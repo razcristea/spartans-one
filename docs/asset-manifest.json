@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/spartans-one/static/css/main.5ecd60fb.chunk.css",
+    "main.js": "/spartans-one/static/js/main.ea826dc6.chunk.js",
+    "main.js.map": "/spartans-one/static/js/main.ea826dc6.chunk.js.map",
+    "runtime-main.js": "/spartans-one/static/js/runtime-main.afdf9105.js",
+    "runtime-main.js.map": "/spartans-one/static/js/runtime-main.afdf9105.js.map",
+    "static/css/2.17e5ed98.chunk.css": "/spartans-one/static/css/2.17e5ed98.chunk.css",
+    "static/js/2.f70243c6.chunk.js": "/spartans-one/static/js/2.f70243c6.chunk.js",
+    "static/js/2.f70243c6.chunk.js.map": "/spartans-one/static/js/2.f70243c6.chunk.js.map",
+    "index.html": "/spartans-one/index.html",
+    "precache-manifest.b4f7ba1659c2c0b935f33f2a5cc7a518.js": "/spartans-one/precache-manifest.b4f7ba1659c2c0b935f33f2a5cc7a518.js",
+    "service-worker.js": "/spartans-one/service-worker.js",
+    "static/css/2.17e5ed98.chunk.css.map": "/spartans-one/static/css/2.17e5ed98.chunk.css.map",
+    "static/css/main.5ecd60fb.chunk.css.map": "/spartans-one/static/css/main.5ecd60fb.chunk.css.map",
+    "static/js/2.f70243c6.chunk.js.LICENSE": "/spartans-one/static/js/2.f70243c6.chunk.js.LICENSE"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.afdf9105.js",
+    "static/css/2.17e5ed98.chunk.css",
+    "static/js/2.f70243c6.chunk.js",
+    "static/css/main.5ecd60fb.chunk.css",
+    "static/js/main.ea826dc6.chunk.js"
+  ]
+}
