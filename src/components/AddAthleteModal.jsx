@@ -6,7 +6,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
 
-const athletesAPI = 'http://theboxathletes.herokuapp.com/athletes/'
+const athletesAPI = 'https://theboxathletes.herokuapp.com/athletes/'
 
 
 
@@ -65,7 +65,7 @@ export default class AddAthleteModal extends Component {
 
         }
 
-        // event.preventDefault()
+        event.preventDefault()
         console.log("Submitting attempt: isValidated is " + this.state.isValidated)
 
         
@@ -177,7 +177,7 @@ export default class AddAthleteModal extends Component {
             </Modal.Body>
             {/* OPTIONAL FOOTER - UNCOMMENT BELOW TO DISPLAY */}
             {/* <Modal.Footer>
-                <Button variant="danger" size="sm" onClick={props.onHide}>Cancel</Button>
+                <Button variant="danger" size="sm" onClick={this.onHide}>Cancel</Button>
             </Modal.Footer> */}
             </Modal>
         );

@@ -42,7 +42,7 @@ export default class Main extends Component {
     return(
     <Fragment>
       {/* TEXT DISPLAYED WHILE FETCH IS RUNNING */}
-        {this.props.athletes.length === 0 && <p>Loading athletes...</p>}
+        {this.props.athletes.length === 0 && <h3>Loading athletes...</h3>}
       {/* DISPLAYNG ATHLETES */}
       <Accordion>
         {this.props.athletes.map(athlete => <Athlete info={athlete} key={athlete._id}/>)}

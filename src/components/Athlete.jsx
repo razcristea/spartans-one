@@ -3,8 +3,15 @@ import Accordion from 'react-bootstrap/Accordion';
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
+import Image from 'react-bootstrap/Image'
+import ListGroup from 'react-bootstrap/ListGroup'
+import Form from 'react-bootstrap/Form'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 
-const athletesAPI = 'http://theboxathletes.herokuapp.com/athletes/'
+const athletesAPI = 'https://theboxathletes.herokuapp.com/athletes/'
+
+const buttonText = ['Edit Records', 'Update Records']
 
 
 export default class Athlete extends Component {
@@ -19,31 +26,86 @@ export default class Athlete extends Component {
         // re-render here !!!
     }
 
+    updateRecords =(e)=>{
+        // first, target the scores for current id, and select all scores
+        const elements = document.getElementById('scores-'+this.props.info._id).getElementsByClassName('scores-best form-control')
+        if (e.target.innerText === buttonText[0]) {
+            // remove 'disabled' attribute
+            Object.keys(elements).map(key=> elements[key].disabled = false)
+            
+            // change button text:
+            e.target.innerText = buttonText[1]
+        } else {
+            // initialize a new object
+            const newScore = {}
+            // add new scores to the newScore object
+            Object.keys(elements).map(key=> newScore[elements[key].name] = elements[key].value)
+            // stringify the object
+            console.log(JSON.stringify(newScore))
+
+            // HERE A NEW ENDPOINT ON BACKEND WOULD BE GREAT, SO WE CAN UPDATE THE SCORES ONLY ! 
+            // fetch()
+
+            // disable input fields
+            Object.keys(elements).map(key=> elements[key].disabled = true)
+            // change button text back to "Edit Records"
+            e.target.innerText = buttonText[0]
+        }
+
+
+
+    }
+
     render(){
 
-        const { name, age, sex, email, photo, _id } = this.props.info;
+        const { name, age, sex, email, photo, _id, personalBest } = this.props.info;
 
         return(
             <Fragment>
-                <Card key={_id} border="success">
+                <Card key={_id} className="rounded-0">
                     <Accordion.Toggle as={Card.Header} variant="link" eventKey={_id}>
-                        {name}
+                        <span style={{fontSize: '1.5rem'}}>{name}</span>
                     </Accordion.Toggle>
                     <Accordion.Collapse eventKey={_id}>
                     <Card.Body>
-                        <Card.Img variant="top" src={photo}/>
+                        <Card.Img as={Image} src={photo} style={{maxHeight : 300, objectFit: "contain" }}/>
 
-                        <Card.Title>{name}</Card.Title>
+                        <Card.Title as={'h3'}>{name}</Card.Title>
     
                         <Card.Text>
                             <small className="text-muted">{email}</small>
-                            <span style={{display: 'block'}}> Age: {age} | Sex: {sex}</span>             
+                            <span style={{display: 'block'}}> Age: {age} | Sex: {sex}</span>         
                         </Card.Text>
+                        <ListGroup variant="flush" style={{padding: "1rem 0"}} id={"scores-" + _id}>
+                                { Object.keys(personalBest).map((key, index)=> 
+                                        <ListGroup.Item as={Form} key={index}>
+                                            <Row>
+                                                <Col>
+                                                    <Form.Label><span style={{textTransform: "capitalize"}}>{key}</span></Form.Label> 
+                                                </Col>
+                                                <Col>
+                                                    <Form.Control 
+                                                        disabled={true}
+                                                        type="number"
+                                                        className="scores-best"
+                                                        name={key}
+                                                        defaultValue={personalBest[key]}
+                                                    />
+                                                </Col>
+                                            </Row>
+                                        </ListGroup.Item> 
+                                        )}
+                            </ListGroup>
+
+ 
+
                         <ButtonGroup size="sm" aria-label="Action Buttons">
-                            <Button variant="success">Personal Best</Button>
+                            <Button variant="success" onClick={this.updateRecords}>{buttonText[0]}</Button>
                             <Button variant="warning">Edit Athlete</Button>
                             <Button variant="danger" onClick={this.deleteAthlete} id={_id}>Detele Athlete</Button>
                         </ButtonGroup>
+
+
                         
                     </Card.Body>
                     </Accordion.Collapse>

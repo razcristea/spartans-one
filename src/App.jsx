@@ -4,7 +4,7 @@ import Header from './components/Header.jsx'
 import Main from './components/Main.jsx'
 import Footer from './components/Footer.jsx'
 
-const athletesAPI = 'http://theboxathletes.herokuapp.com/athletes/'
+const athletesAPI = 'https://theboxathletes.herokuapp.com/athletes/'
 
 
 export default class App extends Component {
@@ -12,8 +12,6 @@ export default class App extends Component {
   constructor(){
     super()
     this.state = { athletes: [] }
-
-    this.componentDidMount = this.componentDidMount.bind(this)
   }
 
   componentDidMount(){
