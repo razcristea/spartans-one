@@ -38,14 +38,15 @@ export default class AddAthleteModal extends Component {
       event.stopPropagation();
     } else {
       console.log("Form validated and submitted");
-      console.log(form.formPersonalBest);
 
       const personalBest = form.formPersonalBest;
       const personalScore = {};
       for (let i = 0; i < personalBest.length; i++) {
-        personalScore[personalBest[i].placeholder] =
+        personalScore[personalBest[i].name] =
           parseInt(personalBest[i].value) || 0;
       }
+
+      console.log(personalScore);
 
       const formData = new FormData();
       formData.append("name", form.formName.value);
@@ -69,8 +70,6 @@ export default class AddAthleteModal extends Component {
         )
         .then(this.props.onHide); // this will close the modal
     }
-
-    console.log("Submitting attempt: isValidated is " + this.state.isValidated);
   };
 
   render() {
@@ -152,6 +151,7 @@ export default class AddAthleteModal extends Component {
                   size="sm"
                   type="number"
                   placeholder="Benchpress"
+                  name="benchpress"
                 />
               </Col>
               <Col sm={3}>
@@ -159,32 +159,55 @@ export default class AddAthleteModal extends Component {
                   size="sm"
                   type="number"
                   placeholder="Strictpress"
+                  name="strictpress"
                 />
               </Col>
               <Col sm={3}>
-                <Form.Control size="sm" type="number" placeholder="Pushpress" />
+                <Form.Control
+                  size="sm"
+                  type="number"
+                  placeholder="Pushpress"
+                  name="pushpress"
+                />
               </Col>
               <Col sm={3}>
-                <Form.Control size="sm" type="number" placeholder="Row" />
+                <Form.Control
+                  size="sm"
+                  type="number"
+                  placeholder="Row"
+                  name="row"
+                />
               </Col>
               <Col sm={3}>
-                <Form.Control size="sm" type="number" placeholder="Backsquat" />
+                <Form.Control
+                  size="sm"
+                  type="number"
+                  placeholder="Backsquat"
+                  name="backsquat"
+                />
               </Col>
               <Col sm={3}>
                 <Form.Control
                   size="sm"
                   type="number"
                   placeholder="Frontsquat"
+                  name="frontsquat"
                 />
               </Col>
               <Col sm={3}>
-                <Form.Control size="sm" type="number" placeholder="Deadlift" />
+                <Form.Control
+                  size="sm"
+                  type="number"
+                  placeholder="Deadlift"
+                  name="deadlift"
+                />
               </Col>
               <Col sm={3}>
                 <Form.Control
                   size="sm"
                   type="number"
                   placeholder="Trapbardeadlift"
+                  name="trapbardeadlift"
                 />
               </Col>
             </Form.Group>
