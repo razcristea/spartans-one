@@ -13,6 +13,10 @@ export default class App extends Component {
   }
 
   componentDidMount() {
+    this.getAthletes();
+  }
+
+  getAthletes = () => {
     fetch(athletesAPI)
       .then(response => response.json())
       .then(
@@ -27,13 +31,13 @@ export default class App extends Component {
           console.log(error);
         }
       );
-  }
+  };
 
   render() {
     return (
       <Fragment>
         <Header />
-        <Main athletes={this.state.athletes} />
+        <Main athletes={this.state.athletes} getAthletes={this.getAthletes} />
         <Footer />
       </Fragment>
     );

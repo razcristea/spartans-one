@@ -38,6 +38,7 @@ export default class AddAthleteModal extends Component {
       event.stopPropagation();
     } else {
       console.log("Form validated and submitted");
+      console.log(form.formPersonalBest);
 
       const personalBest = form.formPersonalBest;
       const personalScore = {};
@@ -57,14 +58,16 @@ export default class AddAthleteModal extends Component {
       fetch(athletesAPI, {
         method: "POST",
         body: formData
-      }).then(
-        response => {
-          console.log(response.json());
-        },
-        error => {
-          console.log(error);
-        }
-      );
+      })
+        .then(
+          response => {
+            console.log(response.json());
+          },
+          error => {
+            console.log(error);
+          }
+        )
+        .then(this.props.onHide); // this will close the modal
     }
 
     console.log("Submitting attempt: isValidated is " + this.state.isValidated);

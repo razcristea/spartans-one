@@ -23,18 +23,22 @@ export default class Athlete extends Component {
       .then(res => res.json())
       .then(
         answer => {
-          console.log(answer);
+          console.log("Answer is: " + answer);
+          // display a popup with the response from server
+          this.props.displayMessage(answer);
+          // hide it after 1.5 seconds
+          setTimeout(this.props.displayMessage, 1500);
         },
         error => console.log(error)
-      );
-
-    // re-render here !!!
+      )
+      .then(this.props.getAthletes); // re-fetch from API
   };
 
   updateRecords = e => {
+    const athleteID = this.props.info._id;
     // first, target the scores for current id, and select all scores
     const elements = document
-      .getElementById("scores-" + this.props.info._id)
+      .getElementById("scores-" + athleteID)
       .getElementsByClassName("scores-best form-control");
     if (e.target.innerText === buttonText[0]) {
       // remove 'disabled' attribute
@@ -52,7 +56,7 @@ export default class Athlete extends Component {
         // remove 0 from numbers starting with 0 (ex: 0123) and if nothing entered, puts 0
       );
 
-      const URI = athletesAPI + this.props.info._id;
+      const URI = athletesAPI + athleteID;
 
       const headers = new Headers();
       headers.append("Content-Type", "application/json");
@@ -62,14 +66,20 @@ export default class Athlete extends Component {
         method: "PUT",
         headers: headers,
         body: JSON.stringify({ personalBest: newScore })
-      }).then(
-        response => {
+      })
+        .then(response => {
           console.log(response.json());
-        },
-        error => {
-          console.log(error);
-        }
-      );
+        })
+        .then(
+          answer => {
+            console.log("Answer is: " + answer);
+          },
+          error => console.log(error)
+        )
+
+        .then(this.props.getAthletes)
+        .then(this.props.displayMessage("Athlete modified")) // display message
+        .then(setTimeout(this.props.displayMessage, 1000)); // hide it afte one second
 
       // disable input fields
       Object.keys(elements).map(key => (elements[key].disabled = true));
