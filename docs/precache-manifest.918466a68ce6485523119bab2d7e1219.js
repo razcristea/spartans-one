@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "5005dd84d22103f510e0bf0631e65d4d",
+    "revision": "16c9b22a2c7b85c64017836de2e0d013",
     "url": "/spartans-one/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/spartans-one/static/css/2.17e5ed98.chunk.css"
   },
   {
-    "revision": "126bf22306eca5ee36e7",
+    "revision": "c68f416c60d7bd04d4d9",
     "url": "/spartans-one/static/css/main.5ecd60fb.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/spartans-one/static/js/2.1dd3fc08.chunk.js.LICENSE"
   },
   {
-    "revision": "126bf22306eca5ee36e7",
-    "url": "/spartans-one/static/js/main.9a94266f.chunk.js"
+    "revision": "c68f416c60d7bd04d4d9",
+    "url": "/spartans-one/static/js/main.995df4ff.chunk.js"
   },
   {
     "revision": "2ec097ca5f3344365ec4",
