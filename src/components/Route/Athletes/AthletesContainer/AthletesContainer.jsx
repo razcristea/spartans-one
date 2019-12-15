@@ -1,11 +1,11 @@
 import React, { Component, Fragment } from "react";
-import Athlete from "./Athlete.jsx";
-import AddAthleteModal from "./AddAthleteModal.jsx";
-import MessageModal from "./MessageModal.jsx";
+import Athlete from "../Athlete/Athlete";
+import AddAthleteModal from "../AddAthleteModal/AddAthleteModal";
+import MessageModal from "../MessageModal/MessageModal";
 import Accordion from "react-bootstrap/Accordion";
 import Button from "react-bootstrap/Button";
 
-export default class Main extends Component {
+export default class AthletesContainer extends Component {
   constructor() {
     super();
     this.state = {

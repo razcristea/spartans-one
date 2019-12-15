@@ -1,45 +1,22 @@
-import React, { Component, Fragment } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-import Header from "./components/Header.jsx";
-import Main from "./components/Main.jsx";
-import Footer from "./components/Footer.jsx";
-
-const athletesAPI = "https://theboxathletes.herokuapp.com/athletes/";
+import React, { Component } from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Header from "./components/Navbar/Header.jsx";
+import Footer from "./components/Footer/Footer";
+import Athletes from "./components/Route/Athletes/Athletes";
 
 export default class App extends Component {
-  constructor() {
-    super();
-    this.state = { athletes: [] };
-  }
-
-  componentDidMount() {
-    this.getAthletes();
-  }
-
-  getAthletes = () => {
-    fetch(athletesAPI)
-      .then(response => response.json())
-      .then(
-        data => {
-          this.setState({ athletes: data });
-          console.log(this.state.athletes);
-        },
-        // Note: it's important to handle errors here
-        // instead of a catch() block so that we don't swallow
-        // exceptions from actual bugs in components.
-        error => {
-          console.log(error);
-        }
-      );
-  };
-
   render() {
     return (
-      <Fragment>
+      <Router>
         <Header />
-        <Main athletes={this.state.athletes} getAthletes={this.getAthletes} />
+        <Switch>
+          {/* <Route path="/" component={LandingPage} exact></Route> */}
+          <Route path="/athletes" component={Athletes}></Route>
+          {/* <Route path="/wods" component={Wods}></Route> */}
+          {/* <Route path="/find" component={Search}></Route> */}
+        </Switch>
         <Footer />
-      </Fragment>
+      </Router>
     );
   }
 }
