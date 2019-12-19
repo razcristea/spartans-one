@@ -10,6 +10,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
 const athletesAPI = "https://theboxathletes.herokuapp.com/athletes/";
+// const athletesAPIDEV = "http://localhost:3000/athletes/";
 
 const buttonText = ["Edit Records", "Update Records"];
 
@@ -57,7 +58,7 @@ export default class Athlete extends Component {
       );
 
       const URI = athletesAPI + athleteID;
-
+      console.log(URI);
       const headers = new Headers();
       headers.append("Content-Type", "application/json");
       // ABSOLUTELY necessary to specify Content-Type!
@@ -68,7 +69,8 @@ export default class Athlete extends Component {
         body: JSON.stringify({ personalBest: newScore })
       })
         .then(response => {
-          console.log(response.json());
+          console.log(response);
+          return response.json();
         })
         .then(
           answer => {
@@ -78,8 +80,12 @@ export default class Athlete extends Component {
         )
 
         .then(this.props.getAthletes)
-        .then(this.props.displayMessage("Athlete modified")) // display message
-        .then(setTimeout(this.props.displayMessage, 1000)); // hide it afte one second
+        .then(
+          this.props.displayMessage(
+            `Updated ${this.props.info.name}'s Personal Best!`
+          )
+        ) // display message
+        .then(setTimeout(this.props.displayMessage, 1500)); // hide it afte one second
 
       // disable input fields
       Object.keys(elements).map(key => (elements[key].disabled = true));
@@ -95,14 +101,25 @@ export default class Athlete extends Component {
       <Fragment>
         <Card key={_id} className="rounded-0">
           <Accordion.Toggle as={Card.Header} variant="link" eventKey={_id}>
-            <span style={{ fontSize: "1.5rem" }}>{name}</span>
+            <span style={{ fontSize: "1.5rem" }}>
+              {sex === "M" ? (
+                <i className="fas fa-mars fa-lg"></i>
+              ) : (
+                <i className="fas fa-venus fa-lg"></i>
+              )}{" "}
+              {name}
+            </span>
           </Accordion.Toggle>
           <Accordion.Collapse eventKey={_id}>
             <Card.Body>
               <Card.Img
                 as={Image}
                 src={photo}
-                style={{ maxHeight: 300, objectFit: "contain" }}
+                style={{
+                  maxHeight: 300,
+                  objectFit: "contain",
+                  imageOrientation: "from-image"
+                }}
               />
 
               <Card.Title as={"h3"}>{name}</Card.Title>

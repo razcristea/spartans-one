@@ -48,8 +48,11 @@ export default class AthletesContainer extends Component {
       fontSize: "1.25em",
       borderRadius: "50%",
       position: "fixed",
-      bottom: 100,
-      right: 50
+      bottom: 75,
+      right: 25,
+      backgroundColor: "#f5ec47",
+      color: "black",
+      border: "1px dashed gray"
     };
 
     return (
@@ -69,8 +72,12 @@ export default class AthletesContainer extends Component {
         </Accordion>
         <div style={{ paddingBottom: "3.5rem" }}></div>
         {/* BUTTON ALWAYS VISIBLE FOR ADDING NEW ATHLETE */}
-        <Button style={alwaysVisible} onClick={this.showModal}>
-          +
+        <Button
+          style={alwaysVisible}
+          onClick={this.showModal}
+          className="hoverable"
+        >
+          <i className="fas fa-user-plus"></i>
         </Button>
         {/* MODAL ADD ATHLETE */}
         <AddAthleteModal
