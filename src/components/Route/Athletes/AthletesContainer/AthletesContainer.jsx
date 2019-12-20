@@ -48,7 +48,7 @@ export default class AthletesContainer extends Component {
       fontSize: "1.25em",
       borderRadius: "50%",
       position: "fixed",
-      bottom: 75,
+      bottom: 65,
       right: 25,
       backgroundColor: "#f5ec47",
       color: "black",
@@ -60,11 +60,11 @@ export default class AthletesContainer extends Component {
         {/* TEXT DISPLAYED WHILE FETCH IS RUNNING */}
         {this.props.athletes.length === 0 && <h3>Loading athletes...</h3>}
         {/* DISPLAYNG ATHLETES */}
-        <Accordion>
+        <Accordion className="mb-5">
           {this.props.athletes.map(athlete => (
             <Athlete
-              info={athlete}
               key={athlete._id}
+              info={athlete}
               getAthletes={this.props.getAthletes}
               displayMessage={this.displayMessage}
             />

@@ -1,13 +1,10 @@
 import React, { Component, Fragment } from "react";
+import { NavLink } from "react-router-dom";
 import Accordion from "react-bootstrap/Accordion";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Image from "react-bootstrap/Image";
-import ListGroup from "react-bootstrap/ListGroup";
-import Form from "react-bootstrap/Form";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 
 const athletesAPI = "https://theboxathletes.herokuapp.com/athletes/";
 // const athletesAPIDEV = "http://localhost:3000/athletes/";
@@ -93,10 +90,8 @@ export default class Athlete extends Component {
       e.target.innerText = buttonText[0];
     }
   };
-
   render() {
-    const { name, age, sex, email, photo, _id, personalBest } = this.props.info;
-
+    const { name, age, sex, email, photo, _id } = this.props.info;
     return (
       <Fragment>
         <Card key={_id} className="rounded-0">
@@ -111,7 +106,7 @@ export default class Athlete extends Component {
             </span>
           </Accordion.Toggle>
           <Accordion.Collapse eventKey={_id}>
-            <Card.Body>
+            <Card.Body className="text-center">
               <Card.Img
                 as={Image}
                 src={photo}
@@ -121,9 +116,7 @@ export default class Athlete extends Component {
                   imageOrientation: "from-image"
                 }}
               />
-
               <Card.Title as={"h3"}>{name}</Card.Title>
-
               <Card.Text>
                 <small className="text-muted">{email}</small>
                 <span style={{ display: "block" }}>
@@ -131,43 +124,30 @@ export default class Athlete extends Component {
                   Age: {age} | Sex: {sex}
                 </span>
               </Card.Text>
-              <ListGroup
-                variant="flush"
-                style={{ padding: "1rem 0" }}
-                id={"scores-" + _id}
-              >
-                {Object.keys(personalBest).map((key, index) => (
-                  <ListGroup.Item as={Form} key={index}>
-                    <Row>
-                      <Col>
-                        <Form.Label>
-                          <span style={{ textTransform: "capitalize" }}>
-                            {key}
-                          </span>
-                        </Form.Label>
-                      </Col>
-                      <Col>
-                        <Form.Control
-                          disabled={true}
-                          type="number"
-                          className="scores-best"
-                          name={key}
-                          defaultValue={personalBest[key]}
-                        />
-                      </Col>
-                    </Row>
-                  </ListGroup.Item>
-                ))}
-              </ListGroup>
-
               <ButtonGroup size="sm" aria-label="Action Buttons">
-                <Button variant="success" onClick={this.updateRecords}>
-                  {buttonText[0]}
+                <Button
+                  variant="success"
+                  onClick={this.updateRecords}
+                  className="m-1"
+                >
+                  <i className="fas fa-user-cog"></i> {buttonText[0]}
                 </Button>
-                <Button variant="warning">Edit Athlete</Button>
-                <Button variant="danger" onClick={this.deleteAthlete} id={_id}>
-                  Detele Athlete
+                <Button variant="secondary" className="m-1">
+                  <i className="fas fa-user-edit"></i> Edit
                 </Button>
+                <Button
+                  variant="danger"
+                  onClick={this.deleteAthlete}
+                  id={_id}
+                  className="m-1"
+                >
+                  <i className="fas fa-user-slash"></i> Detele
+                </Button>
+                <NavLink to={`/athletes/${_id}`}>
+                  <Button variant="primary" className="m-1">
+                    <i className="fas fa-dumbbell"></i> PR's
+                  </Button>
+                </NavLink>
               </ButtonGroup>
             </Card.Body>
           </Accordion.Collapse>
