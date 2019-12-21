@@ -4,6 +4,8 @@ import AddAthleteModal from "../AddAthleteModal/AddAthleteModal";
 import MessageModal from "../MessageModal/MessageModal";
 import Accordion from "react-bootstrap/Accordion";
 import Button from "react-bootstrap/Button";
+import AthleteCard from "../AthleteCard/AthleteCard";
+import "../AthletesContainer/AthletesContainer.css";
 
 export default class AthletesContainer extends Component {
   constructor() {
@@ -11,7 +13,8 @@ export default class AthletesContainer extends Component {
     this.state = {
       modalShow: false,
       messageShow: false,
-      message: ""
+      message: "",
+      isScreenSmall: window.innerWidth <= 414
     };
     this.showModal = this.showModal.bind(this);
     this.hideModal = this.hideModal.bind(this);
@@ -41,6 +44,21 @@ export default class AthletesContainer extends Component {
     });
   }
 
+  resize = () => {
+    if (window.innerWidth <= 697) {
+      this.setState({ isScreenSmall: true });
+    } else {
+      this.setState({ isScreenSmall: false });
+    }
+  };
+
+  componentDidMount() {
+    window.addEventListener("resize", this.resize);
+  }
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.resize);
+  }
+
   render() {
     const alwaysVisible = {
       width: "3rem",
@@ -58,9 +76,14 @@ export default class AthletesContainer extends Component {
     return (
       <Fragment>
         {/* TEXT DISPLAYED WHILE FETCH IS RUNNING */}
-        {this.props.athletes.length === 0 && <h3>Loading athletes...</h3>}
+        {this.props.athletes.length === 0 && (
+          <h3 className="text-center mt-5 pt-5 text-light">
+            Loading athletes...
+          </h3>
+        )}
         {/* DISPLAYNG ATHLETES */}
-        <Accordion className="mb-5">
+
+        <Accordion style={this.state.isScreenSmall ? {} : { display: "none" }}>
           {this.props.athletes.map(athlete => (
             <Athlete
               key={athlete._id}
@@ -70,6 +93,16 @@ export default class AthletesContainer extends Component {
             />
           ))}
         </Accordion>
+
+        <div
+          className="cards-container"
+          style={this.state.isScreenSmall ? { display: "none" } : {}}
+        >
+          {this.props.athletes.map((athlete, i) => (
+            <AthleteCard key={i} athlete={athlete} />
+          ))}
+        </div>
+
         <div style={{ paddingBottom: "3.5rem" }}></div>
         {/* BUTTON ALWAYS VISIBLE FOR ADDING NEW ATHLETE */}
         <Button

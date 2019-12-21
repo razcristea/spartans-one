@@ -54,7 +54,12 @@ export default class Athletes extends Component {
               key={i}
               exact
               component={() => {
-                return <AthleteDetails info={athlete} />;
+                return (
+                  <AthleteDetails
+                    info={athlete}
+                    getAthletes={this.getAthletes}
+                  />
+                );
               }}
             />
           );

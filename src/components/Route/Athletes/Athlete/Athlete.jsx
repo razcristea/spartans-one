@@ -9,8 +9,6 @@ import Image from "react-bootstrap/Image";
 const athletesAPI = "https://theboxathletes.herokuapp.com/athletes/";
 // const athletesAPIDEV = "http://localhost:3000/athletes/";
 
-const buttonText = ["Edit Records", "Update Records"];
-
 export default class Athlete extends Component {
   deleteAthlete = event => {
     const athleteID = event.target.id;
@@ -32,64 +30,6 @@ export default class Athlete extends Component {
       .then(this.props.getAthletes); // re-fetch from API
   };
 
-  updateRecords = e => {
-    const athleteID = this.props.info._id;
-    // first, target the scores for current id, and select all scores
-    const elements = document
-      .getElementById("scores-" + athleteID)
-      .getElementsByClassName("scores-best form-control");
-    if (e.target.innerText === buttonText[0]) {
-      // remove 'disabled' attribute
-      Object.keys(elements).map(key => (elements[key].disabled = false));
-
-      // change button text:
-      e.target.innerText = buttonText[1];
-    } else {
-      // initialize a new object
-      const newScore = {};
-      // add new scores to the newScore object
-      Object.keys(elements).map(
-        key =>
-          (newScore[elements[key].name] = parseInt(elements[key].value) || 0)
-        // remove 0 from numbers starting with 0 (ex: 0123) and if nothing entered, puts 0
-      );
-
-      const URI = athletesAPI + athleteID;
-      console.log(URI);
-      const headers = new Headers();
-      headers.append("Content-Type", "application/json");
-      // ABSOLUTELY necessary to specify Content-Type!
-
-      fetch(URI, {
-        method: "PUT",
-        headers: headers,
-        body: JSON.stringify({ personalBest: newScore })
-      })
-        .then(response => {
-          console.log(response);
-          return response.json();
-        })
-        .then(
-          answer => {
-            console.log("Answer is: " + answer);
-          },
-          error => console.log(error)
-        )
-
-        .then(this.props.getAthletes)
-        .then(
-          this.props.displayMessage(
-            `Updated ${this.props.info.name}'s Personal Best!`
-          )
-        ) // display message
-        .then(setTimeout(this.props.displayMessage, 1500)); // hide it afte one second
-
-      // disable input fields
-      Object.keys(elements).map(key => (elements[key].disabled = true));
-      // change button text back to "Edit Records"
-      e.target.innerText = buttonText[0];
-    }
-  };
   render() {
     const { name, age, sex, email, photo, _id } = this.props.info;
     return (
@@ -125,15 +65,8 @@ export default class Athlete extends Component {
                 </span>
               </Card.Text>
               <ButtonGroup size="sm" aria-label="Action Buttons">
-                <Button
-                  variant="success"
-                  onClick={this.updateRecords}
-                  className="m-1"
-                >
-                  <i className="fas fa-user-cog"></i> {buttonText[0]}
-                </Button>
                 <Button variant="secondary" className="m-1">
-                  <i className="fas fa-user-edit"></i> Edit
+                  <i className="fas fa-user-edit fa-lg"></i> Edit
                 </Button>
                 <Button
                   variant="danger"
@@ -141,11 +74,11 @@ export default class Athlete extends Component {
                   id={_id}
                   className="m-1"
                 >
-                  <i className="fas fa-user-slash"></i> Detele
+                  <i className="fas fa-user-slash fa-lg"></i> Delete
                 </Button>
                 <NavLink to={`/athletes/${_id}`}>
                   <Button variant="primary" className="m-1">
-                    <i className="fas fa-dumbbell"></i> PR's
+                    <i className="fas fa-dumbbell fa-lg"></i> PR's
                   </Button>
                 </NavLink>
               </ButtonGroup>
