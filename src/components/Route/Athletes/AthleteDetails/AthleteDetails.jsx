@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import { withRouter } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
@@ -8,11 +8,13 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import "./AthleteDetails.css";
 
-const buttonText = ["Edit", "Save", "Saving..."];
+const buttonText = ["Edit PR", "Save", "Saving..."];
 const athletesAPI = "https://theboxathletes.herokuapp.com/athletes/";
 
 export default function AthleteDetails({ info, getAthletes }) {
+  const [percentage, setPercentage] = useState(50);
   const { name, age, sex, email, photo, _id, personalBest } = info;
   const GoBack = withRouter(({ history }) => (
     <Button
@@ -23,7 +25,7 @@ export default function AthleteDetails({ info, getAthletes }) {
         history.push("/athletes");
       }}
     >
-      <i className="fas fa-backward fa-lg"></i> Back
+      <i className="fas fa-backward fa-lg"></i> Back To Athletes
     </Button>
   ));
 
@@ -90,7 +92,7 @@ export default function AthleteDetails({ info, getAthletes }) {
               as={Image}
               src={photo}
               style={{
-                maxHeight: 150,
+                maxHeight: 250,
                 objectFit: "contain",
                 imageOrientation: "from-image"
               }}
@@ -108,33 +110,59 @@ export default function AthleteDetails({ info, getAthletes }) {
               style={{ padding: "1rem 0" }}
               id={"scores-" + _id}
             >
+              <div className="p-3 percentage-dropdown">
+                <span className="mr-2">0%</span>
+                <input
+                  style={{ minWidth: "250px" }}
+                  type="range"
+                  name="percentage"
+                  id="percentageSlider"
+                  min="1"
+                  max="100"
+                  step="1"
+                  onChange={() =>
+                    setPercentage(
+                      document.getElementById("percentageSlider").value
+                    )
+                  }
+                />
+                <span className="ml-2">100%</span>
+              </div>
+              <div className="font-weight-bold mb-2">
+                Percentage: {percentage} %
+              </div>
               {Object.keys(personalBest).map((key, index) => (
                 <ListGroup.Item as={Form} key={index}>
                   <Row>
                     <Col>
                       <Form.Label>
-                        <span style={{ textTransform: "capitalize" }}>
-                          {key}
-                        </span>
+                        <div style={{ textTransform: "capitalize" }}>{key}</div>
                       </Form.Label>
                     </Col>
                     <Col>
                       <Form.Control
                         disabled={true}
                         type="number"
-                        className="scores-best"
+                        className="scores-best text-center"
                         name={key}
                         defaultValue={personalBest[key]}
                       />
+                    </Col>
+                    <div className="ml-2">
+                      <i className="far fa-arrow-alt-circle-right fa"></i>
+                    </div>
+                    <Col>
+                      <div>
+                        {(parseInt(personalBest[key]) * percentage) / 100} kg
+                      </div>
                     </Col>
                   </Row>
                 </ListGroup.Item>
               ))}
             </ListGroup>
-
             <ButtonGroup size="sm" aria-label="Action Buttons">
               <Button variant="success" className="m-1" onClick={updateRecords}>
-                <i className="fas fa-user-cog fa-lg"></i> Edit
+                <i className="fas fa-user-cog fa-lg"></i> Edit PR
               </Button>
               <GoBack />
             </ButtonGroup>

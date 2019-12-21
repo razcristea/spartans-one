@@ -1,6 +1,8 @@
 import React from "react";
 import "../AthleteCard/AthleteCard.css";
+import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Button from "react-bootstrap/Button";
+import { Link } from "react-router-dom";
 
 export default function AthleteCard({ athlete }) {
   return (
@@ -21,9 +23,23 @@ export default function AthleteCard({ athlete }) {
         <i className="fas fa-envelope fa-2x"></i>
         <br /> {athlete.email}
       </p>
-      <Button variant="secondary" size="sm" className="athlete-card-button">
-        Details
-      </Button>
+      <ButtonGroup size="sm">
+        <Button variant="warning" size="sm" className="athlete-card-button">
+          <i className="fas fa-user-edit fa-lg"></i> Edit
+        </Button>
+        <Button variant="danger" size="sm" className="athlete-card-button">
+          <i className="fas fa-user-slash fa-lg"></i> Delete
+        </Button>
+        <Link to={`/athletes/${athlete._id}`}>
+          <Button
+            variant="secondary"
+            size="sm"
+            className="athlete-card-button ml-0"
+          >
+            <i className="fas fa-dumbbell fa-lg"></i> PR's
+          </Button>
+        </Link>
+      </ButtonGroup>
     </div>
   );
 }

@@ -35,7 +35,7 @@ export default class Athlete extends Component {
     return (
       <Fragment>
         <Card key={_id} className="rounded-0">
-          <Accordion.Toggle as={Card.Header} variant="link" eventKey={_id}>
+          <Accordion.Toggle as={Card.Header} variant="info" eventKey={_id}>
             <span style={{ fontSize: "1.5rem" }}>
               {sex === "M" ? (
                 <i className="fas fa-mars fa-lg"></i>
@@ -65,7 +65,7 @@ export default class Athlete extends Component {
                 </span>
               </Card.Text>
               <ButtonGroup size="sm" aria-label="Action Buttons">
-                <Button variant="secondary" className="m-1">
+                <Button variant="warning" className="m-1">
                   <i className="fas fa-user-edit fa-lg"></i> Edit
                 </Button>
                 <Button
@@ -77,7 +77,7 @@ export default class Athlete extends Component {
                   <i className="fas fa-user-slash fa-lg"></i> Delete
                 </Button>
                 <NavLink to={`/athletes/${_id}`}>
-                  <Button variant="primary" className="m-1">
+                  <Button variant="secondary" className="m-1">
                     <i className="fas fa-dumbbell fa-lg"></i> PR's
                   </Button>
                 </NavLink>

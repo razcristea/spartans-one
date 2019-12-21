@@ -10,9 +10,14 @@ export default class Athletes extends Component {
     super();
     this.state = { athletes: [] };
   }
-
+  _isMounted = false;
   componentDidMount() {
+    this._isMounted = true;
     this.getAthletes();
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   getAthletes = () => {
