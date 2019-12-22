@@ -16,33 +16,30 @@ export default class AthletesContainer extends Component {
       message: "",
       isScreenSmall: window.innerWidth <= 414
     };
-    this.showModal = this.showModal.bind(this);
-    this.hideModal = this.hideModal.bind(this);
-    this.displayMessage = this.displayMessage.bind(this);
   }
 
-  showModal() {
+  showModal = () => {
     this.setState({
       modalShow: true
     });
-  }
+  };
 
-  hideModal() {
+  hideModal = () => {
     this.setState({
       modalShow: false
     });
     this.props.getAthletes();
     this.displayMessage("Modal AddAthlete inchis"); // NEEDS IMPLEMENTATION OF CUSTOM MESSAGE
     setTimeout(this.displayMessage, 1500);
-  }
+  };
 
-  displayMessage(message) {
+  displayMessage = message => {
     const newState = !this.state.messageShow;
     this.setState({
       messageShow: newState,
       message: message
     });
-  }
+  };
 
   resize = () => {
     if (window.innerWidth <= 697) {
@@ -66,8 +63,8 @@ export default class AthletesContainer extends Component {
       fontSize: "1.25em",
       borderRadius: "50%",
       position: "fixed",
-      bottom: 65,
-      right: 25,
+      bottom: 70,
+      right: 7,
       backgroundColor: "#f5ec47",
       color: "black",
       border: "1px dashed gray"
