@@ -8,16 +8,33 @@ import AthleteCard from "../AthleteCard/AthleteCard";
 import "../AthletesContainer/AthletesContainer.css";
 
 export default class AthletesContainer extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    console.log(props);
     this.state = {
+      athletes: this.props.athletes,
+      searchfield: "",
       modalShow: false,
       messageShow: false,
       message: "",
-      isScreenSmall: window.innerWidth <= 414
+      isScreenSmall: window.innerWidth <= 414,
+      isSearching: false
     };
   }
+  showSearchInput = () => {
+    this.setState({ isSearching: !this.state.isSearching });
+  };
 
+  doTheSearch = event => {
+    const filteredAthletes = [...this.state.athletes];
+    const result = filteredAthletes.filter(athlete =>
+      athlete.name.toLowerCase().includes(event.target.value.toLowerCase())
+    );
+    console.log(result);
+    this.setState({
+      athletes: event.target.value.length <= 1 ? this.props.athletes : result
+    });
+  };
   showModal = () => {
     this.setState({
       modalShow: true
@@ -57,23 +74,32 @@ export default class AthletesContainer extends Component {
   }
 
   render() {
-    const alwaysVisible = {
+    const addAthleteBtnStyles = {
       width: "3rem",
       height: "3rem",
       fontSize: "1.25em",
       borderRadius: "50%",
       position: "fixed",
-      bottom: 70,
+      bottom: 77,
       right: 7,
-      backgroundColor: "#f5ec47",
+      backgroundColor: "#dabc01",
       color: "black",
-      border: "1px dashed gray"
+      border: "2px double white"
+    };
+    const searchAthleteBtnStyles = {
+      width: "3rem",
+      height: "3rem",
+      fontSize: "1.25em",
+      borderRadius: "50%",
+      backgroundColor: "#343a40",
+      color: "white",
+      border: "2px double white"
     };
 
     return (
       <Fragment>
         {/* TEXT DISPLAYED WHILE FETCH IS RUNNING */}
-        {this.props.athletes.length === 0 && (
+        {this.state.athletes.length === 0 && (
           <h3 className="text-center mt-5 pt-5 text-light">
             Loading athletes...
           </h3>
@@ -81,7 +107,7 @@ export default class AthletesContainer extends Component {
         {/* DISPLAYNG ATHLETES */}
 
         <Accordion style={this.state.isScreenSmall ? {} : { display: "none" }}>
-          {this.props.athletes.map(athlete => (
+          {this.state.athletes.map(athlete => (
             <Athlete
               key={athlete._id}
               info={athlete}
@@ -95,15 +121,41 @@ export default class AthletesContainer extends Component {
           className="cards-container"
           style={this.state.isScreenSmall ? { display: "none" } : {}}
         >
-          {this.props.athletes.map((athlete, i) => (
+          {this.state.athletes.map((athlete, i) => (
             <AthleteCard key={i} athlete={athlete} />
           ))}
         </div>
-
         <div style={{ paddingBottom: "3.5rem" }}></div>
+        <div
+          style={{
+            position: "fixed",
+            bottom: 77,
+            left: 7,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center"
+          }}
+        >
+          <Button
+            style={searchAthleteBtnStyles}
+            onClick={this.showSearchInput}
+            className="hoverable"
+          >
+            <i className="fas fa-search"></i>
+          </Button>
+          {this.state.isSearching ? (
+            <input
+              type="search"
+              placeholder="Type Athlete Name..."
+              className="ml-2 p-2 searchInput"
+              onChange={this.doTheSearch}
+              onBlur={this.showSearchInput}
+            />
+          ) : null}
+        </div>
         {/* BUTTON ALWAYS VISIBLE FOR ADDING NEW ATHLETE */}
         <Button
-          style={alwaysVisible}
+          style={addAthleteBtnStyles}
           onClick={this.showModal}
           className="hoverable"
         >

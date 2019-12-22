@@ -35,7 +35,7 @@ export default class Athlete extends Component {
     return (
       <Fragment>
         <Card key={_id} className="rounded-0">
-          <Accordion.Toggle as={Card.Header} variant="info" eventKey={_id}>
+          <Accordion.Toggle as={Card.Header} variant="link" eventKey={_id}>
             <span style={{ fontSize: "1.5rem" }}>
               {sex === "M" ? (
                 <i className="fas fa-mars fa-lg"></i>
