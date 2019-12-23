@@ -21,6 +21,7 @@ export default class AthletesContainer extends Component {
       isSearching: false
     };
   }
+
   showSearchInput = () => {
     this.setState({ isSearching: !this.state.isSearching });
   };
@@ -146,6 +147,7 @@ export default class AthletesContainer extends Component {
           {this.state.isSearching ? (
             <input
               type="search"
+              autoFocus
               placeholder="Type Athlete Name..."
               className="ml-2 p-2 searchInput"
               onChange={this.doTheSearch}
