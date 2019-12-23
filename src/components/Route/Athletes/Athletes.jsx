@@ -25,7 +25,9 @@ export default class Athletes extends Component {
       .then(response => response.json())
       .then(
         data => {
-          data.sort((a, b) => (a.name > b.name ? 1 : -1));
+          data.sort((a, b) =>
+            a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
+          );
           this.setState({ athletes: data });
           console.log(this.state.athletes);
         },
