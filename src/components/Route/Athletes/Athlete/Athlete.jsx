@@ -6,6 +6,7 @@ import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Image from "react-bootstrap/Image";
 import Modal from "react-bootstrap/Modal";
+import Alert from "react-bootstrap/Alert";
 
 const athletesAPI = "https://theboxathletes.herokuapp.com/athletes/";
 // const athletesAPIDEV = "http://localhost:3000/athletes/";
@@ -14,7 +15,9 @@ export default class Athlete extends Component {
   constructor() {
     super();
     this.state = {
-      willDelete: false
+      willDelete: false,
+      alertDeleted: false,
+      messageAlertDeleted: ""
     };
   }
   _isMounted = false;
@@ -25,6 +28,13 @@ export default class Athlete extends Component {
 
   closeDeleteModal = () => {
     this.setState({ willDelete: false });
+  };
+
+  displayAlertDeleted = message => {
+    this.setState({
+      alertDeleted: true,
+      messageAlertDeleted: message
+    });
   };
 
   componentDidMount() {
@@ -42,9 +52,10 @@ export default class Athlete extends Component {
         answer => {
           console.log("Answer is: " + answer);
           // display a popup with the response from server
-          this.props.displayMessage(answer);
+          // this.props.displayMessage(answer);
+          this.displayAlertDeleted(answer);
           // hide it after 1.5 seconds
-          setTimeout(this.props.displayMessage, 1500);
+          // setTimeout(this.props.displayMessage, 1500);
         },
         error => console.log(error)
       )
@@ -59,6 +70,7 @@ export default class Athlete extends Component {
     const { name, age, sex, email, photo, _id } = this.props.info;
     return (
       <Fragment>
+        {/*MODAL THAT APPEARS AT CLICK DELETE BUTTON*/}
         <Modal show={this.state.willDelete} onHide={this.closeDeleteModal}>
           <Modal.Header closeButton></Modal.Header>
           <Modal.Body>Are you sure you want to delete this athlete?</Modal.Body>
@@ -71,6 +83,11 @@ export default class Athlete extends Component {
             </Button>
           </Modal.Footer>
         </Modal>
+
+        {/*ALERT THAT DISPLAYS SERVER ANSWER AFTER DELETE */}
+        <Alert variant="success" showAlert={this.state.alertDeleted}>
+          {this.state.messageAlertDeleted}
+        </Alert>
 
         <Card key={_id} className="rounded-0">
           <Accordion.Toggle as={Card.Header} variant="link" eventKey={_id}>
