@@ -5,6 +5,7 @@ import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
 
 export default function AthleteCard({ athlete }) {
+  athlete.phoneNumber = "0742874381";
   return (
     <div className="card text-center card-item">
       <div className="header-card-wraper">
@@ -19,9 +20,14 @@ export default function AthleteCard({ athlete }) {
           )}
         </h5>
       </div>
-      <p className="card-email">
-        <i className="fas fa-envelope fa-2x"></i>
-        <br /> {athlete.email}
+      <p className="card-phone">
+        <i className="fas fa-phone-square fa-lg"></i>{" "}
+        {athlete.phoneNumber.substring(0, 4)}-
+        {athlete.phoneNumber.substring(4, 7)}-
+        {athlete.phoneNumber.substring(7, 10)}
+      </p>
+      <p className="card-email text-muted">
+        <i className="fas fa-envelope fa-lg"></i> {athlete.email}
       </p>
       <ButtonGroup size="sm">
         <Button variant="warning" size="sm" className="athlete-card-button">

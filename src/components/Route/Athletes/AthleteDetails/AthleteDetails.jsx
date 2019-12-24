@@ -38,7 +38,10 @@ export default function AthleteDetails({ info, getAthletes }) {
     if (e.target.innerText.includes(buttonText[0])) {
       // remove 'disabled' attribute
       Object.keys(elements).map(key => (elements[key].disabled = false));
-
+      Array.from(elements).map(
+        element => (element.style.backgroundColor = "#dabd00")
+      );
+      Array.from(elements).map(element => (element.style.color = "#fff"));
       // change button text:
       e.target.innerHTML = `<div><i class="fas fa-save fa-lg"></i> ${buttonText[1]}</div>`;
     } else {
@@ -85,7 +88,11 @@ export default function AthleteDetails({ info, getAthletes }) {
   };
   return (
     <Fragment>
-      <Card key={_id} className="rounded-0 mb-5">
+      <Card
+        key={_id}
+        className="rounded-0 mb-5 text-light"
+        style={{ backgroundColor: "#353535" }}
+      >
         <div eventkey={_id}>
           <Card.Body className="text-center">
             <Card.Img
@@ -107,10 +114,10 @@ export default function AthleteDetails({ info, getAthletes }) {
             </Card.Text>
             <ListGroup
               variant="flush"
-              style={{ padding: "1rem 0" }}
+              style={{ padding: "0.5rem 0", color: "black" }}
               id={"scores-" + _id}
             >
-              <div className="p-3 percentage-dropdown">
+              <div className="p-1 percentage-dropdown text-light">
                 <span className="mr-2">0%</span>
                 <input
                   style={{ minWidth: "250px" }}
@@ -128,11 +135,18 @@ export default function AthleteDetails({ info, getAthletes }) {
                 />
                 <span className="ml-2">100%</span>
               </div>
-              <div className="font-weight-bold mb-2">
+              <div className="font-weight-bold mb-2 text-light">
                 Percentage: {percentage} %
               </div>
               {Object.keys(personalBest).map((key, index) => (
-                <ListGroup.Item as={Form} key={index}>
+                <ListGroup.Item
+                  as={Form}
+                  key={index}
+                  style={{
+                    backgroundColor: "#353539",
+                    color: "white"
+                  }}
+                >
                   <Row>
                     <Col>
                       <Form.Label>

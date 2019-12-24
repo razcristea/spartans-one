@@ -10,7 +10,6 @@ import "../AthletesContainer/AthletesContainer.css";
 export default class AthletesContainer extends Component {
   constructor(props) {
     super(props);
-    console.log(props);
     this.state = {
       athletes: this.props.athletes,
       searchfield: "",
@@ -92,8 +91,8 @@ export default class AthletesContainer extends Component {
       height: "3rem",
       fontSize: "1.25em",
       borderRadius: "50%",
-      backgroundColor: "#343a40",
-      color: "white",
+      backgroundColor: "#dabc01",
+      color: "black",
       border: "2px double white"
     };
 

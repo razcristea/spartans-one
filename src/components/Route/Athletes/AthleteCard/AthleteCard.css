@@ -55,8 +55,8 @@ body {
 }
 
 .card-email {
-  min-height: 60px;
-  margin-bottom: 1.3rem !important;
+  font-size: 13px;
+  min-height: 20px;
 }
 
 .header-card-wraper {

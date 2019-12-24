@@ -44,7 +44,7 @@ export default class Athlete extends Component {
           // display a popup with the response from server
           this.props.displayMessage(answer);
           // hide it after 1.5 seconds
-          setTimeout(this.props.displayMessage, 1500);
+          setTimeout(this.props.displayMessage, 2500);
         },
         error => console.log(error)
       )
@@ -56,24 +56,33 @@ export default class Athlete extends Component {
   }
 
   render() {
-    const { name, age, sex, email, photo, _id } = this.props.info;
+    const { name, age, sex, email, photo, _id, phoneNumber } = this.props.info;
     return (
       <Fragment>
         <Modal show={this.state.willDelete} onHide={this.closeDeleteModal}>
           <Modal.Header closeButton></Modal.Header>
           <Modal.Body>Are you sure you want to delete this athlete?</Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={this.deleteAthlete} id={_id}>
+            <Button variant="danger" onClick={this.deleteAthlete} id={_id}>
               Yes
             </Button>
-            <Button variant="primary" onClick={this.closeDeleteModal}>
+            <Button variant="success" onClick={this.closeDeleteModal}>
               No
             </Button>
           </Modal.Footer>
         </Modal>
 
-        <Card key={_id} className="rounded-0">
-          <Accordion.Toggle as={Card.Header} variant="link" eventKey={_id}>
+        <Card
+          key={_id}
+          className="rounded-0 text-white"
+          style={{ backgroundColor: "#333333" }}
+        >
+          <Accordion.Toggle
+            as={Card.Header}
+            variant="link"
+            eventKey={_id}
+            style={{ backgroundColor: "#1f1f1f" }}
+          >
             <span style={{ fontSize: "1.5rem" }}>
               {sex === "M" ? (
                 <i className="fas fa-mars fa-lg"></i>
@@ -84,8 +93,12 @@ export default class Athlete extends Component {
             </span>
           </Accordion.Toggle>
           <Accordion.Collapse eventKey={_id}>
-            <Card.Body className="text-center">
+            <Card.Body
+              className="text-center"
+              style={{ backgroundColor: "#424242" }}
+            >
               <Card.Img
+                className="p-0 border border-white"
                 as={Image}
                 src={photo}
                 style={{
@@ -94,9 +107,18 @@ export default class Athlete extends Component {
                   imageOrientation: "from-image"
                 }}
               />
-              <Card.Title as={"h3"}>{name}</Card.Title>
+              <Card.Title as={"h3"} className="p-2">
+                {name}
+              </Card.Title>
               <Card.Text>
-                <small className="text-muted">{email}</small>
+                <span className="p-1 d-block">
+                  <i className="fas fa-phone-square fa-lg"></i>{" "}
+                  {phoneNumber.substring(0, 4)}-{phoneNumber.substring(4, 7)}-
+                  {phoneNumber.substring(7, 10)}
+                </span>
+                <small className="text-muted">
+                  <i className="fas fa-envelope fa-lg"></i> {email}
+                </small>
                 <span style={{ display: "block" }}>
                   {" "}
                   Age: {age} | Sex: {sex}
