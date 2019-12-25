@@ -37,8 +37,10 @@ export default class Footer extends Component {
       this.today.getFullYear();
     this.setState({ date: date });
   }
-  componentDidUpdate() {
-    this.getAthletes();
+  componentDidUpdate(prevProps) {
+    if (prevProps.count !== this.props.count) {
+      this.getAthletes();
+    }
   }
   getAthletes = () => {
     fetch(athletesAPI)

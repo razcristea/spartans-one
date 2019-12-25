@@ -26,7 +26,7 @@ export default class AthletesContainer extends Component {
   };
 
   doTheSearch = event => {
-    const filteredAthletes = [...this.state.athletes];
+    const filteredAthletes = [...this.props.athletes];
     const result = filteredAthletes.filter(athlete =>
       athlete.name.toLowerCase().includes(event.target.value.toLowerCase())
     );
@@ -45,7 +45,7 @@ export default class AthletesContainer extends Component {
     this.setState({
       modalShow: false
     });
-    this.props.getAthletes();
+    // this.props.getAthletes();
     this.displayMessage("Modal AddAthlete inchis"); // NEEDS IMPLEMENTATION OF CUSTOM MESSAGE
     setTimeout(this.displayMessage, 1500);
   };
@@ -95,11 +95,10 @@ export default class AthletesContainer extends Component {
       color: "black",
       border: "2px double white"
     };
-
     return (
       <Fragment>
         {/* TEXT DISPLAYED WHILE FETCH IS RUNNING */}
-        {this.state.athletes.length === 0 && (
+        {this.props.athletes.length === 0 && (
           <h3 className="text-center mt-5 pt-5 text-light">
             Loading athletes...
           </h3>
@@ -113,6 +112,7 @@ export default class AthletesContainer extends Component {
               info={athlete}
               getAthletes={this.props.getAthletes}
               displayMessage={this.displayMessage}
+              changeCount={this.props.changeCount}
             />
           ))}
         </Accordion>
@@ -122,7 +122,11 @@ export default class AthletesContainer extends Component {
           style={this.state.isScreenSmall ? { display: "none" } : {}}
         >
           {this.state.athletes.map((athlete, i) => (
-            <AthleteCard key={i} athlete={athlete} />
+            <AthleteCard
+              key={i}
+              athlete={athlete}
+              changeCount={this.props.changeCount}
+            />
           ))}
         </div>
         <div style={{ paddingBottom: "3.5rem" }}></div>
@@ -167,6 +171,7 @@ export default class AthletesContainer extends Component {
           show={this.state.modalShow}
           onHide={this.hideModal}
           message={this.state.message}
+          changeCount={this.props.changeCount}
         />
         {/* MODAL TO DISPLAY MESSAGES */}
         <MessageModal

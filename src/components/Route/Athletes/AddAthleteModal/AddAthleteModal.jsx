@@ -69,6 +69,7 @@ export default class AddAthleteModal extends Component {
             console.log(error);
           }
         )
+        .then(this.props.changeCount)
         .then(this.props.onHide); // this will close the modal
     }
   };
@@ -76,7 +77,9 @@ export default class AddAthleteModal extends Component {
   render() {
     return (
       <Modal
-        {...this.props}
+        show={this.props.show}
+        onHide={this.props.onHide}
+        message={this.props.message}
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered

@@ -48,6 +48,7 @@ export default class Athlete extends Component {
         },
         error => console.log(error)
       )
+      .then(this.props.changeCount)
       .then(this.props.getAthletes); // re-fetch from API
   };
 
