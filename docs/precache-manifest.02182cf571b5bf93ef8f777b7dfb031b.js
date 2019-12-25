@@ -1,31 +1,35 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "11e2078985a7c62ffb9b8e9f2c37485a",
+    "revision": "3061ec27cc8b4a9d46d725ab22af820d",
     "url": "/spartans-one/index.html"
   },
   {
-    "revision": "4cf13afb928d9f009169",
+    "revision": "c2a8b149c2fd322b9a14",
     "url": "/spartans-one/static/css/2.75d0c9d2.chunk.css"
   },
   {
-    "revision": "36a2ac5f85ca58612650",
-    "url": "/spartans-one/static/css/main.5ecd60fb.chunk.css"
+    "revision": "3758cba7656fe26c1c10",
+    "url": "/spartans-one/static/css/main.e6269706.chunk.css"
   },
   {
-    "revision": "4cf13afb928d9f009169",
-    "url": "/spartans-one/static/js/2.7ac9b821.chunk.js"
+    "revision": "c2a8b149c2fd322b9a14",
+    "url": "/spartans-one/static/js/2.13e530d9.chunk.js"
   },
   {
     "revision": "86afaa925e0f432774bf95b19b6933fb",
-    "url": "/spartans-one/static/js/2.7ac9b821.chunk.js.LICENSE"
+    "url": "/spartans-one/static/js/2.13e530d9.chunk.js.LICENSE"
   },
   {
-    "revision": "36a2ac5f85ca58612650",
-    "url": "/spartans-one/static/js/main.e0f56ece.chunk.js"
+    "revision": "3758cba7656fe26c1c10",
+    "url": "/spartans-one/static/js/main.96f03667.chunk.js"
   },
   {
     "revision": "2ec097ca5f3344365ec4",
     "url": "/spartans-one/static/js/runtime-main.afdf9105.js"
+  },
+  {
+    "revision": "86ea380c52dc9c9b72c21046ae789d09",
+    "url": "/spartans-one/static/media/athlete-card-background.86ea380c.jpg"
   },
   {
     "revision": "088a34f78f530102fd9661173b4a4f26",
