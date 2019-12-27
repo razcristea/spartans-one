@@ -30,12 +30,17 @@ export default function AthleteDetails({ info, getAthletes }) {
   ));
 
   const updateRecords = e => {
+    console.log(e.target);
     const athleteID = info._id;
     // first, target the scores for current id, and select all scores
     const elements = document
       .getElementById("scores-" + athleteID)
       .getElementsByClassName("scores-best form-control");
-    if (e.target.innerText.includes(buttonText[0])) {
+    const editBtn = document.getElementById("updatePr");
+    if (
+      e.target.innerText.includes(buttonText[0]) ||
+      e.target.id === "triggerEdit"
+    ) {
       // remove 'disabled' attribute
       Object.keys(elements).map(key => (elements[key].disabled = false));
       Array.from(elements).map(
@@ -43,7 +48,7 @@ export default function AthleteDetails({ info, getAthletes }) {
       );
       Array.from(elements).map(element => (element.style.color = "#fff"));
       // change button text:
-      e.target.innerHTML = `<div><i class="fas fa-save fa-lg"></i> ${buttonText[1]}</div>`;
+      editBtn.innerHTML = `<div> <i class="fas fa-save fa-lg"> </i> ${buttonText[1]}</div>`;
     } else {
       // initialize a new object
       const newScore = {};
@@ -83,7 +88,7 @@ export default function AthleteDetails({ info, getAthletes }) {
       // disable input fields
       Object.keys(elements).map(key => (elements[key].disabled = true));
       // change button text back to "Edit Records"
-      e.target.innerHTML = `<div><i class="fas fa-share-square fa-lg"></i> ${buttonText[2]}</div>`;
+      editBtn.innerHTML = `<div><i class="fas fa-share-square fa-lg"></i> ${buttonText[2]}</div>`;
     }
   };
   return (
@@ -112,16 +117,63 @@ export default function AthleteDetails({ info, getAthletes }) {
                 Age: {age} | Sex: {sex}
               </span>
             </Card.Text>
-            <ListGroup
-              variant="flush"
-              style={{ padding: "0.5rem 0", color: "black" }}
-              id={"scores-" + _id}
-            >
-              <div className="p-1 percentage-dropdown text-light">
-                <span className="mr-2">0%</span>
+            <div className="detailsContainer">
+              <ListGroup
+                variant="flush"
+                style={{ padding: "0.5rem 0", color: "black" }}
+                id={"scores-" + _id}
+              >
+                <div className="font-weight-bold mb-2 text-light">
+                  Percentage: {percentage} %
+                </div>
+                {Object.keys(personalBest).map((key, index) => (
+                  <ListGroup.Item
+                    as={Form}
+                    key={index}
+                    style={{
+                      backgroundColor: "#353539",
+                      color: "white"
+                    }}
+                  >
+                    <Row style={{ lineHeight: "30px" }}>
+                      <Col className="p-0 w-25 ml-0">
+                        <Form.Label>
+                          <div style={{ textTransform: "capitalize" }}>
+                            {key}
+                          </div>
+                        </Form.Label>
+                      </Col>
+                      <Col className="p-0 w-25 ml-4">
+                        <Form.Control
+                          disabled={true}
+                          type="number"
+                          className="scores-best text-center"
+                          name={key}
+                          defaultValue={personalBest[key]}
+                        />
+                      </Col>
+                      <div className="ml-4">
+                        <i className="far fa-arrow-alt-circle-right fa"></i>
+                      </div>
+                      <Col className="p-0 w-25">
+                        <div>
+                          {(parseInt(personalBest[key]) * percentage) / 100} kg
+                        </div>
+                      </Col>
+                    </Row>
+                  </ListGroup.Item>
+                ))}
+              </ListGroup>
+              <div className="p-1 text-light">
+                <div className="m-1 ml-2 font-weight-bold">100%</div>
                 <input
-                  style={{ minWidth: "250px" }}
+                  style={{
+                    width: "5px",
+                    minHeight: "475px",
+                    WebkitAppearance: "slider-vertical"
+                  }}
                   type="range"
+                  orient="vertical"
                   name="percentage"
                   id="percentageSlider"
                   min="1"
@@ -133,50 +185,18 @@ export default function AthleteDetails({ info, getAthletes }) {
                     )
                   }
                 />
-                <span className="ml-2">100%</span>
+                <div className="m-1 font-weight-bold">0%</div>
               </div>
-              <div className="font-weight-bold mb-2 text-light">
-                Percentage: {percentage} %
-              </div>
-              {Object.keys(personalBest).map((key, index) => (
-                <ListGroup.Item
-                  as={Form}
-                  key={index}
-                  style={{
-                    backgroundColor: "#353539",
-                    color: "white"
-                  }}
-                >
-                  <Row>
-                    <Col>
-                      <Form.Label>
-                        <div style={{ textTransform: "capitalize" }}>{key}</div>
-                      </Form.Label>
-                    </Col>
-                    <Col>
-                      <Form.Control
-                        disabled={true}
-                        type="number"
-                        className="scores-best text-center"
-                        name={key}
-                        defaultValue={personalBest[key]}
-                      />
-                    </Col>
-                    <div className="ml-2">
-                      <i className="far fa-arrow-alt-circle-right fa"></i>
-                    </div>
-                    <Col>
-                      <div>
-                        {(parseInt(personalBest[key]) * percentage) / 100} kg
-                      </div>
-                    </Col>
-                  </Row>
-                </ListGroup.Item>
-              ))}
-            </ListGroup>
+            </div>
             <ButtonGroup size="sm" aria-label="Action Buttons">
-              <Button variant="success" className="m-1" onClick={updateRecords}>
-                <i className="fas fa-user-cog fa-lg"></i> Edit PR
+              <Button
+                variant="success"
+                className="m-1"
+                onClick={updateRecords}
+                id="updatePr"
+              >
+                <i className="fas fa-user-cog fa-lg" id="triggerEdit"></i> Edit
+                PR
               </Button>
               <GoBack />
             </ButtonGroup>
