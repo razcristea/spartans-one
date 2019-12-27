@@ -10,10 +10,6 @@ import Image from "react-bootstrap/Image";
 // const athletesAPIDEV = "http://localhost:3000/athletes/";
 
 export default class Athlete extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const { name, age, sex, email, photo, _id, phoneNumber } = this.props.info;
     return (

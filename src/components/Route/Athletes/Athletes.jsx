@@ -29,7 +29,6 @@ export default class Athletes extends Component {
             a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
           );
           this.setState({ athletes: data });
-          console.log(this.state.athletes);
         },
         // Note: it's important to handle errors here
         // instead of a catch() block so that we don't swallow
@@ -50,6 +49,7 @@ export default class Athletes extends Component {
               <AthletesContainer
                 athletes={this.state.athletes}
                 getAthletes={this.getAthletes}
+                changeCount={this.props.changeCount}
               />
             );
           }}

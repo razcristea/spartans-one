@@ -5,17 +5,24 @@ import Footer from "./components/Footer/Footer";
 import Athletes from "./components/Route/Athletes/Athletes";
 
 export default class App extends Component {
+  state = { changeCount: 0 };
+  changeCount = () => {
+    this.setState({ changeCount: this.state.changeCount + 1 });
+  };
   render() {
     return (
       <Router>
         <Header />
         <Switch>
           {/* <Route path="/" component={LandingPage} exact></Route> */}
-          <Route path="/athletes" component={Athletes}></Route>
+          <Route
+            path="/athletes"
+            component={() => <Athletes changeCount={this.changeCount} />}
+          ></Route>
           {/* <Route path="/wods" component={Wods}></Route> */}
           {/* <Route path="/find" component={Search}></Route> */}
         </Switch>
-        <Footer />
+        <Footer count={this.state.changeCount} />
       </Router>
     );
   }

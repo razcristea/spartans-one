@@ -34,7 +34,7 @@ export default class AthletesContainer extends Component {
   };
 
   doTheSearch = event => {
-    const filteredAthletes = [...this.state.athletes];
+    const filteredAthletes = [...this.props.athletes];
     const result = filteredAthletes.filter(athlete =>
       athlete.name.toLowerCase().includes(event.target.value.toLowerCase())
     );
@@ -54,7 +54,7 @@ export default class AthletesContainer extends Component {
     this.setState({
       modalShow: false
     });
-    this.props.getAthletes();
+    // this.props.getAthletes();
     this.displayMessage("Modal AddAthlete inchis"); // NEEDS IMPLEMENTATION OF CUSTOM MESSAGE
     setTimeout(this.displayMessage, 1500);
   };
@@ -116,20 +116,14 @@ export default class AthletesContainer extends Component {
         },
         error => console.log(error)
       )
-      .then(setTimeout(() => this.props.getAthletes(), 5000)); // re-fetch from API
+      .then(setTimeout(() => this.props.getAthletes(), 5000)) // re-fetch from API
+      .then(this.props.changeCount);
   };
 
   componentWillUnmount() {
     this._isMounted = false;
     window.removeEventListener("resize", this.resize);
   }
-
-  // componentDidMount() {
-  //   window.addEventListener("resize", this.resize);
-  // }
-  // componentWillUnmount() {
-  //   window.removeEventListener("resize", this.resize);
-  // }
 
   render() {
     const addAthleteBtnStyles = {
@@ -153,11 +147,10 @@ export default class AthletesContainer extends Component {
       color: "black",
       border: "2px double white"
     };
-
     return (
       <Fragment>
         {/* TEXT DISPLAYED WHILE FETCH IS RUNNING */}
-        {this.state.athletes.length === 0 && (
+        {this.props.athletes.length === 0 && (
           <h3 className="text-center mt-5 pt-5 text-light">
             Loading athletes...
           </h3>
@@ -192,6 +185,9 @@ export default class AthletesContainer extends Component {
               key={athlete._id}
               info={athlete}
               toggleWillDeleteModal={this.toggleWillDeleteModal}
+              // getAthletes={this.props.getAthletes}
+              // displayMessage={this.displayMessage}
+              changeCount={this.props.changeCount}
             />
           ))}
         </Accordion>
@@ -205,6 +201,7 @@ export default class AthletesContainer extends Component {
               key={i}
               athlete={athlete}
               toggleWillDeleteModal={this.toggleWillDeleteModal}
+              changeCount={this.props.changeCount}
             />
           ))}
         </div>
@@ -250,6 +247,7 @@ export default class AthletesContainer extends Component {
           show={this.state.modalShow}
           onHide={this.hideModal}
           // message={this.state.message}
+          changeCount={this.props.changeCount}
         />
         {/* MODAL TO DISPLAY MESSAGES */}
         <MessageModal

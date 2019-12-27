@@ -1,26 +1,27 @@
 {
   "files": {
-    "main.css": "/spartans-one/static/css/main.5ecd60fb.chunk.css",
-    "main.js": "/spartans-one/static/js/main.e0f56ece.chunk.js",
-    "main.js.map": "/spartans-one/static/js/main.e0f56ece.chunk.js.map",
+    "main.css": "/spartans-one/static/css/main.e6269706.chunk.css",
+    "main.js": "/spartans-one/static/js/main.96f03667.chunk.js",
+    "main.js.map": "/spartans-one/static/js/main.96f03667.chunk.js.map",
     "runtime-main.js": "/spartans-one/static/js/runtime-main.afdf9105.js",
     "runtime-main.js.map": "/spartans-one/static/js/runtime-main.afdf9105.js.map",
     "static/css/2.75d0c9d2.chunk.css": "/spartans-one/static/css/2.75d0c9d2.chunk.css",
-    "static/js/2.7ac9b821.chunk.js": "/spartans-one/static/js/2.7ac9b821.chunk.js",
-    "static/js/2.7ac9b821.chunk.js.map": "/spartans-one/static/js/2.7ac9b821.chunk.js.map",
+    "static/js/2.13e530d9.chunk.js": "/spartans-one/static/js/2.13e530d9.chunk.js",
+    "static/js/2.13e530d9.chunk.js.map": "/spartans-one/static/js/2.13e530d9.chunk.js.map",
     "index.html": "/spartans-one/index.html",
-    "precache-manifest.4499c70d9da0163f7918010426ff7ce1.js": "/spartans-one/precache-manifest.4499c70d9da0163f7918010426ff7ce1.js",
+    "precache-manifest.02182cf571b5bf93ef8f777b7dfb031b.js": "/spartans-one/precache-manifest.02182cf571b5bf93ef8f777b7dfb031b.js",
     "service-worker.js": "/spartans-one/service-worker.js",
     "static/css/2.75d0c9d2.chunk.css.map": "/spartans-one/static/css/2.75d0c9d2.chunk.css.map",
-    "static/css/main.5ecd60fb.chunk.css.map": "/spartans-one/static/css/main.5ecd60fb.chunk.css.map",
-    "static/js/2.7ac9b821.chunk.js.LICENSE": "/spartans-one/static/js/2.7ac9b821.chunk.js.LICENSE",
+    "static/css/main.e6269706.chunk.css.map": "/spartans-one/static/css/main.e6269706.chunk.css.map",
+    "static/js/2.13e530d9.chunk.js.LICENSE": "/spartans-one/static/js/2.13e530d9.chunk.js.LICENSE",
+    "static/media/index.css": "/spartans-one/static/media/athlete-card-background.86ea380c.jpg",
     "static/media/all.min.css": "/spartans-one/static/media/fa-solid-900.f6121be5.woff2"
   },
   "entrypoints": [
     "static/js/runtime-main.afdf9105.js",
     "static/css/2.75d0c9d2.chunk.css",
-    "static/js/2.7ac9b821.chunk.js",
-    "static/css/main.5ecd60fb.chunk.css",
-    "static/js/main.e0f56ece.chunk.js"
+    "static/js/2.13e530d9.chunk.js",
+    "static/css/main.e6269706.chunk.css",
+    "static/js/main.96f03667.chunk.js"
   ]
 }
