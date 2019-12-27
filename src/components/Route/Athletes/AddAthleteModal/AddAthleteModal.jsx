@@ -50,6 +50,7 @@ export default class AddAthleteModal extends Component {
 
       const formData = new FormData();
       formData.append("name", form.formName.value);
+      formData.append("phoneNumber", form.formPhone.value);
       formData.append("email", form.formEmail.value);
       formData.append("age", form.formAge.value);
       formData.append("sex", form.formGender.value);
@@ -62,7 +63,7 @@ export default class AddAthleteModal extends Component {
       })
         .then(
           response => {
-            console.log(response.json());
+            return response.json();
           },
           error => {
             console.log(error);
@@ -103,6 +104,15 @@ export default class AddAthleteModal extends Component {
                   type="text"
                   placeholder="Athlete's name"
                 />
+              </Col>
+            </Form.Group>
+            {/* PHONE */}
+            <Form.Group as={Row} controlId="formPhone">
+              <Form.Label column sm={2}>
+                Phone
+              </Form.Label>
+              <Col sm={10}>
+                <Form.Control required type="text" placeholder="Phone number" />
               </Col>
             </Form.Group>
             {/* EMAIL ADDRESS */}
