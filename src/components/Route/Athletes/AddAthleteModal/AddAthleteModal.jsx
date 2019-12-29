@@ -73,7 +73,53 @@ export default class AddAthleteModal extends Component {
         .then(this.props.onHide); // this will close the modal
     }
   };
-
+  onKeyUp = (target, event) => {
+    if (event.keyCode === 13) {
+      switch (target) {
+        case "name":
+          this.phone.focus();
+          break;
+        case "phone":
+          this.email.focus();
+          break;
+        case "email":
+          this.age.focus();
+          break;
+        case "age":
+          this.benchpress.focus();
+          break;
+        case "benchpress":
+          this.strictpress.focus();
+          break;
+        case "strictpress":
+          this.pushpress.focus();
+          break;
+        case "pushpress":
+          this.row.focus();
+          break;
+        case "row":
+          this.backsquat.focus();
+          break;
+        case "backsquat":
+          this.frontsquat.focus();
+          break;
+        case "frontsquat":
+          this.deadlift.focus();
+          break;
+        case "deadlift":
+          this.trapbardeadlift.focus();
+          break;
+        case "trapbardeadlift":
+          this.photo.focus();
+          break;
+        case "photo":
+          this.submitBtn.focus();
+          break;
+        default:
+          this.name.focus();
+      }
+    }
+  };
   render() {
     return (
       <Modal
@@ -91,11 +137,7 @@ export default class AddAthleteModal extends Component {
         </Modal.Header>
         <Modal.Body>
           {/* FORM STARTS HERE */}
-          <Form
-            noValidate
-            // validated={this.state.isValidated}
-            onSubmit={this.handleSubmit}
-          >
+          <Form noValidate onSubmit={this.handleSubmit}>
             {/* NAME */}
             <Form.Group as={Row} controlId="formName">
               <Form.Label column sm={2}>
@@ -104,8 +146,13 @@ export default class AddAthleteModal extends Component {
               <Col sm={10}>
                 <Form.Control
                   required
+                  autoFocus
                   type="text"
                   placeholder="Athlete's name"
+                  ref={input => {
+                    this.name = input;
+                  }}
+                  onKeyUp={this.onKeyUp.bind(this, "name")}
                 />
               </Col>
             </Form.Group>
@@ -115,7 +162,15 @@ export default class AddAthleteModal extends Component {
                 Phone
               </Form.Label>
               <Col sm={10}>
-                <Form.Control required type="text" placeholder="Phone number" />
+                <Form.Control
+                  required
+                  type="text"
+                  placeholder="Phone number"
+                  ref={input => {
+                    this.phone = input;
+                  }}
+                  onKeyUp={this.onKeyUp.bind(this, "phone")}
+                />
               </Col>
             </Form.Group>
             {/* EMAIL ADDRESS */}
@@ -124,13 +179,15 @@ export default class AddAthleteModal extends Component {
                 Email
               </Form.Label>
               <Col sm={10}>
-                <Form.Control required type="email" placeholder="Enter email" />
-                <Form.Text className="text-muted">
-                  We'll never share your email with anyone else.
-                </Form.Text>
-                <Form.Control.Feedback type="invalid">
-                  Please provide a valid email.
-                </Form.Control.Feedback>
+                <Form.Control
+                  required
+                  type="email"
+                  placeholder="Enter email"
+                  ref={input => {
+                    this.email = input;
+                  }}
+                  onKeyUp={this.onKeyUp.bind(this, "email")}
+                />
               </Col>
             </Form.Group>
             {/* AGE SELECTION */}
@@ -139,7 +196,15 @@ export default class AddAthleteModal extends Component {
                 Age
               </Form.Label>
               <Col sm={10}>
-                <Form.Control required type="number" placeholder="Enter age" />
+                <Form.Control
+                  required
+                  type="number"
+                  placeholder="Enter age"
+                  ref={input => {
+                    this.age = input;
+                  }}
+                  onKeyUp={this.onKeyUp.bind(this, "age")}
+                />
               </Col>
             </Form.Group>
             {/* GENDER SELECTION */}
@@ -165,6 +230,10 @@ export default class AddAthleteModal extends Component {
                   type="number"
                   placeholder="Benchpress"
                   name="benchpress"
+                  ref={input => {
+                    this.benchpress = input;
+                  }}
+                  onKeyUp={this.onKeyUp.bind(this, "benchpress")}
                 />
               </Col>
               <Col sm={3}>
@@ -173,6 +242,10 @@ export default class AddAthleteModal extends Component {
                   type="number"
                   placeholder="Strictpress"
                   name="strictpress"
+                  ref={input => {
+                    this.strictpress = input;
+                  }}
+                  onKeyUp={this.onKeyUp.bind(this, "strictpress")}
                 />
               </Col>
               <Col sm={3}>
@@ -181,6 +254,10 @@ export default class AddAthleteModal extends Component {
                   type="number"
                   placeholder="Pushpress"
                   name="pushpress"
+                  ref={input => {
+                    this.pushpress = input;
+                  }}
+                  onKeyUp={this.onKeyUp.bind(this, "pushpress")}
                 />
               </Col>
               <Col sm={3}>
@@ -189,6 +266,10 @@ export default class AddAthleteModal extends Component {
                   type="number"
                   placeholder="Row"
                   name="row"
+                  ref={input => {
+                    this.row = input;
+                  }}
+                  onKeyUp={this.onKeyUp.bind(this, "row")}
                 />
               </Col>
               <Col sm={3}>
@@ -197,6 +278,10 @@ export default class AddAthleteModal extends Component {
                   type="number"
                   placeholder="Backsquat"
                   name="backsquat"
+                  ref={input => {
+                    this.backsquat = input;
+                  }}
+                  onKeyUp={this.onKeyUp.bind(this, "backsquat")}
                 />
               </Col>
               <Col sm={3}>
@@ -205,6 +290,10 @@ export default class AddAthleteModal extends Component {
                   type="number"
                   placeholder="Frontsquat"
                   name="frontsquat"
+                  ref={input => {
+                    this.frontsquat = input;
+                  }}
+                  onKeyUp={this.onKeyUp.bind(this, "frontsquat")}
                 />
               </Col>
               <Col sm={3}>
@@ -213,6 +302,10 @@ export default class AddAthleteModal extends Component {
                   type="number"
                   placeholder="Deadlift"
                   name="deadlift"
+                  ref={input => {
+                    this.deadlift = input;
+                  }}
+                  onKeyUp={this.onKeyUp.bind(this, "deadlift")}
                 />
               </Col>
               <Col sm={3}>
@@ -221,6 +314,10 @@ export default class AddAthleteModal extends Component {
                   type="number"
                   placeholder="Trapbardeadlift"
                   name="trapbardeadlift"
+                  ref={input => {
+                    this.trapbardeadlift = input;
+                  }}
+                  onKeyUp={this.onKeyUp.bind(this, "trapbardeadlift")}
                 />
               </Col>
             </Form.Group>
@@ -230,17 +327,30 @@ export default class AddAthleteModal extends Component {
                 Photo
               </Form.Label>
               <Col sm={10}>
-                <Form.Control type="file" onChange={this.onChangeFileHandler} />
+                <Form.Control
+                  type="file"
+                  onChange={this.onChangeFileHandler}
+                  ref={input => {
+                    this.photo = input;
+                  }}
+                  onKeyUp={this.onKeyUp.bind(this, "photo")}
+                />
               </Col>
             </Form.Group>
             {/* SUBMIT BUTTON */}
-            <Form.Group as={Row}>
-              <Col sm={{ span: 10, offset: 2 }}>
-                <Button variant="success" type="submit">
-                  Submit
-                </Button>
-              </Col>
-            </Form.Group>
+            <Col sm={{ span: 10, offset: 2 }}>
+              <Button
+                variant="success"
+                type="submit"
+                ref={button => {
+                  this.submitBtn = button;
+                }}
+                onKeyUp={this.onKeyUp.bind(this, "submitBtn")}
+              >
+                Submit
+              </Button>
+            </Col>
+            <Form.Group as={Row}></Form.Group>
           </Form>
           {/* FORM ENDED RIGHT ABOVE */}
         </Modal.Body>

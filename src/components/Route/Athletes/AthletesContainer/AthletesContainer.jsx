@@ -8,6 +8,7 @@ import Modal from "react-bootstrap/Modal";
 import AthleteCard from "../AthleteCard/AthleteCard";
 import "../AthletesContainer/AthletesContainer.css";
 import AlertMessage from "../AlertMessage/AlertMessage";
+import AddAthleteV2 from "../AddAthleteModal/AddAthletev2";
 
 const athletesAPI = "https://theboxathletes.herokuapp.com/athletes/";
 
@@ -54,9 +55,6 @@ export default class AthletesContainer extends Component {
     this.setState({
       modalShow: false
     });
-    // this.props.getAthletes();
-    this.displayMessage("Modal AddAthlete inchis"); // NEEDS IMPLEMENTATION OF CUSTOM MESSAGE
-    setTimeout(this.displayMessage, 1500);
   };
 
   displayMessage = message => {
@@ -106,18 +104,16 @@ export default class AthletesContainer extends Component {
       method: "DELETE"
     })
       .then(res => res.json())
+      .then(answer => {
+        console.log("Answer is: " + answer);
+        this.closeDeleteModal();
+        this.displayAlertDeleted(answer);
+      })
       .then(
-        answer => {
-          console.log("Answer is: " + answer);
-
-          this.closeDeleteModal();
-
-          this.displayAlertDeleted(answer);
-        },
-        error => console.log(error)
-      )
-      .then(setTimeout(() => this.props.getAthletes(), 5000)) // re-fetch from API
-      .then(this.props.changeCount);
+        setTimeout(() => {
+          this.props.changeCount();
+        }, 3000)
+      );
   };
 
   componentWillUnmount() {
@@ -185,8 +181,6 @@ export default class AthletesContainer extends Component {
               key={athlete._id}
               info={athlete}
               toggleWillDeleteModal={this.toggleWillDeleteModal}
-              // getAthletes={this.props.getAthletes}
-              // displayMessage={this.displayMessage}
               changeCount={this.props.changeCount}
             />
           ))}
@@ -243,7 +237,7 @@ export default class AthletesContainer extends Component {
           <i className="fas fa-user-plus"></i>
         </Button>
         {/* MODAL ADD ATHLETE */}
-        <AddAthleteModal
+        <AddAthleteV2
           show={this.state.modalShow}
           onHide={this.hideModal}
           // message={this.state.message}
