@@ -1,0 +1,19 @@
+.addform {
+    background-color: #1f1f1f;
+    border: 1px ridge white;
+}
+
+.modalHeader {
+    background-color: #1f1f1f;
+    border: 2px ridge white;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.modalFooter {
+    background-color: #1f1f1f;
+    border: 2px ridge white;
+    position: sticky;
+    bottom: 0;
+}

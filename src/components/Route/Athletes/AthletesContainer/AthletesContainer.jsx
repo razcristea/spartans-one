@@ -240,7 +240,7 @@ export default class AthletesContainer extends Component {
         <AddAthleteV2
           show={this.state.modalShow}
           onHide={this.hideModal}
-          // message={this.state.message}
+          showServerResponse={this.displayAlertDeleted}
           changeCount={this.props.changeCount}
         />
         {/* MODAL TO DISPLAY MESSAGES */}
