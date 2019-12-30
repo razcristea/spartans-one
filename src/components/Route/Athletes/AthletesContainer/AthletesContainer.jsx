@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 import Athlete from "../Athlete/Athlete";
-import AddAthleteModal from "../AddAthleteModal/AddAthleteModal";
+// import AddAthleteModal from "../AddAthleteModal/AddAthleteModal";
 import MessageModal from "../MessageModal/MessageModal";
 import Accordion from "react-bootstrap/Accordion";
 import Button from "react-bootstrap/Button";
@@ -112,7 +112,7 @@ export default class AthletesContainer extends Component {
       .then(
         setTimeout(() => {
           this.props.changeCount();
-        }, 3000)
+        }, 2000)
       );
   };
 

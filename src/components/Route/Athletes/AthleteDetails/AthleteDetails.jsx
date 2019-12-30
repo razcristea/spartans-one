@@ -48,7 +48,7 @@ export default function AthleteDetails({ info, getAthletes }) {
       );
       Array.from(elements).map(element => {
         element.style.color = "#fff";
-        element.style.fontWeight = "bold";
+        return (element.style.fontWeight = "bold");
       });
       // change button text:
       editBtn.innerHTML = `<div> <i class="fas fa-save fa-lg"> </i> ${buttonText[1]}</div>`;

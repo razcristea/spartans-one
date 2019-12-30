@@ -5,7 +5,6 @@ import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
 
 export default function AthleteCard({ athlete, toggleWillDeleteModal }) {
-  athlete.phoneNumber = "0742874381";
   return (
     <div className="card text-center card-item">
       <div className="header-card-wraper">

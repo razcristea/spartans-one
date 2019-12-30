@@ -2,6 +2,8 @@ import React from "react";
 import { MDBRow, MDBCol, MDBInput, MDBBtn, MDBIcon } from "mdbreact";
 import Modal from "react-bootstrap/Modal";
 
+const athletesAPI = "https://theboxathletes.herokuapp.com/athletes/";
+
 class AddAthleteV2 extends React.Component {
   state = {
     name: "",
@@ -10,14 +12,14 @@ class AddAthleteV2 extends React.Component {
     age: "",
     genre: "",
     personalBest: {
-      benchPress: "",
-      strictPress: "",
-      pushPress: "",
-      row: "",
-      backsquat: "",
-      frontsquat: "",
-      deadlift: "",
-      trapbardeadlift: ""
+      benchpress: "" || 0,
+      strictpress: "" || 0,
+      pushpress: "" || 0,
+      row: "" || 0,
+      backsquat: "" || 0,
+      frontsquat: "" || 0,
+      deadlift: "" || 0,
+      trapDeadlift: "" || 0
     },
     selectedFileName: "Upload Photo...",
     selectedFile: null
@@ -34,41 +36,43 @@ class AddAthleteV2 extends React.Component {
     event.target.className += " was-validated";
     const form = event.currentTarget;
     const isValid = form.checkValidity();
-    console.log(form);
-    const formData = new FormData();
-    formData.append("name", this.state.name);
-    formData.append("phoneNumber", this.state.phone);
-    formData.append("email", this.state.email);
-    formData.append("age", this.state.age);
-    formData.append("sex", this.state.genre);
-    formData.append("personalBest", JSON.stringify(this.state.personalBest));
-    formData.append("photo", this.state.selectedFile);
+    if (isValid) {
+      const formData = new FormData();
+      formData.append("name", this.state.name);
+      formData.append("phoneNumber", this.state.phone);
+      formData.append("email", this.state.email);
+      formData.append("age", this.state.age);
+      formData.append("sex", this.state.genre);
+      formData.append("personalBest", JSON.stringify(this.state.personalBest));
+      formData.append("photo", this.state.selectedFile);
 
-    console.log(formData);
-    console.log(this.state);
-    // fetch(athletesAPI, {
-    //   method: "POST",
-    //   body: formData
-    // })
-    //   .then(
-    //     response => {
-    //       return response.json();
-    //     },
-    //     error => {
-    //       console.log(error);
-    //     }
-    //   )
-    //   .then(this.props.changeCount)
-    //   .then(this.props.onHide); // this will close the modal
+      fetch(athletesAPI, {
+        method: "POST",
+        body: formData
+      })
+        .then(
+          response => {
+            return response.json();
+          },
+          error => {
+            console.log(error);
+          }
+        )
+        .then(this.props.changeCount)
+        .then(this.props.onHide); // this will close the modal
+    }
   };
 
   changeHandler = event => {
-    console.log(event.target.name);
     this.setState({ [event.target.name]: event.target.value });
   };
+
   changePrHandler = event => {
     this.setState({
-      personalBest: { [event.target.name]: parseInt(event.target.value) || 0 }
+      personalBest: {
+        ...this.state.personalBest,
+        [event.target.name]: parseInt(event.target.value) || 0
+      }
     });
   };
   render() {
@@ -81,17 +85,35 @@ class AddAthleteV2 extends React.Component {
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
-        <Modal.Header closeButton className="bg-dark text-light">
+        <Modal.Header
+          className="text-light"
+          style={{
+            backgroundColor: "#1f1f1f",
+            position: "sticky",
+            top: "0",
+            left: "0",
+            right: "0",
+            zIndex: "100"
+          }}
+        >
           <Modal.Title id="contained-modal-title-vcenter">
-            Add new Athlete
+            <MDBIcon icon="user-plus" /> Add new Athlete
           </Modal.Title>
-        </Modal.Header>
-        <Modal.Body className="bg-dark text-light">
-          <form
-            className="needs-validation"
-            onSubmit={this.submitHandler}
-            noValidate
+          <button
+            type="button"
+            className="close text-white"
+            onClick={this.props.onHide}
           >
+            <span>&times;</span>
+          </button>
+        </Modal.Header>
+        <form
+          className="needs-validation"
+          onSubmit={this.submitHandler}
+          noValidate
+          style={{ backgroundColor: "#1f1f1f" }}
+        >
+          <Modal.Body className="bg-dark text-light">
             <MDBRow>
               <MDBCol md="4">
                 <MDBInput
@@ -175,7 +197,9 @@ class AddAthleteV2 extends React.Component {
             </MDBRow>
             <MDBRow>
               <MDBCol md="12">
-                <div className="mt-3">Genre:</div>
+                <div className="mt-3">
+                  Genre: <MDBIcon icon="male" /> / <MDBIcon icon="female" />
+                </div>
                 <div className="custom-control custom-radio">
                   <input
                     type="radio"
@@ -210,11 +234,11 @@ class AddAthleteV2 extends React.Component {
               </MDBCol>
             </MDBRow>
 
-            <div className="ml-3 mb-2">
+            <div className="mt-2 mb-2 text-center">
               <MDBIcon icon="dumbbell" /> Personal Best:
             </div>
             <MDBRow className="mt-3">
-              <MDBCol md="2" className="m-1 ml-3 mr-3">
+              <MDBCol md="3">
                 <MDBInput
                   onChange={this.changePrHandler}
                   type="number"
@@ -224,7 +248,7 @@ class AddAthleteV2 extends React.Component {
                   outline
                 />
               </MDBCol>
-              <MDBCol md="2" className="m-1 ml-3 mr-3">
+              <MDBCol md="3">
                 <MDBInput
                   onChange={this.changePrHandler}
                   type="number"
@@ -234,7 +258,7 @@ class AddAthleteV2 extends React.Component {
                   outline
                 />
               </MDBCol>
-              <MDBCol md="2" className="ml-3 mr-3 m-1">
+              <MDBCol md="3">
                 <MDBInput
                   onChange={this.changePrHandler}
                   type="number"
@@ -244,7 +268,7 @@ class AddAthleteV2 extends React.Component {
                   outline
                 />
               </MDBCol>
-              <MDBCol md="2" className="m-1 ml-3 mr-3">
+              <MDBCol md="3">
                 <MDBInput
                   onChange={this.changePrHandler}
                   type="number"
@@ -256,7 +280,7 @@ class AddAthleteV2 extends React.Component {
               </MDBCol>
             </MDBRow>
             <MDBRow>
-              <MDBCol md="2" className="m-1 ml-3 mr-3">
+              <MDBCol md="3">
                 <MDBInput
                   onChange={this.changePrHandler}
                   type="number"
@@ -266,7 +290,7 @@ class AddAthleteV2 extends React.Component {
                   outline
                 />
               </MDBCol>
-              <MDBCol md="2" className="m-1 ml-3 mr-3">
+              <MDBCol md="3">
                 <MDBInput
                   onChange={this.changePrHandler}
                   type="number"
@@ -276,7 +300,7 @@ class AddAthleteV2 extends React.Component {
                   outline
                 />
               </MDBCol>
-              <MDBCol md="2" className="m-1 ml-3 mr-3">
+              <MDBCol md="3">
                 <MDBInput
                   onChange={this.changePrHandler}
                   type="number"
@@ -286,18 +310,18 @@ class AddAthleteV2 extends React.Component {
                   outline
                 />
               </MDBCol>
-              <MDBCol md="2" className="m-1 ml-3 mr-3">
+              <MDBCol md="3">
                 <MDBInput
                   onChange={this.changePrHandler}
                   type="number"
-                  id="trapbardeadlift"
-                  name="trapbardeadlift"
+                  id="trapDeadlift"
+                  name="trapDeadlift"
                   label="Trapbardeadlift"
                   outline
                 />
               </MDBCol>
             </MDBRow>
-            <MDBCol md="4" className="mb-3 mt-3">
+            <MDBCol md="12" className="mb-3 mt-3">
               <div className="custom-control custom-checkbox pl-3">
                 <input
                   className="custom-control-input"
@@ -314,11 +338,22 @@ class AddAthleteV2 extends React.Component {
                 </div>
               </div>
             </MDBCol>
+          </Modal.Body>
+          <Modal.Header
+            style={{
+              backgroundColor: "#1f1f1f",
+              position: "sticky",
+              bottom: "0"
+            }}
+          >
             <MDBBtn color="success" type="submit">
-              Submit Form
+              <MDBIcon icon="share-square" /> Submit
             </MDBBtn>
-          </form>
-        </Modal.Body>
+            <MDBBtn color="danger" onClick={this.props.onHide}>
+              <MDBIcon icon="ban" /> Cancel
+            </MDBBtn>
+          </Modal.Header>
+        </form>
       </Modal>
     );
   }
