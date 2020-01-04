@@ -68,7 +68,7 @@ export default class Footer extends Component {
     return (
       <footer style={footerStyle}>
         <div>
-          <div>Welcome, Coach Valy!</div>
+          <div>Welcome, Coach Vali!</div>
           <div className="text-muted text-center text-small">
             <i className="far fa-calendar-alt"></i> {this.state.date}
           </div>

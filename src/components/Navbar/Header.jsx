@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
-import Logo from "./theboxlogo.png";
+import Logo from "./CoachVLogo.png";
 
 const links = [
   { path: "Home", route: "/", icon: "fas fa-home" },
@@ -27,14 +27,15 @@ export default function Header() {
     >
       <Navbar.Brand>
         <NavLink
-          to="/"
+          to="/athletes"
           className="text-decoration-none text-light font-weight-bold"
+          style={{ lineHeight: "45px" }}
         >
           <img
             alt=""
             src={Logo}
-            width="30"
-            height="30"
+            width="45"
+            height="45"
             className="d-inline-block align-top"
           />{" "}
           My|PT|Helper
@@ -43,6 +44,7 @@ export default function Header() {
       <Navbar.Toggle
         aria-controls="basic-navbar-nav"
         onClick={() => setExpanded(expanded ? false : "expanded")}
+        onBlur={() => setTimeout(() => setExpanded(false), 100)}
       />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto">
@@ -51,11 +53,10 @@ export default function Header() {
               key={i}
               exact
               to={`${link.route}`}
-              className="m-2 text-decoration-none"
+              className="m-2 text-decoration-none text-center"
               activeClassName="selected"
               activeStyle={activeStyle}
               style={{ color: "white" }}
-              onClick={() => setTimeout(() => setExpanded(false), 100)}
             >
               <i className={link.icon}></i>
               <span> </span>

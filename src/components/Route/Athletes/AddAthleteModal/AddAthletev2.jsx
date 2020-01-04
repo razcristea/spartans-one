@@ -32,15 +32,18 @@ class AddAthleteV2 extends React.Component {
   };
   _handleKeyPress = (target, e) => {
     if (e.keyCode === 13) {
-      e.preventDefault();
+      e.stopPropagation();
       switch (target) {
         case "name":
+          console.log(this[target]);
           this.phone.setFocus();
           break;
         case "phone":
+          console.log(this[target]);
           this.email.setFocus();
           break;
         case "email":
+          console.log(this[target]);
           this.age.setFocus();
           break;
         case "age":
@@ -84,9 +87,11 @@ class AddAthleteV2 extends React.Component {
   };
   submitHandler = event => {
     event.preventDefault();
-    event.target.className += " was-validated";
     const form = event.currentTarget;
+    console.log(form);
     const isValid = form.checkValidity();
+    console.log(event.target);
+    // event.target.keyCode === 13 ? event.stopPropagation() : console.log("No");
     if (isValid) {
       const formData = new FormData();
       formData.append("name", this.state.name);
@@ -111,11 +116,17 @@ class AddAthleteV2 extends React.Component {
         .then(
           setTimeout(() => {
             this.props.changeCount();
-          }, 3500)
+          }, 2500)
         );
+    } else {
+      event.target.className += " was-validated";
+      const formElements = Array.from(form.elements);
+      const firstInvalidElement = formElements.find(
+        element => !element.validity.valid && element.required
+      );
+      firstInvalidElement.focus();
     }
   };
-
   changeHandler = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
@@ -155,22 +166,18 @@ class AddAthleteV2 extends React.Component {
           onSubmit={this.submitHandler}
           noValidate
         >
-          <Modal.Body className="bg-dark text-light">
+          <Modal.Body className="bg-dark text-light" id="modalBody">
             <MDBRow>
               {addAthleteFields.map((field, index) => (
                 <MDBCol md="4" key={index}>
+                  <label className="mb-2 mt-3">
+                    <MDBIcon icon={field.icon} /> - {field.label}
+                  </label>
                   <MDBInput
-                    icon={field.icon}
                     value={this.state[field.name]}
                     name={field.name}
                     onChange={this.changeHandler}
                     type={field.type}
-                    ref={input => {
-                      this[field.name] = input;
-                    }}
-                    onKeyUp={this._handleKeyPress.bind(this, field.name)}
-                    label={field.label}
-                    outline
                     required
                   >
                     <div className="invalid-feedback">
@@ -180,8 +187,10 @@ class AddAthleteV2 extends React.Component {
                   </MDBInput>
                 </MDBCol>
               ))}
-              <MDBCol md="4">
-                <MDBIcon icon="camera" />
+              <MDBCol md="4" className="mb-2 mt-3">
+                <label>
+                  <MDBIcon icon="camera" /> - Photo
+                </label>
                 <div className="custom-file">
                   <input
                     type="file"
@@ -197,8 +206,8 @@ class AddAthleteV2 extends React.Component {
             </MDBRow>
             <MDBRow>
               <MDBCol md="12">
-                <div className="mt-3">
-                  Gender: <MDBIcon icon="male" /> / <MDBIcon icon="female" />
+                <div className="mt-3 mb-2">
+                  <MDBIcon icon="male" /> / <MDBIcon icon="female" />
                 </div>
                 <div className="custom-control custom-radio">
                   <input
@@ -233,22 +242,17 @@ class AddAthleteV2 extends React.Component {
                 </div>
               </MDBCol>
             </MDBRow>
-            <div className="mt-2 mb-2 text-center">
-              <MDBIcon icon="dumbbell" /> Personal Best:
-            </div>
-            <MDBRow className="mt-3">
+            <h3 className="mt-2 text-center border">
+              <MDBIcon icon="dumbbell" /> Personal Best
+            </h3>
+            <MDBRow className="mt-2 pb-4 border">
               {personalBestFields.map((field, index) => (
                 <MDBCol md="3" key={index}>
+                  <label className="mb-0 mt-3">{field.label}</label>
                   <MDBInput
                     onChange={this.changePrHandler}
                     type={field.type}
                     name={field.name}
-                    label={field.label}
-                    ref={input => {
-                      this[field.name] = input;
-                    }}
-                    onKeyUp={this._handleKeyPress.bind(this, field.name)}
-                    outline
                   />
                 </MDBCol>
               ))}
@@ -262,10 +266,6 @@ class AddAthleteV2 extends React.Component {
                   value=""
                   id="invalidCheck"
                   required
-                  ref={input => {
-                    this.checkbox = input;
-                  }}
-                  onKeyUp={this._handleKeyPress.bind(this, "checkbox")}
                 />
                 <label className="custom-control-label" htmlFor="invalidCheck">
                   Check the box if the info submitted is correct

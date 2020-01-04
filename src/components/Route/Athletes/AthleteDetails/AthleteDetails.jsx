@@ -2,7 +2,6 @@ import React, { Fragment, useState } from "react";
 import { withRouter } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Image from "react-bootstrap/Image";
 import ListGroup from "react-bootstrap/ListGroup";
 import Form from "react-bootstrap/Form";
@@ -10,48 +9,67 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import "./AthleteDetails.css";
 
-const buttonText = ["Edit PR", "Save", "Saving..."];
 const athletesAPI = "https://theboxathletes.herokuapp.com/athletes/";
+
+const goBackBtnStyles = {
+  width: "3rem",
+  fontSize: "1rem",
+  borderRadius: "10%",
+  backgroundColor: "#000304",
+  color: "white",
+  border: "1px double white",
+  zIndex: "100"
+};
+const editPRBtnStyles = {
+  width: "3rem",
+  fontSize: "1rem",
+  borderRadius: "10%",
+  backgroundColor: "#00bf06",
+  color: "white",
+  border: "1px double white"
+};
 
 export default function AthleteDetails({ info, getAthletes }) {
   const [percentage, setPercentage] = useState(50);
   const { name, age, sex, email, photo, _id, personalBest } = info;
   const GoBack = withRouter(({ history }) => (
     <Button
-      variant="secondary"
       type="button"
-      className="m-1 p-2"
+      style={goBackBtnStyles}
       onClick={() => {
         history.push("/athletes");
       }}
     >
-      <i className="fas fa-backward fa-lg"></i> Back To Athletes
+      <i className="fas fa-undo-alt fa-lg"></i>
     </Button>
   ));
-
+  const handleKeyPress = e => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      document.getElementById("updatePr").focus();
+      updateRecords(e);
+    }
+  };
   const updateRecords = e => {
-    console.log(e.target);
     const athleteID = info._id;
     // first, target the scores for current id, and select all scores
     const elements = document
       .getElementById("scores-" + athleteID)
       .getElementsByClassName("scores-best form-control");
     const editBtn = document.getElementById("updatePr");
-    if (
-      e.target.innerText.includes(buttonText[0]) ||
-      e.target.id === "triggerEdit"
-    ) {
+    if (e.target.id === "triggerEdit" || e.target.tagName === "INPUT") {
       // remove 'disabled' attribute
+      e.target.autofocus = true;
       Object.keys(elements).map(key => (elements[key].disabled = false));
       Array.from(elements).map(
-        element => (element.style.backgroundColor = "#dabd00")
+        element => (element.style.backgroundColor = "#00bf06")
       );
       Array.from(elements).map(element => {
         element.style.color = "#fff";
         return (element.style.fontWeight = "bold");
       });
       // change button text:
-      editBtn.innerHTML = `<div> <i class="fas fa-save fa-lg"> </i> ${buttonText[1]}</div>`;
+      editBtn.innerHTML = `<div> <i class="fas fa-save fa-lg"> </i></div>`;
     } else {
       // initialize a new object
       const newScore = {};
@@ -91,7 +109,7 @@ export default function AthleteDetails({ info, getAthletes }) {
       // disable input fields
       Object.keys(elements).map(key => (elements[key].disabled = true));
       // change button text back to "Edit Records"
-      editBtn.innerHTML = `<div><i class="fas fa-share-square fa-lg"></i> ${buttonText[2]}</div>`;
+      editBtn.innerHTML = `<div>...</div>`;
     }
   };
   return (
@@ -126,13 +144,34 @@ export default function AthleteDetails({ info, getAthletes }) {
                 style={{ padding: "0.5rem 0", color: "black" }}
                 id={"scores-" + _id}
               >
-                <div className="font-weight-bold mb-2 text-light">
-                  Percentage: {percentage} %
+                <div
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    justifyContent: "space-around"
+                  }}
+                >
+                  <GoBack />
+                  <Button
+                    className="m-1"
+                    onClick={updateRecords}
+                    id="updatePr"
+                    autoFocus
+                    style={editPRBtnStyles}
+                  >
+                    <i className="fas fa-user-cog fa-lg" id="triggerEdit"></i>{" "}
+                  </Button>
+                  <div className="font-weight-bold mb-2 text-light">
+                    Percentage: {percentage} %
+                  </div>
                 </div>
+
                 {Object.keys(personalBest).map((key, index) => (
                   <ListGroup.Item
                     as={Form}
                     key={index}
+                    onClick={updateRecords}
+                    onKeyPress={handleKeyPress}
                     style={{
                       backgroundColor: "#353539",
                       color: "white"
@@ -191,18 +230,6 @@ export default function AthleteDetails({ info, getAthletes }) {
                 <div className="m-1 font-weight-bold">0%</div>
               </div>
             </div>
-            <ButtonGroup size="sm" aria-label="Action Buttons">
-              <Button
-                variant="success"
-                className="m-1"
-                onClick={updateRecords}
-                id="updatePr"
-              >
-                <i className="fas fa-user-cog fa-lg" id="triggerEdit"></i> Edit
-                PR
-              </Button>
-              <GoBack />
-            </ButtonGroup>
           </Card.Body>
         </div>
       </Card>

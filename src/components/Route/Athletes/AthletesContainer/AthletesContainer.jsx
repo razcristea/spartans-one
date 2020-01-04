@@ -174,7 +174,12 @@ export default class AthletesContainer extends Component {
           show={this.state.alertDeleted}
           messageAlertDeleted={this.state.messageAlertDeleted}
         />
-
+        <h1
+          className="text-center text-light p-2 m-3 w-75 mx-auto"
+          style={{ borderBottom: "0.5px solid gray" }}
+        >
+          Athletes List
+        </h1>
         <Accordion style={this.state.isScreenSmall ? {} : { display: "none" }}>
           {this.state.athletes.map(athlete => (
             <Athlete
