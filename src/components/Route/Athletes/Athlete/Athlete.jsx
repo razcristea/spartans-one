@@ -5,6 +5,7 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Image from "react-bootstrap/Image";
+import "./Athlete.css";
 
 // const athletesAPI = "https://theboxathletes.herokuapp.com/athletes/";
 // const athletesAPIDEV = "http://localhost:3000/athletes/";
@@ -22,17 +23,27 @@ export default class Athlete extends Component {
           <Accordion.Toggle
             as={Card.Header}
             variant="link"
+            className="p-1"
             eventKey={_id}
-            style={{ backgroundColor: "#1f1f1f" }}
+            style={{
+              backgroundColor: "#1f1f1f",
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center"
+            }}
           >
-            <span style={{ fontSize: "1.5rem" }}>
-              {sex === "M" ? (
-                <i className="fas fa-mars fa-lg"></i>
-              ) : (
-                <i className="fas fa-venus fa-lg"></i>
-              )}{" "}
-              {name}
+            <span style={{ fontSize: "1.3rem" }}>
+              <img className="m-2 imageIcon" src={photo} alt="athlete" /> {name}
             </span>
+            {sex === "M" ? (
+              <div className="m-2">
+                <i className="fas fa-mars fa-2x"></i>
+              </div>
+            ) : (
+              <div className="m-2">
+                <i className="fas fa-venus fa-2x"></i>
+              </div>
+            )}{" "}
           </Accordion.Toggle>
           <Accordion.Collapse eventKey={_id}>
             <Card.Body
@@ -79,7 +90,7 @@ export default class Athlete extends Component {
                 </Button>
                 <NavLink to={`/athletes/${_id}`}>
                   <Button variant="secondary" className="m-1">
-                    <i className="fas fa-dumbbell fa-lg"></i> PR's
+                    <i className="fas fa-dumbbell fa-lg"></i> Details
                   </Button>
                 </NavLink>
               </ButtonGroup>

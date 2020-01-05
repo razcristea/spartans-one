@@ -3,3 +3,8 @@
   align-items: center;
   justify-content: center;
 }
+.addwod {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}

@@ -88,10 +88,7 @@ class AddAthleteV2 extends React.Component {
   submitHandler = event => {
     event.preventDefault();
     const form = event.currentTarget;
-    console.log(form);
     const isValid = form.checkValidity();
-    console.log(event.target);
-    // event.target.keyCode === 13 ? event.stopPropagation() : console.log("No");
     if (isValid) {
       const formData = new FormData();
       formData.append("name", this.state.name);

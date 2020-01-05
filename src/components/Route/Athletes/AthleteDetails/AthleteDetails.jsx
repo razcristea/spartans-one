@@ -7,7 +7,9 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import { MDBIcon } from "mdbreact";
 import "./AthleteDetails.css";
+import Workouts from "./Workouts";
 
 const athletesAPI = "https://theboxathletes.herokuapp.com/athletes/";
 
@@ -138,7 +140,10 @@ export default function AthleteDetails({ info, getAthletes }) {
                 Age: {age} | Sex: {sex}
               </span>
             </Card.Text>
-            <div className="detailsContainer">
+            <h3 className="text-light mt-5 mb-1">
+              <MDBIcon icon="dumbbell" /> Personal Best
+            </h3>
+            <div className="detailsContainer mb-3 mt-0">
               <ListGroup
                 variant="flush"
                 style={{ padding: "0.5rem 0", color: "black" }}
@@ -208,11 +213,11 @@ export default function AthleteDetails({ info, getAthletes }) {
                   </ListGroup.Item>
                 ))}
               </ListGroup>
-              <div className="p-1 text-light">
+              <div className="p-1 text-light mt-5">
                 <div className="m-1 ml-2 font-weight-bold">100%</div>
                 <input
                   style={{
-                    width: "5px",
+                    width: "15px",
                     minHeight: "475px",
                     WebkitAppearance: "slider-vertical"
                   }}
@@ -230,6 +235,14 @@ export default function AthleteDetails({ info, getAthletes }) {
                   }
                 />
                 <div className="m-1 font-weight-bold">0%</div>
+              </div>
+            </div>
+            <div className="details-workouts mt-3">
+              <h3 className="text-light">
+                <MDBIcon icon="bolt" /> {name}'s Workouts
+              </h3>
+              <div className="addwod mt-5">
+                <Workouts />
               </div>
             </div>
           </Card.Body>

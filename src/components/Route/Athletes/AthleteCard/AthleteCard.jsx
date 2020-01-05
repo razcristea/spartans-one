@@ -46,7 +46,7 @@ export default function AthleteCard({ athlete, toggleWillDeleteModal }) {
             size="sm"
             className="athlete-card-button ml-0"
           >
-            <i className="fas fa-dumbbell fa-lg"></i> PR's
+            <i className="fas fa-dumbbell fa-lg"></i> Details
           </Button>
         </Link>
       </ButtonGroup>

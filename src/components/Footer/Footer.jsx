@@ -73,7 +73,6 @@ export default class Footer extends Component {
             <i className="far fa-calendar-alt"></i> {this.state.date}
           </div>
         </div>
-        <div>You are coaching: </div>
         <div className="text-center">
           <div>
             <i className="fas fa-users fa-lg"></i> {this.state.athleteCount}
