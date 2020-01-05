@@ -25,6 +25,7 @@ export default class Athletes extends Component {
       .then(response => response.json())
       .then(
         data => {
+          console.log(data);
           data.sort((a, b) =>
             a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
           );

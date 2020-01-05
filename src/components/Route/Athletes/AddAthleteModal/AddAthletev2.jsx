@@ -242,7 +242,7 @@ class AddAthleteV2 extends React.Component {
                 </div>
               </MDBCol>
             </MDBRow>
-            <h3 className="mt-2 text-center border">
+            <h3 className="mt-2 mb-2 p-2 text-center border">
               <MDBIcon icon="dumbbell" /> Personal Best
             </h3>
             <MDBRow className="mt-2 pb-4 border">

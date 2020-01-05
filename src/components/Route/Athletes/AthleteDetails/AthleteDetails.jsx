@@ -151,16 +151,18 @@ export default function AthleteDetails({ info, getAthletes }) {
                     justifyContent: "space-around"
                   }}
                 >
-                  <GoBack />
-                  <Button
-                    className="m-1"
-                    onClick={updateRecords}
-                    id="updatePr"
-                    autoFocus
-                    style={editPRBtnStyles}
-                  >
-                    <i className="fas fa-user-cog fa-lg" id="triggerEdit"></i>{" "}
-                  </Button>
+                  <div>
+                    <GoBack />
+                    <Button
+                      className="m-2"
+                      onClick={updateRecords}
+                      id="updatePr"
+                      autoFocus
+                      style={editPRBtnStyles}
+                    >
+                      <i className="fas fa-user-cog fa-lg" id="triggerEdit"></i>{" "}
+                    </Button>
+                  </div>
                   <div className="font-weight-bold mb-2 text-light">
                     Percentage: {percentage} %
                   </div>
