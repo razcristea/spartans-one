@@ -7,43 +7,43 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { MDBIcon } from "mdbreact";
+import { MDBIcon, MDBBtn } from "mdbreact";
 import "./AthleteDetails.css";
 import Workouts from "./Workouts";
 
 const athletesAPI = "https://theboxathletes.herokuapp.com/athletes/";
 
 const goBackBtnStyles = {
-  width: "3rem",
+  position: "fixed",
+  bottom: "8px",
+  right: "25%",
   fontSize: "1rem",
   borderRadius: "10%",
-  backgroundColor: "#000304",
+  backgroundColor: "#333333",
+  border: "0.5px solid white",
   color: "white",
-  border: "1px double white",
-  zIndex: "100"
+  zIndex: "1000"
 };
 const editPRBtnStyles = {
-  width: "3rem",
+  border: "none",
   fontSize: "1rem",
-  borderRadius: "10%",
   backgroundColor: "#00bf06",
-  color: "white",
-  border: "1px double white"
+  color: "white"
 };
 
 export default function AthleteDetails({ info, getAthletes }) {
   const [percentage, setPercentage] = useState(50);
   const { name, age, sex, email, photo, _id, personalBest } = info;
   const GoBack = withRouter(({ history }) => (
-    <Button
+    <MDBBtn
       type="button"
       style={goBackBtnStyles}
       onClick={() => {
         history.push("/athletes");
       }}
     >
-      <i className="fas fa-undo-alt fa-lg"></i>
-    </Button>
+      <i className="fas fa-backward fa-lg"></i>
+    </MDBBtn>
   ));
   const handleKeyPress = e => {
     if (e.key === "Enter") {
@@ -71,7 +71,7 @@ export default function AthleteDetails({ info, getAthletes }) {
         return (element.style.fontWeight = "bold");
       });
       // change button text:
-      editBtn.innerHTML = `<div> <i class="fas fa-save fa-lg"> </i></div>`;
+      editBtn.innerHTML = `<div> <i class="fas fa-save fa-lg"> </i> Save</div>`;
     } else {
       // initialize a new object
       const newScore = {};
@@ -116,6 +116,7 @@ export default function AthleteDetails({ info, getAthletes }) {
   };
   return (
     <Fragment>
+      <GoBack />
       <Card
         key={_id}
         className="rounded-0 mb-5 text-light"
@@ -132,7 +133,9 @@ export default function AthleteDetails({ info, getAthletes }) {
                 imageOrientation: "from-image"
               }}
             />
-            <Card.Title as={"h3"}>{name}</Card.Title>
+            <Card.Title as={"h3"} className="mt-3">
+              {name}
+            </Card.Title>
             <Card.Text>
               <small className="text-muted">{email}</small>
               <span style={{ display: "block" }}>
@@ -157,15 +160,14 @@ export default function AthleteDetails({ info, getAthletes }) {
                   }}
                 >
                   <div>
-                    <GoBack />
                     <Button
                       className="m-2"
                       onClick={updateRecords}
                       id="updatePr"
-                      autoFocus
                       style={editPRBtnStyles}
                     >
                       <i className="fas fa-user-cog fa-lg" id="triggerEdit"></i>{" "}
+                      Update
                     </Button>
                   </div>
                   <div className="font-weight-bold mb-2 text-light">

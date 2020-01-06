@@ -12,6 +12,7 @@ import "./Athlete.css";
 
 export default class Athlete extends Component {
   render() {
+    const { isSelected } = this.props;
     const { name, age, sex, email, photo, _id, phoneNumber } = this.props.info;
     return (
       <Fragment>
@@ -26,7 +27,8 @@ export default class Athlete extends Component {
             className="p-1"
             eventKey={_id}
             style={{
-              backgroundColor: "#1f1f1f",
+              backgroundColor: isSelected !== _id ? "#1f1f1f" : "#fff",
+              color: isSelected !== _id ? "white" : "black",
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center"

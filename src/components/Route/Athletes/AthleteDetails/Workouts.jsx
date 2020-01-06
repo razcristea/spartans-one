@@ -66,19 +66,20 @@ const Workouts = props => {
   };
 
   return (
-    <MDBCard
-      className="w-100 border border-white"
-      style={{ backgroundColor: "#353535" }}
-    >
+    <MDBCard className="w-100" style={{ backgroundColor: "#353535" }}>
       <MDBCardHeader className="d-flex justify-content-around align-items-center mb-0">
         <div>
           <MDBBtn
             rounded
             size="sm"
-            className="px-2"
-            style={{ backgroundColor: "#00bf06", color: "#fff" }}
+            className="px-5"
+            style={{
+              backgroundColor: "#00bf06",
+              color: "#fff",
+              fontSize: "1rem"
+            }}
           >
-            <i className="fas fa-plus mt-0"></i> Workout
+            <i className="fas fa-plus fa-lg"></i> Workout
           </MDBBtn>
         </div>
         <div className="mr-1 text-white">Counter : 1</div>

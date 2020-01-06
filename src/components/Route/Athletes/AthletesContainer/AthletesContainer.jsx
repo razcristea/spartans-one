@@ -22,6 +22,7 @@ export default class AthletesContainer extends Component {
       messageShow: false,
       message: "",
       isScreenSmall: window.innerWidth <= 414,
+      isSelected: "",
       isSearching: false,
       willDelete: false,
       alertDeleted: false,
@@ -39,7 +40,6 @@ export default class AthletesContainer extends Component {
     const result = filteredAthletes.filter(athlete =>
       athlete.name.toLowerCase().includes(event.target.value.toLowerCase())
     );
-    console.log(result);
     this.setState({
       athletes: event.target.value.length <= 1 ? this.props.athletes : result
     });
@@ -154,7 +154,11 @@ export default class AthletesContainer extends Component {
 
         {/* DISPLAYNG ATHLETES */}
         {/*MODAL THAT APPEARS AT CLICK DELETE BUTTON*/}
-        <Modal show={this.state.willDelete} onHide={this.closeDeleteModal}>
+        <Modal
+          show={this.state.willDelete}
+          onHide={this.closeDeleteModal}
+          centered
+        >
           <Modal.Header closeButton></Modal.Header>
           <Modal.Body className="delete-message">
             Are you sure you want to delete this athlete?
@@ -180,9 +184,13 @@ export default class AthletesContainer extends Component {
         >
           Athletes List
         </h1>
-        <Accordion style={this.state.isScreenSmall ? {} : { display: "none" }}>
+        <Accordion
+          style={this.state.isScreenSmall ? {} : { display: "none" }}
+          onSelect={ev => this.setState({ isSelected: ev })}
+        >
           {this.state.athletes.map(athlete => (
             <Athlete
+              isSelected={this.state.isSelected}
               key={athlete._id}
               info={athlete}
               toggleWillDeleteModal={this.toggleWillDeleteModal}
