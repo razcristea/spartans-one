@@ -1,8 +1,7 @@
 .addform {
-  background-color: #1f1f1f;
+  background-color: #383838;
   border: 1px ridge white;
 }
-
 .modalHeader {
   background-color: #1f1f1f;
   border: 2px ridge white;
@@ -10,11 +9,21 @@
   top: 0;
   z-index: 100;
 }
-
 .modalFooter {
   background-color: #1f1f1f;
   border: 2px ridge white;
   position: sticky;
   bottom: 0;
   z-index: 100;
+}
+.labelClass {
+  color: white !important;
+}
+.active {
+  color: #00c851 !important;
+}
+.addAthleteInput {
+  color: #fff !important;
+  border-bottom: 1px solid white !important;
+  box-shadow: none !important;
 }

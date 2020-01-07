@@ -9,6 +9,7 @@ import AthleteCard from "../AthleteCard/AthleteCard";
 import "../AthletesContainer/AthletesContainer.css";
 import AlertMessage from "../AlertMessage/AlertMessage";
 import AddAthleteV2 from "../AddAthleteModal/AddAthletev2";
+import { MDBBtn } from "mdbreact";
 
 const athletesAPI = "https://theboxathletes.herokuapp.com/athletes/";
 
@@ -122,27 +123,6 @@ export default class AthletesContainer extends Component {
   }
 
   render() {
-    const addAthleteBtnStyles = {
-      width: "3rem",
-      height: "3rem",
-      fontSize: "1.25em",
-      borderRadius: "50%",
-      position: "fixed",
-      bottom: 77,
-      right: 7,
-      backgroundColor: "#dabc01",
-      color: "black",
-      border: "2px double white"
-    };
-    const searchAthleteBtnStyles = {
-      width: "3rem",
-      height: "3rem",
-      fontSize: "1.25em",
-      borderRadius: "50%",
-      backgroundColor: "#dabc01",
-      color: "black",
-      border: "2px double white"
-    };
     return (
       <Fragment>
         {/* TEXT DISPLAYED WHILE FETCH IS RUNNING */}
@@ -180,7 +160,7 @@ export default class AthletesContainer extends Component {
         />
         <h1
           className="text-center text-light p-2 m-3 w-75 mx-auto"
-          style={{ borderBottom: "0.5px solid gray" }}
+          style={{ borderBottom: "0.5px solid white" }}
         >
           Athletes List
         </h1>
@@ -216,20 +196,21 @@ export default class AthletesContainer extends Component {
         <div
           style={{
             position: "fixed",
-            bottom: 77,
+            bottom: 63,
             left: 7,
             display: "flex",
             alignItems: "center",
-            justifyContent: "center"
+            justifyContent: "space-between"
           }}
         >
-          <Button
+          <MDBBtn
+            color="warning"
             style={searchAthleteBtnStyles}
             onClick={this.showSearchInput}
             className="hoverable"
           >
             <i className="fas fa-search"></i>
-          </Button>
+          </MDBBtn>
           {this.state.isSearching ? (
             <input
               type="search"
@@ -242,13 +223,14 @@ export default class AthletesContainer extends Component {
           ) : null}
         </div>
         {/* BUTTON ALWAYS VISIBLE FOR ADDING NEW ATHLETE */}
-        <Button
+        <MDBBtn
+          color="warning"
           style={addAthleteBtnStyles}
           onClick={this.showModal}
           className="hoverable"
         >
           <i className="fas fa-user-plus"></i>
-        </Button>
+        </MDBBtn>
         {/* MODAL ADD ATHLETE */}
         <AddAthleteV2
           show={this.state.modalShow}
@@ -266,3 +248,26 @@ export default class AthletesContainer extends Component {
     );
   }
 }
+
+const addAthleteBtnStyles = {
+  width: "3rem",
+  height: "3rem",
+  fontSize: "1.25rem",
+  padding: "0.50rem 0.20rem",
+  borderRadius: "50%",
+  position: "fixed",
+  bottom: 63,
+  right: 7,
+  color: "black",
+  border: "2px double white"
+};
+const searchAthleteBtnStyles = {
+  width: "3rem",
+  height: "3rem",
+  fontSize: "1.25em",
+  padding: "0.50rem 0.20rem",
+  borderRadius: "50%",
+  backgroundColor: "#dabc01",
+  color: "black",
+  border: "2px double white"
+};

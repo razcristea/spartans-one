@@ -163,30 +163,32 @@ class AddAthleteV2 extends React.Component {
           onSubmit={this.submitHandler}
           noValidate
         >
-          <Modal.Body className="bg-dark text-light" id="modalBody">
+          <Modal.Body className="text-light" id="modalBody">
             <MDBRow>
               {addAthleteFields.map((field, index) => (
                 <MDBCol md="4" key={index}>
-                  <label className="mb-2 mt-3">
-                    <MDBIcon icon={field.icon} /> - {field.label}
-                  </label>
                   <MDBInput
+                    icon={field.icon}
                     value={this.state[field.name]}
-                    name={field.name}
                     onChange={this.changeHandler}
+                    id={field.name}
                     type={field.type}
+                    name={field.name}
+                    label={field.label}
+                    labelClass="labelClass"
+                    className="addAthleteInput"
                     required
                   >
-                    <div className="invalid-feedback">
+                    <div className="invalid-feedback ml-4 pl-3">
                       {field.invalidMessage}
                     </div>
-                    <div className="valid-feedback">Looks good!</div>
+                    <div className="valid-feedback ml-4 pl-3">Looks good!</div>
                   </MDBInput>
                 </MDBCol>
               ))}
               <MDBCol md="4" className="mb-2 mt-3">
                 <label>
-                  <MDBIcon icon="camera" /> - Photo
+                  <MDBIcon icon="camera" size="lg" /> - Photo
                 </label>
                 <div className="custom-file">
                   <input
@@ -245,8 +247,11 @@ class AddAthleteV2 extends React.Component {
             <MDBRow className="mt-2 pb-4 border">
               {personalBestFields.map((field, index) => (
                 <MDBCol md="3" key={index}>
-                  <label className="mb-0 mt-3">{field.label}</label>
                   <MDBInput
+                    label={field.label}
+                    labelClass="labelClass"
+                    className="addAthleteInput mx-auto"
+                    id={field.name}
                     onChange={this.changePrHandler}
                     type={field.type}
                     name={field.name}
