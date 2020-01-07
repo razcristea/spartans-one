@@ -2,11 +2,11 @@ import React from "react";
 import { MDBRow, MDBCol, MDBInput, MDBBtn, MDBIcon } from "mdbreact";
 import Modal from "react-bootstrap/Modal";
 import "./AddAthlete.css";
-
 import {
   addAthleteFields,
   personalBestFields
 } from "../../../../helpers/addAthlete";
+import Spinner from "./Spinner";
 
 const athletesAPI = "https://theboxathletes.herokuapp.com/athletes/";
 
@@ -28,7 +28,8 @@ class AddAthleteV2 extends React.Component {
       trapDeadlift: "" || 0
     },
     selectedFileName: "Upload Photo...",
-    selectedFile: null
+    selectedFile: null,
+    spinner: false
   };
   _handleKeyPress = (target, e) => {
     if (e.keyCode === 13) {
@@ -99,6 +100,7 @@ class AddAthleteV2 extends React.Component {
       formData.append("personalBest", JSON.stringify(this.state.personalBest));
       formData.append("photo", this.state.selectedFile);
 
+      this.setState({ spinner: true });
       fetch(athletesAPI, {
         method: "POST",
         body: formData
@@ -112,6 +114,7 @@ class AddAthleteV2 extends React.Component {
           );
         })
         .finally(() => {
+          this.setState({ spinner: false });
           console.log("I'm in Finally!");
           setTimeout(() => {
             this.props.changeCount();
@@ -140,156 +143,164 @@ class AddAthleteV2 extends React.Component {
   };
   render() {
     return (
-      <Modal
-        show={this.props.show}
-        onHide={this.props.onHide}
-        message={this.props.message}
-        size="lg"
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-      >
-        <Modal.Header className="text-light modalHeader">
-          <Modal.Title id="contained-modal-title-vcenter">
-            <MDBIcon icon="user-plus" /> Add Athlete
-          </Modal.Title>
-          <button
-            type="button"
-            className="close text-white"
-            onClick={this.props.onHide}
-          >
-            <span>&times;</span>
-          </button>
-        </Modal.Header>
-        <form
-          className="needs-validation addform"
-          onSubmit={this.submitHandler}
-          noValidate
+      <React.Fragment>
+        {this.state.spinner ? <Spinner /> : null}
+        <Modal
+          show={this.props.show}
+          onHide={this.props.onHide}
+          message={this.props.message}
+          size="lg"
+          aria-labelledby="contained-modal-title-vcenter"
+          centered
         >
-          <Modal.Body className="text-light" id="modalBody">
-            <MDBRow>
-              {addAthleteFields.map((field, index) => (
-                <MDBCol md="4" key={index}>
-                  <MDBInput
-                    icon={field.icon}
-                    value={this.state[field.name]}
-                    onChange={this.changeHandler}
-                    id={field.name}
-                    type={field.type}
-                    name={field.name}
-                    label={field.label}
-                    labelClass="labelClass"
-                    className="addAthleteInput"
-                    required
-                  >
-                    <div className="invalid-feedback ml-4 pl-3">
-                      {field.invalidMessage}
-                    </div>
-                    <div className="valid-feedback ml-4 pl-3">Looks good!</div>
-                  </MDBInput>
+          <Modal.Header className="text-light modalHeader">
+            <Modal.Title id="contained-modal-title-vcenter">
+              <MDBIcon icon="user-plus" /> Add Athlete
+            </Modal.Title>
+            <button
+              type="button"
+              className="close text-white"
+              onClick={this.props.onHide}
+            >
+              <span>&times;</span>
+            </button>
+          </Modal.Header>
+          <form
+            className="needs-validation addform"
+            onSubmit={this.submitHandler}
+            noValidate
+          >
+            <Modal.Body className="text-light" id="modalBody">
+              <MDBRow>
+                {addAthleteFields.map((field, index) => (
+                  <MDBCol md="4" key={index}>
+                    <MDBInput
+                      icon={field.icon}
+                      value={this.state[field.name]}
+                      onChange={this.changeHandler}
+                      id={field.name}
+                      type={field.type}
+                      name={field.name}
+                      label={field.label}
+                      labelClass="labelClass"
+                      className="addAthleteInput"
+                      required
+                    >
+                      <div className="invalid-feedback ml-4 pl-3">
+                        {field.invalidMessage}
+                      </div>
+                      <div className="valid-feedback ml-4 pl-3">
+                        Looks good!
+                      </div>
+                    </MDBInput>
+                  </MDBCol>
+                ))}
+                <MDBCol md="4" className="mb-2 mt-3">
+                  <label>
+                    <MDBIcon icon="camera" size="lg" /> - Photo
+                  </label>
+                  <div className="custom-file">
+                    <input
+                      type="file"
+                      onChange={this.onChangeFileHandler}
+                      className="custom-file-input"
+                      id="FormPhoto"
+                    />
+                    <label className="custom-file-label" htmlFor="FormPhoto">
+                      {this.state.selectedFileName}
+                    </label>
+                  </div>
                 </MDBCol>
-              ))}
-              <MDBCol md="4" className="mb-2 mt-3">
-                <label>
-                  <MDBIcon icon="camera" size="lg" /> - Photo
-                </label>
-                <div className="custom-file">
+              </MDBRow>
+              <MDBRow>
+                <MDBCol md="12">
+                  <div className="mt-3 mb-2">
+                    <MDBIcon icon="male" /> / <MDBIcon icon="female" />
+                  </div>
+                  <div className="custom-control custom-radio">
+                    <input
+                      type="radio"
+                      className="custom-control-input"
+                      onChange={this.changeHandler}
+                      id="male"
+                      name="genre"
+                      value="M"
+                      required
+                    />
+                    <label className="custom-control-label" htmlFor="male">
+                      Male
+                    </label>
+                  </div>
+                  <div className="custom-control custom-radio mb-3">
+                    <input
+                      type="radio"
+                      className="custom-control-input"
+                      onChange={this.changeHandler}
+                      id="female"
+                      name="genre"
+                      value="F"
+                      required
+                    />
+                    <label className="custom-control-label" htmlFor="female">
+                      Female
+                    </label>
+                    <div className="invalid-feedback">
+                      Please select male or female!
+                    </div>
+                  </div>
+                </MDBCol>
+              </MDBRow>
+              <h3 className="mt-2 mb-2 p-2 text-center border">
+                <MDBIcon icon="dumbbell" /> Personal Best
+              </h3>
+              <MDBRow className="mt-2 pb-4 border">
+                {personalBestFields.map((field, index) => (
+                  <MDBCol md="3" key={index}>
+                    <MDBInput
+                      label={field.label}
+                      labelClass="labelClass"
+                      className="addAthleteInput mx-auto"
+                      id={field.name}
+                      onChange={this.changePrHandler}
+                      type={field.type}
+                      name={field.name}
+                    />
+                  </MDBCol>
+                ))}
+              </MDBRow>
+              <MDBCol md="12" className="mb-3 mt-3">
+                <div className="custom-control custom-checkbox pl-3">
                   <input
-                    type="file"
-                    onChange={this.onChangeFileHandler}
-                    className="custom-file-input"
-                    id="FormPhoto"
-                  />
-                  <label className="custom-file-label" htmlFor="FormPhoto">
-                    {this.state.selectedFileName}
-                  </label>
-                </div>
-              </MDBCol>
-            </MDBRow>
-            <MDBRow>
-              <MDBCol md="12">
-                <div className="mt-3 mb-2">
-                  <MDBIcon icon="male" /> / <MDBIcon icon="female" />
-                </div>
-                <div className="custom-control custom-radio">
-                  <input
-                    type="radio"
                     className="custom-control-input"
-                    onChange={this.changeHandler}
-                    id="male"
-                    name="genre"
-                    value="M"
+                    type="checkbox"
+                    name="checkbox"
+                    value=""
+                    id="invalidCheck"
                     required
                   />
-                  <label className="custom-control-label" htmlFor="male">
-                    Male
-                  </label>
-                </div>
-                <div className="custom-control custom-radio mb-3">
-                  <input
-                    type="radio"
-                    className="custom-control-input"
-                    onChange={this.changeHandler}
-                    id="female"
-                    name="genre"
-                    value="F"
-                    required
-                  />
-                  <label className="custom-control-label" htmlFor="female">
-                    Female
+                  <label
+                    className="custom-control-label"
+                    htmlFor="invalidCheck"
+                  >
+                    Check the box if the info submitted is correct
                   </label>
                   <div className="invalid-feedback">
-                    Please select male or female!
+                    You must agree before submitting.
                   </div>
                 </div>
               </MDBCol>
-            </MDBRow>
-            <h3 className="mt-2 mb-2 p-2 text-center border">
-              <MDBIcon icon="dumbbell" /> Personal Best
-            </h3>
-            <MDBRow className="mt-2 pb-4 border">
-              {personalBestFields.map((field, index) => (
-                <MDBCol md="3" key={index}>
-                  <MDBInput
-                    label={field.label}
-                    labelClass="labelClass"
-                    className="addAthleteInput mx-auto"
-                    id={field.name}
-                    onChange={this.changePrHandler}
-                    type={field.type}
-                    name={field.name}
-                  />
-                </MDBCol>
-              ))}
-            </MDBRow>
-            <MDBCol md="12" className="mb-3 mt-3">
-              <div className="custom-control custom-checkbox pl-3">
-                <input
-                  className="custom-control-input"
-                  type="checkbox"
-                  name="checkbox"
-                  value=""
-                  id="invalidCheck"
-                  required
-                />
-                <label className="custom-control-label" htmlFor="invalidCheck">
-                  Check the box if the info submitted is correct
-                </label>
-                <div className="invalid-feedback">
-                  You must agree before submitting.
-                </div>
-              </div>
-            </MDBCol>
-          </Modal.Body>
-          <Modal.Header className="modalFooter">
-            <MDBBtn color="success" type="submit">
-              <MDBIcon icon="share-square" /> Submit
-            </MDBBtn>
-            <MDBBtn color="danger" onClick={this.props.onHide}>
-              <MDBIcon icon="ban" /> Cancel
-            </MDBBtn>
-          </Modal.Header>
-        </form>
-      </Modal>
+            </Modal.Body>
+            <Modal.Header className="modalFooter">
+              <MDBBtn color="success" type="submit">
+                <MDBIcon icon="share-square" /> Submit
+              </MDBBtn>
+              <MDBBtn color="danger" onClick={this.props.onHide}>
+                <MDBIcon icon="ban" /> Cancel
+              </MDBBtn>
+            </Modal.Header>
+          </form>
+        </Modal>
+      </React.Fragment>
     );
   }
 }

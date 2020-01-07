@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from "react";
 import Athlete from "../Athlete/Athlete";
-// import AddAthleteModal from "../AddAthleteModal/AddAthleteModal";
 import MessageModal from "../MessageModal/MessageModal";
 import Accordion from "react-bootstrap/Accordion";
 import Button from "react-bootstrap/Button";
