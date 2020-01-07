@@ -1,7 +1,7 @@
 import React from "react";
 import "../AthleteCard/AthleteCard.css";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
-import Button from "react-bootstrap/Button";
+import { MDBBtn } from "mdbreact";
 import { Link } from "react-router-dom";
 
 export default function AthleteCard({ athlete, toggleWillDeleteModal }) {
@@ -29,25 +29,22 @@ export default function AthleteCard({ athlete, toggleWillDeleteModal }) {
         <i className="fas fa-envelope fa-lg"></i> {athlete.email}
       </p>
       <ButtonGroup size="sm">
-        <Button variant="warning" size="sm" className="athlete-card-button">
-          <i className="fas fa-user-edit fa-lg"></i> Edit
-        </Button>
-        <Button
-          variant="danger"
+        <MDBBtn
+          color="danger"
           size="sm"
-          className="athlete-card-button"
+          className="athlete-card-button p-0"
           onClick={() => toggleWillDeleteModal(athlete._id)}
         >
           <i className="fas fa-user-slash fa-lg"></i> Delete
-        </Button>
+        </MDBBtn>
         <Link to={`/athletes/${athlete._id}`}>
-          <Button
-            variant="secondary"
+          <MDBBtn
+            color="success"
             size="sm"
             className="athlete-card-button ml-0"
           >
             <i className="fas fa-dumbbell fa-lg"></i> Details
-          </Button>
+          </MDBBtn>
         </Link>
       </ButtonGroup>
     </div>

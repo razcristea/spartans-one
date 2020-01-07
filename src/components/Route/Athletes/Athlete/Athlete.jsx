@@ -2,10 +2,10 @@ import React, { Component, Fragment } from "react";
 import { NavLink } from "react-router-dom";
 import Accordion from "react-bootstrap/Accordion";
 import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
-import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Image from "react-bootstrap/Image";
+import { MDBBtn } from "mdbreact";
 import "./Athlete.css";
+import ButtonGroup from "react-bootstrap/ButtonGroup";
 
 // const athletesAPI = "https://theboxathletes.herokuapp.com/athletes/";
 // const athletesAPIDEV = "http://localhost:3000/athletes/";
@@ -19,19 +19,16 @@ export default class Athlete extends Component {
         <Card
           key={_id}
           className="rounded-0 text-white"
-          style={{ backgroundColor: "#333333" }}
+          style={{ backgroundColor: "#333333b3" }}
         >
           <Accordion.Toggle
             as={Card.Header}
             variant="link"
-            className="p-1"
+            className="p-1 athleteheader"
             eventKey={_id}
             style={{
-              backgroundColor: isSelected !== _id ? "#1f1f1f" : "#fff",
-              color: isSelected !== _id ? "white" : "black",
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center"
+              backgroundColor: isSelected !== _id ? "#333333b3" : "#fff",
+              color: isSelected !== _id ? "white" : "black"
             }}
           >
             <span style={{ fontSize: "1.3rem" }}>
@@ -50,7 +47,7 @@ export default class Athlete extends Component {
           <Accordion.Collapse eventKey={_id}>
             <Card.Body
               className="text-center"
-              style={{ backgroundColor: "#424242" }}
+              style={{ backgroundColor: "#333333" }}
             >
               <Card.Img
                 className="p-0 border border-white"
@@ -62,10 +59,10 @@ export default class Athlete extends Component {
                   imageOrientation: "from-image"
                 }}
               />
-              <Card.Title as={"h3"} className="p-2">
+              <Card.Title as={"h3"} className="pt-2">
                 {name}
               </Card.Title>
-              <Card.Text>
+              <Card.Text className="text-white">
                 <span className="p-1 d-block">
                   <i className="fas fa-phone-square fa-lg"></i>{" "}
                   {phoneNumber.substring(0, 4)}-{phoneNumber.substring(4, 7)}-
@@ -80,20 +77,18 @@ export default class Athlete extends Component {
                 </span>
               </Card.Text>
               <ButtonGroup size="sm" aria-label="Action Buttons">
-                <Button variant="warning" className="m-1">
-                  <i className="fas fa-user-edit fa-lg"></i> Edit
-                </Button>
-                <Button
-                  variant="danger"
+                <MDBBtn
+                  size="sm"
+                  color="danger"
                   onClick={() => this.props.toggleWillDeleteModal(_id)}
-                  className="m-1"
+                  className="m-1 p-2"
                 >
                   <i className="fas fa-user-slash fa-lg"></i> Delete
-                </Button>
+                </MDBBtn>
                 <NavLink to={`/athletes/${_id}`}>
-                  <Button variant="secondary" className="m-1">
+                  <MDBBtn color="success" className="m-1" size="sm">
                     <i className="fas fa-dumbbell fa-lg"></i> Details
-                  </Button>
+                  </MDBBtn>
                 </NavLink>
               </ButtonGroup>
             </Card.Body>

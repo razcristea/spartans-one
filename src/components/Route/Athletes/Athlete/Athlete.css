@@ -11,3 +11,10 @@
   background-size: cover;
   vertical-align: middle;
 }
+.athleteheader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 0.8px solid rgba(255, 255, 255, 0.158) !important;
+  margin-bottom: 0px !important;
+}

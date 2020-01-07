@@ -15,34 +15,35 @@ const athletesAPI = "https://theboxathletes.herokuapp.com/athletes/";
 
 const goBackBtnStyles = {
   position: "fixed",
-  bottom: "8px",
+  bottom: "5px",
   right: "25%",
-  fontSize: "1rem",
-  borderRadius: "10%",
-  backgroundColor: "#333333",
   border: "0.5px solid white",
   color: "white",
   zIndex: "1000"
 };
-const editPRBtnStyles = {
-  border: "none",
-  fontSize: "1rem",
-  backgroundColor: "#00bf06",
-  color: "white"
-};
-
 export default function AthleteDetails({ info, getAthletes }) {
   const [percentage, setPercentage] = useState(50);
-  const { name, age, sex, email, photo, _id, personalBest } = info;
+  const {
+    name,
+    age,
+    sex,
+    email,
+    photo,
+    _id,
+    personalBest,
+    phoneNumber,
+    wods
+  } = info;
   const GoBack = withRouter(({ history }) => (
     <MDBBtn
-      type="button"
+      size="sm"
+      color="dark"
       style={goBackBtnStyles}
       onClick={() => {
         history.push("/athletes");
       }}
     >
-      <i className="fas fa-backward fa-lg"></i>
+      <i className="fas fa-backward"></i> <span> Back</span>
     </MDBBtn>
   ));
   const handleKeyPress = e => {
@@ -59,17 +60,19 @@ export default function AthleteDetails({ info, getAthletes }) {
       .getElementById("scores-" + athleteID)
       .getElementsByClassName("scores-best form-control");
     const editBtn = document.getElementById("updatePr");
-    if (e.target.id === "triggerEdit" || e.target.tagName === "INPUT") {
+    if (
+      e.target.id === "triggerEdit" ||
+      e.target.innerHTML.includes("Update") ||
+      e.target.className.includes("prfield") ||
+      e.target.tagName === "INPUT"
+    ) {
       // remove 'disabled' attribute
       e.target.autofocus = true;
       Object.keys(elements).map(key => (elements[key].disabled = false));
       Array.from(elements).map(
-        element => (element.style.backgroundColor = "#00bf06")
+        element => (element.style.backgroundColor = "#00c851")
       );
-      Array.from(elements).map(element => {
-        element.style.color = "#fff";
-        return (element.style.fontWeight = "bold");
-      });
+      Array.from(elements).map(element => (element.style.color = "#fff"));
       // change button text:
       editBtn.innerHTML = `<div> <i class="fas fa-save fa-lg"> </i> Save</div>`;
     } else {
@@ -111,7 +114,7 @@ export default function AthleteDetails({ info, getAthletes }) {
       // disable input fields
       Object.keys(elements).map(key => (elements[key].disabled = true));
       // change button text back to "Edit Records"
-      editBtn.innerHTML = `<div>...</div>`;
+      editBtn.innerText = `...`;
     }
   };
   return (
@@ -127,6 +130,7 @@ export default function AthleteDetails({ info, getAthletes }) {
             <Card.Img
               as={Image}
               src={photo}
+              className="border border-white"
               style={{
                 maxHeight: 250,
                 objectFit: "contain",
@@ -136,18 +140,27 @@ export default function AthleteDetails({ info, getAthletes }) {
             <Card.Title as={"h3"} className="mt-3">
               {name}
             </Card.Title>
-            <Card.Text>
+            <Card.Text className="text-white">
+              <span className="p-1 d-block">
+                <i className="fas fa-phone-square fa-lg"></i>{" "}
+                {phoneNumber.substring(0, 4)}-{phoneNumber.substring(4, 7)}-
+                {phoneNumber.substring(7, 10)}
+              </span>
               <small className="text-muted">{email}</small>
               <span style={{ display: "block" }}>
                 {" "}
                 Age: {age} | Sex: {sex}
               </span>
             </Card.Text>
-            <h3 className="text-light mt-5 mb-1">
+            <MDBBtn color="warning" size="sm">
+              <i className="fas fa-user-edit fa-lg"></i> Edit
+            </MDBBtn>
+            <h3 className="text-light mt-5 mb-3">
               <MDBIcon icon="dumbbell" /> Personal Best
             </h3>
             <div className="detailsContainer mb-3 mt-0">
               <ListGroup
+                className="card bg-dark p-0 w-100"
                 variant="flush"
                 style={{ padding: "0.5rem 0", color: "black" }}
                 id={"scores-" + _id}
@@ -164,7 +177,7 @@ export default function AthleteDetails({ info, getAthletes }) {
                       className="m-2"
                       onClick={updateRecords}
                       id="updatePr"
-                      style={editPRBtnStyles}
+                      variant="success"
                     >
                       <i className="fas fa-user-cog fa-lg" id="triggerEdit"></i>{" "}
                       Update
@@ -183,7 +196,8 @@ export default function AthleteDetails({ info, getAthletes }) {
                     onKeyPress={handleKeyPress}
                     style={{
                       backgroundColor: "#353539",
-                      color: "white"
+                      color: "white",
+                      paddingLeft: "25px"
                     }}
                   >
                     <Row style={{ lineHeight: "30px" }}>
@@ -194,7 +208,7 @@ export default function AthleteDetails({ info, getAthletes }) {
                           </div>
                         </Form.Label>
                       </Col>
-                      <Col className="p-0 w-25 ml-4">
+                      <Col className="p-0 w-25 ml-4 prfield">
                         <Form.Control
                           disabled={true}
                           type="number"
@@ -208,28 +222,30 @@ export default function AthleteDetails({ info, getAthletes }) {
                       </div>
                       <Col className="p-0 w-25">
                         <div>
-                          {(parseInt(personalBest[key]) * percentage) / 100} kg
+                          {(parseInt(personalBest[key]) * percentage) / 100}
+                          <small>kg</small>
                         </div>
                       </Col>
                     </Row>
                   </ListGroup.Item>
                 ))}
               </ListGroup>
-              <div className="p-1 text-light mt-5">
-                <div className="m-1 ml-2 font-weight-bold">100%</div>
+              <div className="p-0 text-light mt-1 ml-2 card bg-dark text-center">
+                <div className="m-1 ml-1 font-weight-bold">100%</div>
                 <input
                   style={{
                     width: "15px",
                     minHeight: "475px",
                     WebkitAppearance: "slider-vertical"
                   }}
+                  className="mx-auto"
                   type="range"
                   orient="vertical"
                   name="percentage"
                   id="percentageSlider"
-                  min="1"
+                  min="0"
                   max="100"
-                  step="1"
+                  step="5"
                   onChange={() =>
                     setPercentage(
                       document.getElementById("percentageSlider").value
@@ -239,12 +255,12 @@ export default function AthleteDetails({ info, getAthletes }) {
                 <div className="m-1 font-weight-bold">0%</div>
               </div>
             </div>
-            <div className="details-workouts mt-3">
+            <div className="details-workouts mt-5">
               <h3 className="text-light">
                 <MDBIcon icon="bolt" /> {name}'s Workouts
               </h3>
-              <div className="addwod mt-5">
-                <Workouts />
+              <div className="addwod mt-3">
+                <Workouts wods={wods} />
               </div>
             </div>
           </Card.Body>
