@@ -104,17 +104,19 @@ class AddAthleteV2 extends React.Component {
         body: formData
       })
         .then(response => response.json())
-        .then(answer => {
+        .then(answer => console.log("ANSWER IS: ", answer))
+        .then(() => {
           this.props.onHide();
           this.props.showServerResponse(
             `${this.state.name} has joined The Box and Valy's Athletes!`
           );
         })
-        .then(
+        .finally(() => {
+          console.log("I'm in Finally!");
           setTimeout(() => {
             this.props.changeCount();
-          }, 2500)
-        );
+          }, 2500);
+        });
     } else {
       event.target.className += " was-validated";
       const formElements = Array.from(form.elements);
