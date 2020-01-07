@@ -264,6 +264,7 @@ class AddAthleteV2 extends React.Component {
                       onChange={this.changePrHandler}
                       type={field.type}
                       name={field.name}
+                      value={this.state[field.name]}
                     />
                   </MDBCol>
                 ))}
