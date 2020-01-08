@@ -31,6 +31,7 @@ class AddAthleteV2 extends React.Component {
     selectedFile: null,
     spinner: false
   };
+
   _handleKeyPress = (target, e) => {
     if (e.keyCode === 13) {
       e.stopPropagation();
@@ -141,6 +142,29 @@ class AddAthleteV2 extends React.Component {
       }
     });
   };
+
+  clearFieldsAndClose = () => {
+    this.setState({
+      name: "",
+      phone: "",
+      email: "",
+      age: "",
+      genre: "",
+      personalBest: {
+        benchpress: "",
+        strictpress: "",
+        pushpress: "",
+        row: "",
+        backsquat: "",
+        frontsquat: "",
+        deadlift: "",
+        trapDeadlift: ""
+      }
+    });
+
+    this.props.onHide();
+  };
+
   render() {
     return (
       <React.Fragment>
@@ -160,7 +184,7 @@ class AddAthleteV2 extends React.Component {
             <button
               type="button"
               className="close text-white"
-              onClick={this.props.onHide}
+              onClick={this.clearFieldsAndClose}
             >
               <span>&times;</span>
             </button>
@@ -294,7 +318,7 @@ class AddAthleteV2 extends React.Component {
               <MDBBtn color="success" type="submit">
                 <MDBIcon icon="share-square" /> Submit
               </MDBBtn>
-              <MDBBtn color="danger" onClick={this.props.onHide}>
+              <MDBBtn color="danger" onClick={this.clearFieldsAndClose}>
                 <MDBIcon icon="ban" /> Cancel
               </MDBBtn>
             </Modal.Header>
