@@ -233,12 +233,12 @@ export default function AthleteDetails({ info, getAthletes }) {
                   </ListGroup.Item>
                 ))}
               </ListGroup>
-              <div className="p-0 text-light mt-1 ml-2 card bg-dark text-center">
-                <div className="m-1 ml-1 font-weight-bold">100%</div>
+              <div className="p-0 text-light mt-1 ml-3 card bg-info text-center">
+                <div className="m-1 font-weight-bold">98%</div>
                 <input
                   style={{
                     width: "15px",
-                    minHeight: "475px",
+                    minHeight: "440px",
                     WebkitAppearance: "slider-vertical"
                   }}
                   className="mx-auto"
@@ -246,16 +246,16 @@ export default function AthleteDetails({ info, getAthletes }) {
                   orient="vertical"
                   name="percentage"
                   id="percentageSlider"
-                  min="0"
-                  max="100"
-                  step="5"
+                  min="10"
+                  max="98"
+                  step="1"
                   onChange={() =>
                     setPercentage(
                       document.getElementById("percentageSlider").value
                     )
                   }
                 />
-                <div className="m-1 font-weight-bold">0%</div>
+                <div className="m-1 font-weight-bold">10%</div>
               </div>
             </div>
             <div className="details-workouts mt-5">

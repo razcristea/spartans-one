@@ -19,7 +19,7 @@ export default class Athlete extends Component {
         <Card
           key={_id}
           className="rounded-0 text-white"
-          style={{ backgroundColor: "#333333b3" }}
+          style={{ backgroundColor: "#333333d6" }}
         >
           <Accordion.Toggle
             as={Card.Header}
@@ -27,7 +27,7 @@ export default class Athlete extends Component {
             className="p-1 athleteheader"
             eventKey={_id}
             style={{
-              backgroundColor: isSelected !== _id ? "#333333b3" : "#fff",
+              backgroundColor: isSelected !== _id ? "#1c1c1cbd" : "#fff",
               color: isSelected !== _id ? "white" : "black"
             }}
           >
