@@ -1,27 +1,29 @@
 {
   "files": {
-    "main.css": "/spartans-one/static/css/main.ce6e2a28.chunk.css",
-    "main.js": "/spartans-one/static/js/main.9ebfd8fd.chunk.js",
-    "main.js.map": "/spartans-one/static/js/main.9ebfd8fd.chunk.js.map",
+    "main.css": "/spartans-one/static/css/main.9a2f3313.chunk.css",
+    "main.js": "/spartans-one/static/js/main.44d170b4.chunk.js",
+    "main.js.map": "/spartans-one/static/js/main.44d170b4.chunk.js.map",
     "runtime-main.js": "/spartans-one/static/js/runtime-main.afdf9105.js",
     "runtime-main.js.map": "/spartans-one/static/js/runtime-main.afdf9105.js.map",
-    "static/css/2.75d0c9d2.chunk.css": "/spartans-one/static/css/2.75d0c9d2.chunk.css",
-    "static/js/2.69ffea55.chunk.js": "/spartans-one/static/js/2.69ffea55.chunk.js",
-    "static/js/2.69ffea55.chunk.js.map": "/spartans-one/static/js/2.69ffea55.chunk.js.map",
+    "static/css/2.b14ff059.chunk.css": "/spartans-one/static/css/2.b14ff059.chunk.css",
+    "static/js/2.dc558a3a.chunk.js": "/spartans-one/static/js/2.dc558a3a.chunk.js",
+    "static/js/2.dc558a3a.chunk.js.map": "/spartans-one/static/js/2.dc558a3a.chunk.js.map",
     "index.html": "/spartans-one/index.html",
-    "precache-manifest.0311422208e290eb9e8a534cec615be7.js": "/spartans-one/precache-manifest.0311422208e290eb9e8a534cec615be7.js",
+    "precache-manifest.8aa19254470aa5013ec9fe24e36a4820.js": "/spartans-one/precache-manifest.8aa19254470aa5013ec9fe24e36a4820.js",
     "service-worker.js": "/spartans-one/service-worker.js",
-    "static/css/2.75d0c9d2.chunk.css.map": "/spartans-one/static/css/2.75d0c9d2.chunk.css.map",
-    "static/css/main.ce6e2a28.chunk.css.map": "/spartans-one/static/css/main.ce6e2a28.chunk.css.map",
-    "static/js/2.69ffea55.chunk.js.LICENSE": "/spartans-one/static/js/2.69ffea55.chunk.js.LICENSE",
+    "static/css/2.b14ff059.chunk.css.map": "/spartans-one/static/css/2.b14ff059.chunk.css.map",
+    "static/css/main.9a2f3313.chunk.css.map": "/spartans-one/static/css/main.9a2f3313.chunk.css.map",
+    "static/js/2.dc558a3a.chunk.js.LICENSE": "/spartans-one/static/js/2.dc558a3a.chunk.js.LICENSE",
+    "static/media/CoachVLogo.png": "/spartans-one/static/media/CoachVLogo.496aa6b2.png",
+    "static/media/mdb.css": "/spartans-one/static/media/arrow_right.8ef6a08c.svg",
     "static/media/index.css": "/spartans-one/static/media/athlete-card-background.86ea380c.jpg",
     "static/media/all.min.css": "/spartans-one/static/media/fa-solid-900.f6121be5.woff2"
   },
   "entrypoints": [
     "static/js/runtime-main.afdf9105.js",
-    "static/css/2.75d0c9d2.chunk.css",
-    "static/js/2.69ffea55.chunk.js",
-    "static/css/main.ce6e2a28.chunk.css",
-    "static/js/main.9ebfd8fd.chunk.js"
+    "static/css/2.b14ff059.chunk.css",
+    "static/js/2.dc558a3a.chunk.js",
+    "static/css/main.9a2f3313.chunk.css",
+    "static/js/main.44d170b4.chunk.js"
   ]
 }
