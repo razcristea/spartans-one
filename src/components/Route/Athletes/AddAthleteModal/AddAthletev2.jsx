@@ -50,12 +50,13 @@ class AddAthleteV2 extends React.Component {
       formData.append("age", this.state.age);
       formData.append("sex", this.state.genre);
       formData.append("personalBest", JSON.stringify(this.state.personalBest));
-      formData.append(
-        "photo",
-        this.state.selectedFile,
-        this.state.selectedFileName
-      );
-
+      this.state.selectedFile
+        ? formData.append(
+            "photo",
+            this.state.selectedFile,
+            this.state.selectedFileName
+          )
+        : formData.append("photo", this.state.selectedFile);
       this.setState({ spinner: true });
       fetch(athletesAPI, {
         method: "POST",
@@ -88,7 +89,6 @@ class AddAthleteV2 extends React.Component {
   changeHandler = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
-
   changePrHandler = event => {
     this.setState({
       personalBest: {
@@ -97,6 +97,27 @@ class AddAthleteV2 extends React.Component {
       }
     });
   };
+  clearFieldsAndClose = () => {
+    this.setState({
+      name: "",
+      phone: "",
+      email: "",
+      age: "",
+      genre: "",
+      personalBest: {
+        benchpress: "",
+        strictpress: "",
+        pushpress: "",
+        row: "",
+        backsquat: "",
+        frontsquat: "",
+        deadlift: "",
+        trapDeadlift: ""
+      }
+    });
+    this.props.onHide();
+  };
+
   render() {
     return (
       <React.Fragment>
@@ -116,7 +137,7 @@ class AddAthleteV2 extends React.Component {
             <button
               type="button"
               className="close text-white"
-              onClick={this.props.onHide}
+              onClick={this.clearFieldsAndClose}
             >
               <span>&times;</span>
             </button>
@@ -254,7 +275,7 @@ class AddAthleteV2 extends React.Component {
               <MDBBtn color="success" type="submit">
                 <MDBIcon icon="share-square" /> Submit
               </MDBBtn>
-              <MDBBtn color="danger" onClick={this.props.onHide}>
+              <MDBBtn color="danger" onClick={this.clearFieldsAndClose}>
                 <MDBIcon icon="ban" /> Cancel
               </MDBBtn>
             </Modal.Header>
