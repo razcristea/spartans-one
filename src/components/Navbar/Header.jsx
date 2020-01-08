@@ -26,9 +26,8 @@ export default function Header() {
       sticky="top"
     >
       <Navbar.Brand>
-        <NavLink
-          to="/athletes"
-          className="text-decoration-none text-light font-weight-bold"
+        <div
+          className="text-light font-weight-bold"
           style={{ lineHeight: "45px" }}
         >
           <img
@@ -39,12 +38,12 @@ export default function Header() {
             className="d-inline-block align-top"
           />{" "}
           My|PT|Helper
-        </NavLink>
+        </div>
       </Navbar.Brand>
       <Navbar.Toggle
         aria-controls="basic-navbar-nav"
-        onClick={() => setExpanded(expanded ? false : "expanded")}
-        onBlur={() => setTimeout(() => setExpanded(false), 100)}
+        onMouseDown={() => setExpanded(expanded ? false : true)}
+        onBlur={() => setTimeout(() => setExpanded(false), 300)}
       />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto">

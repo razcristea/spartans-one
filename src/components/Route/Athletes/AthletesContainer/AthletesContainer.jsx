@@ -157,12 +157,22 @@ export default class AthletesContainer extends Component {
           show={this.state.alertDeleted}
           messageAlertDeleted={this.state.messageAlertDeleted}
         />
-        <h1
-          className="text-center text-light p-2 m-3 w-75 mx-auto"
+        {this.state.isSearching ? (
+          <input
+            type="search"
+            autoFocus
+            placeholder="Type Athlete Name..."
+            className="ml-2 p-2 searchInput mx-auto"
+            onChange={this.doTheSearch}
+            onBlur={this.showSearchInput}
+          />
+        ) : null}
+        <h2
+          className="text-center text-light p-1 m-1 w-75 mx-auto"
           style={{ borderBottom: "0.5px solid white" }}
         >
-          Athletes List
-        </h1>
+          My Athletes
+        </h2>
         <Accordion
           style={this.state.isScreenSmall ? {} : { display: "none" }}
           onSelect={ev => this.setState({ isSelected: ev })}
@@ -210,16 +220,6 @@ export default class AthletesContainer extends Component {
           >
             <i className="fas fa-search"></i>
           </MDBBtn>
-          {this.state.isSearching ? (
-            <input
-              type="search"
-              autoFocus
-              placeholder="Type Athlete Name..."
-              className="ml-2 p-2 searchInput"
-              onChange={this.doTheSearch}
-              onBlur={this.showSearchInput}
-            />
-          ) : null}
         </div>
         {/* BUTTON ALWAYS VISIBLE FOR ADDING NEW ATHLETE */}
         <MDBBtn
@@ -231,6 +231,7 @@ export default class AthletesContainer extends Component {
           <i className="fas fa-user-plus"></i>
         </MDBBtn>
         {/* MODAL ADD ATHLETE */}
+
         <AddAthleteV2
           show={this.state.modalShow}
           onHide={this.hideModal}

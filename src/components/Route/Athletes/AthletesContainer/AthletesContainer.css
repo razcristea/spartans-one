@@ -7,12 +7,15 @@
   padding: 1%;
 }
 .searchInput {
-  width: 260px;
-  background-color: #6b6b6b;
+  width: 200px;
+  background-color: #ffffff;
   font-weight: 300;
   font-style: italic;
-  color: white;
+  color: rgb(104, 104, 104);
+  position: absolute;
+  top: 10;
+  left: calc(50% - 100px);
 }
 .searchInput::placeholder {
-  color: white;
+  color: rgb(124, 124, 124);
 }
