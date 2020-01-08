@@ -62,7 +62,7 @@ export default function AthleteDetails({ info, getAthletes }) {
     const editBtn = document.getElementById("updatePr");
     if (
       e.target.id === "triggerEdit" ||
-      e.target.innerHTML.includes("Update") ||
+      e.target.innerHTML.includes("Modify") ||
       e.target.className.includes("prfield") ||
       e.target.tagName === "INPUT"
     ) {
@@ -70,11 +70,11 @@ export default function AthleteDetails({ info, getAthletes }) {
       e.target.autofocus = true;
       Object.keys(elements).map(key => (elements[key].disabled = false));
       Array.from(elements).map(
-        element => (element.style.backgroundColor = "#00c851")
+        element => (element.style.backgroundColor = "#33b5e5")
       );
       Array.from(elements).map(element => (element.style.color = "#fff"));
       // change button text:
-      editBtn.innerHTML = `<div> <i class="fas fa-save fa-lg"> </i> Save</div>`;
+      editBtn.innerHTML = `<div> <i class="fas fa-save fa-2x"> </i> Save</div>`;
     } else {
       // initialize a new object
       const newScore = {};
@@ -106,10 +106,7 @@ export default function AthleteDetails({ info, getAthletes }) {
         )
 
         .then(getAthletes)
-        .then(console.log(`Updated ${info.name}'s Personal Best!`)) // display message
-        .then(
-          setTimeout(() => console.log("hidding modal after 1.5sec"), 1500)
-        ); // hide it afte one second
+        .then(console.log(`Updated ${info.name}'s Personal Best!`)); // display message
 
       // disable input fields
       Object.keys(elements).map(key => (elements[key].disabled = true));
@@ -127,34 +124,39 @@ export default function AthleteDetails({ info, getAthletes }) {
       >
         <div eventkey={_id}>
           <Card.Body className="text-center">
-            <Card.Img
-              as={Image}
-              src={photo}
-              className="border border-white"
-              style={{
-                maxHeight: 250,
-                objectFit: "contain",
-                imageOrientation: "from-image"
-              }}
-            />
-            <Card.Title as={"h3"} className="mt-3">
-              {name}
-            </Card.Title>
-            <Card.Text className="text-white">
-              <span className="p-1 d-block">
-                <i className="fas fa-phone-square fa-lg"></i>{" "}
-                {phoneNumber.substring(0, 4)}-{phoneNumber.substring(4, 7)}-
-                {phoneNumber.substring(7, 10)}
-              </span>
-              <small className="text-muted">{email}</small>
-              <span style={{ display: "block" }}>
-                {" "}
-                Age: {age} | Sex: {sex}
-              </span>
-            </Card.Text>
-            <MDBBtn color="warning" size="sm">
-              <i className="fas fa-user-edit fa-lg"></i> Edit
-            </MDBBtn>
+            <div className="infoSection border">
+              <img
+                alt={name}
+                as={Image}
+                src={photo}
+                className="border border-white"
+                style={{
+                  maxWidth: 220,
+                  objectFit: "contain",
+                  imageOrientation: "from-image"
+                }}
+              />
+              <div className="ml-2">
+                <Card.Title as={"h3"} className="mt-3">
+                  {name}
+                </Card.Title>
+                <Card.Text className="text-white">
+                  <span className="p-1 d-block">
+                    <i className="fas fa-phone-square fa-lg"></i>{" "}
+                    {phoneNumber.substring(0, 4)}-{phoneNumber.substring(4, 7)}-
+                    {phoneNumber.substring(7, 10)}
+                  </span>
+                  <small className="text-muted">{email}</small>
+                  <span style={{ display: "block" }}>
+                    {" "}
+                    Age: {age} | Sex: {sex}
+                  </span>
+                </Card.Text>
+                <MDBBtn color="warning" size="sm">
+                  <i className="fas fa-user-edit fa-lg"></i> Edit
+                </MDBBtn>
+              </div>
+            </div>
             <h3 className="text-light mt-5 mb-3">
               <MDBIcon icon="dumbbell" /> Personal Best
             </h3>
@@ -177,10 +179,11 @@ export default function AthleteDetails({ info, getAthletes }) {
                       className="m-2"
                       onClick={updateRecords}
                       id="updatePr"
-                      variant="success"
+                      variant="info"
+                      size="sm"
                     >
-                      <i className="fas fa-user-cog fa-lg" id="triggerEdit"></i>{" "}
-                      Update
+                      <i className="fas fa-user-cog fa-2x" id="triggerEdit"></i>{" "}
+                      Modify
                     </Button>
                   </div>
                   <div className="font-weight-bold mb-2 text-light">
@@ -230,12 +233,12 @@ export default function AthleteDetails({ info, getAthletes }) {
                   </ListGroup.Item>
                 ))}
               </ListGroup>
-              <div className="p-0 text-light mt-1 ml-2 card bg-dark text-center">
-                <div className="m-1 ml-1 font-weight-bold">100%</div>
+              <div className="p-0 text-light mt-1 ml-3 card bg-info text-center">
+                <div className="m-1 font-weight-bold">98%</div>
                 <input
                   style={{
                     width: "15px",
-                    minHeight: "475px",
+                    minHeight: "440px",
                     WebkitAppearance: "slider-vertical"
                   }}
                   className="mx-auto"
@@ -243,16 +246,16 @@ export default function AthleteDetails({ info, getAthletes }) {
                   orient="vertical"
                   name="percentage"
                   id="percentageSlider"
-                  min="0"
-                  max="100"
-                  step="5"
+                  min="10"
+                  max="98"
+                  step="1"
                   onChange={() =>
                     setPercentage(
                       document.getElementById("percentageSlider").value
                     )
                   }
                 />
-                <div className="m-1 font-weight-bold">0%</div>
+                <div className="m-1 font-weight-bold">10%</div>
               </div>
             </div>
             <div className="details-workouts mt-5">

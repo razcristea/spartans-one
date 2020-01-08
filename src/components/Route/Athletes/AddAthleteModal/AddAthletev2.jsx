@@ -83,7 +83,7 @@ class AddAthleteV2 extends React.Component {
   };
   onChangeFileHandler = event => {
     this.setState({
-      selectedFileName: event.target.files[0].name,
+      selectedFileName: this.state.phone + event.target.files[0].name,
       selectedFile: event.target.files[0]
     });
   };
@@ -277,7 +277,7 @@ class AddAthleteV2 extends React.Component {
               <h3 className="mt-2 mb-2 p-2 text-center border">
                 <MDBIcon icon="dumbbell" /> Personal Best
               </h3>
-              <MDBRow className="mt-2 pb-4 border">
+              <MDBRow className="m-3 pb-4 border">
                 {personalBestFields.map((field, index) => (
                   <MDBCol md="3" key={index}>
                     <MDBInput
@@ -288,6 +288,7 @@ class AddAthleteV2 extends React.Component {
                       onChange={this.changePrHandler}
                       type={field.type}
                       name={field.name}
+                      value={this.state[field.name]}
                     />
                   </MDBCol>
                 ))}
