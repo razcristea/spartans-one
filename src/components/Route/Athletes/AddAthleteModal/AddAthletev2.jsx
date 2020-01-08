@@ -31,55 +31,6 @@ class AddAthleteV2 extends React.Component {
     selectedFile: null,
     spinner: false
   };
-  _handleKeyPress = (target, e) => {
-    if (e.keyCode === 13) {
-      e.stopPropagation();
-      switch (target) {
-        case "name":
-          console.log(this[target]);
-          this.phone.setFocus();
-          break;
-        case "phone":
-          console.log(this[target]);
-          this.email.setFocus();
-          break;
-        case "email":
-          console.log(this[target]);
-          this.age.setFocus();
-          break;
-        case "age":
-          this.benchpress.setFocus();
-          break;
-        case "benchpress":
-          this.strictpress.setFocus();
-          break;
-        case "strictpress":
-          this.pushpress.setFocus();
-          break;
-        case "pushpress":
-          this.row.setFocus();
-          break;
-        case "row":
-          this.backsquat.setFocus();
-          break;
-        case "backsquat":
-          this.frontsquat.setFocus();
-          break;
-        case "frontsquat":
-          this.deadlift.setFocus();
-          break;
-        case "deadlift":
-          this.trapDeadlift.setFocus();
-          break;
-        case "trapDeadlift":
-          this.checkbox.focus();
-          break;
-        default:
-          this.name.setFocus();
-          break;
-      }
-    }
-  };
   onChangeFileHandler = event => {
     this.setState({
       selectedFileName: this.state.phone + event.target.files[0].name,
@@ -89,6 +40,7 @@ class AddAthleteV2 extends React.Component {
   submitHandler = event => {
     event.preventDefault();
     const form = event.currentTarget;
+    console.log(this.state.selectedFile);
     const isValid = form.checkValidity();
     if (isValid) {
       const formData = new FormData();
@@ -98,7 +50,11 @@ class AddAthleteV2 extends React.Component {
       formData.append("age", this.state.age);
       formData.append("sex", this.state.genre);
       formData.append("personalBest", JSON.stringify(this.state.personalBest));
-      formData.append("photo", this.state.selectedFile);
+      formData.append(
+        "photo",
+        this.state.selectedFile,
+        this.state.selectedFileName
+      );
 
       this.setState({ spinner: true });
       fetch(athletesAPI, {
@@ -171,7 +127,10 @@ class AddAthleteV2 extends React.Component {
             noValidate
           >
             <Modal.Body className="text-light" id="modalBody">
-              <MDBRow>
+              <h3 className="mt-2 mb-2 p-2 text-center border">
+                <MDBIcon icon="info" /> Athlete Info
+              </h3>
+              <MDBRow className="m-3 border">
                 {addAthleteFields.map((field, index) => (
                   <MDBCol md="4" key={index}>
                     <MDBInput

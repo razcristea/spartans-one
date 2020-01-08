@@ -39,9 +39,7 @@ export default function AthleteDetails({ info, getAthletes }) {
       size="sm"
       color="dark"
       style={goBackBtnStyles}
-      onClick={() => {
-        history.push("/athletes");
-      }}
+      onMouseDown={() => history.goBack()}
     >
       <i className="fas fa-backward"></i> <span> Back</span>
     </MDBBtn>
@@ -129,9 +127,9 @@ export default function AthleteDetails({ info, getAthletes }) {
                 alt={name}
                 as={Image}
                 src={photo}
-                className="border border-white"
+                className="thumbnail"
                 style={{
-                  maxWidth: 220,
+                  maxWidth: 200,
                   objectFit: "contain",
                   imageOrientation: "from-image"
                 }}
@@ -249,11 +247,14 @@ export default function AthleteDetails({ info, getAthletes }) {
                   min="10"
                   max="98"
                   step="1"
-                  onChange={() =>
+                  onClick={() => console.log("selected")}
+                  onTouchEnd={() => (document.body.style.overflow = "unset")}
+                  onChange={() => {
+                    document.body.style.overflow = "hidden";
                     setPercentage(
                       document.getElementById("percentageSlider").value
-                    )
-                  }
+                    );
+                  }}
                 />
                 <div className="m-1 font-weight-bold">10%</div>
               </div>

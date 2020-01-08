@@ -12,9 +12,6 @@
   font-weight: 300;
   font-style: italic;
   color: rgb(104, 104, 104);
-  position: absolute;
-  top: 10;
-  left: calc(50% - 100px);
 }
 .searchInput::placeholder {
   color: rgb(124, 124, 124);
