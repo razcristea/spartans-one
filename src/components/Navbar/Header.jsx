@@ -49,6 +49,7 @@ export default function Header() {
         <Nav className="ml-auto">
           {links.map((link, i) => (
             <NavLink
+              onClick={() => setExpanded(false)}
               key={i}
               exact
               to={`${link.route}`}

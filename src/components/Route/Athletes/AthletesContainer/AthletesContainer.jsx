@@ -130,7 +130,6 @@ export default class AthletesContainer extends Component {
             Loading athletes...
           </h3>
         )}
-
         {/* DISPLAYNG ATHLETES */}
         {/*MODAL THAT APPEARS AT CLICK DELETE BUTTON*/}
         <Modal
@@ -151,28 +150,29 @@ export default class AthletesContainer extends Component {
             </Button>
           </Modal.Footer>
         </Modal>
-
         {/*ALERT THAT DISPLAYS SERVER ANSWER AFTER DELETE */}
         <AlertMessage
           show={this.state.alertDeleted}
           messageAlertDeleted={this.state.messageAlertDeleted}
         />
-        {this.state.isSearching ? (
-          <input
-            type="search"
-            autoFocus
-            placeholder="Type Athlete Name..."
-            className="ml-2 p-2 searchInput mx-auto"
-            onChange={this.doTheSearch}
-            onBlur={this.showSearchInput}
-          />
-        ) : null}
         <h2
-          className="text-center text-light p-1 m-1 w-75 mx-auto"
+          className="text-center text-white p-1 m-1 w-50 mx-auto"
           style={{ borderBottom: "0.5px solid white" }}
         >
           My Athletes
         </h2>
+        <div className="ml-5 mr-5 mb-2 text-center">
+          {this.state.isSearching ? (
+            <input
+              type="search"
+              autoFocus
+              placeholder="Type Athlete Name..."
+              className="p-1 searchInput"
+              onChange={this.doTheSearch}
+              onBlur={this.showSearchInput}
+            />
+          ) : null}
+        </div>
         <Accordion
           style={this.state.isScreenSmall ? {} : { display: "none" }}
           onSelect={ev => this.setState({ isSelected: ev })}
@@ -187,7 +187,6 @@ export default class AthletesContainer extends Component {
             />
           ))}
         </Accordion>
-
         <div
           className="cards-container"
           style={this.state.isScreenSmall ? { display: "none" } : {}}
@@ -231,7 +230,6 @@ export default class AthletesContainer extends Component {
           <i className="fas fa-user-plus"></i>
         </MDBBtn>
         {/* MODAL ADD ATHLETE */}
-
         <AddAthleteV2
           show={this.state.modalShow}
           onHide={this.hideModal}

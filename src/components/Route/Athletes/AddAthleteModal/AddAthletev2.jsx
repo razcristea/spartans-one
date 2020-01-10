@@ -31,56 +31,6 @@ class AddAthleteV2 extends React.Component {
     selectedFile: null,
     spinner: false
   };
-
-  _handleKeyPress = (target, e) => {
-    if (e.keyCode === 13) {
-      e.stopPropagation();
-      switch (target) {
-        case "name":
-          console.log(this[target]);
-          this.phone.setFocus();
-          break;
-        case "phone":
-          console.log(this[target]);
-          this.email.setFocus();
-          break;
-        case "email":
-          console.log(this[target]);
-          this.age.setFocus();
-          break;
-        case "age":
-          this.benchpress.setFocus();
-          break;
-        case "benchpress":
-          this.strictpress.setFocus();
-          break;
-        case "strictpress":
-          this.pushpress.setFocus();
-          break;
-        case "pushpress":
-          this.row.setFocus();
-          break;
-        case "row":
-          this.backsquat.setFocus();
-          break;
-        case "backsquat":
-          this.frontsquat.setFocus();
-          break;
-        case "frontsquat":
-          this.deadlift.setFocus();
-          break;
-        case "deadlift":
-          this.trapDeadlift.setFocus();
-          break;
-        case "trapDeadlift":
-          this.checkbox.focus();
-          break;
-        default:
-          this.name.setFocus();
-          break;
-      }
-    }
-  };
   onChangeFileHandler = event => {
     this.setState({
       selectedFileName: this.state.phone + event.target.files[0].name,
@@ -90,6 +40,7 @@ class AddAthleteV2 extends React.Component {
   submitHandler = event => {
     event.preventDefault();
     const form = event.currentTarget;
+    console.log(this.state.selectedFile);
     const isValid = form.checkValidity();
     if (isValid) {
       const formData = new FormData();
@@ -99,8 +50,13 @@ class AddAthleteV2 extends React.Component {
       formData.append("age", this.state.age);
       formData.append("sex", this.state.genre);
       formData.append("personalBest", JSON.stringify(this.state.personalBest));
-      formData.append("photo", this.state.selectedFile);
-
+      this.state.selectedFile
+        ? formData.append(
+            "photo",
+            this.state.selectedFile,
+            this.state.selectedFileName
+          )
+        : formData.append("photo", this.state.selectedFile);
       this.setState({ spinner: true });
       fetch(athletesAPI, {
         method: "POST",
@@ -133,7 +89,6 @@ class AddAthleteV2 extends React.Component {
   changeHandler = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
-
   changePrHandler = event => {
     this.setState({
       personalBest: {
@@ -142,7 +97,6 @@ class AddAthleteV2 extends React.Component {
       }
     });
   };
-
   clearFieldsAndClose = () => {
     this.setState({
       name: "",
@@ -151,17 +105,16 @@ class AddAthleteV2 extends React.Component {
       age: "",
       genre: "",
       personalBest: {
-        benchpress: "",
-        strictpress: "",
-        pushpress: "",
-        row: "",
-        backsquat: "",
-        frontsquat: "",
-        deadlift: "",
-        trapDeadlift: ""
+        benchpress: "" || 0,
+        strictpress: "" || 0,
+        pushpress: "" || 0,
+        row: "" || 0,
+        backsquat: "" || 0,
+        frontsquat: "" || 0,
+        deadlift: "" || 0,
+        trapDeadlift: "" || 0
       }
     });
-
     this.props.onHide();
   };
 
@@ -179,7 +132,8 @@ class AddAthleteV2 extends React.Component {
         >
           <Modal.Header className="text-light modalHeader">
             <Modal.Title id="contained-modal-title-vcenter">
-              <MDBIcon icon="user-plus" /> Add Athlete
+              <MDBIcon icon="user-plus" size="lg" className="mr-2" /> Add
+              Athlete
             </Modal.Title>
             <button
               type="button"
@@ -195,7 +149,10 @@ class AddAthleteV2 extends React.Component {
             noValidate
           >
             <Modal.Body className="text-light" id="modalBody">
-              <MDBRow>
+              <h3 className="mt-2 mb-2 p-2 text-center border">
+                <MDBIcon icon="info" size="lg" className="mr-2" /> Athlete Info
+              </h3>
+              <MDBRow className="m-3 border">
                 {addAthleteFields.map((field, index) => (
                   <MDBCol md="4" key={index}>
                     <MDBInput
@@ -317,10 +274,11 @@ class AddAthleteV2 extends React.Component {
             </Modal.Body>
             <Modal.Header className="modalFooter">
               <MDBBtn color="success" type="submit">
-                <MDBIcon icon="share-square" /> Submit
+                <MDBIcon icon="share-square" size="lg" className="mr-2" />{" "}
+                Submit
               </MDBBtn>
               <MDBBtn color="danger" onClick={this.clearFieldsAndClose}>
-                <MDBIcon icon="ban" /> Cancel
+                <MDBIcon icon="ban" size="lg" className="mr-2" /> Cancel
               </MDBBtn>
             </Modal.Header>
           </form>

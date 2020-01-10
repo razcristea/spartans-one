@@ -83,11 +83,11 @@ export default class Athlete extends Component {
                   onClick={() => this.props.toggleWillDeleteModal(_id)}
                   className="m-1 p-2"
                 >
-                  <i className="fas fa-user-slash fa-lg"></i> Delete
+                  <i className="fas fa-user-slash fa-2x mr-1"></i> Delete
                 </MDBBtn>
                 <NavLink to={`/athletes/${_id}`}>
                   <MDBBtn color="success" className="m-1" size="sm">
-                    <i className="fas fa-dumbbell fa-lg"></i> Details
+                    <i className="fas fa-dumbbell fa-2x mr-2"></i> Details
                   </MDBBtn>
                 </NavLink>
               </ButtonGroup>
