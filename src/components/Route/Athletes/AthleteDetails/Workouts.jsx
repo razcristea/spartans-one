@@ -1,11 +1,7 @@
 import React from "react";
-import {
-  MDBCard,
-  MDBCardBody,
-  MDBCardHeader,
-  MDBBtn,
-  MDBDataTable
-} from "mdbreact";
+import { MDBCard, MDBCardBody, MDBCardHeader, MDBDataTable } from "mdbreact";
+import Accordion from "react-bootstrap/Accordion";
+import AddWorkoutForm from "./AddWorkoutForm";
 
 const Workouts = ({ wods }) => {
   wods.map(wod => {
@@ -44,13 +40,10 @@ const Workouts = ({ wods }) => {
 
   return (
     <MDBCard className="w-100" style={{ backgroundColor: "#353535" }}>
-      <MDBCardHeader className="d-flex justify-content-around align-items-center mb-0 bg-dark">
-        <div>
-          <MDBBtn rounded className="p" color="success">
-            <i className="fas fa-plus fa-lg"></i> Workout
-          </MDBBtn>
-        </div>
-        <div className="mr-1 text-white">Counter : 1</div>
+      <MDBCardHeader>
+        <Accordion>
+          <AddWorkoutForm count={wods.length} />
+        </Accordion>
       </MDBCardHeader>
       <MDBCardBody className="text-white">
         <MDBDataTable

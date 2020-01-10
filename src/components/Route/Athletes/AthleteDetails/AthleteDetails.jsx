@@ -23,6 +23,7 @@ const goBackBtnStyles = {
 };
 export default function AthleteDetails({ info, getAthletes }) {
   const [percentage, setPercentage] = useState(50);
+  const [editingPersonalBest, setEditingPersonalBest] = useState(false);
   const {
     name,
     age,
@@ -39,7 +40,7 @@ export default function AthleteDetails({ info, getAthletes }) {
       size="sm"
       color="dark"
       style={goBackBtnStyles}
-      onMouseDown={() => history.goBack()}
+      onMouseDown={() => setTimeout(() => history.goBack(), 300)}
     >
       <i className="fas fa-backward"></i> <span> Back</span>
     </MDBBtn>
@@ -72,7 +73,8 @@ export default function AthleteDetails({ info, getAthletes }) {
       );
       Array.from(elements).map(element => (element.style.color = "#fff"));
       // change button text:
-      editBtn.innerHTML = `<div> <i class="fas fa-save fa-2x"> </i> Save</div>`;
+      setEditingPersonalBest(true);
+      editBtn.innerHTML = `<div> <i class="fas fa-save fa-2x mr-2"> </i> Update</div>`;
     } else {
       // initialize a new object
       const newScore = {};
@@ -109,7 +111,8 @@ export default function AthleteDetails({ info, getAthletes }) {
       // disable input fields
       Object.keys(elements).map(key => (elements[key].disabled = true));
       // change button text back to "Edit Records"
-      editBtn.innerText = `...`;
+      // editBtn.innerText = `...`;     Nu uita: TREBUIE REPARAT AICI!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      setEditingPersonalBest(false);
     }
   };
   return (
@@ -151,7 +154,7 @@ export default function AthleteDetails({ info, getAthletes }) {
                   </span>
                 </Card.Text>
                 <MDBBtn color="warning" size="sm">
-                  <i className="fas fa-user-edit fa-lg"></i> Edit
+                  <i className="fas fa-user-edit fa-lg mr-2"></i> Edit
                 </MDBBtn>
               </div>
             </div>
@@ -177,10 +180,13 @@ export default function AthleteDetails({ info, getAthletes }) {
                       className="m-2"
                       onClick={updateRecords}
                       id="updatePr"
-                      variant="info"
+                      variant={!editingPersonalBest ? "info" : "success"}
                       size="sm"
                     >
-                      <i className="fas fa-user-cog fa-2x" id="triggerEdit"></i>{" "}
+                      <i
+                        className="fas fa-user-cog fa-2x mr-2"
+                        id="triggerEdit"
+                      ></i>{" "}
                       Modify
                     </Button>
                   </div>
@@ -235,7 +241,7 @@ export default function AthleteDetails({ info, getAthletes }) {
                 <div className="m-1 font-weight-bold">98%</div>
                 <input
                   style={{
-                    width: "15px",
+                    width: "32px",
                     minHeight: "440px",
                     WebkitAppearance: "slider-vertical"
                   }}
