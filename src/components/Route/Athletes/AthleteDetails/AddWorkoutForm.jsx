@@ -6,16 +6,12 @@ import Select from "./Select";
 import { MDBBtn, MDBInput } from "mdbreact";
 import Stopwatch from "./Stopwatch";
 
-const TestSelect = [
-  { name: "Wod1" },
-  { name: "Wod2" },
-  { name: "Wod3" },
-  { name: "Wod4" }
-];
+const wodsApi = "https://theboxathletes.herokuapp.com/wods/";
 
 export default function AddWorkoutForm({ count }) {
   const [isAddingWorkout, setIsAddingWorkout] = useState(false);
   const [currentDay, setCurrentDay] = useState("");
+  const [availableWods, setAvailableWods] = useState([]);
   const [selectedWod, setSelectedWod] = useState("");
   const [timerValue, setTimerValue] = useState(0);
   const [nrOfReps, setNrOfReps] = useState(0);
@@ -37,6 +33,9 @@ export default function AddWorkoutForm({ count }) {
       "." +
       today.getFullYear();
     setCurrentDay(date);
+    fetch(wodsApi)
+      .then(response => response.json())
+      .then(wods => setAvailableWods(wods));
   }, []);
 
   return (
@@ -68,14 +67,13 @@ export default function AddWorkoutForm({ count }) {
               <i className="far fa-calendar-check fa-lg mr-2"></i>Date:{" "}
               {currentDay}
             </h3>
-            <Select options={TestSelect} getValue={setSelectedWod} />
+            <Select options={availableWods} getValue={setSelectedWod} />
             <Stopwatch getValue={setTimerValue} />
             <MDBInput
-              value={nrOfReps}
               onChange={e => setNrOfReps(parseInt(e.target.value))}
               type="number"
               name="nrOfReps"
-              label="Number of Reps: "
+              label="Number of Reps (default : 0)"
               className="mx-auto"
             ></MDBInput>
             <div onClick={validate}>

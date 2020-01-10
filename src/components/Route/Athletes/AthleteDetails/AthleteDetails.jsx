@@ -121,7 +121,6 @@ export default function AthleteDetails({ info, getAthletes }) {
     <Fragment>
       <GoBack />
       <EditInfoModal show={setisEditing} isShowing={isEditing} />
-
       <Card
         key={_id}
         className="rounded-0 mb-5 text-light"

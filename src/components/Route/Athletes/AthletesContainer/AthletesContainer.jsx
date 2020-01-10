@@ -126,9 +126,7 @@ export default class AthletesContainer extends Component {
       <Fragment>
         {/* TEXT DISPLAYED WHILE FETCH IS RUNNING */}
         {this.props.athletes.length === 0 && (
-          <h3 className="text-center mt-5 pt-5 text-light">
-            Loading athletes...
-          </h3>
+          <h3 className="text-center mt-5 pt-5 text-light">Loading...</h3>
         )}
         {/* DISPLAYNG ATHLETES */}
         {/*MODAL THAT APPEARS AT CLICK DELETE BUTTON*/}

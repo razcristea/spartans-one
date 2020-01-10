@@ -17,11 +17,19 @@ export default class EditInfoModal extends Component {
         <MDBModal
           isOpen={this.props.isShowing}
           toggle={() => this.props.show(!this.props.isShowing)}
+          centered
         >
-          <MDBModalHeader toggle={() => this.props.show(!this.props.isShowing)}>
-            Edit athlete
+          <MDBModalHeader
+            toggle={() => this.props.show(!this.props.isShowing)}
+            style={{
+              backgroundColor: "#1f1f1f",
+              border: "2px ridge white",
+              color: "#fff"
+            }}
+          >
+            Edit info
           </MDBModalHeader>
-          <MDBModalBody>
+          <MDBModalBody className="bg-dark text-white border">
             <div className="form-group">
               <MDBInput label="Name" icon="user" />
               <MDBInput label="Phone" icon="phone" />
@@ -30,14 +38,20 @@ export default class EditInfoModal extends Component {
               <MDBInput label="Age" icon="baby" />
             </div>
           </MDBModalBody>
-          <MDBModalFooter>
+          <MDBModalFooter
+            style={{
+              backgroundColor: "#1f1f1f",
+              border: "2px ridge white",
+              color: "#fff"
+            }}
+          >
             <MDBBtn
-              color="secondary"
+              color="danger"
               onClick={() => this.props.show(!this.props.isShowing)}
             >
               Close
             </MDBBtn>
-            <MDBBtn color="primary">Save changes</MDBBtn>
+            <MDBBtn color="success">Save changes</MDBBtn>
           </MDBModalFooter>
         </MDBModal>
       </MDBContainer>

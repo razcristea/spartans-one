@@ -119,7 +119,6 @@ class AddAthleteV2 extends React.Component {
   };
 
   render() {
-    console.log(this.props);
     return (
       <React.Fragment>
         {this.state.spinner ? <Spinner /> : null}
