@@ -105,14 +105,14 @@ class AddAthleteV2 extends React.Component {
       age: "",
       genre: "",
       personalBest: {
-        benchpress: "",
-        strictpress: "",
-        pushpress: "",
-        row: "",
-        backsquat: "",
-        frontsquat: "",
-        deadlift: "",
-        trapDeadlift: ""
+        benchpress: "" || 0,
+        strictpress: "" || 0,
+        pushpress: "" || 0,
+        row: "" || 0,
+        backsquat: "" || 0,
+        frontsquat: "" || 0,
+        deadlift: "" || 0,
+        trapDeadlift: "" || 0
       }
     });
     this.props.onHide();
@@ -133,7 +133,8 @@ class AddAthleteV2 extends React.Component {
         >
           <Modal.Header className="text-light modalHeader">
             <Modal.Title id="contained-modal-title-vcenter">
-              <MDBIcon icon="user-plus" /> Add Athlete
+              <MDBIcon icon="user-plus" size="lg" className="mr-2" /> Add
+              Athlete
             </Modal.Title>
             <button
               type="button"
@@ -150,7 +151,7 @@ class AddAthleteV2 extends React.Component {
           >
             <Modal.Body className="text-light" id="modalBody">
               <h3 className="mt-2 mb-2 p-2 text-center border">
-                <MDBIcon icon="info" /> Athlete Info
+                <MDBIcon icon="info" size="lg" className="mr-2" /> Athlete Info
               </h3>
               <MDBRow className="m-3 border">
                 {addAthleteFields.map((field, index) => (
@@ -274,10 +275,11 @@ class AddAthleteV2 extends React.Component {
             </Modal.Body>
             <Modal.Header className="modalFooter">
               <MDBBtn color="success" type="submit">
-                <MDBIcon icon="share-square" /> Submit
+                <MDBIcon icon="share-square" size="lg" className="mr-2" />{" "}
+                Submit
               </MDBBtn>
               <MDBBtn color="danger" onClick={this.clearFieldsAndClose}>
-                <MDBIcon icon="ban" /> Cancel
+                <MDBIcon icon="ban" size="lg" className="mr-2" /> Cancel
               </MDBBtn>
             </Modal.Header>
           </form>

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { MDBInput, MDBIcon } from "mdbreact";
+import { MDBInput } from "mdbreact";
 
 import {
   MDBContainer,
@@ -12,7 +12,6 @@ import {
 
 export default class EditInfoModal extends Component {
   render() {
-    console.log(this.props);
     return (
       <MDBContainer>
         <MDBModal
@@ -27,9 +26,8 @@ export default class EditInfoModal extends Component {
               <MDBInput label="Name" icon="user" />
               <MDBInput label="Phone" icon="phone" />
               <MDBInput label="Email" icon="envelope-open" />
-              <MDBIcon icon="male" /> / <MDBIcon icon="female" />
-              {/* <MDBInput label="Age" />
-              <MDBInput label="Sex" /> */}
+              <MDBInput label="Sex" icon="transgender" />
+              <MDBInput label="Age" icon="baby" />
             </div>
           </MDBModalBody>
           <MDBModalFooter>
