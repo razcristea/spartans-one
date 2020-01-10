@@ -10,6 +10,7 @@ import Col from "react-bootstrap/Col";
 import { MDBIcon, MDBBtn } from "mdbreact";
 import "./AthleteDetails.css";
 import Workouts from "./Workouts";
+import EditInfoModal from "./EditInfoModal";
 
 const athletesAPI = "https://theboxathletes.herokuapp.com/athletes/";
 
@@ -23,6 +24,7 @@ const goBackBtnStyles = {
 };
 export default function AthleteDetails({ info, getAthletes }) {
   const [percentage, setPercentage] = useState(50);
+  const [isEditing, setisEditing] = useState(false);
   const [editingPersonalBest, setEditingPersonalBest] = useState(false);
   const {
     name,
@@ -118,6 +120,8 @@ export default function AthleteDetails({ info, getAthletes }) {
   return (
     <Fragment>
       <GoBack />
+      <EditInfoModal show={setisEditing} isShowing={isEditing} />
+
       <Card
         key={_id}
         className="rounded-0 mb-5 text-light"
@@ -153,8 +157,12 @@ export default function AthleteDetails({ info, getAthletes }) {
                     Age: {age} | Sex: {sex}
                   </span>
                 </Card.Text>
-                <MDBBtn color="warning" size="sm">
-                  <i className="fas fa-user-edit fa-lg mr-2"></i> Edit
+                <MDBBtn
+                  color="warning"
+                  size="sm"
+                  onClick={() => setisEditing(!isEditing)}
+                >
+                  <i className="fas fa-user-edit fa-lg"></i> Edit
                 </MDBBtn>
               </div>
             </div>
