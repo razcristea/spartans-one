@@ -3,7 +3,7 @@ import { MDBCard, MDBCardBody, MDBCardHeader, MDBDataTable } from "mdbreact";
 import Accordion from "react-bootstrap/Accordion";
 import AddWorkoutForm from "./AddWorkoutForm";
 
-const Workouts = ({ wods }) => {
+const Workouts = ({ wods, _id }) => {
   wods.map(wod => {
     let formatedDate = wod.date.split("T");
     return (wod.date = formatedDate[0]
@@ -11,7 +11,6 @@ const Workouts = ({ wods }) => {
       .reverse()
       .join("-"));
   });
-  console.log(wods);
   const data_panel = {
     columns: [
       {
@@ -42,7 +41,7 @@ const Workouts = ({ wods }) => {
     <MDBCard className="w-100" style={{ backgroundColor: "#353535" }}>
       <MDBCardHeader>
         <Accordion>
-          <AddWorkoutForm count={wods.length} />
+          <AddWorkoutForm count={wods.length} id={_id} />
         </Accordion>
       </MDBCardHeader>
       <MDBCardBody className="text-white">

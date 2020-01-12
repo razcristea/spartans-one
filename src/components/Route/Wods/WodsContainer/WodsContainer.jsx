@@ -1,18 +1,20 @@
 import React, { Component, Fragment } from "react";
 import Accordion from "react-bootstrap/Accordion";
 import Card from "react-bootstrap/Card";
-import { MDBTable, MDBTableBody, MDBTableHead } from "mdbreact";
+import { MDBBtn, MDBBtnGroup } from "mdbreact";
+import "./Wod.css";
 
 export default class WodsContainer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      wods: this.props.wods
-    };
-  }
-
   render() {
-    const { description, _id, name, exercises } = this.props.wodInfo;
+    const { isSelected } = this.props;
+    const {
+      description,
+      type,
+      time,
+      _id,
+      name,
+      exercises
+    } = this.props.wodInfo;
     return (
       <Fragment>
         <Card
@@ -23,39 +25,50 @@ export default class WodsContainer extends Component {
           <Accordion.Toggle
             as={Card.Header}
             variant="link"
-            className="p-1 wodheader"
+            className="p-1 text-center wodHeader"
             eventKey={_id}
+            style={{
+              backgroundColor: isSelected !== _id ? "#1c1c1cbd" : "#fff",
+              color: isSelected !== _id ? "white" : "black"
+            }}
           >
-            <span style={{ fontSize: "1.3rem" }}>{name}</span>
+            <span style={{ fontSize: "1.4rem" }}>{name}</span>
           </Accordion.Toggle>
           <Accordion.Collapse eventKey={_id}>
             <Card.Body
-              className="text-center"
+              className="text-center wodBody border border-white m-2"
               style={{ backgroundColor: "#333333" }}
             >
-              <Card.Title as={"h3"} className="pt-2">
-                {name} - {description}
+              <Card.Title as={"h5"} className="pt-0">
+                - {type} -
               </Card.Title>
-              <MDBTable>
-                <MDBTableHead color="primary-color" textWhite>
-                  <tr>
-                    <th>Exercise name</th>
-                    <th>Number of reps</th>
-                    <th>Weight</th>
-                  </tr>
-                </MDBTableHead>
-                <MDBTableBody textWhite>
+              {description !== "N/A" ? <p>{description}</p> : null}
+              {time ? <h5>{time} min</h5> : null}
+              <div className="mt-4">
+                <div className="textWhite ">
                   {exercises.map((exercise, i) => {
                     return (
-                      <tr key={i}>
-                        <td>{exercise.name}</td>
-                        <td>{exercise.nrOfReps}</td>
-                        <td>{exercise.weight}</td>
-                      </tr>
+                      <p key={i}>
+                        {exercise.reps ? (
+                          <span className="m-2">{exercise.reps}</span>
+                        ) : null}
+                        <span className="m-2">{exercise.name}</span>
+                        {exercise.weight ? (
+                          <span className="m-2">{exercise.weight}kg</span>
+                        ) : null}
+                      </p>
                     );
                   })}
-                </MDBTableBody>
-              </MDBTable>
+                </div>
+                <MDBBtnGroup>
+                  <MDBBtn className="m-2">
+                    <i className="fas fa-info-circle fa-lg mr-1"></i> Details
+                  </MDBBtn>
+                  <MDBBtn className="m-2" color="danger">
+                    <i className="fas fa-trash fa-lg mr-1"></i> Delete
+                  </MDBBtn>
+                </MDBBtnGroup>
+              </div>
             </Card.Body>
           </Accordion.Collapse>
         </Card>

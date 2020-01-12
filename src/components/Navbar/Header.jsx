@@ -2,13 +2,12 @@ import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
-import Logo from "./CoachVLogo.png";
+import Logo from "./logoV2.png";
 
 const links = [
   { path: "Home", route: "/", icon: "fas fa-home" },
   { path: "Athletes", route: "/athletes", icon: "fas fa-users" },
-  { path: "Wods", route: "/wods", icon: "fas fa-dumbbell" },
-  { path: "Search", route: "/find", icon: "fas fa-search" }
+  { path: "Wods", route: "/wods", icon: "fas fa-dumbbell" }
 ];
 
 const activeStyle = {
@@ -33,7 +32,6 @@ export default function Header() {
           <img
             alt=""
             src={Logo}
-            width="45"
             height="45"
             className="d-inline-block align-top"
           />{" "}

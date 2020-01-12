@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import TypeFilter from "./WodsContainer/TypeFilter";
 import WodsContainer from "./WodsContainer/WodsContainer";
 import Accordion from "react-bootstrap/Accordion";
 
@@ -7,7 +8,7 @@ const wodsApi = "https://theboxathletes.herokuapp.com/wods/";
 export default class Wods extends Component {
   constructor() {
     super();
-    this.state = { wods: [] };
+    this.state = { wods: [], isSelected: "" };
   }
 
   _isMounted = false;
@@ -26,6 +27,9 @@ export default class Wods extends Component {
       .then(
         data => {
           console.log(data);
+          data.sort((a, b) =>
+            a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
+          );
           this.setState({ wods: data });
         },
         error => {
@@ -43,9 +47,14 @@ export default class Wods extends Component {
         >
           My Wods
         </h2>
-        <Accordion>
+        <TypeFilter />
+        <Accordion
+          onSelect={ev => this.setState({ isSelected: ev })}
+          className="mb-5"
+        >
           {this.state.wods.map(wod => (
             <WodsContainer
+              isSelected={this.state.isSelected}
               wods={this.state.wods}
               getWods={this.getWods}
               key={wod._id}

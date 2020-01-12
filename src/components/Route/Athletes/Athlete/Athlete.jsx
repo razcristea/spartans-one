@@ -46,7 +46,7 @@ export default class Athlete extends Component {
           </Accordion.Toggle>
           <Accordion.Collapse eventKey={_id}>
             <Card.Body
-              className="text-center"
+              className="text-center m-2 border border-white"
               style={{ backgroundColor: "#333333" }}
             >
               <Card.Img
@@ -76,20 +76,19 @@ export default class Athlete extends Component {
                   Age: {age} | Sex: {sex}
                 </span>
               </Card.Text>
-              <ButtonGroup size="sm" aria-label="Action Buttons">
-                <MDBBtn
-                  size="sm"
-                  color="danger"
-                  onClick={() => this.props.toggleWillDeleteModal(_id)}
-                  className="m-1 p-2"
-                >
-                  <i className="fas fa-user-slash fa-2x mr-1"></i> Delete
-                </MDBBtn>
+              <ButtonGroup aria-label="Action Buttons">
                 <NavLink to={`/athletes/${_id}`}>
-                  <MDBBtn color="success" className="m-1" size="sm">
-                    <i className="fas fa-dumbbell fa-2x mr-2"></i> Details
+                  <MDBBtn color="default" className="m-1">
+                    <i className="fas fa-info-circle fa-lg mr-1"></i> Details
                   </MDBBtn>
                 </NavLink>
+                <MDBBtn
+                  color="danger"
+                  onClick={() => this.props.toggleWillDeleteModal(_id)}
+                  className="m-1"
+                >
+                  <i className="fas fa-user-slash fa-lg mr-1"></i> Delete
+                </MDBBtn>
               </ButtonGroup>
             </Card.Body>
           </Accordion.Collapse>
