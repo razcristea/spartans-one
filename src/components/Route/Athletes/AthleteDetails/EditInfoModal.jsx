@@ -11,9 +11,11 @@ import {
 } from "mdbreact";
 
 export default class EditInfoModal extends Component {
-  render() {
-    console.log(this.props);
+  handleChange = ({ target }) => {
+    this.setState({ [target.name]: target.value });
+  };
 
+  render() {
     return (
       <MDBContainer>
         <MDBModal
@@ -33,23 +35,31 @@ export default class EditInfoModal extends Component {
           </MDBModalHeader>
           <MDBModalBody className="bg-dark text-white border">
             <div className="form-group">
-              <MDBInput label="Name" icon="user" value={this.props.info.name} />
+              <MDBInput
+                label="Name"
+                icon="user"
+                valueDefault={this.props.info.name}
+              />
               <MDBInput
                 label="Phone"
                 icon="phone"
-                value={this.props.info.phoneNumber}
+                valueDefault={this.props.info.phoneNumber}
               />
               <MDBInput
                 label="Email"
                 icon="envelope-open"
-                value={this.props.info.email}
+                valueDefault={this.props.info.email}
               />
               <MDBInput
                 label="Sex"
                 icon="transgender"
-                value={this.props.info.sex}
+                valueDefault={this.props.info.sex}
               />
-              <MDBInput label="Age" icon="baby" value={this.props.info.age} />
+              <MDBInput
+                label="Age"
+                icon="baby"
+                valueDefault={this.props.info.age}
+              />
             </div>
           </MDBModalBody>
           <MDBModalFooter
