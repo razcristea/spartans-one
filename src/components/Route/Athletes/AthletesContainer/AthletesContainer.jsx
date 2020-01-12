@@ -126,9 +126,7 @@ export default class AthletesContainer extends Component {
       <Fragment>
         {/* TEXT DISPLAYED WHILE FETCH IS RUNNING */}
         {this.props.athletes.length === 0 && (
-          <h3 className="text-center mt-5 pt-5 text-light">
-            Loading athletes...
-          </h3>
+          <h3 className="text-center mt-5 pt-5 text-light">Loading...</h3>
         )}
         {/* DISPLAYNG ATHLETES */}
         {/*MODAL THAT APPEARS AT CLICK DELETE BUTTON*/}
@@ -248,10 +246,10 @@ export default class AthletesContainer extends Component {
 }
 
 const addAthleteBtnStyles = {
-  width: "3rem",
-  height: "3rem",
-  fontSize: "1.25rem",
-  padding: "0.50rem 0.20rem",
+  width: "2.3rem",
+  height: "2.3rem",
+  fontSize: "1.1rem",
+  padding: "0.30rem 0.20rem",
   borderRadius: "50%",
   position: "fixed",
   bottom: 63,
@@ -260,10 +258,10 @@ const addAthleteBtnStyles = {
   border: "2px double white"
 };
 const searchAthleteBtnStyles = {
-  width: "3rem",
-  height: "3rem",
-  fontSize: "1.25em",
-  padding: "0.50rem 0.20rem",
+  width: "2.3rem",
+  height: "2.3rem",
+  fontSize: "1.1em",
+  padding: "0.30rem 0.20rem",
   borderRadius: "50%",
   backgroundColor: "#dabc01",
   color: "black",

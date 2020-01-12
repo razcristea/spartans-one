@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { MDBInput } from "mdbreact";
 
 import {
   MDBContainer,
@@ -6,56 +7,65 @@ import {
   MDBModal,
   MDBModalBody,
   MDBModalHeader,
-  MDBModalFooter,
-  MDBInput,
-  MDBIcon
+  MDBModalFooter
 } from "mdbreact";
 
 export default class EditInfoModal extends Component {
   render() {
+    console.log(this.props);
+
     return (
       <MDBContainer>
         <MDBModal
           isOpen={this.props.isShowing}
           toggle={() => this.props.show(!this.props.isShowing)}
+          centered
         >
           <MDBModalHeader
             toggle={() => this.props.show(!this.props.isShowing)}
-            className="m-4"
+            style={{
+              backgroundColor: "#1f1f1f",
+              border: "2px ridge white",
+              color: "#fff"
+            }}
           >
-            Edit Athlete
+            Edit info
           </MDBModalHeader>
-
-          <MDBModalBody className="editModal">
+          <MDBModalBody className="bg-dark text-white border">
             <div className="form-group">
-              <MDBInput label="Name" icon="user" />
-              <MDBInput label="Phone" icon="phone" />
-              <MDBInput label="Email" icon="envelope-open" />
-              <MDBInput label="Sex" icon="transgender" />
-              <MDBInput label="Age" icon="baby" />
-              <MDBIcon icon="camera" size="lg" className="mr-3" />
-              Photo
-              <div className="custom-file m-2">
-                <input type="file" className="custom-file-input" />
-                <label
-                  className="custom-file-label"
-                  id="editPhoto"
-                  htmlFor="editPhoto"
-                ></label>
-              </div>
+              <MDBInput label="Name" icon="user" value={this.props.info.name} />
+              <MDBInput
+                label="Phone"
+                icon="phone"
+                value={this.props.info.phoneNumber}
+              />
+              <MDBInput
+                label="Email"
+                icon="envelope-open"
+                value={this.props.info.email}
+              />
+              <MDBInput
+                label="Sex"
+                icon="transgender"
+                value={this.props.info.sex}
+              />
+              <MDBInput label="Age" icon="baby" value={this.props.info.age} />
             </div>
           </MDBModalBody>
-          <MDBModalFooter>
+          <MDBModalFooter
+            style={{
+              backgroundColor: "#1f1f1f",
+              border: "2px ridge white",
+              color: "#fff"
+            }}
+          >
             <MDBBtn
               color="danger"
               onClick={() => this.props.show(!this.props.isShowing)}
             >
-              <MDBIcon icon="ban" size="sm" className="m-2" /> Cancel
+              Close
             </MDBBtn>
-            <MDBBtn color="success">
-              <MDBIcon icon="check" size="sm" className="m-2" />
-              Save
-            </MDBBtn>
+            <MDBBtn color="success">Save changes</MDBBtn>
           </MDBModalFooter>
         </MDBModal>
       </MDBContainer>

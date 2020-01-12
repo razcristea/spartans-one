@@ -8,7 +8,8 @@
   box-shadow: 0 3px 6px rgb(12, 12, 12);
 }
 .Stopwatch-header {
-  font-size: 20px;
+  margin-top: 5px;
+  font-size: 15px;
   font-weight: 100;
 }
 .Stopwatch-display {

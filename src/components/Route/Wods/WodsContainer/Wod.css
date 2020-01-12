@@ -1,0 +1,7 @@
+.wodBody {
+  background-image: url("./blackboard.jpg");
+}
+.wodHeader {
+  border-bottom: 0.5px solid rgba(255, 255, 255, 0.534) !important;
+  margin-bottom: 0px !important;
+}

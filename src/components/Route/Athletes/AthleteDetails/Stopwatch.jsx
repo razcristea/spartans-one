@@ -39,17 +39,20 @@ class Stopwatch extends Component {
     let seconds = ("0" + (Math.floor(timerTime / 1000) % 60)).slice(-2);
     let minutes = ("0" + (Math.floor(timerTime / 60000) % 60)).slice(-2);
     let hours = ("0" + Math.floor(timerTime / 3600000)).slice(-2);
+    this.props.validate()
+      ? this.props.setIsReady(false)
+      : this.props.setIsReady(true);
     return (
-      <div className="Stopwatch mt-4 mb-4">
+      <div className="Stopwatch mt-2 mb-2">
         <div className="Stopwatch-header">
-          <i className="fas fa-stopwatch fa-lg mr-2 mt-2"></i>Stopwatch
+          <i className="fas fa-stopwatch fa-lg mr-1"></i>Stopwatch
         </div>
         <div className="Stopwatch-display">
           {hours} : {minutes} : {seconds}
         </div>
         {this.state.timerOn === false && this.state.timerTime === 0 && (
           <MDBBtn color="success" size="sm" onClick={this.startTimer}>
-            <i className="fas fa-play fa-lg mr-2"></i> Start
+            <i className="fas fa-play mr-1"></i> Start
           </MDBBtn>
         )}
         {this.state.timerOn === true && (
@@ -61,12 +64,12 @@ class Stopwatch extends Component {
               this.props.getValue(this.state.timerTime);
             }}
           >
-            <i className="fas fa-stop fa-lg mr-2"></i> Stop
+            <i className="fas fa-stop mr-1"></i> Stop
           </MDBBtn>
         )}
         {this.state.timerOn === false && this.state.timerTime > 0 && (
           <MDBBtn color="warning" size="sm" onClick={this.startTimer}>
-            <i className="fas fa-pause fa-lg mr-2"></i> Resume
+            <i className="fas fa-pause mr-1"></i> Resume
           </MDBBtn>
         )}
         {this.state.timerOn === false && this.state.timerTime > 0 && (
@@ -78,7 +81,7 @@ class Stopwatch extends Component {
               this.props.getValue(0);
             }}
           >
-            <i className="fas fa-undo-alt fa-lg mr-2"></i> Reset
+            <i className="fas fa-undo-alt mr-1"></i> Reset
           </MDBBtn>
         )}
       </div>

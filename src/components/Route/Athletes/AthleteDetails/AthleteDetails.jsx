@@ -76,7 +76,7 @@ export default function AthleteDetails({ info, getAthletes }) {
       Array.from(elements).map(element => (element.style.color = "#fff"));
       // change button text:
       setEditingPersonalBest(true);
-      editBtn.innerHTML = `<div> <i class="fas fa-save fa-2x mr-2"> </i> Update</div>`;
+      editBtn.innerHTML = `<div> <i class="fas fa-save fa-2x mr-1"> </i> Update</div>`;
     } else {
       // initialize a new object
       const newScore = {};
@@ -120,8 +120,7 @@ export default function AthleteDetails({ info, getAthletes }) {
   return (
     <Fragment>
       <GoBack />
-      <EditInfoModal show={setisEditing} isShowing={isEditing} />
-
+      <EditInfoModal show={setisEditing} isShowing={isEditing} info={info} />
       <Card
         key={_id}
         className="rounded-0 mb-5 text-light"
@@ -162,7 +161,7 @@ export default function AthleteDetails({ info, getAthletes }) {
                   size="sm"
                   onClick={() => setisEditing(!isEditing)}
                 >
-                  <i className="fas fa-user-edit fa-lg"></i> Edit
+                  <i className="fas fa-user-edit fa-lg mr-1"></i> Edit
                 </MDBBtn>
               </div>
             </div>
@@ -192,7 +191,7 @@ export default function AthleteDetails({ info, getAthletes }) {
                       size="sm"
                     >
                       <i
-                        className="fas fa-user-cog fa-2x mr-2"
+                        className="fas fa-user-cog fa-2x mr-1"
                         id="triggerEdit"
                       ></i>{" "}
                       Modify
@@ -260,8 +259,9 @@ export default function AthleteDetails({ info, getAthletes }) {
                   id="percentageSlider"
                   min="10"
                   max="98"
+                  draggable
                   step="1"
-                  onClick={() => console.log("selected")}
+                  list="tickmarks"
                   onTouchEnd={() => (document.body.style.overflow = "unset")}
                   onChange={() => {
                     document.body.style.overflow = "hidden";
@@ -278,7 +278,7 @@ export default function AthleteDetails({ info, getAthletes }) {
                 <MDBIcon icon="bolt" /> {name}'s Workouts
               </h3>
               <div className="addwod mt-3">
-                <Workouts wods={wods} />
+                <Workouts wods={wods} id={_id} />
               </div>
             </div>
           </Card.Body>
