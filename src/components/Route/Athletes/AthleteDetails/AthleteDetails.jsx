@@ -120,7 +120,7 @@ export default function AthleteDetails({ info, getAthletes }) {
   return (
     <Fragment>
       <GoBack />
-      <EditInfoModal show={setisEditing} isShowing={isEditing} />
+      <EditInfoModal show={setisEditing} isShowing={isEditing} info={info} />
       <Card
         key={_id}
         className="rounded-0 mb-5 text-light"
