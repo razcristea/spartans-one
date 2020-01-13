@@ -1,35 +1,31 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "4829da06af84d27b646f60941974f0c5",
+    "revision": "31f6ac3bed865e9765a12d2eff467ba7",
     "url": "/spartans-one/index.html"
   },
   {
-    "revision": "d0cac30447d56ff4f04f",
+    "revision": "ece7d33be8a7296df278",
     "url": "/spartans-one/static/css/2.b14ff059.chunk.css"
   },
   {
-    "revision": "abb41a7adc7f01bb88ef",
-    "url": "/spartans-one/static/css/main.8fa51a9e.chunk.css"
+    "revision": "d474399e5db95361d631",
+    "url": "/spartans-one/static/css/main.9795c23d.chunk.css"
   },
   {
-    "revision": "d0cac30447d56ff4f04f",
-    "url": "/spartans-one/static/js/2.1b2b46e4.chunk.js"
+    "revision": "ece7d33be8a7296df278",
+    "url": "/spartans-one/static/js/2.bc20f8bb.chunk.js"
   },
   {
     "revision": "54f6e2d0ef339619d0a432be7ac0ab75",
-    "url": "/spartans-one/static/js/2.1b2b46e4.chunk.js.LICENSE"
+    "url": "/spartans-one/static/js/2.bc20f8bb.chunk.js.LICENSE"
   },
   {
-    "revision": "abb41a7adc7f01bb88ef",
-    "url": "/spartans-one/static/js/main.d0d69946.chunk.js"
+    "revision": "d474399e5db95361d631",
+    "url": "/spartans-one/static/js/main.8a8c0bda.chunk.js"
   },
   {
     "revision": "2ec097ca5f3344365ec4",
     "url": "/spartans-one/static/js/runtime-main.afdf9105.js"
-  },
-  {
-    "revision": "496aa6b2a5611e62439711f7f526ea23",
-    "url": "/spartans-one/static/media/CoachVLogo.496aa6b2.png"
   },
   {
     "revision": "39b2c3031be6b4ea96e2e3e95d307814",
@@ -124,6 +120,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/spartans-one/static/media/athlete-card-background.86ea380c.jpg"
   },
   {
+    "revision": "ef857ce735836c5c57a09a83de371c3f",
+    "url": "/spartans-one/static/media/blackboard.ef857ce7.jpg"
+  },
+  {
     "revision": "088a34f78f530102fd9661173b4a4f26",
     "url": "/spartans-one/static/media/fa-brands-400.088a34f7.eot"
   },
@@ -182,5 +182,9 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "f6121be597a72928f54e7ab5b95512a1",
     "url": "/spartans-one/static/media/fa-solid-900.f6121be5.woff2"
+  },
+  {
+    "revision": "1db03830de43b68569a2571412401c40",
+    "url": "/spartans-one/static/media/logoV2.1db03830.png"
   }
 ]);
