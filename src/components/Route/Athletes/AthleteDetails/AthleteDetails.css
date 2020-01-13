@@ -13,3 +13,8 @@
   align-items: center;
   justify-content: center;
 }
+.prSlider {
+  width: 32px;
+  min-height: 440px;
+  -webkit-appearance: slider-vertical;
+}

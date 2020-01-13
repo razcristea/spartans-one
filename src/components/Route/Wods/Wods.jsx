@@ -41,6 +41,9 @@ export default class Wods extends Component {
   render() {
     return (
       <div>
+        {this.state.wods.length === 0 && (
+          <h3 className="text-center mt-5 pt-5 text-light">Loading...</h3>
+        )}
         <h2
           className="text-center text-white p-1 m-1 w-50 mx-auto"
           style={{ borderBottom: "0.5px solid white" }}

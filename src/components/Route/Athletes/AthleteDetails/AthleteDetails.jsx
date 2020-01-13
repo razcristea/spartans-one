@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect, useRef } from "react";
 import { withRouter } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
@@ -11,6 +11,7 @@ import { MDBIcon, MDBBtn } from "mdbreact";
 import "./AthleteDetails.css";
 import Workouts from "./Workouts";
 import EditInfoModal from "./EditInfoModal";
+import RangeTouch from "rangetouch";
 
 const athletesAPI = "https://theboxathletes.herokuapp.com/athletes/";
 
@@ -23,6 +24,10 @@ const goBackBtnStyles = {
   zIndex: "1000"
 };
 export default function AthleteDetails({ info, getAthletes }) {
+  const inputRef = useRef(null);
+  useEffect(() => {
+    new RangeTouch(inputRef.current);
+  }, []);
   const [percentage, setPercentage] = useState(50);
   const [isEditing, setisEditing] = useState(false);
   const [editingPersonalBest, setEditingPersonalBest] = useState(false);
@@ -247,21 +252,15 @@ export default function AthleteDetails({ info, getAthletes }) {
               <div className="p-0 text-light mt-1 ml-3 card bg-info text-center">
                 <div className="m-1 font-weight-bold">98%</div>
                 <input
-                  style={{
-                    width: "32px",
-                    minHeight: "440px",
-                    WebkitAppearance: "slider-vertical"
-                  }}
-                  className="mx-auto"
+                  ref={inputRef}
+                  className="mx-auto prSlider"
                   type="range"
-                  orient="vertical"
                   name="percentage"
                   id="percentageSlider"
                   min="10"
                   max="98"
                   draggable
                   step="1"
-                  list="tickmarks"
                   onTouchEnd={() => (document.body.style.overflow = "unset")}
                   onChange={() => {
                     document.body.style.overflow = "hidden";
