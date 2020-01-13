@@ -8,6 +8,7 @@
   position: sticky;
   top: 0;
   z-index: 100;
+  padding: 0.5rem !important;
 }
 .modalFooter {
   background-color: #1f1f1f;
@@ -15,6 +16,7 @@
   position: sticky;
   bottom: 0;
   z-index: 100;
+  padding: 0.5rem !important;
 }
 .labelClass {
   color: white !important;

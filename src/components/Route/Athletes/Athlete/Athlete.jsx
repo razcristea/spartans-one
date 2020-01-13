@@ -24,7 +24,7 @@ export default class Athlete extends Component {
           <Accordion.Toggle
             as={Card.Header}
             variant="link"
-            className="p-1 athleteheader"
+            className="p-0 athleteheader"
             eventKey={_id}
             style={{
               backgroundColor: isSelected !== _id ? "#1c1c1cbd" : "#fff",

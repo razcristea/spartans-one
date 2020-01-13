@@ -61,7 +61,7 @@ class Stopwatch extends Component {
             size="sm"
             onClick={() => {
               this.stopTimer();
-              this.props.getValue(this.state.timerTime);
+              this.props.getValue(Math.floor(this.state.timerTime / 1000));
             }}
           >
             <i className="fas fa-stop mr-1"></i> Stop

@@ -278,7 +278,7 @@ export default function AthleteDetails({ info, getAthletes }) {
                 <MDBIcon icon="bolt" /> {name}'s Workouts
               </h3>
               <div className="addwod mt-3">
-                <Workouts wods={wods} id={_id} />
+                <Workouts wods={wods} id={_id} updateWods={getAthletes} />
               </div>
             </div>
           </Card.Body>

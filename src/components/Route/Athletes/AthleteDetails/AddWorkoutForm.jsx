@@ -5,10 +5,13 @@ import Button from "react-bootstrap/Button";
 import Select from "./Select";
 import { MDBBtn, MDBInput, MDBBtnGroup } from "mdbreact";
 import Stopwatch from "./Stopwatch";
+import AlertMessage from "../AlertMessage/AlertMessage";
 
+const athletesApi = "https://theboxathletes.herokuapp.com/athletes/";
 const wodsApi = "https://theboxathletes.herokuapp.com/wods/";
 
-export default function AddWorkoutForm({ count, _id }) {
+let time = 0;
+export default function AddWorkoutForm({ count, id, updateWods }) {
   const [isAddingWorkout, setIsAddingWorkout] = useState(false);
   const [currentDay, setCurrentDay] = useState("");
   const [availableWods, setAvailableWods] = useState([]);
@@ -20,11 +23,32 @@ export default function AddWorkoutForm({ count, _id }) {
   const [nrOfReps, setNrOfReps] = useState(0);
   const [isReady, setIsReady] = useState(true);
 
+  const [displayAlert, setDisplayAlert] = useState(false);
+  const [alertMesage, setAlertMesage] = useState("");
+
   const saveWorkoutToAthlete = () => {
-    console.log("Day: ", currentDay);
-    console.log("Wod Name: ", selectedWod);
-    console.log("Time: ", timerValue);
-    console.log("NrOfReps: ", nrOfReps);
+    fetch(athletesApi + id, {
+      headers: { "Content-Type": "application/json" },
+      method: "POST",
+      body: JSON.stringify({
+        name: selectedWod,
+        time: timerValue,
+        reps: nrOfReps,
+        date: currentDay
+      })
+    })
+      .then(response => response.json())
+      .then(data => {
+        setDisplayAlert(true);
+        setAlertMesage(data);
+      })
+      .finally(() => {
+        setTimeout(() => {
+          setDisplayAlert(false);
+          setAlertMesage("");
+          updateWods();
+        }, 1500);
+      });
   };
   const validate = () => {
     if (!selectedWod || selectedWod === "default") return false;
@@ -35,6 +59,13 @@ export default function AddWorkoutForm({ count, _id }) {
       if (!timerValue) return false;
     }
     return true;
+  };
+
+  const getTime = e => {
+    e.target.name === "minutes"
+      ? (time = 60 * parseInt(e.target.value))
+      : (time += parseInt(e.target.value));
+    setTimerValue(time);
   };
 
   useEffect(() => {
@@ -53,6 +84,7 @@ export default function AddWorkoutForm({ count, _id }) {
 
   return (
     <React.Fragment>
+      <AlertMessage show={displayAlert} messageAlertDeleted={alertMesage} />
       <Card>
         <div className="d-flex justify-content-around align-items-center mb-0 bg-dark p-3">
           <Accordion.Toggle
@@ -71,7 +103,6 @@ export default function AddWorkoutForm({ count, _id }) {
               Workout
             </div>
           </Accordion.Toggle>
-
           <div className="ml-1 text-white">Wod Count : {count}</div>
         </div>
         <Accordion.Collapse eventKey={1}>
@@ -136,16 +167,30 @@ export default function AddWorkoutForm({ count, _id }) {
                 />
               ) : null}
               {inputManualIsDisplayed ? (
-                <MDBInput
-                  onChange={e => {
-                    setNrOfReps(parseInt(e.target.value));
-                    validate() ? setIsReady(false) : setIsReady(true);
-                  }}
-                  type="text"
-                  name="Time"
-                  label="Time (default : 00:00)"
-                  className="mx-auto"
-                ></MDBInput>
+                <div className="d-flex inline align-items-center mx-auto">
+                  <MDBInput
+                    autoFocus
+                    onBlur={e => {
+                      getTime(e);
+                      validate() ? setIsReady(false) : setIsReady(true);
+                    }}
+                    type="number"
+                    name="minutes"
+                    label="Minutes"
+                    className="mx-auto"
+                  ></MDBInput>
+                  <div className="ml-2 mr-2">:</div>
+                  <MDBInput
+                    onBlur={e => {
+                      getTime(e);
+                      validate() ? setIsReady(false) : setIsReady(true);
+                    }}
+                    type="number"
+                    name="seconds"
+                    label="Seconds"
+                    className="mx-auto"
+                  ></MDBInput>
+                </div>
               ) : null}
             </div>
             <div className="mt-2 p-2">
@@ -156,7 +201,7 @@ export default function AddWorkoutForm({ count, _id }) {
                 }}
                 type="number"
                 name="nrOfReps"
-                label="Number of Reps (default : 0)"
+                label="Reps (default : 0)"
                 className="mx-auto"
               ></MDBInput>
             </div>

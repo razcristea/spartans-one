@@ -13,7 +13,7 @@ class InputPage extends Component {
 
   render() {
     return (
-      <div className="text-center m-2 text-white p-2 font-weight-bold">
+      <div className="text-center m-2 text-white p-2 font-weight">
         {/* <i className="fas fa-filter fa-lg"></i> */}
         <label htmlFor="emom" className="ml-2 mr-1">
           EMOM

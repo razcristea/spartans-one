@@ -273,11 +273,15 @@ class AddAthleteV2 extends React.Component {
               </MDBCol>
             </Modal.Body>
             <Modal.Header className="modalFooter">
-              <MDBBtn color="success" type="submit">
+              <MDBBtn color="success" size="sm" type="submit">
                 <MDBIcon icon="share-square" size="lg" className="mr-2" />{" "}
                 Submit
               </MDBBtn>
-              <MDBBtn color="danger" onClick={this.clearFieldsAndClose}>
+              <MDBBtn
+                color="danger"
+                size="sm"
+                onClick={this.clearFieldsAndClose}
+              >
                 <MDBIcon icon="ban" size="lg" className="mr-2" /> Cancel
               </MDBBtn>
             </Modal.Header>
