@@ -4,7 +4,29 @@ import Card from "react-bootstrap/Card";
 import { MDBBtn, MDBBtnGroup } from "mdbreact";
 import "./Wod.css";
 
-export default class WodsContainer extends Component {
+export default class Wod extends Component {
+  state = { icon: "" };
+  componentDidMount() {
+    this.setIconForWod(this.props.wodInfo.type);
+  }
+  setIconForWod = type => {
+    switch (type) {
+      case "FOR TIME":
+        this.setState({ icon: "fas fa-stopwatch" });
+        break;
+      case "EMOM":
+        this.setState({ icon: "far fa-hourglass" });
+        break;
+      case "CHIPPER":
+        this.setState({ icon: "fas fa-hammer" });
+        break;
+      case "AMRAP":
+        this.setState({ icon: "fas fa-bolt" });
+        break;
+      default:
+        this.setState({ icon: "fas fa-radiation" });
+    }
+  };
   render() {
     const { isSelected } = this.props;
     const {
@@ -25,18 +47,24 @@ export default class WodsContainer extends Component {
           <Accordion.Toggle
             as={Card.Header}
             variant="link"
-            className="p-1 text-center wodHeader"
+            className="p-1 text-center wodHeader d-flex justify-content-between"
             eventKey={_id}
             style={{
               backgroundColor: isSelected !== _id ? "#1c1c1cbd" : "#fff",
               color: isSelected !== _id ? "white" : "black"
             }}
           >
-            <span style={{ fontSize: "1.4rem" }}>{name}</span>
+            <div className="ml-1" style={{ fontSize: "1.3rem" }}>
+              <i className={this.state.icon + " mr-2"}></i>
+              {name}
+            </div>
+            <div className="text-muted mr-1" style={{ fontSize: "0.6rem" }}>
+              {type}
+            </div>
           </Accordion.Toggle>
           <Accordion.Collapse eventKey={_id}>
             <Card.Body
-              className="text-center wodBody border border-white m-2"
+              className="text-center wodBody border border-white m-3"
               style={{ backgroundColor: "#333333" }}
             >
               <Card.Title as={"h5"} className="pt-0">
@@ -61,10 +89,10 @@ export default class WodsContainer extends Component {
                   })}
                 </div>
                 <MDBBtnGroup>
-                  <MDBBtn className="m-2">
+                  <MDBBtn className="m-2" size="sm">
                     <i className="fas fa-info-circle fa-lg mr-1"></i> Details
                   </MDBBtn>
-                  <MDBBtn className="m-2" color="danger">
+                  <MDBBtn className="m-2" color="danger" size="sm">
                     <i className="fas fa-trash fa-lg mr-1"></i> Delete
                   </MDBBtn>
                 </MDBBtnGroup>

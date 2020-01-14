@@ -149,9 +149,9 @@ class AddAthleteV2 extends React.Component {
             noValidate
           >
             <Modal.Body className="text-light" id="modalBody">
-              <h3 className="mt-2 mb-2 p-2 text-center border">
+              <h5 className="mt-2 mb-2 p-2 text-center border">
                 <MDBIcon icon="info" size="lg" className="mr-2" /> Athlete Info
-              </h3>
+              </h5>
               <MDBRow className="m-3 border">
                 {addAthleteFields.map((field, index) => (
                   <MDBCol md="4" key={index}>
@@ -195,8 +195,9 @@ class AddAthleteV2 extends React.Component {
               </MDBRow>
               <MDBRow>
                 <MDBCol md="12">
-                  <div className="mt-3 mb-2">
-                    <MDBIcon icon="male" /> / <MDBIcon icon="female" />
+                  <div className="mt-1 mb-1">
+                    <MDBIcon icon="male" size="lg" /> /{" "}
+                    <MDBIcon icon="female" size="lg" />
                   </div>
                   <div className="custom-control custom-radio">
                     <input
@@ -231,9 +232,9 @@ class AddAthleteV2 extends React.Component {
                   </div>
                 </MDBCol>
               </MDBRow>
-              <h3 className="mt-2 mb-2 p-2 text-center border">
+              <h5 className="mt-2 mb-2 p-2 text-center border">
                 <MDBIcon icon="dumbbell" /> Personal Best
-              </h3>
+              </h5>
               <MDBRow className="m-3 pb-4 border">
                 {personalBestFields.map((field, index) => (
                   <MDBCol md="3" key={index}>

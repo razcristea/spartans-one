@@ -1,3 +1,10 @@
+.wodBody {
+  background-image: url("./blackboard.jpg");
+}
+.wodHeader {
+  border-bottom: 0.3px solid rgba(255, 255, 255, 0.534) !important;
+  margin-bottom: 0px !important;
+}
 .imageIcon {
   object-fit: cover;
   image-orientation: from-image;
@@ -10,11 +17,4 @@
   background-position: 50%;
   background-size: cover;
   vertical-align: middle;
-}
-.athleteheader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 0.3px solid rgba(255, 255, 255, 0.534) !important;
-  margin-bottom: 0px !important;
 }

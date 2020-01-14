@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect, useRef } from "react";
+import React, { Fragment, useState, useRef } from "react";
 import { withRouter } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
@@ -25,9 +25,7 @@ const goBackBtnStyles = {
 };
 export default function AthleteDetails({ info, getAthletes }) {
   const inputRef = useRef(null);
-  useEffect(() => {
-    new RangeTouch(inputRef.current);
-  }, []);
+  new RangeTouch(inputRef);
   const [percentage, setPercentage] = useState(50);
   const [isEditing, setisEditing] = useState(false);
   const [editingPersonalBest, setEditingPersonalBest] = useState(false);

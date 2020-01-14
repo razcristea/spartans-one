@@ -1,0 +1,8 @@
+.wodButton {
+  position: fixed;
+  bottom: 63px;
+  left: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

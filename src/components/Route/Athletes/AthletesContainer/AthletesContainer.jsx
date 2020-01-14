@@ -249,7 +249,7 @@ const addAthleteBtnStyles = {
   width: "2.3rem",
   height: "2.3rem",
   fontSize: "1.1rem",
-  padding: "0.30rem 0.20rem",
+  padding: "0.1rem 0.45rem",
   borderRadius: "50%",
   position: "fixed",
   bottom: 63,

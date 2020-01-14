@@ -15,6 +15,7 @@
 }
 .prSlider {
   width: 32px;
+  padding: 0px 16px;
   min-height: 440px;
   -webkit-appearance: slider-vertical;
 }
