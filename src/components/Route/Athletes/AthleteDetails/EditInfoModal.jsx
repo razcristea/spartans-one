@@ -40,7 +40,6 @@ export default class EditInfoModal extends Component {
 
     console.log(updatedAthleteDetails);
     console.log(this.props);
-
     this.editAthleteDetails(updatedAthleteDetails);
   };
 
@@ -50,7 +49,7 @@ export default class EditInfoModal extends Component {
       {
         headers: { "Content-Type": "application/json" },
         method: "PUT",
-        body: JSON.stringify({ updatedAthleteDetails })
+        body: JSON.stringify(updatedAthleteDetails)
       }
     )
       .then(response => {
@@ -83,35 +82,35 @@ export default class EditInfoModal extends Component {
                 label="Name"
                 icon="user"
                 name="name"
-                valueDefault={this.state.name}
+                value={this.state.name}
                 onChange={this.handleChange}
               />
               <MDBInput
                 label="Phone"
                 icon="phone"
                 name="phoneNumber"
-                valueDefault={this.state.phoneNumber}
+                value={this.state.phoneNumber}
                 onChange={this.handleChange}
               />
               <MDBInput
                 label="Email"
                 icon="envelope-open"
                 name="email"
-                valueDefault={this.state.email}
+                value={this.state.email}
                 onChange={this.handleChange}
               />
               <MDBInput
                 label="Sex"
                 icon="transgender"
                 name="sex"
-                valueDefault={this.state.sex}
+                value={this.state.sex}
                 onChange={this.handleChange}
               />
               <MDBInput
                 label="Age"
                 icon="baby"
                 name="age"
-                valueDefault={this.state.age}
+                value={this.state.age}
                 onChange={this.handleChange}
               />
             </div>
@@ -129,7 +128,11 @@ export default class EditInfoModal extends Component {
             >
               Close
             </MDBBtn>
-            <MDBBtn color="success" onClick={this.handleSubmit}>
+            <MDBBtn
+              color="success"
+              onClick={this.handleSubmit}
+              // onClick={() => this.props.show(!this.props.isShowing)}
+            >
               Save changes
             </MDBBtn>
           </MDBModalFooter>
