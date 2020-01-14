@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "31f6ac3bed865e9765a12d2eff467ba7",
+    "revision": "0049ad8b0b97cc9e01ac8fb4c96b88f8",
     "url": "/spartans-one/index.html"
   },
   {
-    "revision": "ece7d33be8a7296df278",
+    "revision": "7ceac7b160d664d149a9",
     "url": "/spartans-one/static/css/2.b14ff059.chunk.css"
   },
   {
-    "revision": "d474399e5db95361d631",
-    "url": "/spartans-one/static/css/main.9795c23d.chunk.css"
+    "revision": "8b6a8fad5bc71a1f04c0",
+    "url": "/spartans-one/static/css/main.1988909e.chunk.css"
   },
   {
-    "revision": "ece7d33be8a7296df278",
-    "url": "/spartans-one/static/js/2.bc20f8bb.chunk.js"
+    "revision": "7ceac7b160d664d149a9",
+    "url": "/spartans-one/static/js/2.de7ece9e.chunk.js"
   },
   {
     "revision": "54f6e2d0ef339619d0a432be7ac0ab75",
-    "url": "/spartans-one/static/js/2.bc20f8bb.chunk.js.LICENSE"
+    "url": "/spartans-one/static/js/2.de7ece9e.chunk.js.LICENSE"
   },
   {
-    "revision": "d474399e5db95361d631",
-    "url": "/spartans-one/static/js/main.8a8c0bda.chunk.js"
+    "revision": "8b6a8fad5bc71a1f04c0",
+    "url": "/spartans-one/static/js/main.a5e57cd6.chunk.js"
   },
   {
     "revision": "2ec097ca5f3344365ec4",
