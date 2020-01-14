@@ -21,7 +21,7 @@ export default class AthletesContainer extends Component {
       modalShow: false,
       messageShow: false,
       message: "",
-      isScreenSmall: window.innerWidth <= 414,
+      isScreenSmall: window.innerWidth <= 697,
       isSelected: "",
       isSearching: false,
       willDelete: false,
@@ -171,33 +171,30 @@ export default class AthletesContainer extends Component {
             />
           ) : null}
         </div>
-        <Accordion
-          style={this.state.isScreenSmall ? {} : { display: "none" }}
-          onSelect={ev => this.setState({ isSelected: ev })}
-        >
-          {this.state.athletes.map(athlete => (
-            <Athlete
-              isSelected={this.state.isSelected}
-              key={athlete._id}
-              info={athlete}
-              toggleWillDeleteModal={this.toggleWillDeleteModal}
-              changeCount={this.props.changeCount}
-            />
-          ))}
-        </Accordion>
-        <div
-          className="cards-container"
-          style={this.state.isScreenSmall ? { display: "none" } : {}}
-        >
-          {this.state.athletes.map((athlete, i) => (
-            <AthleteCard
-              key={i}
-              athlete={athlete}
-              toggleWillDeleteModal={this.toggleWillDeleteModal}
-              changeCount={this.props.changeCount}
-            />
-          ))}
-        </div>
+        {this.state.isScreenSmall ? (
+          <Accordion onSelect={ev => this.setState({ isSelected: ev })}>
+            {this.state.athletes.map(athlete => (
+              <Athlete
+                isSelected={this.state.isSelected}
+                key={athlete._id}
+                info={athlete}
+                toggleWillDeleteModal={this.toggleWillDeleteModal}
+                changeCount={this.props.changeCount}
+              />
+            ))}
+          </Accordion>
+        ) : (
+          <div className="cards-container">
+            {this.state.athletes.map((athlete, i) => (
+              <AthleteCard
+                key={i}
+                athlete={athlete}
+                toggleWillDeleteModal={this.toggleWillDeleteModal}
+                changeCount={this.props.changeCount}
+              />
+            ))}
+          </div>
+        )}
         <div style={{ paddingBottom: "3.5rem" }}></div>
         <div
           style={{

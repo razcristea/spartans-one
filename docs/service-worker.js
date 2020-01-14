@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/spartans-one/precache-manifest.fda1cfa05195a11870284558eae011ac.js"
+  "/spartans-one/precache-manifest.bca234876303a54698e55b2d8c3a46a6.js"
 );
 
 self.addEventListener('message', (event) => {
