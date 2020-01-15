@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/spartans-one/static/css/main.1988909e.chunk.css",
-    "main.js": "/spartans-one/static/js/main.6508ee9d.chunk.js",
-    "main.js.map": "/spartans-one/static/js/main.6508ee9d.chunk.js.map",
+    "main.css": "/spartans-one/static/css/main.0468aa8c.chunk.css",
+    "main.js": "/spartans-one/static/js/main.2817ae23.chunk.js",
+    "main.js.map": "/spartans-one/static/js/main.2817ae23.chunk.js.map",
     "runtime-main.js": "/spartans-one/static/js/runtime-main.afdf9105.js",
     "runtime-main.js.map": "/spartans-one/static/js/runtime-main.afdf9105.js.map",
     "static/css/2.b14ff059.chunk.css": "/spartans-one/static/css/2.b14ff059.chunk.css",
     "static/js/2.fd29b17c.chunk.js": "/spartans-one/static/js/2.fd29b17c.chunk.js",
     "static/js/2.fd29b17c.chunk.js.map": "/spartans-one/static/js/2.fd29b17c.chunk.js.map",
     "index.html": "/spartans-one/index.html",
-    "precache-manifest.bca234876303a54698e55b2d8c3a46a6.js": "/spartans-one/precache-manifest.bca234876303a54698e55b2d8c3a46a6.js",
+    "precache-manifest.3cf103d927c45f46a45b222b6fd66bf5.js": "/spartans-one/precache-manifest.3cf103d927c45f46a45b222b6fd66bf5.js",
     "service-worker.js": "/spartans-one/service-worker.js",
     "static/css/2.b14ff059.chunk.css.map": "/spartans-one/static/css/2.b14ff059.chunk.css.map",
-    "static/css/main.1988909e.chunk.css.map": "/spartans-one/static/css/main.1988909e.chunk.css.map",
+    "static/css/main.0468aa8c.chunk.css.map": "/spartans-one/static/css/main.0468aa8c.chunk.css.map",
     "static/js/2.fd29b17c.chunk.js.LICENSE": "/spartans-one/static/js/2.fd29b17c.chunk.js.LICENSE",
     "static/media/mdb.css": "/spartans-one/static/media/arrow_right.8ef6a08c.svg",
     "static/media/index.css": "/spartans-one/static/media/athlete-card-background.86ea380c.jpg",
@@ -24,7 +24,7 @@
     "static/js/runtime-main.afdf9105.js",
     "static/css/2.b14ff059.chunk.css",
     "static/js/2.fd29b17c.chunk.js",
-    "static/css/main.1988909e.chunk.css",
-    "static/js/main.6508ee9d.chunk.js"
+    "static/css/main.0468aa8c.chunk.css",
+    "static/js/main.2817ae23.chunk.js"
   ]
 }

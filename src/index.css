@@ -8,6 +8,7 @@ body {
 
   background-image: url(./components/Route/Athletes/AthletesContainer/athlete-card-background.jpg);
   background-size: cover;
+  -webkit-background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
