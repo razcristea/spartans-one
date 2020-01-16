@@ -187,29 +187,24 @@ export default function AthleteDetails({ info, getAthletes }) {
               >
                 <div
                   style={{
-                    display: "inline-flex",
+                    display: "flex",
                     alignItems: "center",
                     justifyContent: "space-around"
                   }}
                 >
-                  <div>
-                    <Button
-                      className="m-2"
-                      onClick={updateRecords}
-                      id="updatePr"
-                      variant={!editingPersonalBest ? "info" : "success"}
-                      size="sm"
-                    >
-                      <i
-                        className="fas fa-user-cog fa-2x mr-1"
-                        id="triggerEdit"
-                      ></i>{" "}
-                      Modify
-                    </Button>
-                  </div>
-                  <div className="font-weight-bold mb-2 text-light">
-                    Percentage: {percentage} %
-                  </div>
+                  <Button
+                    className="font-weight-bol"
+                    onClick={updateRecords}
+                    id="updatePr"
+                    variant={!editingPersonalBest ? "info" : "success"}
+                    size="sm"
+                  >
+                    <i className="fas fa-cog fa-2x mr-1" id="triggerEdit"></i>{" "}
+                    Change
+                  </Button>
+                  <h2 className="mt-2 font-weight-bold text-white border pr-3 pl-3">
+                    {percentage}%
+                  </h2>
                 </div>
 
                 {Object.keys(personalBest).map((key, index) => (
