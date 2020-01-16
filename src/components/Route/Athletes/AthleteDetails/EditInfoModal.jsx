@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { MDBInput } from "mdbreact";
+import { AlertMessage } from "../AlertMessage/AlertMessage";
 
 import {
   MDBContainer,
@@ -7,18 +8,19 @@ import {
   MDBModal,
   MDBModalBody,
   MDBModalHeader,
-  MDBModalFooter
+  MDBModalFooter,
+  MDBIcon
 } from "mdbreact";
 
 export default class EditInfoModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: this.props.info.name,
-      phoneNumber: this.props.info.phoneNumber,
-      email: this.props.info.email,
-      sex: this.props.info.sex,
-      age: this.props.info.age
+      name: props.info.name,
+      phoneNumber: props.info.phoneNumber,
+      email: props.info.email,
+      sex: props.info.sex,
+      age: props.info.age
     };
   }
 
@@ -38,8 +40,6 @@ export default class EditInfoModal extends Component {
       age: this.state.age
     };
 
-    console.log(updatedAthleteDetails);
-    console.log(this.props);
     this.editAthleteDetails(updatedAthleteDetails);
   };
 
@@ -55,26 +55,24 @@ export default class EditInfoModal extends Component {
       .then(response => {
         return response.json();
       })
-      .then(error => console.log(error));
+      .then(answer => console.log(answer))
+      .then(() => this.props.refresh());
   }
 
   render() {
+    const { isShowing, show } = this.props;
     return (
       <MDBContainer>
-        <MDBModal
-          isOpen={this.props.isShowing}
-          toggle={() => this.props.show(!this.props.isShowing)}
-          centered
-        >
+        <MDBModal isOpen={isShowing} toggle={() => show(!isShowing)} centered>
           <MDBModalHeader
-            toggle={() => this.props.show(!this.props.isShowing)}
+            toggle={() => show(!isShowing)}
             style={{
               backgroundColor: "#1f1f1f",
               border: "2px ridge white",
               color: "#fff"
             }}
           >
-            Edit info
+            <MDBIcon icon="user-edit" size="lg" className="mr-2" /> Edit info
           </MDBModalHeader>
           <MDBModalBody className="bg-dark text-white border">
             <div className="form-group">
@@ -122,18 +120,11 @@ export default class EditInfoModal extends Component {
               color: "#fff"
             }}
           >
-            <MDBBtn
-              color="danger"
-              onClick={() => this.props.show(!this.props.isShowing)}
-            >
-              Close
+            <MDBBtn color="danger" size="sm" onClick={() => show(!isShowing)}>
+              <MDBIcon icon="ban" size="lg" className="mr-2" /> Close
             </MDBBtn>
-            <MDBBtn
-              color="success"
-              onClick={this.handleSubmit}
-              // onClick={() => this.props.show(!this.props.isShowing)}
-            >
-              Save changes
+            <MDBBtn color="success" size="sm" onClick={this.handleSubmit}>
+              <MDBIcon icon="save" size="lg" className="mr-2" /> Save changes
             </MDBBtn>
           </MDBModalFooter>
         </MDBModal>

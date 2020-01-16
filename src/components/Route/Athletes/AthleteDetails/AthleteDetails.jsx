@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useRef } from "react";
+import React, { Fragment, useState, useRef, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
@@ -25,7 +25,9 @@ const goBackBtnStyles = {
 };
 export default function AthleteDetails({ info, getAthletes }) {
   const inputRef = useRef(null);
-  new RangeTouch(inputRef);
+  useEffect(() => {
+    new RangeTouch(inputRef);
+  }, []);
   const [percentage, setPercentage] = useState(50);
   const [isEditing, setisEditing] = useState(false);
   const [editingPersonalBest, setEditingPersonalBest] = useState(false);
@@ -123,7 +125,12 @@ export default function AthleteDetails({ info, getAthletes }) {
   return (
     <Fragment>
       <GoBack />
-      <EditInfoModal show={setisEditing} isShowing={isEditing} info={info} />
+      <EditInfoModal
+        show={setisEditing}
+        isShowing={isEditing}
+        info={info}
+        refresh={getAthletes}
+      />
       <Card
         key={_id}
         className="rounded-0 mb-5 text-light"
@@ -254,7 +261,6 @@ export default function AthleteDetails({ info, getAthletes }) {
                   className="mx-auto prSlider"
                   type="range"
                   name="percentage"
-                  id="percentageSlider"
                   min="10"
                   max="98"
                   draggable
@@ -262,9 +268,7 @@ export default function AthleteDetails({ info, getAthletes }) {
                   onTouchEnd={() => (document.body.style.overflow = "unset")}
                   onChange={() => {
                     document.body.style.overflow = "hidden";
-                    setPercentage(
-                      document.getElementById("percentageSlider").value
-                    );
+                    setPercentage(inputRef.current.value);
                   }}
                 />
                 <div className="m-1 font-weight-bold">10%</div>

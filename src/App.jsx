@@ -4,6 +4,7 @@ import Header from "./components/Navbar/Header.jsx";
 import Footer from "./components/Footer/Footer";
 import Athletes from "./components/Route/Athletes/Athletes";
 import Wods from "./components/Route/Wods/Wods";
+import Home from "./components/Route/Home/Home";
 
 export default class App extends Component {
   state = { changeCount: 0 };
@@ -15,7 +16,7 @@ export default class App extends Component {
       <Router>
         <Header />
         <Switch>
-          {/* <Route path="/" component={LandingPage} exact></Route> */}
+          <Route path="/" component={Home} exact></Route>
           <Route
             path="/athletes"
             component={() => <Athletes changeCount={this.changeCount} />}
