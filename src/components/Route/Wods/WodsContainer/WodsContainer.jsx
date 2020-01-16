@@ -1,34 +1,58 @@
 import React, { Component } from "react";
+import { MDBBtn } from "mdbreact";
+import Select from "../../Athletes/AthleteDetails/Select";
 import Wod from "../Wod/Wod";
 import Accordion from "react-bootstrap/Accordion";
-import { MDBBtn } from "mdbreact";
-import TypeFilter from "../Wod/TypeFilter";
 import "./WodsContainer.css";
 
-export default class Wods extends Component {
-  state = { isSelected: "" };
+const options = [
+  { name: "EMOM" },
+  { name: "AMRAP" },
+  { name: "FOR TIME" },
+  { name: "CHIPPER" },
+  { name: "SPECIAL" }
+];
+
+export default class WodsContainer extends Component {
+  state = { isSelected: "", isFiltering: false };
+
+  getValue = value => {
+    console.log(value);
+  };
+  showFilterOptions = () => {
+    this.setState({ isFiltering: !this.state.isFiltering });
+  };
 
   render() {
     return (
       <div>
-        {this.props.wods.length === 0 && (
-          <h3 className="text-center mt-5 pt-5 text-light">Loading...</h3>
-        )}
-        <h2
-          className="text-center text-white p-1 m-1 w-50 mx-auto"
-          style={{ borderBottom: "0.5px solid white" }}
-        >
-          My Wods
-        </h2>
-        <TypeFilter />
+        <h3 className="text-center text-white p-3 m-1 w-100 mx-auto bg-dark">
+          <i className="fas fa-dumbbell mr-2"></i>My Wods
+        </h3>
+        {this.state.isFiltering ? (
+          <div
+            className="text-center"
+            autoFocus
+            onBlur={this.showFilterOptions}
+          >
+            <Select
+              options={options}
+              getValue={this.getValue}
+              defaultValue="Filter Wods"
+              className="w-25"
+            />
+          </div>
+        ) : null}
         <Accordion
           onSelect={ev => this.setState({ isSelected: ev })}
           className="mb-5"
         >
           {this.props.wods.map(wod => (
             <Wod
-              key={wod._id}
               isSelected={this.state.isSelected}
+              wods={this.state.wods}
+              getWods={this.getWods}
+              key={wod._id}
               wodInfo={wod}
             />
           ))}
@@ -37,10 +61,10 @@ export default class Wods extends Component {
           <MDBBtn
             color="warning"
             style={searchWodBtnStyles}
-            onClick={this.showSearchInput}
+            onClick={this.showFilterOptions}
             className="hoverable"
           >
-            <i className="fas fa-search-plus"></i>
+            <i className="fas fa-filter "></i>
           </MDBBtn>
         </div>
         {/* BUTTON ALWAYS VISIBLE FOR ADDING NEW ATHLETE */}

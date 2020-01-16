@@ -68,7 +68,7 @@ export default class EditInfoModal extends Component {
       .then(() => {
         setTimeout(() => {
           this.props.refresh();
-        }, 2000);
+        }, 1500);
       });
   }
 
@@ -95,6 +95,7 @@ export default class EditInfoModal extends Component {
             <MDBModalBody className="bg-dark text-white border">
               <div className="form-group">
                 <MDBInput
+                  className="white-text"
                   label="Name"
                   icon="user"
                   name="name"
@@ -102,6 +103,7 @@ export default class EditInfoModal extends Component {
                   onChange={this.handleChange}
                 />
                 <MDBInput
+                  className="white-text"
                   label="Phone"
                   icon="phone"
                   name="phoneNumber"
@@ -109,6 +111,7 @@ export default class EditInfoModal extends Component {
                   onChange={this.handleChange}
                 />
                 <MDBInput
+                  className="white-text"
                   label="Email"
                   icon="envelope-open"
                   name="email"
@@ -116,6 +119,7 @@ export default class EditInfoModal extends Component {
                   onChange={this.handleChange}
                 />
                 <MDBInput
+                  className="white-text"
                   label="Age"
                   icon="baby"
                   name="age"
