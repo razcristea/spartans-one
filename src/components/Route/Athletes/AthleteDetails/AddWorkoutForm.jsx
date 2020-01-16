@@ -79,7 +79,12 @@ export default function AddWorkoutForm({ count, id, updateWods }) {
     setCurrentDay(date);
     fetch(wodsApi)
       .then(response => response.json())
-      .then(wods => setAvailableWods(wods));
+      .then(wods => {
+        wods.sort((a, b) =>
+          a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
+        );
+        setAvailableWods(wods);
+      });
   }, []);
 
   return (
@@ -116,6 +121,7 @@ export default function AddWorkoutForm({ count, id, updateWods }) {
               getValue={setSelectedWod}
               validate={validate}
               setIsReady={setIsReady}
+              defaultValue={"Select WOD"}
             />
             <div className="mt-2 p-2">
               {!showBtnGroup ? (

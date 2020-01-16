@@ -126,7 +126,7 @@ export default class AthletesContainer extends Component {
       <Fragment>
         {/* TEXT DISPLAYED WHILE FETCH IS RUNNING */}
         {this.props.athletes.length === 0 && (
-          <h3 className="text-center mt-5 pt-5 text-light">Loading...</h3>
+          <h5 className="text-center mt-1 text-light">Loading...</h5>
         )}
         {/* DISPLAYNG ATHLETES */}
         {/*MODAL THAT APPEARS AT CLICK DELETE BUTTON*/}
@@ -153,22 +153,22 @@ export default class AthletesContainer extends Component {
           show={this.state.alertDeleted}
           messageAlertDeleted={this.state.messageAlertDeleted}
         />
-        <h2
-          className="text-center text-white p-1 m-1 w-50 mx-auto"
-          style={{ borderBottom: "0.5px solid white" }}
-        >
-          My Athletes
-        </h2>
-        <div className="ml-5 mr-5 mb-2 text-center">
+        <h3 className="text-center text-white p-3 m-1 w-100 mx-auto bg-dark">
+          <i className="fas fa-users mr-2"></i>My Athletes
+        </h3>
+        <div className="ml-5 mr-5 mb-1 text-center">
           {this.state.isSearching ? (
-            <input
-              type="search"
-              autoFocus
-              placeholder="Type Athlete Name..."
-              className="p-1 searchInput"
-              onChange={this.doTheSearch}
-              onBlur={this.showSearchInput}
-            />
+            <div>
+              <i className="fas fa-search text-white fa-lg mr-2"></i>
+              <input
+                type="search"
+                autoFocus
+                placeholder="Athlete Name..."
+                className="p-1 pl-2 searchInput border"
+                onChange={this.doTheSearch}
+                onBlur={this.showSearchInput}
+              />
+            </div>
           ) : null}
         </div>
         {this.state.isScreenSmall ? (

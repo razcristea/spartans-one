@@ -7,7 +7,10 @@ export default function Home() {
     dateRef.current.value = today;
   });
   return (
-    <div className="text-center mt-5">
+    <div className="text-center">
+      <h3 className="text-center text-white p-3 m-1 w-100 mx-auto bg-dark">
+        <i className="fas fa-clipboard-list mr-2"></i>Schedule
+      </h3>
       <div htmlFor="date">Choose Date:</div>
       <input type="date" name="date" id="date" ref={dateRef} />
     </div>

@@ -5,9 +5,9 @@ import Nav from "react-bootstrap/Nav";
 import Logo from "./logoV2.png";
 
 const links = [
-  { path: "Home", route: "/", icon: "fas fa-home" },
-  { path: "Athletes", route: "/athletes", icon: "fas fa-users" },
-  { path: "Wods", route: "/wods", icon: "fas fa-dumbbell" }
+  { path: "Schedule", route: "/", icon: "fas fa-clipboard-list mr-1" },
+  { path: "Athletes", route: "/athletes", icon: "fas fa-users mr-1" },
+  { path: "Wods", route: "/wods", icon: "fas fa-dumbbell mr-1" }
 ];
 
 const activeStyle = {
@@ -26,7 +26,7 @@ export default function Header() {
     >
       <Navbar.Brand>
         <div
-          className="text-light font-weight-bold"
+          className="text-white font-weight-bold"
           style={{ lineHeight: "45px" }}
         >
           <img
