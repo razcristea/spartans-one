@@ -175,8 +175,8 @@ export default class AthletesContainer extends Component {
           <Accordion onSelect={ev => this.setState({ isSelected: ev })}>
             {this.state.athletes.map(athlete => (
               <Athlete
-                isSelected={this.state.isSelected}
                 key={athlete._id}
+                isSelected={this.state.isSelected}
                 info={athlete}
                 toggleWillDeleteModal={this.toggleWillDeleteModal}
                 changeCount={this.props.changeCount}
