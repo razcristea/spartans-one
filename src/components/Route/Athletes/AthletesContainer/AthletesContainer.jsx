@@ -124,11 +124,6 @@ export default class AthletesContainer extends Component {
   render() {
     return (
       <Fragment>
-        {/* TEXT DISPLAYED WHILE FETCH IS RUNNING */}
-        {this.props.athletes.length === 0 && (
-          <h5 className="text-center mt-1 text-light">Loading...</h5>
-        )}
-        {/* DISPLAYNG ATHLETES */}
         {/*MODAL THAT APPEARS AT CLICK DELETE BUTTON*/}
         <Modal
           show={this.state.willDelete}
