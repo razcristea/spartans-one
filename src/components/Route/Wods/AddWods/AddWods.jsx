@@ -26,7 +26,7 @@ export default function AddWods(props) {
           </button>
         </Modal.Header>
         <form
-          className="needs-validation"
+          className="needs-validation border"
           noValidate
           style={{
             backgroundColor: "#383838",
@@ -34,7 +34,10 @@ export default function AddWods(props) {
           }}
         >
           <Modal.Body className="text-light">
-            <MDBRow className="m-3">
+            <h5 className="mt-2 mb-2 p-2 text-center border">
+              <MDBIcon icon="info" size="lg" className="mr-2" /> Wod Info
+            </h5>
+            <MDBRow className="m-3 border pl-1 pr-1">
               <MDBCol md="4" className="mb-2 mt-3">
                 <MDBInput
                   className="text-white"
@@ -48,6 +51,14 @@ export default function AddWods(props) {
                   <div className="invalid-feedback ml-4 pl-3"></div>
                   <div className="valid-feedback ml-4 pl-3">Looks good!</div>
                 </MDBInput>
+              </MDBCol>
+              <MDBCol md="4" className="mb-2 mt-3">
+                <Select
+                  options={props.options}
+                  getValue={props.getValue}
+                  defaultValue="Select Type"
+                  className="w-100"
+                />
               </MDBCol>
               <MDBCol md="4" className="mb-2 mt-3">
                 <MDBInput
@@ -69,19 +80,10 @@ export default function AddWods(props) {
                   labelClass="labelClass"
                 ></MDBInput>
               </MDBCol>
-              <MDBCol md="4" className="mb-2 mt-3">
-                <h6 className="mt-2 mb-2 p-2 text-center">Type</h6>
-
-                <Select
-                  options={props.options}
-                  getValue={props.getValue}
-                  defaultValue="Select Type"
-                />
-              </MDBCol>
             </MDBRow>
 
-            <h5 className="mt-2 mb-2 p-2 text-center border">
-              <MDBIcon icon="dumbbell" /> Exercises
+            <h5 className="mb-2 p-2 text-center border">
+              <MDBIcon icon="dumbbell" size="lg" className="mr-2" /> Exercises
             </h5>
             <MDBRow className="m-3 pb-4 border">
               <MDBCol md="6" className="mb-2 mt-3">
@@ -89,7 +91,7 @@ export default function AddWods(props) {
                   className="text-white"
                   type="text"
                   name="exerciseName"
-                  label="Name"
+                  label="Name (Ex: Squats)"
                   labelClass="labelClass"
                 ></MDBInput>
               </MDBCol>
@@ -110,14 +112,14 @@ export default function AddWods(props) {
                   className="text-white"
                   type="number"
                   name="weightFemale"
-                  label="Female/Kg"
+                  label="Female/Kg (default:0)"
                 ></MDBInput>
                 <MDBInput
                   className="text-white"
                   icon="male"
                   type="number"
                   name="weightMale"
-                  label="Male/Kg"
+                  label="Male/Kg (default:0)"
                 ></MDBInput>
               </MDBCol>
 
@@ -133,7 +135,7 @@ export default function AddWods(props) {
               </MDBCol>
             </MDBRow>
           </Modal.Body>
-          <Modal.Header className="modalHeader">
+          <Modal.Header className="modalFooter">
             <MDBBtn color="success" size="sm" type="submit">
               <MDBIcon icon="share-square" size="lg" className="mr-2" /> Add WOD
             </MDBBtn>
