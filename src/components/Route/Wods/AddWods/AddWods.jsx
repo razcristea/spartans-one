@@ -13,10 +13,7 @@ export default function AddWods(props) {
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
-        <Modal.Header
-          className="text-light"
-          style={{ backgroundColor: "#1f1f1f" }}
-        >
+        <Modal.Header className="text-light modalHeader">
           <Modal.Title id="contained-modal-title-vcenter">
             <MDBIcon icon="dumbbell" size="lg" className="mr-2" /> Add Wod
           </Modal.Title>
@@ -106,7 +103,6 @@ export default function AddWods(props) {
                   labelClass="labelClass"
                 ></MDBInput>
               </MDBCol>
-
               <MDBCol md="6" className="mb-2 mt-3">
                 Weight
                 <MDBInput
@@ -114,22 +110,32 @@ export default function AddWods(props) {
                   className="text-white"
                   type="number"
                   name="weightFemale"
-                  label="Kg"
+                  label="Female/Kg"
                 ></MDBInput>
                 <MDBInput
                   className="text-white"
                   icon="male"
                   type="number"
                   name="weightMale"
-                  label="Kg"
+                  label="Male/Kg"
                 ></MDBInput>
+              </MDBCol>
+
+              <MDBCol className="d-flex align-items-end flex-column bd-highlight example-parent">
+                <MDBBtn
+                  color="info"
+                  size="md"
+                  type="submit"
+                  className="mt-auto p-2 bd-highlight col-example"
+                >
+                  <MDBIcon icon="plus" size="lg" /> Add
+                </MDBBtn>
               </MDBCol>
             </MDBRow>
           </Modal.Body>
-          <Modal.Header className="modalFooter">
+          <Modal.Header className="modalHeader">
             <MDBBtn color="success" size="sm" type="submit">
-              <MDBIcon icon="share-square" size="lg" className="mr-2" /> Add
-              Exercise
+              <MDBIcon icon="share-square" size="lg" className="mr-2" /> Add WOD
             </MDBBtn>
             <MDBBtn color="danger" size="sm" onClick={props.toggleModal}>
               <MDBIcon icon="ban" size="lg" className="mr-2" /> Cancel
