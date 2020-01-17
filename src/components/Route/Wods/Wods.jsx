@@ -4,15 +4,15 @@ import TypeFilter from "./Wod/TypeFilter";
 import Wod from "./Wod/Wod";
 import Accordion from "react-bootstrap/Accordion";
 import "./Wods.css";
+import AddWods from "./AddWods/AddWods";
 
 const wodsApi = "https://theboxathletes.herokuapp.com/wods/";
 
 export default class Wods extends Component {
   constructor() {
     super();
-    this.state = { wods: [], isSelected: "" };
+    this.state = { wods: [], isSelected: "", displayModal: false };
   }
-
   _isMounted = false;
   componentDidMount() {
     this._isMounted = true;
@@ -23,6 +23,11 @@ export default class Wods extends Component {
     this._isMounted = false;
   }
 
+  toggleModal = () => {
+    this.setState({
+      displayModal: !this.state.displayModal
+    });
+  };
   getWods = () => {
     fetch(wodsApi)
       .then(response => response.json())
@@ -81,11 +86,15 @@ export default class Wods extends Component {
         <MDBBtn
           color="warning"
           style={addWodBtnStyles}
-          onClick={this.showModal}
+          onClick={this.toggleModal}
           className="hoverable"
         >
           <i className="fas fa-plus"></i>
         </MDBBtn>
+        <AddWods
+          toggleModal={this.toggleModal}
+          displayModal={this.state.displayModal}
+        />
       </div>
     );
   }
