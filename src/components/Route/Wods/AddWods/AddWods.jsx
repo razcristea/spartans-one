@@ -1,117 +1,142 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { Fragment } from "react";
 import { MDBRow, MDBCol, MDBInput, MDBBtn, MDBIcon } from "mdbreact";
 import Modal from "react-bootstrap/Modal";
-import ModalBody from "react-bootstrap/ModalBody";
-import Card from "react-bootstrap/Card";
+import "./AddWods.css";
+import Select from "../../Athletes/AthleteDetails/Select";
 
 export default function AddWods(props) {
-  console.log(props);
-
-  // class FormsPage extends React.Component {
-  //   state = {
-  //     fname: "Mark",
-  //     lname: "Otto",
-  //     email: "",
-  //     city: "",s
-  //     state: "",
-  //     zip: ""
-  //   };
-
-  //   submitHandler = event => {
-  //     event.preventDefault();
-  //     event.target.className += " was-validated";
-  //   };
-
-  // changeHandler = event => {
-  //   this.setState({ [event.target.name]: event.target.value });
-  // };
-
-  //   render() {
   return (
-    <Modal show={props.displayModal} className="text-white">
-      <Modal.Header className="text-light modalHeader">
-        <Modal.Title id="contained-modal-title-vcenter">
-          <MDBIcon icon="dumbbell" size="md" className="mr-2" /> Add Wod
-        </Modal.Title>
-        <button
-          type="button"
-          className="close text-white"
-          onClick={props.toggleModal}
+    <Fragment>
+      <Modal
+        show={props.displayModal}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header
+          className="text-light"
+          style={{ backgroundColor: "#1f1f1f" }}
         >
-          <span>&times;</span>
-        </button>
-      </Modal.Header>
-      <Card>
+          <Modal.Title id="contained-modal-title-vcenter">
+            <MDBIcon icon="dumbbell" size="lg" className="mr-2" /> Add Wod
+          </Modal.Title>
+          <button
+            type="button"
+            className="close text-white"
+            onClick={props.toggleModal}
+          >
+            <span>&times;</span>
+          </button>
+        </Modal.Header>
         <form
           className="needs-validation"
-          // onSubmit={this.submitHandler}
           noValidate
+          style={{
+            backgroundColor: "#383838",
+            padding: "0.5rem"
+          }}
         >
-          <ModalBody className="bg-dark">
-            <MDBRow>
-              <MDBCol md="4">
+          <Modal.Body className="text-light">
+            <MDBRow className="m-3">
+              <MDBCol md="4" className="mb-2 mt-3">
                 <MDBInput
-                  icon="dumbbell"
-                  size="sm"
-                  //   value={this.state.fname}
-                  name="workoutTitle"
-                  //   onChange={this.changeHandler}
+                  className="text-white"
+                  icon="pen"
                   type="text"
+                  name="wodName"
                   label="Name"
+                  labelClass="labelClass"
                   required
+                >
+                  <div className="invalid-feedback ml-4 pl-3"></div>
+                  <div className="valid-feedback ml-4 pl-3">Looks good!</div>
+                </MDBInput>
+              </MDBCol>
+              <MDBCol md="4" className="mb-2 mt-3">
+                <MDBInput
+                  className="text-white"
+                  icon="align-left"
+                  type="text"
+                  name="description"
+                  label="Description"
+                  labelClass="labelClass"
                 ></MDBInput>
               </MDBCol>
-              <MDBCol md="4">
+              <MDBCol md="4" className="mb-2 mt-3">
                 <MDBInput
-                  type="textarea"
-                  label="description"
-                  outline
-                  icon="align-left"
-                  //   value={this.state.lname}
-                  name="lname"
-                  //   onChange={this.changeHandler}
-                  type="text"
-                  label="Description"
-                  required
+                  className="text-white"
+                  icon="clock"
+                  type="number"
+                  name="time"
+                  label="Time"
+                  labelClass="labelClass"
+                ></MDBInput>
+              </MDBCol>
+              <MDBCol md="4" className="mb-2 mt-3">
+                <h6 className="mt-2 mb-2 p-2 text-center">Type</h6>
+
+                <Select
+                  options={props.options}
+                  getValue={props.getValue}
+                  defaultValue="Select Type"
                 />
               </MDBCol>
-              <MDBCol md="4">
-                <MDBInput
-                  icon="clock"
-                  //   value={this.state.email}
-                  //   onChange={this.changeHandler}
-                  type="number"
-                  name="duration"
-                  label="Duration"
-                ></MDBInput>
-              </MDBCol>
             </MDBRow>
-            <MDBRow>
-              <MDBCol md="4">
-                <MDBInput
-                  icon="filter"
-                  //   value={this.state.city}
-                  //   onChange={this.changeHandler}
-                  type="text"
-                  name="type"
-                  label="Cathegory"
-                  required
-                ></MDBInput>
-              </MDBCol>
-            </MDBRow>
-          </ModalBody>
 
+            <h5 className="mt-2 mb-2 p-2 text-center border">
+              <MDBIcon icon="dumbbell" /> Exercises
+            </h5>
+            <MDBRow className="m-3 pb-4 border">
+              <MDBCol md="6" className="mb-2 mt-3">
+                <MDBInput
+                  className="text-white"
+                  type="text"
+                  name="exerciseName"
+                  label="Name"
+                  labelClass="labelClass"
+                ></MDBInput>
+              </MDBCol>
+              <MDBCol md="6" className="mb-2 mt-3">
+                <MDBInput
+                  className="text-white"
+                  icon=""
+                  type="number"
+                  name="reps"
+                  label="Reps"
+                  labelClass="labelClass"
+                ></MDBInput>
+              </MDBCol>
+
+              <MDBCol md="6" className="mb-2 mt-3">
+                Weight
+                <MDBInput
+                  icon="female"
+                  className="text-white"
+                  type="number"
+                  name="weightFemale"
+                  label="Kg"
+                ></MDBInput>
+                <MDBInput
+                  className="text-white"
+                  icon="male"
+                  type="number"
+                  name="weightMale"
+                  label="Kg"
+                ></MDBInput>
+              </MDBCol>
+            </MDBRow>
+          </Modal.Body>
           <Modal.Header className="modalFooter">
             <MDBBtn color="success" size="sm" type="submit">
-              <MDBIcon icon="share-square" size="lg" className="mr-2" /> Submit
+              <MDBIcon icon="share-square" size="lg" className="mr-2" /> Add
+              Exercise
             </MDBBtn>
             <MDBBtn color="danger" size="sm" onClick={props.toggleModal}>
-              <MDBIcon icon="ban" size="lg" className="mr-2" />
-              Cancel
+              <MDBIcon icon="ban" size="lg" className="mr-2" /> Cancel
             </MDBBtn>
           </Modal.Header>
         </form>
-      </Card>
-    </Modal>
+      </Modal>
+    </Fragment>
   );
 }

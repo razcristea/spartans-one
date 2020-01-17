@@ -68,7 +68,7 @@ export default class EditInfoModal extends Component {
       .then(() => {
         setTimeout(() => {
           this.props.refresh();
-        }, 2000);
+        }, 1500);
       });
   }
 
