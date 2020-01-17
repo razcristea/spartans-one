@@ -1,0 +1,8 @@
+.go-back-to-wods-btn {
+  position: fixed;
+  bottom: 5px;
+  right: 25%;
+  border: 0.5px solid white !important;
+  color: white;
+  z-index: 1000;
+}
