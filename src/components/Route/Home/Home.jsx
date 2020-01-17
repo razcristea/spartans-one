@@ -1,5 +1,6 @@
 import React from "react";
 import MyCalendar from "./Calendar/MyCalendar";
+import { MDBBtn } from "mdbreact";
 
 export default function Home() {
   return (
@@ -10,6 +11,7 @@ export default function Home() {
       <MyCalendar />
       <div className="p-5 m-2 w-75 border mx-auto font-weight-bold">
         No Appointments for today!
+        <MDBBtn color="success">Add Appointment</MDBBtn>
       </div>
     </div>
   );

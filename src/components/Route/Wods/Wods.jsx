@@ -4,14 +4,16 @@ import WodsContainer from "./WodsContainer/WodsContainer";
 import WodDetails from "./WodDetails/WodDetails";
 
 const wodsApi = "https://theboxathletes.herokuapp.com/wods/";
+const athletesApi = "https://theboxathletes.herokuapp.com/athletes/";
 
 export default class Wods extends Component {
-  state = { wods: [] };
+  state = { wods: [], athletes: [] };
 
   _isMounted = false;
   componentDidMount() {
     this._isMounted = true;
     this.getWods();
+    this.getAthletes();
   }
 
   componentWillUnmount() {
@@ -21,18 +23,29 @@ export default class Wods extends Component {
   getWods = () => {
     fetch(wodsApi)
       .then(response => response.json())
-      .then(
-        data => {
-          console.log(data);
-          data.sort((a, b) =>
-            a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
-          );
-          this.setState({ wods: data });
-        },
-        error => {
-          console.log(error);
-        }
-      );
+      .then(data => {
+        data.sort((a, b) =>
+          a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
+        );
+        this.setState({ wods: data });
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+
+  getAthletes = () => {
+    fetch(athletesApi)
+      .then(response => response.json())
+      .then(data => {
+        data.sort((a, b) =>
+          a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
+        );
+        this.setState({ athletes: data });
+      })
+      .catch(error => {
+        console.log(error);
+      });
   };
 
   render() {
@@ -54,7 +67,9 @@ export default class Wods extends Component {
               key={i}
               exact
               component={() => {
-                return <WodDetails wodInfo={wod} />;
+                return (
+                  <WodDetails wodInfo={wod} athletes={this.state.athletes} />
+                );
               }}
             />
           );
