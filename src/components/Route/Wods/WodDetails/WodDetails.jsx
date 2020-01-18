@@ -5,20 +5,30 @@ import "./WodDetails.css";
 
 export default function WodDetails({ wodInfo, athletes }) {
   const { description, type, time, name, exercises } = wodInfo;
+  console.log(type);
   const [neededAthletes, setNeededAthletes] = useState([]);
   useEffect(() => {
     let filteredAthletes = athletes.filter(athlete => {
       let found = false;
-      //   console.log(athlete);
+      let bestTime = 10000000000000;
       athlete.wods.forEach(wod => {
+        wod.time < bestTime ? (bestTime = wod.time) : (bestTime = bestTime);
         if (wod.name === name) {
+          type === ("FOR TIME" || "CHIPPER")
+            ? (athlete.test = bestTime)
+            : (athlete.test = wod.reps);
+
           found = true;
         }
       });
-      return found && athlete.name;
+      return found && athlete.wods;
     });
+    type === ("FOR TIME" || "CHIPPER")
+      ? filteredAthletes.sort((a, b) => (a.test > b.test ? 1 : -1))
+      : filteredAthletes.sort((a, b) => (a.test > b.test ? -1 : 1));
+    console.log(filteredAthletes);
     setNeededAthletes(filteredAthletes);
-  }, [athletes, name]);
+  }, [athletes, name, type]);
 
   const GoBackToWods = withRouter(({ history }) => (
     <MDBBtn
@@ -31,12 +41,12 @@ export default function WodDetails({ wodInfo, athletes }) {
     </MDBBtn>
   ));
 
-  //   const sortByTime = () => {
-  //       athlete.wods.sort((a,b) => {
-  //           return a.time - b.time
-  //       })
-  //   }
-
+  // const sortByTime = () => {
+  //   athlete.wods.sort((a, b) => {
+  //     return a.time - b.time;
+  //   });
+  // };
+  console.log(neededAthletes);
   return (
     <Fragment>
       <GoBackToWods />
@@ -69,7 +79,10 @@ export default function WodDetails({ wodInfo, athletes }) {
               key={i}
               className="border p-2 m-2 w-50 mx-auto font-weight-bold"
             >
-              {athlete.name}
+              {athlete.name}:{" "}
+              {type === ("FOR TIME" || "CHIPPER")
+                ? `${Math.floor(athlete.test / 60)}min ${athlete.test % 60}sec`
+                : `${athlete.test}reps`}
             </div>
           );
         })}

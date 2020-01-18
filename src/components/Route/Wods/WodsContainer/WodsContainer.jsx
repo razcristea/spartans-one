@@ -29,6 +29,7 @@ export default class WodsContainer extends Component {
   };
 
   render() {
+    console.log(this.props.wods);
     return (
       <div>
         <h3 className="text-center text-white p-3 m-1 w-100 mx-auto bg-dark">
@@ -85,6 +86,7 @@ export default class WodsContainer extends Component {
           toggleModal={this.toggleModal}
           displayModal={this.state.displayModal}
           options={options}
+          exercises={[]}
           getValue={this.getValue}
         />
       </div>
