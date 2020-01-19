@@ -2,6 +2,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
 import { MDBBtn } from "mdbreact";
 import "./WodDetails.css";
+import firstPlace from "./first_place_icon.png";
 
 export default function WodDetails({ wodInfo, athletes }) {
   const { description, type, time, name, exercises } = wodInfo;
@@ -12,7 +13,7 @@ export default function WodDetails({ wodInfo, athletes }) {
       let found = false;
       let bestTime = 10000000000000;
       athlete.wods.forEach(wod => {
-        wod.time < bestTime ? (bestTime = wod.time) : (bestTime = bestTime);
+        wod.time < bestTime ? (bestTime = wod.time) : (bestTime = null);
         if (wod.name === name) {
           type === ("FOR TIME" || "CHIPPER")
             ? (athlete.test = bestTime)
@@ -41,11 +42,6 @@ export default function WodDetails({ wodInfo, athletes }) {
     </MDBBtn>
   ));
 
-  // const sortByTime = () => {
-  //   athlete.wods.sort((a, b) => {
-  //     return a.time - b.time;
-  //   });
-  // };
   console.log(neededAthletes);
   return (
     <Fragment>
@@ -74,11 +70,13 @@ export default function WodDetails({ wodInfo, athletes }) {
         </div>
         <h4>Hall of fame</h4>
         {neededAthletes.map((athlete, i) => {
+          console.log(neededAthletes.length);
           return (
             <div
               key={i}
               className="border p-2 m-2 w-50 mx-auto font-weight-bold"
             >
+              <img src={firstPlace} alt={"poza"} />
               {athlete.name}:{" "}
               {type === ("FOR TIME" || "CHIPPER")
                 ? `${Math.floor(athlete.test / 60)}min ${athlete.test % 60}sec`
