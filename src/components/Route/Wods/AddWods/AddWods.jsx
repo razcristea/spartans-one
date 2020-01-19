@@ -1,7 +1,8 @@
-import React, { Fragment, useState, useRef } from "react";
+import React, { useState, useRef } from "react";
 import { MDBRow, MDBCol, MDBInput, MDBBtn, MDBIcon } from "mdbreact";
 import Modal from "react-bootstrap/Modal";
 import "./AddWods.css";
+import Spinner from "../../Athletes/AddAthleteModal/Spinner";
 import Select from "../../Athletes/AthleteDetails/Select";
 
 const wodsApi = "https://theboxathletes.herokuapp.com/wods/";
@@ -18,6 +19,7 @@ export default function AddWods(props) {
   const [timecap, setTimecap] = useState(0);
   const [exercises, setExercises] = useState([]);
   const [enabled, setEnabled] = useState(true);
+  const [showSpinner, setShowSpinner] = useState(false);
 
   const addExercise = () => {
     const exercise = {
@@ -55,6 +57,7 @@ export default function AddWods(props) {
         time: timecap,
         exercises
       };
+      setShowSpinner(true);
       fetch(wodsApi, {
         headers: { "Content-Type": "application/json" },
         method: "POST",
@@ -62,6 +65,8 @@ export default function AddWods(props) {
       })
         .then(response => response.json())
         .then(data => {
+          console.log(data);
+          setShowSpinner(false);
           props.toggleModal();
           props.showServerResponse(
             `${name} workout has been added to the database!`
@@ -69,7 +74,8 @@ export default function AddWods(props) {
         })
         .finally(() => {
           setTimeout(() => props.getWods(), 1500);
-        });
+        })
+        .catch(error => console.log(error));
     } else {
       e.target.className += " was-validated";
       const formElements = Array.from(form.elements);
@@ -80,7 +86,8 @@ export default function AddWods(props) {
     }
   };
   return (
-    <Fragment>
+    <div>
+      {showSpinner ? <Spinner /> : null}
       <Modal
         show
         size="lg"
@@ -171,7 +178,7 @@ export default function AddWods(props) {
                   icon=""
                   type="number"
                   name="reps"
-                  label="Reps(Ex: 20, default: 0)"
+                  label="Reps/Cal/m(Ex: 20, default: 0)"
                   labelClass="labelClass"
                 ></MDBInput>
               </MDBCol>
@@ -269,6 +276,6 @@ export default function AddWods(props) {
           </Modal.Header>
         </form>
       </Modal>
-    </Fragment>
+    </div>
   );
 }

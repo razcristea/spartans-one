@@ -1,7 +1,7 @@
 {
   "name": "spartans-frontend",
   "version": "0.1.0",
-  "homepage": "https://razcristea.github.io/spartans-one/",
+  "homepage": "/",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.12.0",
