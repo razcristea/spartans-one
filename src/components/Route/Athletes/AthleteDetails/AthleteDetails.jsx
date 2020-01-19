@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useRef, useEffect } from "react";
+import React, { Fragment, useState, useRef } from "react";
 import { withRouter } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
@@ -11,7 +11,6 @@ import { MDBIcon, MDBBtn } from "mdbreact";
 import "./AthleteDetails.css";
 import Workouts from "./Workouts";
 import EditInfoModal from "./EditInfoModal";
-import RangeTouch from "rangetouch";
 
 const athletesAPI = "https://theboxathletes.herokuapp.com/athletes/";
 
@@ -25,9 +24,6 @@ const goBackBtnStyles = {
 };
 export default function AthleteDetails({ info, getAthletes }) {
   const inputRef = useRef(null);
-  useEffect(() => {
-    new RangeTouch(inputRef);
-  }, []);
   const [percentage, setPercentage] = useState(50);
   const [isEditing, setisEditing] = useState(false);
   const [editingPersonalBest, setEditingPersonalBest] = useState(false);

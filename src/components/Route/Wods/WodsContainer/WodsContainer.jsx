@@ -1,10 +1,13 @@
 import React, { Component } from "react";
 import { MDBBtn } from "mdbreact";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 import Select from "../../Athletes/AthleteDetails/Select";
 import Wod from "../Wod/Wod";
 import Accordion from "react-bootstrap/Accordion";
-import "./WodsContainer.css";
+import AlertMessage from "../../Athletes/AlertMessage/AlertMessage";
 import AddWods from "../AddWods/AddWods";
+import "./WodsContainer.css";
 
 const options = [
   { name: "EMOM" },
@@ -14,24 +17,84 @@ const options = [
   { name: "SPECIAL" }
 ];
 
+const wodsApi = "https://theboxathletes.herokuapp.com/wods/";
+
 export default class WodsContainer extends Component {
-  state = { isSelected: "", isFiltering: false, displayModal: false };
+  state = {
+    isSelected: "",
+    isFiltering: false,
+    displayModal: false,
+    willDelete: false,
+    idToDelete: "",
+    alertDeleted: false,
+    messageAlertDeleted: ""
+  };
   getValue = value => {
     console.log(value);
   };
   showFilterOptions = () => {
     this.setState({ isFiltering: !this.state.isFiltering });
   };
-  toggleModal = () => {
+  toggleAddModal = () => {
     this.setState({
       displayModal: !this.state.displayModal
     });
   };
 
+  toggleWillDeleteModal = id => {
+    this.setState({ willDelete: true, idToDelete: id });
+  };
+
+  closeDeleteModal = () => {
+    this.setState({ willDelete: false });
+  };
+  displayAlertDeleted = messagedelete => {
+    this.setState({
+      alertDeleted: true,
+      messageAlertDeleted: messagedelete
+    });
+  };
+  deleteWod = () => {
+    fetch(wodsApi + this.state.idToDelete, {
+      method: "DELETE"
+    })
+      .then(res => res.json())
+      .then(answer => {
+        this.closeDeleteModal();
+        this.displayAlertDeleted(answer);
+      })
+      .then(
+        setTimeout(() => {
+          this.props.getWods();
+        }, 2000)
+      );
+  };
+
   render() {
-    console.log(this.props.wods);
     return (
       <div>
+        <Modal
+          show={this.state.willDelete}
+          onHide={this.closeDeleteModal}
+          centered
+        >
+          <Modal.Header closeButton></Modal.Header>
+          <Modal.Body className="delete-message">
+            Are you sure you want to delete this wod?
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="danger" onClick={this.deleteWod}>
+              Yes
+            </Button>
+            <Button variant="success" onClick={this.closeDeleteModal}>
+              No
+            </Button>
+          </Modal.Footer>
+        </Modal>
+        <AlertMessage
+          show={this.state.alertDeleted}
+          messageAlertDeleted={this.state.messageAlertDeleted}
+        />
         <h3 className="text-center text-white p-3 m-1 w-100 mx-auto bg-dark">
           <i className="fas fa-dumbbell mr-2"></i>My Wods
         </h3>
@@ -56,8 +119,8 @@ export default class WodsContainer extends Component {
           {this.props.wods.map(wod => (
             <Wod
               isSelected={this.state.isSelected}
-              wods={this.state.wods}
-              getWods={this.getWods}
+              toggleWillDelete={this.toggleWillDeleteModal}
+              getWods={this.props.getWods}
               key={wod._id}
               wodInfo={wod}
             />
@@ -77,18 +140,20 @@ export default class WodsContainer extends Component {
         <MDBBtn
           color="warning"
           style={addWodBtnStyles}
-          onClick={this.toggleModal}
+          onClick={this.toggleAddModal}
           className="hoverable"
         >
           <i className="fas fa-plus"></i>
         </MDBBtn>
-        <AddWods
-          toggleModal={this.toggleModal}
-          displayModal={this.state.displayModal}
-          options={options}
-          exercises={[]}
-          getValue={this.getValue}
-        />
+        {this.state.displayModal ? (
+          <AddWods
+            toggleModal={this.toggleAddModal}
+            options={options}
+            exercises={[]}
+            showServerResponse={this.displayAlertDeleted}
+            getWods={this.props.getWods}
+          />
+        ) : null}
       </div>
     );
   }

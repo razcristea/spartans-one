@@ -28,6 +28,7 @@ export default class Wod extends Component {
         this.setState({ icon: "fas fa-radiation" });
     }
   };
+
   render() {
     const { isSelected } = this.props;
     const {
@@ -82,8 +83,9 @@ export default class Wod extends Component {
                           <span className="m-2">{exercise.reps}</span>
                         ) : null}
                         <span className="m-2">{exercise.name}</span>
-                        {exercise.weight ? (
-                          <span className="m-2">{exercise.weight}kg</span>
+                        {exercise.weight !== "0" &&
+                        exercise.weight !== "/ kg" ? (
+                          <span className="m-2">{exercise.weight}</span>
                         ) : null}
                       </p>
                     );
@@ -95,7 +97,12 @@ export default class Wod extends Component {
                       <i className="fas fa-info-circle fa-lg mr-1"></i> Details
                     </MDBBtn>
                   </Link>
-                  <MDBBtn className="m-2" color="danger" size="sm">
+                  <MDBBtn
+                    className="m-2"
+                    color="danger"
+                    size="sm"
+                    onClick={() => this.props.toggleWillDelete(_id)}
+                  >
                     <i className="fas fa-trash fa-lg mr-1"></i> Delete
                   </MDBBtn>
                 </MDBBtnGroup>
