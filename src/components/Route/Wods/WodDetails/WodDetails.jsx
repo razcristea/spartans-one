@@ -33,9 +33,22 @@ export default function WodDetails({ wodInfo, athletes }) {
       ? filteredAthletes.sort((a, b) => (a.test > b.test ? 1 : -1))
       : filteredAthletes.sort((a, b) => (a.test > b.test ? -1 : 1));
 
-    if (filteredAthletes.length >= 1) filteredAthletes[0].icon = firstPlace;
-    if (filteredAthletes.length >= 2) filteredAthletes[1].icon = secondPlace;
-    if (filteredAthletes.length >= 3) filteredAthletes[2].icon = thirdPlace;
+    filteredAthletes.forEach((athlete, i) => {
+      switch (i) {
+        case 0:
+          athlete.icon = firstPlace;
+          break;
+        case 1:
+          athlete.icon = secondPlace;
+          break;
+        case 2:
+          athlete.icon = thirdPlace;
+          break;
+        default:
+          athlete.icon = otherPlaces;
+          break;
+      }
+    });
 
     setNeededAthletes(filteredAthletes);
   }, [athletes, name, type]);
@@ -55,7 +68,7 @@ export default function WodDetails({ wodInfo, athletes }) {
     <Fragment>
       <GoBackToWods />
       <div className="text-center pb-5 mb-2">
-        <div className="card w-50 mx-auto m-3 p-2 wod-card-style">
+        <div className="card w-75 mx-auto m-3 p-2 wod-card-style">
           <h3 className="p-2">{name}</h3>
           <h5>{type}</h5>
           {description !== "N/A" ? <p>Details: {description}</p> : null}
@@ -77,49 +90,56 @@ export default function WodDetails({ wodInfo, athletes }) {
           </div>
         </div>
         <h4 className="fame-style  mx-auto w-50 p-2 text-center">
-          ~ Hall Of Fame ~
+          - Hall Of Fame -
         </h4>
-        <div className="p-2 m-2 w-75  mx-auto font-weight-bold">
-          <MDBTable className=" table-striped table-dark  table-hover table-wod-style">
-            <MDBTableHead>
-              <tr className="table-head-style">
-                <th>Rank</th>
-                <th>Athlete</th>
-                <th>Result</th>
-              </tr>
-            </MDBTableHead>
+        {neededAthletes.length ? (
+          <div className="p-1 m-2 w-100  mx-auto font-weight-bold card">
+            <MDBTable className="table-striped table-dark  table-hover table-wod-style my-auto">
+              <MDBTableHead>
+                <tr className="table-head-style">
+                  <th>Rank</th>
+                  <th>Athlete</th>
+                  <th>Result</th>
+                </tr>
+              </MDBTableHead>
 
-            {neededAthletes.map((athlete, i) => {
-              return (
-                <MDBTableBody key={i}>
-                  <tr>
-                    <td className="rows-style">
-                      <img
-                        src={athlete.icon ? athlete.icon : otherPlaces}
-                        alt=""
-                      />
-                    </td>
-
-                    <Link
-                      to={`/athletes/${athlete._id}`}
-                      className="text-white link-styles"
-                    >
-                      <td className="rows-style style-table-name">
-                        {athlete.name}
+              {neededAthletes.map((athlete, i) => {
+                return (
+                  <MDBTableBody key={i}>
+                    <tr>
+                      <td className="rows-style">
+                        <img
+                          src={athlete.icon ? athlete.icon : otherPlaces}
+                          alt=""
+                        />
                       </td>
-                    </Link>
-                    <td className="rows-style">
-                      {type === ("FOR TIME" || "CHIPPER")
-                        ? `${Math.floor(athlete.test / 60)}min ${athlete.test %
-                            60}sec`
-                        : `${athlete.test}reps`}
-                    </td>
-                  </tr>
-                </MDBTableBody>
-              );
-            })}
-          </MDBTable>
-        </div>
+
+                      <td className="rows-style ">
+                        <Link
+                          to={`/athletes/${athlete._id}`}
+                          className="text-white link-styles style-table-name"
+                        >
+                          {athlete.name}
+                        </Link>
+                      </td>
+                      <td className="rows-style">
+                        {type === ("FOR TIME" || "CHIPPER")
+                          ? `${Math.floor(
+                              athlete.test / 60
+                            )}min ${athlete.test % 60}sec`
+                          : `${athlete.test}reps`}
+                      </td>
+                    </tr>
+                  </MDBTableBody>
+                );
+              })}
+            </MDBTable>
+          </div>
+        ) : (
+          <div className="text-center text-white mt-3 font-weight-bold">
+            Nobody has done this Wod yet
+          </div>
+        )}
       </div>
     </Fragment>
   );

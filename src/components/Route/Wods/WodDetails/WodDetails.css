@@ -27,6 +27,7 @@
 }
 
 .fame-style {
+  color: rgb(56, 56, 56);
   font-weight: bold;
   margin-top: 2.5rem;
   box-shadow: 0 2px 5px 0 #212529, 0 2px 10px 0 #212121;
@@ -44,7 +45,7 @@
 
 .style-table-name:hover {
   font-weight: bold;
-  color: #f5ec47;
+  color: #f5ec47 !important;
 }
 
 .table-wod-style {
