@@ -25,7 +25,11 @@ export default function AddWods(props) {
     });
     setExercisesInState(props.exercises);
   };
-  console.log(props.exercises);
+
+  const addNewWod = () => {
+    console.log("newWod");
+  };
+  // console.log(props);
   return (
     <Fragment>
       <Modal
@@ -166,7 +170,7 @@ export default function AddWods(props) {
             </MDBRow>
           </Modal.Body>
           <Modal.Header className="modalFooter">
-            <MDBBtn color="success" size="sm" type="submit">
+            <MDBBtn color="success" size="sm" type="submit" onClick={addNewWod}>
               <MDBIcon icon="share-square" size="lg" className="mr-2" /> Add WOD
             </MDBBtn>
             <MDBBtn color="danger" size="sm" onClick={props.toggleModal}>
