@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from "react";
 import Athlete from "../Athlete/Athlete";
-import MessageModal from "../MessageModal/MessageModal";
 import Accordion from "react-bootstrap/Accordion";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
@@ -18,9 +17,6 @@ export default class AthletesContainer extends Component {
     this.state = {
       athletes: this.props.athletes,
       searchfield: "",
-      modalShow: false,
-      messageShow: false,
-      message: "",
       isScreenSmall: window.innerWidth <= 697,
       isSelected: "",
       isSearching: false,
@@ -45,23 +41,15 @@ export default class AthletesContainer extends Component {
     });
   };
 
-  showModal = () => {
+  toggleModal = () => {
     this.setState({
-      modalShow: true
+      modalShow: !this.state.modalShow
     });
   };
 
   hideModal = () => {
     this.setState({
       modalShow: false
-    });
-  };
-
-  displayMessage = message => {
-    const newState = !this.state.messageShow;
-    this.setState({
-      messageShow: newState,
-      message: message
     });
   };
 
@@ -99,13 +87,11 @@ export default class AthletesContainer extends Component {
 
   deleteAthlete = () => {
     const athleteID = this.state.idToDelete;
-    console.log(athleteID);
     fetch(athletesAPI + athleteID, {
       method: "DELETE"
     })
       .then(res => res.json())
       .then(answer => {
-        console.log("Answer is: " + answer);
         this.closeDeleteModal();
         this.displayAlertDeleted(answer);
       })
@@ -214,24 +200,19 @@ export default class AthletesContainer extends Component {
         <MDBBtn
           color="warning"
           style={addAthleteBtnStyles}
-          onClick={this.showModal}
+          onClick={this.toggleModal}
           className="hoverable"
         >
           <i className="fas fa-user-plus"></i>
         </MDBBtn>
         {/* MODAL ADD ATHLETE */}
-        <AddAthleteV2
-          show={this.state.modalShow}
-          onHide={this.hideModal}
-          showServerResponse={this.displayAlertDeleted}
-          changeCount={this.props.changeCount}
-        />
-        {/* MODAL TO DISPLAY MESSAGES */}
-        <MessageModal
-          show={this.state.messageShow}
-          onHide={this.displayMessage}
-          message={this.state.message}
-        />
+        {this.state.modalShow ? (
+          <AddAthleteV2
+            onHide={this.toggleModal}
+            showServerResponse={this.displayAlertDeleted}
+            changeCount={this.props.changeCount}
+          />
+        ) : null}
       </Fragment>
     );
   }

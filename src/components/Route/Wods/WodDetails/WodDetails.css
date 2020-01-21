@@ -6,3 +6,56 @@
   color: white;
   z-index: 1000;
 }
+
+.wod-card-style {
+  background-color: rgba(56, 56, 56, 0.95) !important;
+  color: lightgray;
+}
+
+.wod-card-style h3 {
+  font-weight: bold;
+}
+
+.wod-card-style h5 {
+  color: #f5ec47;
+}
+
+.exercise-style {
+  background-color: rgba(56, 56, 56, 1);
+  border: 1px solid #5e5f61;
+  box-shadow: 0 2px 5px 0 #212529, 0 2px 10px 0 #212121;
+}
+
+.fame-style {
+  font-weight: bold;
+  margin-top: 2.5rem;
+  box-shadow: 0 2px 5px 0 #212529, 0 2px 10px 0 #212121;
+}
+
+.table-head-style th {
+  font-weight: bold;
+}
+
+.rows-style {
+  width: 33.3%;
+  vertical-align: middle !important;
+  margin: 0 auto !important;
+}
+
+.style-table-name:hover {
+  font-weight: bold;
+  color: #f5ec47;
+}
+
+.table-wod-style {
+  opacity: 0.95 !important;
+}
+
+.table-wod-style:hover {
+  opacity: 1 !important;
+  cursor: pointer;
+}
+
+.link-styles {
+  border: none !important;
+}

@@ -40,7 +40,6 @@ class AddAthleteV2 extends React.Component {
   submitHandler = event => {
     event.preventDefault();
     const form = event.currentTarget;
-    console.log(this.state.selectedFile);
     const isValid = form.checkValidity();
     if (isValid) {
       const formData = new FormData();
@@ -63,16 +62,14 @@ class AddAthleteV2 extends React.Component {
         body: formData
       })
         .then(response => response.json())
-        .then(answer => console.log("ANSWER IS: ", answer))
         .then(() => {
           this.props.onHide();
           this.props.showServerResponse(
-            `${this.state.name} has joined The Box and Valy's Athletes!`
+            `${this.state.name} has joined The Box and Vali's Athletes!`
           );
         })
         .finally(() => {
           this.setState({ spinner: false });
-          console.log("I'm in Finally!");
           setTimeout(() => {
             this.props.changeCount();
           }, 2500);
@@ -97,33 +94,13 @@ class AddAthleteV2 extends React.Component {
       }
     });
   };
-  clearFieldsAndClose = () => {
-    this.setState({
-      name: "",
-      phone: "",
-      email: "",
-      age: "",
-      genre: "",
-      personalBest: {
-        benchpress: "" || 0,
-        strictpress: "" || 0,
-        pushpress: "" || 0,
-        row: "" || 0,
-        backsquat: "" || 0,
-        frontsquat: "" || 0,
-        deadlift: "" || 0,
-        trapDeadlift: "" || 0
-      }
-    });
-    this.props.onHide();
-  };
 
   render() {
     return (
       <React.Fragment>
         {this.state.spinner ? <Spinner /> : null}
         <Modal
-          show={this.props.show}
+          show
           onHide={this.props.onHide}
           message={this.props.message}
           size="lg"
@@ -138,7 +115,7 @@ class AddAthleteV2 extends React.Component {
             <button
               type="button"
               className="close text-white"
-              onClick={this.clearFieldsAndClose}
+              onClick={this.props.onHide}
             >
               <span>&times;</span>
             </button>
@@ -278,11 +255,7 @@ class AddAthleteV2 extends React.Component {
                 <MDBIcon icon="share-square" size="lg" className="mr-2" />{" "}
                 Submit
               </MDBBtn>
-              <MDBBtn
-                color="danger"
-                size="sm"
-                onClick={this.clearFieldsAndClose}
-              >
+              <MDBBtn color="danger" size="sm" onClick={this.props.onHide}>
                 <MDBIcon icon="ban" size="lg" className="mr-2" /> Cancel
               </MDBBtn>
             </Modal.Header>

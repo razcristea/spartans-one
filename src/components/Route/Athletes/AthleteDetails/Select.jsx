@@ -14,11 +14,9 @@ export default function Select({
       </option>
     );
   });
-  validate
-    ? validate()
-      ? setIsReady(false)
-      : setIsReady(true)
-    : console.log("Nothing to validate");
+  if (validate) {
+    validate() ? setIsReady(false) : setIsReady(true);
+  }
   return (
     <div className="m-2 w-75 mx-auto d-flex align-items-center">
       <i className="fas fa-filter fa-lg text-white mr-2 "></i>
