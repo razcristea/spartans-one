@@ -9,18 +9,20 @@ export default function WodDetails({ wodInfo, athletes }) {
   useEffect(() => {
     let filteredAthletes = athletes.filter(athlete => {
       let found = false;
-      let bestTime = 10000000000000;
+      let bestTime = Infinity;
+      let bestReps = -Infinity;
       athlete.wods.forEach(wod => {
-        if (wod.time < bestTime) bestTime = wod.time;
         if (wod.name === name) {
+          if (wod.time < bestTime) bestTime = wod.time;
+          if (wod.reps > bestReps) bestReps = wod.reps;
           type === ("FOR TIME" || "CHIPPER")
             ? (athlete.test = bestTime)
-            : (athlete.test = wod.reps);
+            : (athlete.test = bestReps);
 
           found = true;
         }
       });
-      return found && athlete.wods;
+      return found && athlete;
     });
     type === ("FOR TIME" || "CHIPPER")
       ? filteredAthletes.sort((a, b) => (a.test > b.test ? 1 : -1))
