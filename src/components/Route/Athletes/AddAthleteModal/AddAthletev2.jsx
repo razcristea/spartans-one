@@ -63,13 +63,13 @@ class AddAthleteV2 extends React.Component {
       })
         .then(response => response.json())
         .then(() => {
+          this.setState({ spinner: false });
           this.props.onHide();
           this.props.showServerResponse(
             `${this.state.name} has joined The Box and Vali's Athletes!`
           );
         })
         .finally(() => {
-          this.setState({ spinner: false });
           setTimeout(() => {
             this.props.changeCount();
           }, 2500);
