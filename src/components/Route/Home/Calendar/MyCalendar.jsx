@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Calendar from "react-calendar";
+import "./MyCalendar.css";
 
 export default class MyCalendar extends Component {
   state = {
@@ -12,7 +13,7 @@ export default class MyCalendar extends Component {
         <Calendar
           onChange={this.onChange}
           value={this.state.date}
-          className="w-75 mx-auto"
+          className="w-75 mx-auto calendar"
         />
       </div>
     );

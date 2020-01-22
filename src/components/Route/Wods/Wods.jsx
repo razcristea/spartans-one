@@ -28,6 +28,7 @@ export default class Wods extends Component {
           a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
         );
         this.setState({ wods: data });
+        console.log(this.state.wods);
       })
       .catch(error => {
         console.log(error);
