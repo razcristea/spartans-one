@@ -95,9 +95,16 @@ export default class WodsContainer extends Component {
           show={this.state.alertDeleted}
           messageAlertDeleted={this.state.messageAlertDeleted}
         />
-        <h3 className="text-center text-white p-3 m-1 w-100 mx-auto bg-dark">
-          <i className="fas fa-dumbbell mr-2"></i>My Wods
-        </h3>
+        <div
+          style={{
+            backgroundColor: "rgba(255, 206, 0, 0.15)",
+            boxShadow: "0 2px 5px 0 #212529, 0 2px 10px 0 #212121"
+          }}
+        >
+          <h3 className="text-center text-white p-3 m-1 w-100 mx-auto">
+            <i className="fas fa-dumbbell mr-2"></i>My Wods
+          </h3>
+        </div>
         {this.state.isFiltering ? (
           <div
             className="text-center"
