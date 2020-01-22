@@ -176,7 +176,8 @@ const addWodBtnStyles = {
   bottom: 63,
   right: 7,
   color: "black",
-  border: "2px double white"
+  border: "2px double white",
+  boxShadow: "0 2px 5px 0 #212529, 0 2px 10px 0 #212121"
 };
 const searchWodBtnStyles = {
   width: "2.3rem",
@@ -186,5 +187,6 @@ const searchWodBtnStyles = {
   borderRadius: "50%",
   backgroundColor: "#dabc01",
   color: "black",
-  border: "2px double white"
+  border: "2px double white",
+  boxShadow: "0 2px 5px 0 #212529, 0 2px 10px 0 #212121"
 };

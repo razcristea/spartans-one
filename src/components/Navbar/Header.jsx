@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Logo from "./logoV2.png";
+import Vali from "./vali.jpeg";
 
 const links = [
   { path: "Schedule", route: "/", icon: "fas fa-clipboard-list mr-1" },
@@ -44,6 +45,21 @@ export default function Header() {
         onBlur={() => setTimeout(() => setExpanded(false), 300)}
       />
       <Navbar.Collapse id="basic-navbar-nav">
+        <div
+          className="text-white h-50 border text-center d-flex align-items-center justify-content-center"
+          style={{
+            position: "absolute",
+            width: "170px",
+            left: "30px",
+            bottom: "30px",
+            borderRadius: "2%",
+            backgroundColor: "white",
+            backgroundImage: `url("${Vali}")`,
+            backgroundSize: "contain",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "center"
+          }}
+        ></div>
         <Nav className="ml-auto">
           {links.map((link, i) => (
             <NavLink
@@ -51,10 +67,13 @@ export default function Header() {
               key={i}
               exact
               to={`${link.route}`}
-              className="m-2 text-decoration-none text-center"
+              className="m-1 mr-3 p-2 text-decoration-none text-right"
               activeClassName="selected"
               activeStyle={activeStyle}
-              style={{ color: "white" }}
+              style={{
+                boxShadow: "0 2px 5px 0 #212529, 0 2px 10px 0 #212121",
+                color: "white"
+              }}
             >
               <i className={link.icon}></i>
               <span> </span>
