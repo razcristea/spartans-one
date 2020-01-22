@@ -1,4 +1,4 @@
-.calendar {
-  background-color: rgba(224, 178, 28, 0.308);
+.react-calendar__tile--now {
+  background-color: rgba(233, 223, 190, 0.514);
   color: white;
 }

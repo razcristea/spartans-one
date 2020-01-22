@@ -134,18 +134,25 @@ export default class AthletesContainer extends Component {
           show={this.state.alertDeleted}
           messageAlertDeleted={this.state.messageAlertDeleted}
         />
-        <h3 className="text-center text-white p-3 m-1 w-100 mx-auto bg-dark">
-          <i className="fas fa-users mr-2"></i>My Athletes
-        </h3>
+        <div
+          style={{
+            backgroundColor: "rgba(255, 206, 0, 0.15)",
+            boxShadow: "0 2px 5px 0 #212529, 0 2px 10px 0 #212121"
+          }}
+        >
+          <h3 className="text-center text-white p-3 m-1 w-100 mx-auto bg-dark">
+            <i className="fas fa-users mr-2"></i>My Athletes
+          </h3>
+        </div>
         <div className="ml-5 mr-5 mb-1 text-center">
           {this.state.isSearching ? (
-            <div>
+            <div className="m-1 mt-2">
               <i className="fas fa-search text-white fa-lg mr-2"></i>
               <input
                 type="search"
                 autoFocus
                 placeholder="Athlete Name..."
-                className="p-1 pl-2 searchInput border"
+                className="p-1 pl-2 searchInput"
                 onChange={this.doTheSearch}
                 onBlur={this.showSearchInput}
               />
@@ -228,7 +235,8 @@ const addAthleteBtnStyles = {
   bottom: 63,
   right: 7,
   color: "black",
-  border: "2px double white"
+  border: "2px double white",
+  boxShadow: "0 2px 5px 0 #212529, 0 2px 10px 0 #212121"
 };
 const searchAthleteBtnStyles = {
   width: "2.3rem",
@@ -238,5 +246,6 @@ const searchAthleteBtnStyles = {
   borderRadius: "50%",
   backgroundColor: "#dabc01",
   color: "black",
-  border: "2px double white"
+  border: "2px double white",
+  boxShadow: "0 2px 5px 0 #212529, 0 2px 10px 0 #212121"
 };

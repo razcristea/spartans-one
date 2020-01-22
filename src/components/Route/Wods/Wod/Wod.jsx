@@ -44,7 +44,7 @@ export default class Wod extends Component {
         <Card
           key={_id}
           className="rounded-0 text-white"
-          style={{ backgroundColor: "#333333d6" }}
+          style={{ backgroundColor: "#3333339c" }}
         >
           <Accordion.Toggle
             as={Card.Header}
