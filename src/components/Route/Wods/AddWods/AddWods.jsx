@@ -45,6 +45,10 @@ export default function AddWods(props) {
       : setEnabled(true);
   };
 
+  const removeExercise = name => {
+    setExercises(exercises.filter(exercise => exercise.name !== name));
+  };
+
   const submitHandler = e => {
     e.preventDefault();
     const form = e.currentTarget;
@@ -234,7 +238,7 @@ export default function AddWods(props) {
                 className="mb-1 ml-5 mr-5 border d-flex justify-content-between align-items-center"
                 style={{ fontSize: "13px" }}
               >
-                <span className="ml-2">
+                <span className="ml-2" key={exercise.name}>
                   {exercise.reps ? exercise.reps : null} {exercise.name}{" "}
                   {exercise.weight === "/ kg" ? null : exercise.weight}
                 </span>
@@ -242,6 +246,9 @@ export default function AddWods(props) {
                   color="danger"
                   className="btn-rounded py-1 px-2"
                   style={{ fontSize: "10px" }}
+                  onClick={() => {
+                    removeExercise(exercise.name);
+                  }}
                 >
                   Remove
                 </MDBBtn>
