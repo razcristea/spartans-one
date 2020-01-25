@@ -46,14 +46,14 @@ export default function Header() {
       />
       <Navbar.Collapse id="basic-navbar-nav">
         <div
-          className="text-white h-50 border text-center d-flex align-items-center justify-content-center"
+          className="text-white border text-center d-flex align-items-center justify-content-center"
           style={{
             position: "absolute",
-            width: "170px",
-            left: "30px",
             bottom: "30px",
-            borderRadius: "2%",
-            backgroundColor: "white",
+            width: "140px",
+            height: "100px",
+            borderRadius: "10%",
+            backgroundColor: "black",
             backgroundImage: `url("${Vali}")`,
             backgroundSize: "contain",
             backgroundRepeat: "no-repeat",

@@ -134,7 +134,7 @@ export default function AthleteDetails({ info, getAthletes }) {
       >
         <div eventkey={_id}>
           <Card.Body className="text-center">
-            <div className="infoSection border">
+            <div className="infoSection">
               <img
                 alt={name}
                 as={Image}

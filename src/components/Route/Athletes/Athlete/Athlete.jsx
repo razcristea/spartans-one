@@ -46,11 +46,11 @@ export default class Athlete extends Component {
           </Accordion.Toggle>
           <Accordion.Collapse eventKey={_id}>
             <Card.Body
-              className="text-center m-3 border border-white"
+              className="text-center m-2 ml-4 mr-4 border"
               style={{ backgroundColor: "#333333" }}
             >
               <Card.Img
-                className="p-0 border border-white"
+                className="p-0"
                 as={Image}
                 src={photo}
                 style={{

@@ -45,24 +45,19 @@ export default class Footer extends Component {
   getAthletes = () => {
     fetch(athletesAPI)
       .then(response => response.json())
-      .then(
-        data => {
-          let female = 0,
-            male = 0;
-          data.forEach(entry => (entry.sex === "M" ? male++ : female++));
-          this.setState({
-            athleteCount: data.length,
-            female: female,
-            male: male
-          });
-        },
-        // Note: it's important to handle errors here
-        // instead of a catch() block so that we don't swallow
-        // exceptions from actual bugs in components.
-        error => {
-          console.log(error);
-        }
-      );
+      .then(data => {
+        let female = 0,
+          male = 0;
+        data.forEach(entry => (entry.sex === "M" ? male++ : female++));
+        this.setState({
+          athleteCount: data.length,
+          female: female,
+          male: male
+        });
+      })
+      .catch(error => {
+        console.log(error);
+      });
   };
   render() {
     return (
@@ -75,7 +70,8 @@ export default class Footer extends Component {
         </div>
         <div className="text-center">
           <div>
-            <i className="fas fa-users fa-lg"></i> {this.state.athleteCount}
+            {this.state.athleteCount} <i className="fas fa-users fa-lg"></i> | 0{" "}
+            <i className="fas fa-birthday-cake fa-lg"></i>
           </div>
           <div>
             {this.state.male} <i className="fas fa-mars fa-lg"></i> |{" "}

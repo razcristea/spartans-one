@@ -17,3 +17,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+.headingStyle {
+  background-color: rgba(255, 206, 0, 0.15);
+  box-shadow: 0 2px 5px 0 #212529, 0 2px 10px 0 #212121;
+}

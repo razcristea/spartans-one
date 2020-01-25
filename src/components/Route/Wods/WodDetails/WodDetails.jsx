@@ -68,18 +68,12 @@ export default function WodDetails({ wodInfo, athletes }) {
     <Fragment>
       <GoBackToWods />
       <div className="text-center pb-5 mb-2">
-        <div
-          className="card w-75 mx-auto m-3 p-3 wod-card-style"
-          style={{
-            backgroundColor: "rgba(255, 206, 0, 0.15)",
-            boxShadow: "0 2px 5px 0 #212529, 0 2px 10px 0 #212121"
-          }}
-        >
+        <div className="w-75 mx-auto m-3 p-3 wod-card-style headingStyle text-white font-weight-bold">
           <h3 className="p-2">{name}</h3>
           <h5>{type}</h5>
           {description !== "N/A" ? <p>Details: {description}</p> : null}
           {time ? <h5>Timecap: {time} min</h5> : null}
-          <div className=" mt-2 pt-2 exercise-style">
+          <div className=" mt-2 pt-2 ">
             {exercises.map((exercise, i) => {
               return (
                 <p key={i}>
@@ -129,11 +123,16 @@ export default function WodDetails({ wodInfo, athletes }) {
                         </Link>
                       </td>
                       <td className="rows-style">
-                        {type === ("FOR TIME" || "CHIPPER")
-                          ? `${Math.floor(
-                              athlete.test / 60
-                            )}min ${athlete.test % 60}sec`
-                          : `${athlete.test}reps`}
+                        {type === ("FOR TIME" || "CHIPPER") ? (
+                          <span className="font-weight-bold">
+                            {Math.floor(athlete.test / 60)}' {athlete.test % 60}
+                            ''
+                          </span>
+                        ) : (
+                          <span className="font-weight-bold">
+                            {athlete.test} reps
+                          </span>
+                        )}
                       </td>
                     </tr>
                   </MDBTableBody>

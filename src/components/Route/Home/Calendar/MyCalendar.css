@@ -2,3 +2,7 @@
   background-color: rgba(233, 223, 190, 0.514);
   color: white;
 }
+.react-calendar__tile--active,
+.react-calendar__tile--active:enabled:hover {
+  background-color: #ffbb33;
+}
