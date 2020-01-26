@@ -63,6 +63,7 @@ const Workouts = ({ wods, id, updateWods }) => {
           striped
           data={data_panel}
           paging={false}
+          noBottomColumns
         ></MDBDataTable>
       </MDBCardBody>
     </MDBCard>

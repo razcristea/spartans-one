@@ -1,8 +1,33 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { MDBDataTable, MDBBtn } from "mdbreact";
 
 export default function Appointments({ data, date, goBack }) {
-  console.log(data.entries);
+  useEffect(() => {
+    data
+      ? data.entries.map(entry => {
+          return (entry.action = (
+            <div className="d-flex align-items-center justify-content-center m-0 p-0">
+              <MDBBtn
+                className="p-2 m-1 rounded"
+                size="sm"
+                color="warning"
+                onClick={() => console.log(entry)}
+              >
+                <i className="fas fa-edit fa-lg"></i>
+              </MDBBtn>
+              <MDBBtn
+                className="p-2 m-1 rounded"
+                size="sm"
+                color="danger"
+                onClick={() => console.log(entry)}
+              >
+                <i className="fas fa-trash-alt fa-lg"></i>
+              </MDBBtn>
+            </div>
+          ));
+        })
+      : console.log("There are no records for this date");
+  }, [data]);
   const data_panel = {
     columns: [
       {
@@ -19,6 +44,10 @@ export default function Appointments({ data, date, goBack }) {
         label: "Participants",
         field: "attendees",
         sort: "asc"
+      },
+      {
+        label: "Actions",
+        field: "action"
       }
     ],
     rows: data.entries ? [...data.entries] : []
@@ -33,43 +62,27 @@ export default function Appointments({ data, date, goBack }) {
       >
         Go Back
       </MDBBtn>
-      {data ? (
-        <div className="p-2 m-2 card bg-dark">
-          <h3 className="headingStyle text-white">{date}</h3>
-          <MDBDataTable
-            sortable={false}
-            btn
-            theadTextWhite
-            tbodyTextWhite
-            bordered
-            dark
-            striped
-            exportToCSV
-            data={data_panel}
-            paging={false}
-            searching={false}
-            noBottomColumns
-          ></MDBDataTable>
-        </div>
-      ) : (
-        <div className="p-2 m-2 card bg-dark">
-          <h3 className="headingStyle text-white">{date}</h3>
-          <h5 className="text-white m-2">No Appointments</h5>
-          <MDBDataTable
-            btn
-            theadTextWhite
-            tbodyTextWhite
-            bordered
-            dark
-            striped
-            exportToCSV
-            data={data_panel}
-            paging={false}
-            searching={false}
-            noBottomColumns
-          ></MDBDataTable>
-        </div>
-      )}
+      <MDBBtn color="warning" style={addWodBtnStyles} className="hoverable">
+        <i className="fas fa-plus"></i>
+      </MDBBtn>
+      <div className="p-2 m-2 card bg-dark">
+        <h3 className="headingStyle text-white">{date}</h3>
+        {!data ? <h5 className="text-white m-2 p-2">No Appointments</h5> : null}
+        <MDBDataTable
+          sortable={false}
+          btn
+          theadTextWhite
+          tbodyTextWhite
+          bordered
+          dark
+          striped
+          exportToCSV
+          data={data_panel}
+          paging={false}
+          searching={false}
+          noBottomColumns
+        ></MDBDataTable>
+      </div>
     </div>
   );
 }
@@ -81,4 +94,18 @@ const goBackBtnStyles = {
   border: "0.5px solid white",
   color: "white",
   zIndex: "1000"
+};
+
+const addWodBtnStyles = {
+  width: "2.3rem",
+  height: "2.3rem",
+  fontSize: "1.1rem",
+  padding: "0.1rem 0.45rem",
+  borderRadius: "50%",
+  position: "fixed",
+  bottom: 63,
+  right: 7,
+  color: "black",
+  border: "2px double white",
+  boxShadow: "0 2px 5px 0 #212529, 0 2px 10px 0 #212121"
 };

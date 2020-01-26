@@ -60,7 +60,7 @@ export default function WodDetails({ wodInfo, athletes }) {
       color="dark"
       onMouseDown={() => setTimeout(() => history.goBack(), 300)}
     >
-      <i className="fas fa-backward"></i> <span> Back</span>
+      <span>Go Back</span>
     </MDBBtn>
   ));
 

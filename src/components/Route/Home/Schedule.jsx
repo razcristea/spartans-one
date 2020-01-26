@@ -3,7 +3,7 @@ import MyCalendar from "./Calendar/MyCalendar";
 import Appointments from "./Appointments/Appointments";
 import { MDBBtn, MDBIcon } from "mdbreact";
 
-const scheduleUrl = "http://localhost:3000/appointments/";
+const scheduleUrl = "https://theboxathletes.herokuapp.com/appointments/";
 
 export default function Schedule() {
   const [selectedDate, setSelectedDate] = useState("");
@@ -18,7 +18,6 @@ export default function Schedule() {
       const dateCheck = data.find(entry => {
         return entry.date === selectedDate;
       });
-      console.log(dateCheck);
       dateCheck ? setAppointments(dateCheck) : setAppointments(0);
     } catch (error) {
       console.log(error);
@@ -41,7 +40,7 @@ export default function Schedule() {
           {!appointments ? (
             <div className="p-3 m-2 w-100 border mx-auto headingStyle">
               <h3 className="text-center text-white p-2 m-1 w-100 mx-auto">
-                <i className="fas fa-clipboard-list mr-2"></i>
+                <i className="far fa-calendar-times mr-2"></i>
                 {selectedDate}
               </h3>
               <h5 className="mb-2">No Appointments</h5>
@@ -57,7 +56,7 @@ export default function Schedule() {
           ) : (
             <div className="p-3 m-2 w-100 border mx-auto headingStyle">
               <h3 className="text-center text-white p-2 m-1 w-100 mx-auto">
-                <i className="fas fa-clipboard-list mr-2"></i>
+                <i className="far fa-calendar-check mr-2"></i>
                 {selectedDate}
               </h3>
               <h5 className="mb-2">

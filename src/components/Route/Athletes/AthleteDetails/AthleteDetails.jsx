@@ -45,7 +45,7 @@ export default function AthleteDetails({ info, getAthletes }) {
       style={goBackBtnStyles}
       onMouseDown={() => setTimeout(() => history.goBack(), 300)}
     >
-      <i className="fas fa-backward"></i> <span> Back</span>
+      <span>Go Back</span>
     </MDBBtn>
   ));
   const handleKeyPress = e => {

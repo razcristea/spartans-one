@@ -69,7 +69,7 @@ export default class Footer extends Component {
           </div>
         </div>
         <div className="text-center">
-          <div>
+          <div className="mb-1">
             {this.state.athleteCount} <i className="fas fa-users fa-lg"></i> | 0{" "}
             <i className="fas fa-birthday-cake fa-lg"></i>
           </div>
