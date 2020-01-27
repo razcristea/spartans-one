@@ -139,6 +139,7 @@ export default class WodsContainer extends Component {
             isSearcheable
             autoFocus
             placeholder="Filter wods..."
+            onBlurResetInput
           />
         ) : null}
         {this.props.showLoader ? (

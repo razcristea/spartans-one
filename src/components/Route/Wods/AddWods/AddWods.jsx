@@ -3,7 +3,7 @@ import { MDBRow, MDBCol, MDBInput, MDBBtn, MDBIcon } from "mdbreact";
 import Modal from "react-bootstrap/Modal";
 import "./AddWods.css";
 import Spinner from "../../Athletes/AddAthleteModal/Spinner";
-import Select from "../../Athletes/AthleteDetails/Select";
+import Select from "react-select";
 
 const wodsApi = "https://theboxathletes.herokuapp.com/wods/";
 
@@ -20,6 +20,10 @@ export default function AddWods(props) {
   const [exercises, setExercises] = useState([]);
   const [enabled, setEnabled] = useState(true);
   const [showSpinner, setShowSpinner] = useState(false);
+
+  const handleChange = selectedOption => {
+    setSelectedType(selectedOption);
+  };
 
   const addExercise = () => {
     const exercise = {
@@ -56,7 +60,7 @@ export default function AddWods(props) {
     if (isValid) {
       const newWod = {
         name,
-        type: selectedType,
+        type: selectedType.value.toUpperCase(),
         description,
         time: timecap,
         exercises
@@ -141,10 +145,12 @@ export default function AddWods(props) {
               </MDBCol>
               <MDBCol md="4">
                 <Select
+                  value={selectedType}
+                  onChange={handleChange}
+                  className="mx-auto p-2 mt-4"
                   required
                   options={props.options}
-                  getValue={setSelectedType}
-                  defaultValue="Type is Required!"
+                  placeholder="Type is Required!"
                 />
               </MDBCol>
               <MDBCol md="4">
