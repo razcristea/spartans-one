@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 
 const footerStyle = {
   position: "fixed",
@@ -19,7 +19,7 @@ const footerStyle = {
 
 const athletesAPI = "https://theboxathletes.herokuapp.com/athletes/";
 
-export default class Footer extends Component {
+export default class Footer extends PureComponent {
   today = new Date();
   state = {
     athleteCount: 0,

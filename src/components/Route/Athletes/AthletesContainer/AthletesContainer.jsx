@@ -155,7 +155,10 @@ export default class AthletesContainer extends Component {
           ) : null}
         </div>
         {this.state.isScreenSmall ? (
-          <Accordion onSelect={ev => this.setState({ isSelected: ev })}>
+          <Accordion
+            onSelect={ev => this.setState({ isSelected: ev })}
+            className="mb-5"
+          >
             {this.state.athletes.map(athlete => (
               <Athlete
                 key={athlete._id}
@@ -178,7 +181,7 @@ export default class AthletesContainer extends Component {
             ))}
           </div>
         )}
-        <div style={{ paddingBottom: "3.5rem" }}></div>
+        <div style={{ paddingBottom: "4rem" }}></div>
         <div
           style={{
             position: "fixed",

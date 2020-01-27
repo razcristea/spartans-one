@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { MDBBtn } from "mdbreact";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
@@ -44,6 +44,7 @@ export default class WodsContainer extends Component {
 
   showFilterOptions = () => {
     this.setState({ isFiltering: !this.state.isFiltering });
+    this.clearFilters();
   };
 
   handleChange = selectedOption => {
@@ -55,6 +56,12 @@ export default class WodsContainer extends Component {
 
     this.setState({ wods: [...resultfilteredWods] });
   };
+
+  clearFilters() {
+    this.setState({
+      selectedOption: null
+    });
+  }
 
   toggleAddModal = () => {
     this.setState({
@@ -93,7 +100,7 @@ export default class WodsContainer extends Component {
 
   render() {
     return (
-      <div>
+      <Fragment>
         <Modal
           show={this.state.willDelete}
           onHide={this.closeDeleteModal}
@@ -134,20 +141,25 @@ export default class WodsContainer extends Component {
             placeholder="Filter wods..."
           />
         ) : null}
-        <Accordion
-          onSelect={ev => this.setState({ isSelected: ev })}
-          className="mb-5"
-        >
-          {this.state.wods.map(wod => (
-            <Wod
-              isSelected={this.state.isSelected}
-              toggleWillDelete={this.toggleWillDeleteModal}
-              getWods={this.props.getWods}
-              key={wod._id}
-              wodInfo={wod}
-            />
-          ))}
-        </Accordion>
+        {this.props.showLoader ? (
+          <div className="mb-5"></div>
+        ) : (
+          <Accordion
+            onSelect={ev => this.setState({ isSelected: ev })}
+            className="mb-5"
+          >
+            {this.state.wods.map(wod => (
+              <Wod
+                isSelected={this.state.isSelected}
+                toggleWillDelete={this.toggleWillDeleteModal}
+                getWods={this.props.getWods}
+                key={wod._id}
+                wodInfo={wod}
+              />
+            ))}
+          </Accordion>
+        )}
+        <div style={{ paddingBottom: "4rem" }}></div>
         <div className="wodButton">
           <MDBBtn
             color="warning"
@@ -176,7 +188,7 @@ export default class WodsContainer extends Component {
             getWods={this.props.getWods}
           />
         ) : null}
-      </div>
+      </Fragment>
     );
   }
 }

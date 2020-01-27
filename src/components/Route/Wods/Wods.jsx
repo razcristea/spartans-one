@@ -2,33 +2,33 @@ import React, { Component } from "react";
 import { Route } from "react-router-dom";
 import WodsContainer from "./WodsContainer/WodsContainer";
 import WodDetails from "./WodDetails/WodDetails";
+import Loader from "../../../helpers/Loader";
 
 const wodsApi = "https://theboxathletes.herokuapp.com/wods/";
 const athletesApi = "https://theboxathletes.herokuapp.com/athletes/";
 
 export default class Wods extends Component {
-  state = { wods: [], athletes: [] };
+  state = { wods: [], athletes: [], showLoader: false };
 
-  _isMounted = false;
   componentDidMount() {
-    this._isMounted = true;
     this.getWods();
     this.getAthletes();
   }
 
-  componentWillUnmount() {
-    this._isMounted = false;
-  }
-
   getWods = () => {
+    if (window.location.pathname === "/wods")
+      this.setState({ showLoader: true });
     fetch(wodsApi)
       .then(response => response.json())
       .then(data => {
         data.sort((a, b) =>
           a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
         );
-        this.setState({ wods: data });
-        console.log(this.state.wods);
+        window.location.pathname === "/wods"
+          ? setTimeout(() => {
+              this.setState({ wods: data, showLoader: false });
+            }, 500)
+          : this.setState({ wods: data });
       })
       .catch(error => {
         console.log(error);
@@ -57,10 +57,15 @@ export default class Wods extends Component {
           exact
           component={() => {
             return (
-              <WodsContainer wods={this.state.wods} getWods={this.getWods} />
+              <WodsContainer
+                wods={this.state.wods}
+                getWods={this.getWods}
+                showLoader={this.state.showLoader}
+              />
             );
           }}
         />
+        {this.state.showLoader ? <Loader /> : null}
         {this.state.wods.map((wod, i) => {
           return (
             <Route

@@ -38,15 +38,15 @@ export default function Schedule() {
           </div>
           <MyCalendar getDate={setSelectedDate} />
           {!appointments ? (
-            <div className="p-3 m-2 w-100 border mx-auto headingStyle">
+            <div className="p-4 m-2 w-100 border mx-auto headingStyle">
               <h3 className="text-center text-white p-2 m-1 w-100 mx-auto">
                 <i className="far fa-calendar-times mr-2"></i>
                 {selectedDate}
               </h3>
-              <h5 className="mb-2">No Appointments</h5>
+              <h5 className="mb-3">No Appointments</h5>
               <MDBBtn
                 color="success"
-                size="lg"
+                size="sm"
                 onClick={() => setLookingAtSchedule(true)}
               >
                 <MDBIcon icon="plus" className="mr-2" size="lg"></MDBIcon>Add
@@ -54,17 +54,17 @@ export default function Schedule() {
               </MDBBtn>
             </div>
           ) : (
-            <div className="p-3 m-2 w-100 border mx-auto headingStyle">
+            <div className="p-4 m-2 w-100 border mx-auto headingStyle">
               <h3 className="text-center text-white p-2 m-1 w-100 mx-auto">
                 <i className="far fa-calendar-check mr-2"></i>
                 {selectedDate}
               </h3>
-              <h5 className="mb-2">
+              <h5 className="mb-3">
                 You have {appointments.entries.length} appointment(s)
               </h5>
               <MDBBtn
                 color="warning"
-                size="lg"
+                size="sm"
                 onClick={() => setLookingAtSchedule(true)}
               >
                 <MDBIcon icon="search" className="mr-2" size="lg"></MDBIcon>View

@@ -1,8 +1,8 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import Calendar from "react-calendar";
 import "./MyCalendar.css";
 
-export default class MyCalendar extends Component {
+export default class MyCalendar extends PureComponent {
   state = {
     date: new Date()
   };
