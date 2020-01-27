@@ -2,19 +2,29 @@ import React, { Component } from "react";
 import { MDBBtn } from "mdbreact";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import Select from "../../Athletes/AthleteDetails/Select";
+import Select from "react-select";
 import Wod from "../Wod/Wod";
 import Accordion from "react-bootstrap/Accordion";
 import AlertMessage from "../../Athletes/AlertMessage/AlertMessage";
 import AddWods from "../AddWods/AddWods";
 import "./WodsContainer.css";
 
+let changeWodIcon = (wodName, icon) => {
+  return (
+    <div>
+      <span className={`fas p-2 mr-1 ${icon}`} />
+      <span className="ml-1 mx-1">{wodName}</span>
+    </div>
+  );
+};
+
 const options = [
-  { name: "EMOM" },
-  { name: "AMRAP" },
-  { name: "FOR TIME" },
-  { name: "CHIPPER" },
-  { name: "SPECIAL" }
+  { value: "emom", label: changeWodIcon("EMOM", "fa-hourglass") },
+  { value: "amrap", label: changeWodIcon("AMRAP", "fa-bolt") },
+  { value: "for time", label: changeWodIcon("FOR TIME", "fa-stopwatch") },
+  { value: "chipper", label: changeWodIcon("CHIPPER", "fa-hammer") },
+  { value: "special", label: changeWodIcon("SPECIAL", "fa-radiation") },
+  { value: "", label: "ALL" }
 ];
 
 const wodsApi = "https://theboxathletes.herokuapp.com/wods/";
@@ -27,14 +37,25 @@ export default class WodsContainer extends Component {
     willDelete: false,
     idToDelete: "",
     alertDeleted: false,
-    messageAlertDeleted: ""
+    messageAlertDeleted: "",
+    selectedOption: null,
+    wods: this.props.wods
   };
-  getValue = value => {
-    console.log(value);
-  };
+
   showFilterOptions = () => {
     this.setState({ isFiltering: !this.state.isFiltering });
   };
+
+  handleChange = selectedOption => {
+    this.setState({ selectedOption });
+    const filterWods = [...this.props.wods];
+    const resultfilteredWods = filterWods.filter(wod => {
+      return wod.type.toLowerCase().includes(selectedOption.value);
+    });
+
+    this.setState({ wods: [...resultfilteredWods] });
+  };
+
   toggleAddModal = () => {
     this.setState({
       displayModal: !this.state.displayModal
@@ -100,25 +121,24 @@ export default class WodsContainer extends Component {
             <i className="fas fa-dumbbell mr-2"></i>My Wods
           </h3>
         </div>
+
         {this.state.isFiltering ? (
-          <div
-            className="text-center"
-            autoFocus
+          <Select
+            value={this.state.selectedOption}
             onBlur={this.showFilterOptions}
-          >
-            <Select
-              options={options}
-              getValue={this.getValue}
-              defaultValue="Filter Wods"
-              className="w-25"
-            />
-          </div>
+            onChange={this.handleChange}
+            options={options}
+            className="w-50 mx-auto p-2"
+            isSearcheable
+            autoFocus
+            placeholder="Filter wods..."
+          />
         ) : null}
         <Accordion
           onSelect={ev => this.setState({ isSelected: ev })}
           className="mb-5"
         >
-          {this.props.wods.map(wod => (
+          {this.state.wods.map(wod => (
             <Wod
               isSelected={this.state.isSelected}
               toggleWillDelete={this.toggleWillDeleteModal}
