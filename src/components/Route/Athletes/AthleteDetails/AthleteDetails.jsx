@@ -11,6 +11,7 @@ import { MDBIcon, MDBBtn } from "mdbreact";
 import "./AthleteDetails.css";
 import Workouts from "./Workouts";
 import EditInfoModal from "./EditInfoModal";
+import { useEffect } from "react";
 
 const athletesAPI = "https://theboxathletes.herokuapp.com/athletes/";
 
@@ -22,22 +23,20 @@ const goBackBtnStyles = {
   color: "white",
   zIndex: "1000"
 };
-export default function AthleteDetails({ info, getAthletes }) {
+export default function AthleteDetails({ id, info, getAthletes }) {
   const inputRef = useRef(null);
   const [percentage, setPercentage] = useState(50);
   const [isEditing, setisEditing] = useState(false);
   const [editingPersonalBest, setEditingPersonalBest] = useState(false);
-  const {
-    name,
-    age,
-    sex,
-    email,
-    photo,
-    _id,
-    personalBest,
-    phoneNumber,
-    wods
-  } = info;
+  const [personalBest, setPersonalBest] = useState([]);
+  const { name, age, sex, email, photo, _id, phoneNumber, wods } = info;
+  useEffect(() => {
+    fetch(athletesAPI + id)
+      .then(response => response.json())
+      .then(data => {
+        setPersonalBest(data.personalBest);
+      });
+  }, [id, editingPersonalBest]);
   const GoBack = withRouter(({ history }) => (
     <MDBBtn
       size="sm"
@@ -55,18 +54,27 @@ export default function AthleteDetails({ info, getAthletes }) {
       updateRecords(e);
     }
   };
+  const getAthlete = async () => {
+    try {
+      const data = await fetch(athletesAPI + _id);
+      const response = await data.json();
+      return response;
+    } catch (err) {
+      console.log(err);
+    }
+  };
   const updateRecords = e => {
-    const athleteID = info._id;
     // first, target the scores for current id, and select all scores
     const elements = document
-      .getElementById("scores-" + athleteID)
+      .getElementById("scores-" + id)
       .getElementsByClassName("scores-best form-control");
     const editBtn = document.getElementById("updatePr");
     if (
       e.target.id === "triggerEdit" ||
       e.target.innerHTML.includes("Modify") ||
       e.target.className.includes("prfield") ||
-      e.target.tagName === "INPUT"
+      e.target.tagName === "INPUT" ||
+      e.target.id === "updatePr"
     ) {
       // remove 'disabled' attribute
       e.target.autofocus = true;
@@ -77,7 +85,7 @@ export default function AthleteDetails({ info, getAthletes }) {
       Array.from(elements).map(element => (element.style.color = "#fff"));
       // change button text:
       setEditingPersonalBest(true);
-      editBtn.innerHTML = `<div> <i class="fas fa-save fa-2x mr-1"> </i> Update</div>`;
+      editBtn.innerHTML = `<div id="savePr"> <i class="fas fa-save fa-2x mr-1"> </i> Update</div>`;
     } else {
       // initialize a new object
       const newScore = {};
@@ -88,7 +96,7 @@ export default function AthleteDetails({ info, getAthletes }) {
         // remove 0 from numbers starting with 0 (ex: 0123) and if nothing entered, puts 0
       );
 
-      const URI = athletesAPI + athleteID;
+      const URI = athletesAPI + id;
       const headers = new Headers();
       headers.append("Content-Type", "application/json");
       // ABSOLUTELY necessary to specify Content-Type!
@@ -98,24 +106,20 @@ export default function AthleteDetails({ info, getAthletes }) {
         headers: headers,
         body: JSON.stringify({ personalBest: newScore })
       })
-        .then(response => {
-          return response.json();
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .then(getAthlete)
+        .then(data => {
+          Object.keys(elements).map(key => (elements[key].disabled = true));
+          Array.from(elements).map(
+            element => (element.style.backgroundColor = "#fff")
+          );
+          Array.from(elements).map(element => (element.style.color = "black"));
+          setEditingPersonalBest(false);
+          editBtn.innerHTML = `<div> <i class="fas fa-cog fa-2x mr-1"> </i> Change</div>`;
         })
-        .then(
-          answer => {
-            console.log("Answer is: " + answer);
-          },
-          error => console.log(error)
-        )
-
-        .then(getAthletes)
-        .then(console.log(`Updated ${info.name}'s Personal Best!`)); // display message
-
-      // disable input fields
-      Object.keys(elements).map(key => (elements[key].disabled = true));
-      // change button text back to "Edit Records"
+        .catch(err => console.log(err));
       // editBtn.innerText = `...`;     Nu uita: TREBUIE REPARAT AICI!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      setEditingPersonalBest(false);
     }
   };
   return (

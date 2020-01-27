@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { MDBDataTable, MDBBtn } from "mdbreact";
 
-export default function Appointments({ data, date, goBack }) {
+function Appointments({ data, date, goBack }) {
   useEffect(() => {
     data
       ? data.entries.map(entry => {
@@ -66,7 +66,10 @@ export default function Appointments({ data, date, goBack }) {
         <i className="fas fa-plus"></i>
       </MDBBtn>
       <div className="p-2 m-2 card bg-dark">
-        <h3 className="headingStyle text-white">{date}</h3>
+        <h3 className="headingStyle text-white p-1">
+          <i className="fas fa-table mr-2"></i>
+          {date}
+        </h3>
         {!data ? <h5 className="text-white m-2 p-2">No Appointments</h5> : null}
         <MDBDataTable
           sortable={false}
@@ -87,6 +90,7 @@ export default function Appointments({ data, date, goBack }) {
   );
 }
 
+export default React.memo(Appointments);
 const goBackBtnStyles = {
   position: "fixed",
   bottom: "5px",

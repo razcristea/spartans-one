@@ -1,8 +1,8 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import Modal from "react-bootstrap/Modal";
 import "./AlertMessage.css";
 
-export default class AlertMessage extends Component {
+export default class AlertMessage extends PureComponent {
   render() {
     return (
       <Modal
