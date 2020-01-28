@@ -123,7 +123,7 @@ export default function AddWods(props) {
             border: "1px ridge white"
           }}
         >
-          <Modal.Body className="text-light">
+          <Modal.Body className="text-white">
             <h5 className="mt-2 mb-2 p-2 text-center border">
               <MDBIcon icon="info" size="lg" className="mr-2" /> Wod Info
             </h5>
@@ -147,7 +147,7 @@ export default function AddWods(props) {
                 <Select
                   value={selectedType}
                   onChange={handleChange}
-                  className="mx-auto p-2 mt-4"
+                  className="mx-auto w-75 mt-1"
                   required
                   options={props.options}
                   placeholder="Type is Required!"
@@ -176,7 +176,6 @@ export default function AddWods(props) {
                 ></MDBInput>
               </MDBCol>
             </MDBRow>
-
             <h5 className="mb-2 p-2 text-center border">
               <MDBIcon icon="dumbbell" size="lg" className="mr-2" /> Exercises
             </h5>
@@ -188,7 +187,7 @@ export default function AddWods(props) {
                   icon=""
                   type="number"
                   name="reps"
-                  label="Reps/Cal/m(Ex: 20, default: 0)"
+                  label="Reps/Cal/m (Ex: 20)"
                   labelClass="labelClass"
                 ></MDBInput>
               </MDBCol>

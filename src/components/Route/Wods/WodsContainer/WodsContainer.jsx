@@ -11,7 +11,7 @@ import "./WodsContainer.css";
 
 let changeWodIcon = (wodName, icon) => {
   return (
-    <div>
+    <div className="text-dark">
       <span className={`fas p-2 mr-1 ${icon}`} />
       <span className="ml-1 mx-1">{wodName}</span>
     </div>
@@ -19,12 +19,12 @@ let changeWodIcon = (wodName, icon) => {
 };
 
 const options = [
+  { value: "", label: changeWodIcon("All Wods", "fa-dumbbell") },
   { value: "emom", label: changeWodIcon("EMOM", "fa-hourglass") },
   { value: "amrap", label: changeWodIcon("AMRAP", "fa-bolt") },
   { value: "for time", label: changeWodIcon("FOR TIME", "fa-stopwatch") },
   { value: "chipper", label: changeWodIcon("CHIPPER", "fa-hammer") },
-  { value: "special", label: changeWodIcon("SPECIAL", "fa-radiation") },
-  { value: "", label: "ALL" }
+  { value: "special", label: changeWodIcon("SPECIAL", "fa-radiation") }
 ];
 
 const wodsApi = "https://theboxathletes.herokuapp.com/wods/";
@@ -135,7 +135,7 @@ export default class WodsContainer extends Component {
             onBlur={this.showFilterOptions}
             onChange={this.handleChange}
             options={options}
-            className="w-50 mx-auto p-2"
+            className="w-75 mx-auto p-2"
             isSearcheable
             autoFocus
             placeholder="Filter wods..."

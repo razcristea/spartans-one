@@ -10,7 +10,7 @@ export default function Select({
   const posibleOptions = options.map((option, i) => {
     return (
       <option key={i} value={option.name}>
-        {option.name}
+        {option.name} - {option.type}
       </option>
     );
   });

@@ -8,7 +8,8 @@ import Vali from "./vali.jpeg";
 const links = [
   { path: "Schedule", route: "/", icon: "fas fa-clipboard-list mr-1" },
   { path: "Athletes", route: "/athletes", icon: "fas fa-users mr-1" },
-  { path: "Wods", route: "/wods", icon: "fas fa-dumbbell mr-1" }
+  { path: "Wods", route: "/wods", icon: "fas fa-dumbbell mr-1" },
+  { path: "Notes", route: "/notes", icon: "far fa-comment-dots mr-1" }
 ];
 
 const activeStyle = {
@@ -45,21 +46,7 @@ export default function Header() {
         onBlur={() => setTimeout(() => setExpanded(false), 300)}
       />
       <Navbar.Collapse id="basic-navbar-nav">
-        <div
-          className="text-white border text-center d-flex align-items-center justify-content-center"
-          style={{
-            position: "absolute",
-            bottom: "30px",
-            width: "140px",
-            height: "100px",
-            borderRadius: "10%",
-            backgroundColor: "black",
-            backgroundImage: `url("${Vali}")`,
-            backgroundSize: "contain",
-            backgroundRepeat: "no-repeat",
-            backgroundPosition: "center"
-          }}
-        ></div>
+        <img className="border m-2 coachPhoto" src={Vali} alt="Vali" />
         <Nav className="ml-auto">
           {links.map((link, i) => (
             <NavLink
@@ -67,7 +54,7 @@ export default function Header() {
               key={i}
               exact
               to={`${link.route}`}
-              className="m-1 mr-3 p-2 text-decoration-none text-right"
+              className="m-1 mr-3 p-1 text-decoration-none text-right"
               activeClassName="selected"
               activeStyle={activeStyle}
               style={{
