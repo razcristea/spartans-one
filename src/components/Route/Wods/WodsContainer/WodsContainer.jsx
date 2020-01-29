@@ -183,7 +183,7 @@ export default class WodsContainer extends Component {
         {this.state.displayModal ? (
           <AddWods
             toggleModal={this.toggleAddModal}
-            options={options}
+            options={[...options]}
             exercises={[]}
             showServerResponse={this.displayAlertDeleted}
             getWods={this.props.getWods}

@@ -23,7 +23,11 @@ export default function WodDetails({ wodInfo, athletes }) {
           type === ("FOR TIME" || "CHIPPER")
             ? (athlete.test = bestTime)
             : (athlete.test = bestReps);
-
+          if (type === "SPECIAL") {
+            bestTime = `${Math.floor(bestTime / 60)}' ${bestTime % 60}''`;
+            bestReps = `${bestReps}`;
+            athlete.test = `${bestTime} | ${bestReps}`;
+          }
           found = true;
         }
       });

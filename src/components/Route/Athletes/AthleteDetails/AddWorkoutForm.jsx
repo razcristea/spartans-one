@@ -6,6 +6,7 @@ import Select from "./Select";
 import { MDBBtn, MDBInput, MDBBtnGroup } from "mdbreact";
 import Stopwatch from "./Stopwatch";
 import AlertMessage from "../AlertMessage/AlertMessage";
+import Spinner from "../AddAthleteModal/Spinner";
 
 const athletesApi = "https://theboxathletes.herokuapp.com/athletes/";
 const wodsApi = "https://theboxathletes.herokuapp.com/wods/";
@@ -25,8 +26,10 @@ export default function AddWorkoutForm({ count, id, updateWods }) {
 
   const [displayAlert, setDisplayAlert] = useState(false);
   const [alertMesage, setAlertMesage] = useState("");
+  const [showSpinner, setShowSpinner] = useState(false);
 
   const saveWorkoutToAthlete = () => {
+    setShowSpinner(true);
     fetch(athletesApi + id, {
       headers: { "Content-Type": "application/json" },
       method: "POST",
@@ -39,6 +42,7 @@ export default function AddWorkoutForm({ count, id, updateWods }) {
     })
       .then(response => response.json())
       .then(data => {
+        setShowSpinner(false);
         setDisplayAlert(true);
         setAlertMesage(data);
       })
@@ -90,6 +94,7 @@ export default function AddWorkoutForm({ count, id, updateWods }) {
   return (
     <React.Fragment>
       <AlertMessage show={displayAlert} messageAlertDeleted={alertMesage} />
+      {showSpinner ? <Spinner /> : null}
       <Card>
         <div className="d-flex justify-content-around align-items-center mb-0 bg-dark p-3">
           <Accordion.Toggle

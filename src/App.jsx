@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Header from "./components/Navbar/Header.jsx";
 import Footer from "./components/Footer/Footer";
+import Schedule from "./components/Route/Home/Schedule";
 import Athletes from "./components/Route/Athletes/Athletes";
 import Wods from "./components/Route/Wods/Wods";
-import Schedule from "./components/Route/Home/Schedule";
+import Notes from "./components/Route/Notes/Notes";
 
 export default class App extends Component {
   state = { changeCount: 0 };
@@ -22,6 +23,7 @@ export default class App extends Component {
             component={() => <Athletes changeCount={this.changeCount} />}
           ></Route>
           <Route path="/wods" component={Wods}></Route>
+          <Route path="/notes" component={Notes}></Route>
         </Switch>
         <Footer count={this.state.changeCount} />
       </Router>

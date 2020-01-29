@@ -8,6 +8,7 @@ import Select from "react-select";
 const wodsApi = "https://theboxathletes.herokuapp.com/wods/";
 
 export default function AddWods(props) {
+  if (!props.options[0].value) props.options.shift();
   const exerciseNameRef = useRef(null);
   const exerciseRepsRef = useRef(null);
   const exerciseWeightFemaleRef = useRef(null);

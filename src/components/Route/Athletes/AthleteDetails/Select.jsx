@@ -10,7 +10,10 @@ export default function Select({
   const posibleOptions = options.map((option, i) => {
     return (
       <option key={i} value={option.name}>
-        {option.name} - {option.type}
+        {option.name} -{" "}
+        {option.type !== ("FOR TIME" || "CHIPPER")
+          ? `(Measure Reps)`
+          : `(Measure Time)`}
       </option>
     );
   });
@@ -18,8 +21,10 @@ export default function Select({
     validate() ? setIsReady(false) : setIsReady(true);
   }
   return (
-    <div className="m-2 w-75 mx-auto d-flex align-items-center">
-      <i className="fas fa-filter fa-lg text-white mr-2 "></i>
+    <div
+      className="m-2 mx-auto d-flex align-items-center"
+      style={{ width: "260px" }}
+    >
       <select
         className="browser-default custom-select"
         onChange={e => {
