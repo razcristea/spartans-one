@@ -1,9 +1,15 @@
 import React, { useEffect } from "react";
-import { MDBCard, MDBCardBody, MDBCardHeader, MDBDataTable } from "mdbreact";
+import {
+  MDBCard,
+  MDBCardBody,
+  MDBCardHeader,
+  MDBDataTable,
+  MDBIcon
+} from "mdbreact";
 import Accordion from "react-bootstrap/Accordion";
 import AddWorkoutForm from "./AddWorkoutForm";
 
-const Workouts = ({ wods, id, updateWods }) => {
+const Workouts = ({ wods, id, updateWods, name }) => {
   useEffect(() => {
     wods.map(wod => {
       if (typeof wod.time === "string") {
@@ -48,25 +54,34 @@ const Workouts = ({ wods, id, updateWods }) => {
   };
 
   return (
-    <MDBCard className="w-100" style={{ backgroundColor: "#353535" }}>
-      <MDBCardHeader>
-        <Accordion>
-          <AddWorkoutForm count={wods.length} id={id} updateWods={updateWods} />
-        </Accordion>
-      </MDBCardHeader>
-      <MDBCardBody className="text-white">
-        <MDBDataTable
-          theadTextWhite
-          tbodyTextWhite
-          bordered
-          dark
-          striped
-          data={data_panel}
-          paging={false}
-          noBottomColumns
-        ></MDBDataTable>
-      </MDBCardBody>
-    </MDBCard>
+    <div className="details-workouts mt-2 w-100">
+      <h3 className="text-light headingStyle p-2 bg-dark">
+        <MDBIcon icon="bolt" /> {name}'s Workouts
+      </h3>
+      <MDBCard className="w-100" style={{ backgroundColor: "#353535" }}>
+        <MDBCardHeader>
+          <Accordion>
+            <AddWorkoutForm
+              count={wods.length}
+              id={id}
+              updateWods={updateWods}
+            />
+          </Accordion>
+        </MDBCardHeader>
+        <MDBCardBody className="text-white">
+          <MDBDataTable
+            theadTextWhite
+            tbodyTextWhite
+            bordered
+            dark
+            striped
+            data={data_panel}
+            paging={false}
+            noBottomColumns
+          ></MDBDataTable>
+        </MDBCardBody>
+      </MDBCard>
+    </div>
   );
 };
 

@@ -26,6 +26,7 @@ export default function Schedule() {
   useEffect(() => {
     checkAppointments(selectedDate);
   }, [selectedDate]);
+  console.log(appointments);
 
   return (
     <div className="text-center pb-5 mb-2">

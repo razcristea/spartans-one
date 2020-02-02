@@ -136,7 +136,7 @@ export default class WodsContainer extends Component {
             onChange={this.handleChange}
             options={options}
             className="w-75 mx-auto p-2"
-            isSearcheable
+            isSearcheable={false}
             autoFocus
             placeholder="Filter wods..."
             onBlurResetInput

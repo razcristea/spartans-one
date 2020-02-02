@@ -10,6 +10,8 @@ export default function Notes() {
       </div>
       <h5 className="text-center p-5 m-5 text-white">
         This part of the app is in the making.It will be added in the future!
+        And yes I will try and make it funny. I will bring Victoria and Victor
+        on it!
       </h5>
     </div>
   );

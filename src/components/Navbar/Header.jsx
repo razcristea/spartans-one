@@ -27,10 +27,7 @@ export default function Header() {
       sticky="top"
     >
       <Navbar.Brand>
-        <div
-          className="text-white font-weight-bold"
-          style={{ lineHeight: "45px" }}
-        >
+        <div className="text-white" style={{ lineHeight: "45px" }}>
           <img
             alt=""
             src={Logo}

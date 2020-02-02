@@ -1,16 +1,18 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { withRouter, Link } from "react-router-dom";
-import { MDBBtn } from "mdbreact";
-import "./WodDetails.css";
-import firstPlace from "./first_place_icon.png";
-import secondPlace from "./second_place_icon.png";
-import thirdPlace from "./third_place_icon.png";
-import otherPlaces from "./other_places_icon.png";
+import GoBack from "../../../../helpers/GoBack";
+import { NavLink } from "react-router-dom";
 import { MDBTable, MDBTableBody, MDBTableHead } from "mdbreact";
+import "./WodDetails.css";
+
+import firstPlace from "./assets/first_place_icon.png";
+import secondPlace from "./assets/second_place_icon.png";
+import thirdPlace from "./assets/third_place_icon.png";
+import otherPlaces from "./assets/other_places_icon.png";
 
 export default function WodDetails({ wodInfo, athletes }) {
   const { description, type, time, name, exercises } = wodInfo;
   const [neededAthletes, setNeededAthletes] = useState([]);
+
   useEffect(() => {
     let filteredAthletes = athletes.filter(athlete => {
       let found = false;
@@ -31,7 +33,7 @@ export default function WodDetails({ wodInfo, athletes }) {
           found = true;
         }
       });
-      return found && athlete;
+      return found;
     });
     type === ("FOR TIME" || "CHIPPER")
       ? filteredAthletes.sort((a, b) => (a.test > b.test ? 1 : -1))
@@ -57,20 +59,9 @@ export default function WodDetails({ wodInfo, athletes }) {
     setNeededAthletes(filteredAthletes);
   }, [athletes, name, type]);
 
-  const GoBackToWods = withRouter(({ history }) => (
-    <MDBBtn
-      className="go-back-to-wods-btn"
-      size="sm"
-      color="dark"
-      onMouseDown={() => setTimeout(() => history.goBack(), 300)}
-    >
-      <span>Go Back</span>
-    </MDBBtn>
-  ));
-
   return (
     <Fragment>
-      <GoBackToWods />
+      <GoBack />
       <div className="text-center pb-5 mb-2">
         <div className="w-75 mx-auto m-3 p-3 wod-card-style headingStyle text-white font-weight-bold">
           <h3 className="p-2">{name}</h3>
@@ -106,7 +97,6 @@ export default function WodDetails({ wodInfo, athletes }) {
                   <th>Result</th>
                 </tr>
               </MDBTableHead>
-
               {neededAthletes.map((athlete, i) => {
                 return (
                   <MDBTableBody key={i}>
@@ -119,12 +109,12 @@ export default function WodDetails({ wodInfo, athletes }) {
                       </td>
 
                       <td className="rows-style ">
-                        <Link
+                        <NavLink
                           to={`/athletes/${athlete._id}`}
                           className="text-white link-styles style-table-name"
                         >
                           {athlete.name}
-                        </Link>
+                        </NavLink>
                       </td>
                       <td className="rows-style">
                         {type === ("FOR TIME" || "CHIPPER") ? (

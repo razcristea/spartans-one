@@ -1,7 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { MDBDataTable, MDBBtn } from "mdbreact";
+import CreateAppointment from "./CreateAppointment";
 
 function Appointments({ data, date, goBack }) {
+  const [creatingAppointment, setCreatingAppointment] = useState(false);
   useEffect(() => {
     data
       ? data.entries.map(entry => {
@@ -62,7 +64,12 @@ function Appointments({ data, date, goBack }) {
       >
         Go Back
       </MDBBtn>
-      <MDBBtn color="warning" style={addWodBtnStyles} className="hoverable">
+      <MDBBtn
+        color="warning"
+        style={createAppointmentBtnStyles}
+        className="hoverable"
+        onClick={() => setCreatingAppointment(!creatingAppointment)}
+      >
         <i className="fas fa-plus"></i>
       </MDBBtn>
       <div className="p-2 m-2 card bg-dark">
@@ -79,18 +86,24 @@ function Appointments({ data, date, goBack }) {
           bordered
           dark
           striped
-          exportToCSV
           data={data_panel}
           paging={false}
           searching={false}
           noBottomColumns
         ></MDBDataTable>
+        {creatingAppointment ? (
+          <CreateAppointment
+            toggle={setCreatingAppointment}
+            isShowing={creatingAppointment}
+          />
+        ) : null}
       </div>
     </div>
   );
 }
 
 export default React.memo(Appointments);
+
 const goBackBtnStyles = {
   position: "fixed",
   bottom: "5px",
@@ -100,7 +113,7 @@ const goBackBtnStyles = {
   zIndex: "1000"
 };
 
-const addWodBtnStyles = {
+const createAppointmentBtnStyles = {
   width: "2.3rem",
   height: "2.3rem",
   fontSize: "1.1rem",

@@ -103,9 +103,9 @@ export default function AddWods(props) {
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
-        <Modal.Header className="text-light modalHeader">
+        <Modal.Header className="text-white modalHeader">
           <Modal.Title id="contained-modal-title-vcenter">
-            <MDBIcon icon="dumbbell" size="lg" className="mr-2" /> Add Wod
+            <MDBIcon icon="dumbbell" className="mr-2" /> Add Wod
           </Modal.Title>
           <button
             type="button"
@@ -125,14 +125,25 @@ export default function AddWods(props) {
           }}
         >
           <Modal.Body className="text-white">
-            <h5 className="mt-2 mb-2 p-2 text-center border">
-              <MDBIcon icon="info" size="lg" className="mr-2" /> Wod Info
+            <h5 className="headingStyle p-2 m-3 bg-dark text-white text-center">
+              <MDBIcon icon="info" className="mr-2" /> Wod Info
             </h5>
-            <MDBRow className="m-3 border">
+            <MDBRow className="m-3 rounded ">
+              <MDBCol md="4">
+                <Select
+                  value={selectedType}
+                  onChange={handleChange}
+                  className="mx-auto w-100 mt-1"
+                  required
+                  options={props.options}
+                  placeholder="Please Select a Type!"
+                />
+              </MDBCol>
               <MDBCol md="4">
                 <MDBInput
                   className="text-white addWodInput"
                   icon="pen"
+                  size="sm"
                   type="text"
                   name="wodName"
                   label="Name"
@@ -145,20 +156,11 @@ export default function AddWods(props) {
                 </MDBInput>
               </MDBCol>
               <MDBCol md="4">
-                <Select
-                  value={selectedType}
-                  onChange={handleChange}
-                  className="mx-auto w-75 mt-1"
-                  required
-                  options={props.options}
-                  placeholder="Type is Required!"
-                />
-              </MDBCol>
-              <MDBCol md="4">
                 <MDBInput
                   className="text-white addWodInput"
                   icon="align-left"
                   type="text"
+                  size="sm"
                   name="description"
                   label="Description (ex: 21-15-9)"
                   labelClass="labelClass"
@@ -171,16 +173,17 @@ export default function AddWods(props) {
                   icon="clock"
                   type="number"
                   name="time"
+                  size="sm"
                   label="Time Cap"
                   labelClass="labelClass"
                   onChange={e => setTimecap(e.target.value)}
                 ></MDBInput>
               </MDBCol>
             </MDBRow>
-            <h5 className="mb-2 p-2 text-center border">
-              <MDBIcon icon="dumbbell" size="lg" className="mr-2" /> Exercises
+            <h5 className="headingStyle p-2 m-3 bg-dark text-white text-center">
+              <MDBIcon icon="dumbbell" className="mr-2" /> Exercises
             </h5>
-            <MDBRow className="m-3 pb-4 border">
+            <MDBRow className="m-3 pb-4">
               <MDBCol md="6">
                 <MDBInput
                   ref={exerciseRepsRef}
@@ -188,6 +191,7 @@ export default function AddWods(props) {
                   icon=""
                   type="number"
                   name="reps"
+                  size="sm"
                   label="Reps/Cal/m (Ex: 20)"
                   labelClass="labelClass"
                 ></MDBInput>
@@ -197,6 +201,7 @@ export default function AddWods(props) {
                   ref={exerciseNameRef}
                   className="text-white addWodInput"
                   type="text"
+                  size="sm"
                   name="exerciseName"
                   label="Name (Ex: Squats)"
                   labelClass="labelClass"
@@ -210,6 +215,7 @@ export default function AddWods(props) {
                   icon="female"
                   className="text-white addWodInput"
                   type="number"
+                  size="sm"
                   name="weightFemale"
                   label="Female/Kg (default:0)"
                 ></MDBInput>
@@ -218,6 +224,7 @@ export default function AddWods(props) {
                   className="text-white addWodInput"
                   icon="male"
                   type="number"
+                  size="sm"
                   name="weightMale"
                   label="Male/Kg (default:0)"
                 ></MDBInput>
@@ -225,23 +232,24 @@ export default function AddWods(props) {
 
               <MDBCol className="d-flex align-items-end flex-column bd-highlight example-parent">
                 <MDBBtn
-                  color="info"
+                  color="warning"
                   size="md"
-                  className="mt-auto p-2 bd-highlight col-example"
+                  className="mt-auto p-2 bd-highlight col-example text-white"
                   onClick={addExercise}
                   disabled={enabled}
                 >
-                  <MDBIcon icon="plus" size="lg" /> Add Exercise
+                  <MDBIcon icon="plus" size="lg" className="mr-1" /> Add
+                  Exercise
                 </MDBBtn>
               </MDBCol>
             </MDBRow>
-            <h5 className="mb-2 p-2 text-center border">
-              <MDBIcon icon="eye" size="lg" className="mr-2" /> Preview
+            <h5 className="headingStyle p-2 m-3 bg-dark text-white text-center">
+              <MDBIcon icon="eye" className="mr-2" /> Preview
             </h5>
             {exercises.map((exercise, i) => (
               <div
                 key={i}
-                className="mb-1 ml-5 mr-5 border d-flex justify-content-between align-items-center"
+                className="mb-1 ml-5 mr-5 border-bottom d-flex justify-content-between align-items-center"
                 style={{ fontSize: "13px" }}
               >
                 <span className="ml-2" key={exercise.name}>
@@ -280,11 +288,11 @@ export default function AddWods(props) {
             </MDBCol>
           </Modal.Body>
           <Modal.Header className="modalFooter">
-            <MDBBtn color="success" size="sm" type="submit">
-              <MDBIcon icon="share-square" size="lg" className="mr-2" /> Add WOD
-            </MDBBtn>
             <MDBBtn color="danger" size="sm" onClick={props.toggleModal}>
               <MDBIcon icon="ban" size="lg" className="mr-2" /> Cancel
+            </MDBBtn>
+            <MDBBtn color="success" size="sm" type="submit">
+              <MDBIcon icon="share-square" size="lg" className="mr-2" /> Submit
             </MDBBtn>
           </Modal.Header>
         </form>

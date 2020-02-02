@@ -1,12 +1,12 @@
 import React from "react";
 import { MDBRow, MDBCol, MDBInput, MDBBtn, MDBIcon } from "mdbreact";
 import Modal from "react-bootstrap/Modal";
-import "./AddAthlete.css";
 import {
   addAthleteFields,
   personalBestFields
 } from "../../../../helpers/addAthlete";
 import Spinner from "./Spinner";
+import "./AddAthlete.css";
 
 const athletesAPI = "https://theboxathletes.herokuapp.com/athletes/";
 
@@ -109,8 +109,7 @@ class AddAthleteV2 extends React.Component {
         >
           <Modal.Header className="text-light modalHeader">
             <Modal.Title id="contained-modal-title-vcenter">
-              <MDBIcon icon="user-plus" size="lg" className="mr-2" /> Add
-              Athlete
+              <MDBIcon icon="user-plus" className="mr-2" /> Add Athlete
             </Modal.Title>
             <button
               type="button"
@@ -126,12 +125,12 @@ class AddAthleteV2 extends React.Component {
             noValidate
           >
             <Modal.Body className="text-light" id="modalBody">
-              <h5 className="mt-2 mb-2 p-2 text-center border">
-                <MDBIcon icon="info" size="lg" className="mr-2" /> Athlete Info
+              <h5 className="headingStyle p-2 m-3 bg-dark text-white text-center">
+                <MDBIcon icon="info" className="mr-2" /> Athlete Info
               </h5>
-              <MDBRow className="m-3 border">
+              <MDBRow className="ml-5 mr-5 mb-3">
                 {addAthleteFields.map((field, index) => (
-                  <MDBCol md="4" key={index}>
+                  <MDBCol md="4" key={index} className="m-0 p-0">
                     <MDBInput
                       icon={field.icon}
                       value={this.state[field.name]}
@@ -140,6 +139,7 @@ class AddAthleteV2 extends React.Component {
                       type={field.type}
                       name={field.name}
                       label={field.label}
+                      size="sm"
                       labelClass="labelClass"
                       className="addAthleteInput"
                       required
@@ -154,9 +154,6 @@ class AddAthleteV2 extends React.Component {
                   </MDBCol>
                 ))}
                 <MDBCol md="4" className="mb-2 mt-3">
-                  <label>
-                    <MDBIcon icon="camera" size="lg" /> - Photo
-                  </label>
                   <div className="custom-file">
                     <input
                       type="file"
@@ -170,56 +167,52 @@ class AddAthleteV2 extends React.Component {
                   </div>
                 </MDBCol>
               </MDBRow>
-              <MDBRow>
-                <MDBCol md="12">
-                  <div className="mt-1 mb-1">
-                    <MDBIcon icon="male" size="lg" /> /{" "}
-                    <MDBIcon icon="female" size="lg" />
-                  </div>
-                  <div className="custom-control custom-radio">
-                    <input
-                      type="radio"
-                      className="custom-control-input"
-                      onChange={this.changeHandler}
-                      id="male"
-                      name="genre"
-                      value="M"
-                      required
-                    />
-                    <label className="custom-control-label" htmlFor="male">
-                      Male
-                    </label>
-                  </div>
-                  <div className="custom-control custom-radio mb-3">
-                    <input
-                      type="radio"
-                      className="custom-control-input"
-                      onChange={this.changeHandler}
-                      id="female"
-                      name="genre"
-                      value="F"
-                      required
-                    />
-                    <label className="custom-control-label" htmlFor="female">
-                      Female
-                    </label>
-                    <div className="invalid-feedback">
-                      Please select male or female!
-                    </div>
-                  </div>
-                </MDBCol>
+              <MDBRow className="d-flex justify-content-center align-items-center">
+                <div className="m-1 mr-2">
+                  <MDBIcon icon="male" size="lg" /> /{" "}
+                  <MDBIcon icon="female" size="lg" />
+                </div>
+                <div className="custom-control custom-radio m-1">
+                  <input
+                    type="radio"
+                    className="custom-control-input"
+                    onChange={this.changeHandler}
+                    id="male"
+                    name="genre"
+                    value="M"
+                    required
+                  />
+                  <label className="custom-control-label m-1" htmlFor="male">
+                    Male
+                  </label>
+                </div>
+                <div className="custom-control custom-radio m-1">
+                  <input
+                    type="radio"
+                    className="custom-control-input"
+                    onChange={this.changeHandler}
+                    id="female"
+                    name="genre"
+                    value="F"
+                    required
+                  />
+                  <label className="custom-control-label m-1" htmlFor="female">
+                    Female
+                  </label>
+                </div>
               </MDBRow>
-              <h5 className="mt-2 mb-2 p-2 text-center border">
+              <h5 className="headingStyle p-2 m-3 bg-dark text-white text-center">
                 <MDBIcon icon="dumbbell" /> Personal Best
               </h5>
-              <MDBRow className="m-3 pb-4 border">
+              <MDBRow className="m-3 pb-4">
                 {personalBestFields.map((field, index) => (
                   <MDBCol md="3" key={index}>
                     <MDBInput
                       label={field.label}
                       labelClass="labelClass"
-                      className="addAthleteInput mx-auto"
+                      className="addAthleteInput mx-auto mb-0"
                       id={field.name}
+                      size="sm"
                       onChange={this.changePrHandler}
                       type={field.type}
                       name={field.name}
@@ -251,12 +244,12 @@ class AddAthleteV2 extends React.Component {
               </MDBCol>
             </Modal.Body>
             <Modal.Header className="modalFooter">
+              <MDBBtn color="danger" size="sm" onClick={this.props.onHide}>
+                <MDBIcon icon="ban" size="lg" className="mr-2" /> Cancel
+              </MDBBtn>
               <MDBBtn color="success" size="sm" type="submit">
                 <MDBIcon icon="share-square" size="lg" className="mr-2" />{" "}
                 Submit
-              </MDBBtn>
-              <MDBBtn color="danger" size="sm" onClick={this.props.onHide}>
-                <MDBIcon icon="ban" size="lg" className="mr-2" /> Cancel
               </MDBBtn>
             </Modal.Header>
           </form>
