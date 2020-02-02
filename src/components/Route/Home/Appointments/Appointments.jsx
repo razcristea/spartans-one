@@ -1,35 +1,29 @@
 import React, { useState, useEffect } from "react";
+import AlertMessage from "../../Athletes/AlertMessage/AlertMessage";
 import { MDBDataTable, MDBBtn } from "mdbreact";
 import CreateAppointment from "./CreateAppointment";
 
-function Appointments({ data, date, goBack }) {
+function Appointments({ data, date, goBack, refresh }) {
   const [creatingAppointment, setCreatingAppointment] = useState(false);
+  const [displayAlert, setDisplayAlert] = useState(false);
+  const [alertMesage, setAlertMesage] = useState("");
+
   useEffect(() => {
-    data
-      ? data.entries.map(entry => {
-          return (entry.action = (
-            <div className="d-flex align-items-center justify-content-center m-0 p-0">
-              <MDBBtn
-                className="p-2 m-1 rounded"
-                size="sm"
-                color="warning"
-                onClick={() => console.log(entry)}
-              >
-                <i className="fas fa-edit fa-lg"></i>
-              </MDBBtn>
-              <MDBBtn
-                className="p-2 m-1 rounded"
-                size="sm"
-                color="danger"
-                onClick={() => console.log(entry)}
-              >
-                <i className="fas fa-trash-alt fa-lg"></i>
-              </MDBBtn>
-            </div>
-          ));
-        })
-      : console.log("There are no records for this date");
+    if (data) {
+      data.entries.map(entry => {
+        return (entry.action = (
+          <MDBBtn
+            className="p-2 m-1 rounded"
+            color="warning"
+            onClick={() => console.log(entry.attendees)}
+          >
+            <i className="fas fa-pencil-alt fa-lg"></i>
+          </MDBBtn>
+        ));
+      });
+    }
   }, [data]);
+
   const data_panel = {
     columns: [
       {
@@ -39,23 +33,23 @@ function Appointments({ data, date, goBack }) {
       },
       {
         label: "End",
-        field: "endHour",
-        sort: "asc"
+        field: "endHour"
       },
       {
         label: "Participants",
-        field: "attendees",
-        sort: "asc"
+        field: "attendees"
       },
       {
-        label: "Actions",
+        label: "Edit",
         field: "action"
       }
     ],
     rows: data.entries ? [...data.entries] : []
   };
+
   return (
     <div>
+      <AlertMessage show={displayAlert} messageAlertDeleted={alertMesage} />
       <MDBBtn
         style={goBackBtnStyles}
         size="sm"
@@ -95,6 +89,11 @@ function Appointments({ data, date, goBack }) {
           <CreateAppointment
             toggle={setCreatingAppointment}
             isShowing={creatingAppointment}
+            data={data}
+            date={date}
+            refresh={refresh}
+            setDisplayAlert={setDisplayAlert}
+            setAlertMesage={setAlertMesage}
           />
         ) : null}
       </div>
@@ -124,5 +123,6 @@ const createAppointmentBtnStyles = {
   right: 7,
   color: "black",
   border: "2px double white",
-  boxShadow: "0 2px 5px 0 #212529, 0 2px 10px 0 #212121"
+  boxShadow: "0 2px 5px 0 #212529, 0 2px 10px 0 #212121",
+  zIndex: 1000
 };
