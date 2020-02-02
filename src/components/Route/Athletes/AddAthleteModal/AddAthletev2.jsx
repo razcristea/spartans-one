@@ -128,9 +128,9 @@ class AddAthleteV2 extends React.Component {
               <h5 className="headingStyle p-2 m-3 bg-dark text-white text-center">
                 <MDBIcon icon="info" className="mr-2" /> Athlete Info
               </h5>
-              <MDBRow className="ml-5 mr-5 mb-3">
+              <MDBRow className="ml-3 mr-3 mb-3">
                 {addAthleteFields.map((field, index) => (
-                  <MDBCol md="4" key={index} className="m-0 p-0">
+                  <MDBCol md="4" key={index}>
                     <MDBInput
                       icon={field.icon}
                       value={this.state[field.name]}
@@ -139,7 +139,6 @@ class AddAthleteV2 extends React.Component {
                       type={field.type}
                       name={field.name}
                       label={field.label}
-                      size="sm"
                       labelClass="labelClass"
                       className="addAthleteInput"
                       required
@@ -210,9 +209,8 @@ class AddAthleteV2 extends React.Component {
                     <MDBInput
                       label={field.label}
                       labelClass="labelClass"
-                      className="addAthleteInput mx-auto mb-0"
+                      className="addAthleteInput mx-auto"
                       id={field.name}
-                      size="sm"
                       onChange={this.changePrHandler}
                       type={field.type}
                       name={field.name}

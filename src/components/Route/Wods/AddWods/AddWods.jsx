@@ -143,7 +143,6 @@ export default function AddWods(props) {
                 <MDBInput
                   className="text-white addWodInput"
                   icon="pen"
-                  size="sm"
                   type="text"
                   name="wodName"
                   label="Name"
@@ -160,7 +159,6 @@ export default function AddWods(props) {
                   className="text-white addWodInput"
                   icon="align-left"
                   type="text"
-                  size="sm"
                   name="description"
                   label="Description (ex: 21-15-9)"
                   labelClass="labelClass"
@@ -173,7 +171,6 @@ export default function AddWods(props) {
                   icon="clock"
                   type="number"
                   name="time"
-                  size="sm"
                   label="Time Cap"
                   labelClass="labelClass"
                   onChange={e => setTimecap(e.target.value)}
@@ -191,7 +188,6 @@ export default function AddWods(props) {
                   icon=""
                   type="number"
                   name="reps"
-                  size="sm"
                   label="Reps/Cal/m (Ex: 20)"
                   labelClass="labelClass"
                 ></MDBInput>
@@ -201,7 +197,6 @@ export default function AddWods(props) {
                   ref={exerciseNameRef}
                   className="text-white addWodInput"
                   type="text"
-                  size="sm"
                   name="exerciseName"
                   label="Name (Ex: Squats)"
                   labelClass="labelClass"
@@ -209,13 +204,12 @@ export default function AddWods(props) {
                 ></MDBInput>
               </MDBCol>
               <MDBCol md="6">
-                Weight
+                <div className="text-center mt-2">Weight</div>
                 <MDBInput
                   ref={exerciseWeightFemaleRef}
                   icon="female"
                   className="text-white addWodInput"
                   type="number"
-                  size="sm"
                   name="weightFemale"
                   label="Female/Kg (default:0)"
                 ></MDBInput>
@@ -224,7 +218,6 @@ export default function AddWods(props) {
                   className="text-white addWodInput"
                   icon="male"
                   type="number"
-                  size="sm"
                   name="weightMale"
                   label="Male/Kg (default:0)"
                 ></MDBInput>
