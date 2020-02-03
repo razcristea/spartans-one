@@ -6,10 +6,12 @@ import {
   MDBModal,
   MDBModalFooter,
   MDBBtn,
-  MDBInput
+  MDBInput,
+  MDBAlert
 } from "mdbreact";
 import Select from "react-select";
 import Spinner from "../../Athletes/AddAthleteModal/Spinner";
+import "./CreateAppointment.css";
 
 function CreateAppointment({
   toggle,
@@ -25,6 +27,8 @@ function CreateAppointment({
   const [selectOptions, setSelectOptions] = useState([]);
   const [participants, setParticipants] = useState(null);
 
+  const [inAlert, setInAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
   const [showSpinner, setShowSpinner] = useState(false);
 
   useEffect(() => {
@@ -51,6 +55,7 @@ function CreateAppointment({
   };
 
   const handleSelectChange = selectedOptions => {
+    setInAlert(false);
     if (!setSelectOptions) {
       return;
     }
@@ -61,6 +66,18 @@ function CreateAppointment({
 
   const handleCreateAppointment = () => {
     if (!start || !participants) {
+      setInAlert(true);
+      setAlertMessage(
+        "It's not really a good ideea to schedule an appointment with NOBODY! Please select at least 1 Athlete!"
+      );
+      return;
+    }
+
+    if (start > end) {
+      setInAlert(true);
+      setAlertMessage(
+        `You can't go backwards in time, yet!(Start needs to be lower than End)`
+      );
       return;
     }
     if (data) {
@@ -129,15 +146,10 @@ function CreateAppointment({
   return (
     <div>
       {showSpinner ? <Spinner /> : null}
-      <MDBContainer className="border">
-        <MDBModal
-          isOpen={isShowing}
-          toggle={() => toggle(false)}
-          centered
-          fullHeight
-        >
+      <MDBContainer>
+        <MDBModal isOpen={isShowing} toggle={() => toggle(false)}>
           <MDBModalHeader
-            className="border bg-dark text-white"
+            className="border bg-dark text-white modalHeader"
             toggle={() => toggle(false)}
           >
             <i className="far fa-calendar-check mr-2"></i>{" "}
@@ -145,13 +157,14 @@ function CreateAppointment({
           </MDBModalHeader>
           <MDBModalBody
             className="text-center border"
-            style={{ backgroundColor: "#383838" }}
+            style={{ backgroundColor: "#383838", overflow: "auto" }}
           >
             <h5 className="headingStyle p-2 m-3 bg-dark text-white">
               <i className="far fa-clock mr-2"></i> Pick Start/End Hour
             </h5>
-            <div className="mt-5 d-flex inline align-items-center justify-content-center">
+            <div className="mt-3 d-flex inline align-items-center justify-content-center">
               <MDBInput
+                className="appointmentInput"
                 valueDefault="07:00"
                 type="time"
                 name="start"
@@ -164,21 +177,25 @@ function CreateAppointment({
               ></MDBInput>
               <div className="ml-3 mr-3"></div>
               <MDBInput
+                className="appointmentInput"
                 value={end}
                 type="time"
                 name="end"
                 step={1800}
                 label="End"
-                onChange={e => setEnd(e.target.value)}
+                onChange={e => {
+                  setEnd(e.target.value);
+                  setInAlert(false);
+                }}
               ></MDBInput>
             </div>
-            <p className="text-muted text-center w-75 small mx-auto mb-5">
+            <p className="text-muted text-center w-75 small mx-auto mb-2">
               <em>
                 Hint: Start Hour can't be later than End Hour! End Hour will
                 default to Start Hour + 1 if nothing is chosen in the field!
               </em>
             </p>
-            <h5 className="headingStyle p-2 m-3 mb-5 bg-dark text-white">
+            <h5 className="headingStyle p-2 m-3 mb-2 bg-dark text-white">
               <i className="fas fa-user-plus mr-2"></i> Add Participants
             </h5>
             <Select
@@ -190,11 +207,14 @@ function CreateAppointment({
               onChange={handleSelectChange}
               style={{ zIndex: 1000 }}
             />
-            <p className="text-muted text-center w-75 small mx-auto mt-3">
+            <p className="text-muted text-center w-75 small mx-auto mt-2">
               <em>Hint: You can select multiple athletes (1 is required!)</em>
             </p>
+            {inAlert ? (
+              <MDBAlert color="danger">{alertMessage}</MDBAlert>
+            ) : null}
           </MDBModalBody>
-          <MDBModalFooter className="bg-dark border d-flex justify-content-around">
+          <MDBModalFooter className="bg-dark border d-flex justify-content-around modalFooter">
             <MDBBtn color="danger" size="sm" onClick={() => toggle(false)}>
               <i className="fas fa-ban mr-1"></i> Cancel
             </MDBBtn>
