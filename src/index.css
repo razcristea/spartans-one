@@ -31,10 +31,6 @@ code {
   background-repeat: no-repeat;
   background-position: center;
 }
-.md-form {
-  margin-top: 0.7rem !important;
-  margin-bottom: 0.7rem !important;
-}
 @media only screen and (min-width: 600px) {
   .coachPhoto {
     display: none;

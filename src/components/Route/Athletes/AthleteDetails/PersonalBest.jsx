@@ -80,6 +80,13 @@ export default function PersonalBest({ id }) {
       // !editBtn.innerText = `...`;     Nu uita: TREBUIE REPARAT AICI!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     }
   };
+  const handleKeyPress = e => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      document.getElementById("updatePr").focus();
+      updateRecords(e);
+    }
+  };
 
   return (
     <div>
@@ -112,6 +119,7 @@ export default function PersonalBest({ id }) {
               as={Form}
               key={index}
               onClick={updateRecords}
+              onKeyPress={handleKeyPress}
               style={{
                 backgroundColor: "#353539",
                 color: "white",

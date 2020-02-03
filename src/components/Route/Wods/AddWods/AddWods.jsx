@@ -128,17 +128,7 @@ export default function AddWods(props) {
             <h5 className="headingStyle p-2 m-3 bg-dark text-white text-center">
               <MDBIcon icon="info" className="mr-2" /> Wod Info
             </h5>
-            <MDBRow className="m-3 rounded ">
-              <MDBCol md="4">
-                <Select
-                  value={selectedType}
-                  onChange={handleChange}
-                  className="mx-auto w-100 mt-1"
-                  required
-                  options={props.options}
-                  placeholder="Please Select a Type!"
-                />
-              </MDBCol>
+            <MDBRow className="m-3 rounded border">
               <MDBCol md="4">
                 <MDBInput
                   className="text-white addWodInput"
@@ -153,6 +143,16 @@ export default function AddWods(props) {
                   <div className="invalid-feedback ml-4 pl-3"></div>
                   <div className="valid-feedback ml-4 pl-3">Looks good!</div>
                 </MDBInput>
+              </MDBCol>
+              <MDBCol md="4">
+                <Select
+                  value={selectedType}
+                  onChange={handleChange}
+                  className="mx-auto w-100 mt-1"
+                  required
+                  options={props.options}
+                  placeholder="Please Select a Type!"
+                />
               </MDBCol>
               <MDBCol md="4">
                 <MDBInput
@@ -180,7 +180,7 @@ export default function AddWods(props) {
             <h5 className="headingStyle p-2 m-3 bg-dark text-white text-center">
               <MDBIcon icon="dumbbell" className="mr-2" /> Exercises
             </h5>
-            <MDBRow className="m-3 pb-4">
+            <MDBRow className="m-3 pb-4 border">
               <MDBCol md="6">
                 <MDBInput
                   ref={exerciseRepsRef}

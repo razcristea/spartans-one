@@ -128,7 +128,7 @@ class AddAthleteV2 extends React.Component {
               <h5 className="headingStyle p-2 m-3 bg-dark text-white text-center">
                 <MDBIcon icon="info" className="mr-2" /> Athlete Info
               </h5>
-              <MDBRow className="ml-3 mr-3 mb-3">
+              <MDBRow className="ml-3 mr-3 mb-3 border">
                 {addAthleteFields.map((field, index) => (
                   <MDBCol md="4" key={index}>
                     <MDBInput
@@ -203,7 +203,7 @@ class AddAthleteV2 extends React.Component {
               <h5 className="headingStyle p-2 m-3 bg-dark text-white text-center">
                 <MDBIcon icon="dumbbell" /> Personal Best
               </h5>
-              <MDBRow className="m-3 pb-4">
+              <MDBRow className="m-3 pb-4 border">
                 {personalBestFields.map((field, index) => (
                   <MDBCol md="3" key={index}>
                     <MDBInput
