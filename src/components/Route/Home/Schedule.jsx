@@ -15,20 +15,21 @@ function Schedule() {
   const checkAppointments = async selectedDate => {
     try {
       // querry the selected date from DB and store it in appointments
-      const response = await fetch(scheduleUrl);
+      const response = await fetch(scheduleUrl + selectedDate);
       const data = await response.json();
-      const dateCheck = data.find(entry => {
-        return entry.date === selectedDate;
-      });
-      if (dateCheck) {
-        dateCheck.entries.sort((a, b) => {
+      if (data.error) {
+        setAppointments(0);
+      }
+      if (data.length) {
+        data[0].entries.sort((a, b) => {
           return parseInt(a.startHour.slice(0, 2)) <
             parseInt(b.startHour.slice(0, 2))
             ? -1
             : 1;
         });
+
+        setAppointments(data[0]);
       }
-      dateCheck ? setAppointments(dateCheck) : setAppointments(0);
     } catch (error) {
       console.log(error);
     }

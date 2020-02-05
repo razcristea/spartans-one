@@ -1,8 +1,8 @@
-import React, { PureComponent } from "react";
+import React, { Component } from "react";
 import Calendar from "react-calendar";
 import "./MyCalendar.css";
 
-export default class MyCalendar extends PureComponent {
+export default class MyCalendar extends Component {
   state = {
     date: new Date()
   };
@@ -15,7 +15,7 @@ export default class MyCalendar extends PureComponent {
         .toString()
         .split(" ")
         .slice(1, 4)
-        .join("/")
+        .join("-")
     );
   }
   componentDidUpdate(prevProps, prevState) {
@@ -25,7 +25,7 @@ export default class MyCalendar extends PureComponent {
           .toString()
           .split(" ")
           .slice(1, 4)
-          .join("/")
+          .join("-")
       );
     }
   }

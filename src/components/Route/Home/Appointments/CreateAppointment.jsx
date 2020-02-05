@@ -159,6 +159,21 @@ function CreateAppointment({
             className="text-center border"
             style={{ backgroundColor: "#383838", overflow: "auto" }}
           >
+            <h5 className="headingStyle p-2 m-3 mb-2 bg-dark text-white">
+              <i className="fas fa-user-plus mr-2"></i> Add Participants
+            </h5>
+            <Select
+              className="m-4"
+              options={selectOptions}
+              isMulti
+              placeholder="Select Athletes..."
+              isSearchable
+              onChange={handleSelectChange}
+              style={{ zIndex: 1000 }}
+            />
+            <p className="text-muted text-center w-75 small mx-auto mt-2">
+              <em>Hint: You can select multiple athletes (1 is required!)</em>
+            </p>
             <h5 className="headingStyle p-2 m-3 bg-dark text-white">
               <i className="far fa-clock mr-2"></i> Pick Start/End Hour
             </h5>
@@ -194,21 +209,6 @@ function CreateAppointment({
                 Hint: Start Hour can't be later than End Hour! End Hour will
                 default to Start Hour + 1 if nothing is chosen in the field!
               </em>
-            </p>
-            <h5 className="headingStyle p-2 m-3 mb-2 bg-dark text-white">
-              <i className="fas fa-user-plus mr-2"></i> Add Participants
-            </h5>
-            <Select
-              className="m-4"
-              options={selectOptions}
-              isMulti
-              placeholder="Select Athletes..."
-              isSearchable
-              onChange={handleSelectChange}
-              style={{ zIndex: 1000 }}
-            />
-            <p className="text-muted text-center w-75 small mx-auto mt-2">
-              <em>Hint: You can select multiple athletes (1 is required!)</em>
             </p>
             {inAlert ? (
               <MDBAlert color="danger">{alertMessage}</MDBAlert>

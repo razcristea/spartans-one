@@ -2,27 +2,38 @@ import React, { useState, useEffect } from "react";
 import AlertMessage from "../../Athletes/AlertMessage/AlertMessage";
 import { MDBDataTable, MDBBtn } from "mdbreact";
 import CreateAppointment from "./CreateAppointment";
+import EditAppointment from "./EditAppointment";
 
 function Appointments({ data, date, goBack, refresh }) {
   const [creatingAppointment, setCreatingAppointment] = useState(false);
+  const [editingAppointment, setEditingAppointment] = useState(false);
+  const [whoToUpdate, setWhoToUpdate] = useState({});
   const [displayAlert, setDisplayAlert] = useState(false);
   const [alertMesage, setAlertMesage] = useState("");
 
   useEffect(() => {
     if (data) {
-      data.entries.map(entry => {
+      data.entries.map((entry, i) => {
         return (entry.action = (
           <MDBBtn
             className="p-2 m-1 rounded"
             color="warning"
-            onClick={() => console.log(entry.attendees)}
+            onClick={() => {
+              setEditingAppointment(true);
+              setWhoToUpdate({
+                id: entry._id,
+                start: entry.startHour,
+                end: entry.endHour,
+                attendees: entry.attendees
+              });
+            }}
           >
             <i className="fas fa-pencil-alt fa-lg"></i>
           </MDBBtn>
         ));
       });
     }
-  }, [data]);
+  }, [data, date]);
 
   const data_panel = {
     columns: [
@@ -96,6 +107,7 @@ function Appointments({ data, date, goBack, refresh }) {
             setAlertMesage={setAlertMesage}
           />
         ) : null}
+        {editingAppointment ? <EditAppointment data={whoToUpdate} /> : null}
       </div>
     </div>
   );

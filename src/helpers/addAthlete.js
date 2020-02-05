@@ -30,6 +30,14 @@ export const addAthleteFields = [
     label: "Age",
     required: true,
     invalidMessage: "Age is required!"
+  },
+  {
+    icon: "calendar-alt",
+    name: "birthday",
+    type: "date",
+    label: "BIRTHDAY-NOT WORKING YET!",
+    required: true,
+    invalidMessage: "Birthday is required!"
   }
 ];
 
