@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { PureComponent, Fragment } from "react";
 import { NavLink } from "react-router-dom";
 import Accordion from "react-bootstrap/Accordion";
 import Card from "react-bootstrap/Card";
@@ -10,7 +10,7 @@ import ButtonGroup from "react-bootstrap/ButtonGroup";
 // const athletesAPI = "https://theboxathletes.herokuapp.com/athletes/";
 // const athletesAPIDEV = "http://localhost:3000/athletes/";
 
-export default class Athlete extends Component {
+export default class Athlete extends PureComponent {
   render() {
     const { isSelected } = this.props;
     const { name, age, sex, email, photo, _id, phoneNumber } = this.props.info;

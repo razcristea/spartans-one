@@ -107,7 +107,14 @@ function Appointments({ data, date, goBack, refresh }) {
             setAlertMesage={setAlertMesage}
           />
         ) : null}
-        {editingAppointment ? <EditAppointment data={whoToUpdate} /> : null}
+        {editingAppointment ? (
+          <EditAppointment
+            date={date}
+            data={whoToUpdate}
+            dateId={data._id}
+            toggle={setEditingAppointment}
+          />
+        ) : null}
       </div>
     </div>
   );

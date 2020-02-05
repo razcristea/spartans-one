@@ -28,22 +28,18 @@ export default function AthleteCard({ athlete, toggleWillDeleteModal }) {
       <p className="card-email text-muted">
         <i className="fas fa-envelope fa-lg"></i> {athlete.email}
       </p>
-      <ButtonGroup size="sm">
-        <MDBBtn
-          color="danger"
-          size="sm"
-          className="athlete-card-button p-0"
-          onClick={() => toggleWillDeleteModal(athlete._id)}
-        >
-          <i className="fas fa-user-slash fa-lg"></i> Delete
-        </MDBBtn>
+      <ButtonGroup aria-label="Action Buttons" className="mx-auto">
         <Link to={`/athletes/${athlete._id}`}>
+          <MDBBtn color="default" size="sm" className="m-1">
+            <i className="fas fa-dumbbell fa-lg mr-1"></i> Details
+          </MDBBtn>
           <MDBBtn
-            color="success"
+            color="danger"
             size="sm"
-            className="athlete-card-button ml-0"
+            className="m-1"
+            onClick={() => toggleWillDeleteModal(athlete._id)}
           >
-            <i className="fas fa-dumbbell fa-lg"></i> Details
+            <i className="mr-1 fas fa-user-slash fa-lg"></i> Delete
           </MDBBtn>
         </Link>
       </ButtonGroup>

@@ -6,7 +6,7 @@ export default class MyCalendar extends Component {
   state = {
     date: new Date()
   };
-  onChange = date => {
+  onChange = async date => {
     this.setState({ date });
   };
   componentDidMount() {
@@ -31,7 +31,7 @@ export default class MyCalendar extends Component {
   }
   render() {
     return (
-      <div className="mt-2 headingStyle">
+      <div className="mt-2 mx-auto headingStyle mediaQuery">
         <Calendar
           onChange={this.onChange}
           value={this.state.date}

@@ -18,7 +18,7 @@ function Schedule() {
       const response = await fetch(scheduleUrl + selectedDate);
       const data = await response.json();
       if (data.error) {
-        setAppointments(0);
+        await setAppointments(0);
       }
       if (data.length) {
         data[0].entries.sort((a, b) => {
@@ -28,7 +28,7 @@ function Schedule() {
             : 1;
         });
 
-        setAppointments(data[0]);
+        await setAppointments(data[0]);
       }
     } catch (error) {
       console.log(error);

@@ -35,4 +35,7 @@ code {
   .coachPhoto {
     display: none;
   }
+  .mediaQuery {
+    width: 414px;
+  }
 }
