@@ -111,13 +111,6 @@ class AddAthleteV2 extends React.Component {
             <Modal.Title id="contained-modal-title-vcenter">
               <MDBIcon icon="user-plus" className="mr-2" /> Add Athlete
             </Modal.Title>
-            <button
-              type="button"
-              className="close text-white"
-              onClick={this.props.onHide}
-            >
-              <span>&times;</span>
-            </button>
           </Modal.Header>
           <form
             className="needs-validation addform"

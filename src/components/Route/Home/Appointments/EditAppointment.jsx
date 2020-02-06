@@ -10,7 +10,13 @@ import {
 import Select from "react-select";
 import Spinner from "../../Athletes/AddAthleteModal/Spinner";
 
-export default function EditAppointment({ data, date, dateId, toggle }) {
+export default function EditAppointment({
+  data,
+  date,
+  dateId,
+  toggle,
+  refresh
+}) {
   const [selectOptions, setSelectOptions] = useState([]);
   const [selectValue, setSelectValue] = useState([]);
   const [participants, setParticipants] = useState(data.attendees);
@@ -40,8 +46,6 @@ export default function EditAppointment({ data, date, dateId, toggle }) {
   }, [participants]);
 
   const handleSelectChange = selectOptions => {
-    console.log(selectOptions);
-
     if (!selectOptions) {
       return;
     }
@@ -51,9 +55,25 @@ export default function EditAppointment({ data, date, dateId, toggle }) {
   };
 
   const handleEditAppointment = () => {
-    console.log("Submit changes clicked!");
+    const newParticipants = {
+      id: data.id,
+      attendees: participants
+    };
+    setShowSpinner(true);
+    fetch("https://theboxathletes.herokuapp.com/appointments/" + dateId, {
+      headers: { "Content-Type": "application/json" },
+      method: "PUT",
+      body: JSON.stringify(newParticipants)
+    })
+      .then(response => response.json())
+      .then(data => {
+        setShowSpinner(false);
+        toggle(false);
+        console.log(data);
+      })
+      .then(() => refresh(date))
+      .catch(err => console.log(err));
   };
-
   return (
     <div>
       {showSpinner ? <Spinner /> : null}

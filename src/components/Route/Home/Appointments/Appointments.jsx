@@ -84,7 +84,6 @@ function Appointments({ data, date, goBack, refresh }) {
         </h3>
         {!data ? <h5 className="text-white m-2 p-2">No Appointments</h5> : null}
         <MDBDataTable
-          sortable={false}
           btn
           theadTextWhite
           tbodyTextWhite
@@ -113,6 +112,7 @@ function Appointments({ data, date, goBack, refresh }) {
             data={whoToUpdate}
             dateId={data._id}
             toggle={setEditingAppointment}
+            refresh={refresh}
           />
         ) : null}
       </div>
