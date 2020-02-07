@@ -17,6 +17,7 @@ class AddAthleteV2 extends React.Component {
     email: "",
     age: "",
     genre: "",
+    birthday: "",
     personalBest: {
       benchpress: "" || 0,
       strictpress: "" || 0,
@@ -37,6 +38,7 @@ class AddAthleteV2 extends React.Component {
       selectedFile: event.target.files[0]
     });
   };
+
   submitHandler = event => {
     event.preventDefault();
     const form = event.currentTarget;
@@ -83,9 +85,11 @@ class AddAthleteV2 extends React.Component {
       firstInvalidElement.focus();
     }
   };
+
   changeHandler = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
+
   changePrHandler = event => {
     this.setState({
       personalBest: {
@@ -141,7 +145,7 @@ class AddAthleteV2 extends React.Component {
                       label={field.label}
                       labelClass="labelClass"
                       className="addAthleteInput"
-                      required
+                      // required
                     >
                       <div className="invalid-feedback ml-4 pl-3">
                         {field.invalidMessage}

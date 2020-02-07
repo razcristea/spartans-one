@@ -18,8 +18,9 @@ export default class EditInfoModal extends Component {
     this.state = {
       name: props.info.name,
       phoneNumber: props.info.phoneNumber,
-      email: props.info.email,
       age: props.info.age,
+      email: props.info.email,
+      birthday: props.info.birthday,
       show: false,
       message: ""
     };
@@ -29,6 +30,13 @@ export default class EditInfoModal extends Component {
     this.setState({
       [event.target.name]: event.target.value
     });
+    console.log(this.props.info.birthday);
+  };
+
+  getAge = () => {
+    let today = new Date();
+    let birthDate = new Date(this.state.birthday);
+    let age = today.getFullYear() - birthDate.getFullYear();
   };
 
   handleSubmit = event => {
@@ -36,8 +44,9 @@ export default class EditInfoModal extends Component {
     const updatedAthleteDetails = {
       name: this.state.name,
       phoneNumber: this.state.phoneNumber,
+      age: this.state.age,
       email: this.state.email,
-      age: this.state.age
+      birthday: this.state.birthday
     };
 
     this.editAthleteDetails(updatedAthleteDetails);
@@ -123,8 +132,17 @@ export default class EditInfoModal extends Component {
                   label="Age"
                   icon="baby"
                   name="age"
-                  value={this.state.age}
+                  value={this.getAge()}
                   onChange={this.handleChange}
+                />
+                <MDBInput
+                  className="white-text"
+                  icon="calendar-alt"
+                  name="birthday"
+                  type="date"
+                  label="Date of birth"
+                  onChange={this.handleChange}
+                  value={this.state.birthday}
                 />
               </div>
             </MDBModalBody>

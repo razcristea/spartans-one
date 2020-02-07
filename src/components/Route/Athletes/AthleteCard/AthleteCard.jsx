@@ -11,7 +11,7 @@ export default function AthleteCard({ athlete, toggleWillDeleteModal }) {
         <img src={athlete.photo} alt="" className="image-card" />
         <h2 className="card-name">{athlete.name}</h2>
         <h5 className="card-age">
-          {athlete.age} |<span> </span>
+          {getAge()} |<span> </span>
           {athlete.sex === "M" ? (
             <i className="fas fa-mars fa-lg"></i>
           ) : (
