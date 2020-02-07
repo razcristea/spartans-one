@@ -30,13 +30,6 @@ export default class EditInfoModal extends Component {
     this.setState({
       [event.target.name]: event.target.value
     });
-    console.log(this.props.info.birthday);
-  };
-
-  getAge = () => {
-    let today = new Date();
-    let birthDate = new Date(this.state.birthday);
-    let age = today.getFullYear() - birthDate.getFullYear();
   };
 
   handleSubmit = event => {
@@ -127,14 +120,7 @@ export default class EditInfoModal extends Component {
                   value={this.state.email}
                   onChange={this.handleChange}
                 />
-                <MDBInput
-                  className="white-text"
-                  label="Age"
-                  icon="baby"
-                  name="age"
-                  value={this.getAge()}
-                  onChange={this.handleChange}
-                />
+
                 <MDBInput
                   className="white-text"
                   icon="calendar-alt"

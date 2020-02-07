@@ -7,13 +7,39 @@ import { MDBBtn } from "mdbreact";
 import "./Athlete.css";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 
-// const athletesAPI = "https://theboxathletes.herokuapp.com/athletes/";
-// const athletesAPIDEV = "http://localhost:3000/athletes/";
-
 export default class Athlete extends PureComponent {
+  state = {
+    age: "",
+    itsHisBirthday: false
+  };
+
+  getAge = () => {
+    let today = new Date();
+    let birthDate = new Date(this.props.info.birthday);
+    let ageNow = today.getFullYear() - birthDate.getFullYear();
+    let monthCalculation = today.getMonth() - birthDate.getMonth();
+    if (monthCalculation < 0 || today.getDate() < birthDate.getDate()) {
+      ageNow--;
+    }
+
+    if (monthCalculation === 0 && today.getDate() === birthDate.getDate()) {
+      this.setState({
+        itsHisBirthday: true
+      });
+    }
+    return ageNow;
+  };
+
+  componentDidMount() {
+    this.setState({
+      age: this.getAge()
+    });
+  }
+
   render() {
     const { isSelected } = this.props;
-    const { name, age, sex, email, photo, _id, phoneNumber } = this.props.info;
+    const { name, sex, email, photo, _id, phoneNumber } = this.props.info;
+
     return (
       <Fragment>
         <Card
@@ -35,12 +61,18 @@ export default class Athlete extends PureComponent {
               <img className="m-2 imageIcon" src={photo} alt="athlete" /> {name}
             </span>
             {sex === "M" ? (
-              <div className="m-2">
-                <i className="fas fa-mars fa-2x"></i>
+              <div className="m-2 ">
+                {this.state.itsHisBirthday ? (
+                  <i className="fas fa-birthday-cake fa-lg mr-1"></i>
+                ) : null}{" "}
+                <i className="fas fa-mars fa-lg"></i>
               </div>
             ) : (
-              <div className="m-2">
-                <i className="fas fa-venus fa-2x"></i>
+              <div className="m-2 d-flex align-items-center justify-content-center">
+                {this.state.itsHisBirthday ? (
+                  <i className="fas fa-birthday-cake fa-lg mr-1"></i>
+                ) : null}
+                <i className="fas fa-venus fa-lg ml-1"></i>
               </div>
             )}{" "}
           </Accordion.Toggle>
@@ -73,7 +105,7 @@ export default class Athlete extends PureComponent {
                 </small>
                 <span style={{ display: "block" }}>
                   {" "}
-                  Age: {age} | Sex: {sex}
+                  Age: {this.state.age} | Sex: {sex}
                 </span>
               </Card.Text>
               <ButtonGroup aria-label="Action Buttons">

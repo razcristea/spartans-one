@@ -26,7 +26,6 @@ export default class AthletesContainer extends Component {
       idToDelete: ""
     };
   }
-
   showSearchInput = () => {
     this.setState({ isSearching: !this.state.isSearching });
   };

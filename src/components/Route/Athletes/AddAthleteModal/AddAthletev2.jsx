@@ -32,6 +32,7 @@ class AddAthleteV2 extends React.Component {
     selectedFile: null,
     spinner: false
   };
+
   onChangeFileHandler = event => {
     this.setState({
       selectedFileName: this.state.phone + event.target.files[0].name,
@@ -50,6 +51,7 @@ class AddAthleteV2 extends React.Component {
       formData.append("email", this.state.email);
       formData.append("age", this.state.age);
       formData.append("sex", this.state.genre);
+      formData.append("birthday", this.state.birthday);
       formData.append("personalBest", JSON.stringify(this.state.personalBest));
       this.state.selectedFile
         ? formData.append(
@@ -87,7 +89,9 @@ class AddAthleteV2 extends React.Component {
   };
 
   changeHandler = event => {
-    this.setState({ [event.target.name]: event.target.value });
+    this.setState({
+      [event.target.name]: event.target.value
+    });
   };
 
   changePrHandler = event => {
@@ -100,6 +104,8 @@ class AddAthleteV2 extends React.Component {
   };
 
   render() {
+    console.log(this.state.birthday);
+
     return (
       <React.Fragment>
         {this.state.spinner ? <Spinner /> : null}
@@ -138,7 +144,7 @@ class AddAthleteV2 extends React.Component {
                       label={field.label}
                       labelClass="labelClass"
                       className="addAthleteInput"
-                      // required
+                      required
                     >
                       <div className="invalid-feedback ml-4 pl-3">
                         {field.invalidMessage}
