@@ -107,13 +107,6 @@ export default function AddWods(props) {
           <Modal.Title id="contained-modal-title-vcenter">
             <MDBIcon icon="dumbbell" className="mr-2" /> Add Wod
           </Modal.Title>
-          <button
-            type="button"
-            className="close text-white"
-            onClick={props.toggleModal}
-          >
-            <span>&times;</span>
-          </button>
         </Modal.Header>
         <form
           className="needs-validation"
@@ -129,7 +122,17 @@ export default function AddWods(props) {
               <MDBIcon icon="info" className="mr-2" /> Wod Info
             </h5>
             <MDBRow className="m-3 rounded border">
-              <MDBCol md="4">
+              <MDBCol md="6">
+                <Select
+                  value={selectedType}
+                  onChange={handleChange}
+                  className="mx-auto w-75 mt-4"
+                  required
+                  options={props.options}
+                  placeholder="Please Select a Type!"
+                />
+              </MDBCol>
+              <MDBCol md="6">
                 <MDBInput
                   className="text-white addWodInput"
                   icon="pen"
@@ -144,17 +147,8 @@ export default function AddWods(props) {
                   <div className="valid-feedback ml-4 pl-3">Looks good!</div>
                 </MDBInput>
               </MDBCol>
-              <MDBCol md="4">
-                <Select
-                  value={selectedType}
-                  onChange={handleChange}
-                  className="mx-auto w-100 mt-1"
-                  required
-                  options={props.options}
-                  placeholder="Please Select a Type!"
-                />
-              </MDBCol>
-              <MDBCol md="4">
+
+              <MDBCol md="6">
                 <MDBInput
                   className="text-white addWodInput"
                   icon="align-left"
@@ -165,7 +159,7 @@ export default function AddWods(props) {
                   onChange={e => setDescription(e.target.value)}
                 ></MDBInput>
               </MDBCol>
-              <MDBCol md="4">
+              <MDBCol md="6">
                 <MDBInput
                   className="text-white addWodInput"
                   icon="clock"
