@@ -84,61 +84,47 @@ export default class EditInfoModal extends Component {
         />
         <MDBContainer>
           <MDBModal isOpen={isShowing} toggle={() => show(!isShowing)} centered>
-            <MDBModalHeader
-              toggle={() => show(!isShowing)}
-              style={{
-                backgroundColor: "#1f1f1f",
-                border: "2px ridge white",
-                color: "#fff"
-              }}
-            >
+            <MDBModalHeader className="border bg-dark text-white">
               <MDBIcon icon="user-edit" size="lg" className="mr-2" /> Edit info
             </MDBModalHeader>
-            <MDBModalBody className="bg-dark text-white border">
-              <div className="form-group">
-                <MDBInput
-                  className="white-text"
-                  label="Name"
-                  icon="user"
-                  name="name"
-                  value={this.state.name}
-                  onChange={this.handleChange}
-                />
-                <MDBInput
-                  className="white-text"
-                  label="Phone"
-                  icon="phone"
-                  name="phoneNumber"
-                  value={this.state.phoneNumber}
-                  onChange={this.handleChange}
-                />
-                <MDBInput
-                  className="white-text"
-                  label="Email"
-                  icon="envelope-open"
-                  name="email"
-                  value={this.state.email}
-                  onChange={this.handleChange}
-                />
-
-                <MDBInput
-                  className="white-text"
-                  icon="calendar-alt"
-                  name="birthday"
-                  type="date"
-                  label="Date of birth"
-                  onChange={this.handleChange}
-                  value={this.state.birthday}
-                />
-              </div>
-            </MDBModalBody>
-            <MDBModalFooter
-              style={{
-                backgroundColor: "#1f1f1f",
-                border: "2px ridge white",
-                color: "#fff"
-              }}
+            <MDBModalBody
+              className="border text-white"
+              style={{ backgroundColor: "#383838", overflow: "auto" }}
             >
+              <MDBInput
+                className="white-text"
+                label="Name"
+                icon="user"
+                name="name"
+                value={this.state.name}
+                onChange={this.handleChange}
+              />
+              <MDBInput
+                className="white-text"
+                label="Phone"
+                icon="phone"
+                name="phoneNumber"
+                value={this.state.phoneNumber}
+                onChange={this.handleChange}
+              />
+              <MDBInput
+                className="white-text"
+                label="Email"
+                icon="envelope-open"
+                name="email"
+                value={this.state.email}
+                onChange={this.handleChange}
+              />
+              <MDBInput
+                className="white-text"
+                icon="calendar-alt"
+                name="birthday"
+                type="date"
+                onChange={this.handleChange}
+                value={this.state.birthday}
+              />
+            </MDBModalBody>
+            <MDBModalFooter className="bg-dark border d-flex justify-content-around modalFooter">
               <MDBBtn color="danger" size="sm" onClick={() => show(!isShowing)}>
                 <MDBIcon icon="ban" size="lg" className="mr-2" /> Close
               </MDBBtn>

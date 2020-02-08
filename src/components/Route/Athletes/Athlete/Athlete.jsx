@@ -38,7 +38,15 @@ export default class Athlete extends PureComponent {
 
   render() {
     const { isSelected } = this.props;
-    const { name, sex, email, photo, _id, phoneNumber } = this.props.info;
+    const {
+      name,
+      sex,
+      email,
+      photo,
+      _id,
+      phoneNumber,
+      birthday
+    } = this.props.info;
 
     return (
       <Fragment>
@@ -103,10 +111,11 @@ export default class Athlete extends PureComponent {
                 <small className="text-muted">
                   <i className="fas fa-envelope fa-lg"></i> {email}
                 </small>
-                <span style={{ display: "block" }}>
+                <span className="p-1 d-block">
                   {" "}
                   Age: {this.state.age} | Sex: {sex}
                 </span>
+                <span className="p-1 d-block">Birthday: {birthday}</span>
               </Card.Text>
               <ButtonGroup aria-label="Action Buttons">
                 <MDBBtn

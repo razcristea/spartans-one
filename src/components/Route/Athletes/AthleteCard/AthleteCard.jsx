@@ -19,16 +19,23 @@ export default function AthleteCard({ athlete, toggleWillDeleteModal }) {
           )}
         </h5>
       </div>
-      <p className="card-phone">
+      <p className="card-phone mt-1">
         <i className="fas fa-phone-square fa-lg"></i>{" "}
         {athlete.phoneNumber.substring(0, 4)}-
         {athlete.phoneNumber.substring(4, 7)}-
         {athlete.phoneNumber.substring(7, 10)}
       </p>
-      <p className="card-email text-muted">
+      <p className="card-email text-muted small">
         <i className="fas fa-envelope fa-lg"></i> {athlete.email}
       </p>
-      <ButtonGroup aria-label="Action Buttons" className="mx-auto">
+      <p>
+        <i className="fas fa-birthday-cake mr-1 fa-lg"></i>
+        {athlete.birthday
+          .split("-")
+          .reverse()
+          .join("-")}
+      </p>
+      <ButtonGroup aria-label="Action Buttons" className="mx-auto mb-2">
         <MDBBtn
           color="danger"
           size="sm"

@@ -17,7 +17,6 @@ class AddAthleteV2 extends React.Component {
     email: "",
     birthday: "",
     genre: "",
-    birthday: "",
     personalBest: {
       benchpress: "" || 0,
       strictpress: "" || 0,
@@ -52,7 +51,6 @@ class AddAthleteV2 extends React.Component {
       formData.append("email", this.state.email);
       formData.append("birthday", this.state.birthday);
       formData.append("sex", this.state.genre);
-      formData.append("birthday", this.state.birthday);
       formData.append("personalBest", JSON.stringify(this.state.personalBest));
       this.state.selectedFile
         ? formData.append(

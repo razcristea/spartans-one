@@ -217,7 +217,6 @@ export default function AddWods(props) {
                   label="Male/Kg (default:0)"
                 ></MDBInput>
               </MDBCol>
-
               <MDBCol className="d-flex align-items-end flex-column bd-highlight example-parent">
                 <MDBBtn
                   color="warning"
@@ -237,7 +236,7 @@ export default function AddWods(props) {
             {exercises.map((exercise, i) => (
               <div
                 key={i}
-                className="mb-1 ml-5 mr-5 border-bottom d-flex justify-content-between align-items-center"
+                className="mb-3 ml-5 mr-5 border-bottom d-flex justify-content-between align-items-center"
                 style={{ fontSize: "13px" }}
               >
                 <span className="ml-2" key={exercise.name}>
@@ -256,7 +255,7 @@ export default function AddWods(props) {
                 </MDBBtn>
               </div>
             ))}
-            <MDBCol md="12" className="mb-3 mt-3">
+            <MDBCol md="12" className="mb-3 mt-5">
               <div className="custom-control custom-checkbox pl-3">
                 <input
                   className="custom-control-input"

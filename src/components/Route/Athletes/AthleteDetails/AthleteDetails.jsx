@@ -10,7 +10,7 @@ import "./AthleteDetails.css";
 
 export default function AthleteDetails({ id, info, getAthletes }) {
   const [isEditing, setisEditing] = useState(false);
-  const { name, sex, email, photo, _id, phoneNumber, wods } = info;
+  const { name, sex, email, photo, _id, phoneNumber, birthday, wods } = info;
 
   const getAge = () => {
     let today = new Date();
@@ -53,7 +53,7 @@ export default function AthleteDetails({ id, info, getAthletes }) {
                 }}
               />
               <div className="ml-2">
-                <Card.Title as={"h3"} className="mt-3">
+                <Card.Title as={"h4"} className="mt-3">
                   {name}
                 </Card.Title>
                 <Card.Text className="text-white">
@@ -63,9 +63,16 @@ export default function AthleteDetails({ id, info, getAthletes }) {
                     {phoneNumber.substring(7, 10)}
                   </span>
                   <small className="text-muted">{email}</small>
-                  <span style={{ display: "block" }}>
+                  <span className="p-1 d-block">
                     {" "}
                     Age: {age} | Sex: {sex}
+                  </span>
+                  <span className="p-1 d-block">
+                    <i className="fas fa-birthday-cake mr-1 fa-lg"></i>{" "}
+                    {birthday
+                      .split("-")
+                      .reverse()
+                      .join("-")}
                   </span>
                 </Card.Text>
                 <MDBBtn

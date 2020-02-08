@@ -30,12 +30,16 @@ export default class Footer extends PureComponent {
   };
   componentDidMount() {
     this.getAthletes();
-    const date =
-      this.today.getDate() +
-      "." +
-      (this.today.getMonth() + 1) +
-      "." +
-      this.today.getFullYear();
+    const year = this.today.getFullYear();
+    const month =
+      this.today.getMonth() + 1 < 10
+        ? "0" + (this.today.getMonth() + 1)
+        : this.today.getMonth() + 1;
+    const day =
+      this.today.getDate() < 10
+        ? "0" + this.today.getDate()
+        : this.today.getDate();
+    const date = year + "-" + month + "-" + day;
     this.setState({ date: date });
   }
   componentDidUpdate(prevProps) {
@@ -48,23 +52,20 @@ export default class Footer extends PureComponent {
       .then(response => response.json())
       .then(data => {
         let female = 0,
-          male = 0;
-        let birthdays = 0;
+          male = 0,
+          birthdays = 0;
         data.forEach(entry => {
           entry.sex === "M" ? male++ : female++;
-          let today = new Date();
-          let birthDate = new Date(entry.birthday);
-          let month = today.getMonth() - birthDate.getMonth();
-          if (month === 0 && today.getDate() === birthDate.getDate()) {
+          if (entry.birthday.slice(4) === this.state.date.slice(4)) {
             birthdays++;
           }
         });
 
         this.setState({
           athleteCount: data.length,
-          female: female,
-          male: male,
-          birthdays: birthdays
+          female,
+          male,
+          birthdays
         });
       })
       .catch(error => {
@@ -77,7 +78,11 @@ export default class Footer extends PureComponent {
         <div>
           <div>Welcome, Coach Vali!</div>
           <div className="text-muted text-center text-small">
-            <i className="far fa-calendar-alt"></i> {this.state.date}
+            <i className="far fa-calendar-alt"></i>{" "}
+            {this.state.date
+              .split("-")
+              .reverse()
+              .join("-")}
           </div>
         </div>
         <div className="text-center">
