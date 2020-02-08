@@ -3,7 +3,7 @@ import Accordion from "react-bootstrap/Accordion";
 import Card from "react-bootstrap/Card";
 import { MDBBtn, MDBBtnGroup } from "mdbreact";
 import "./Wod.css";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export default class Wod extends Component {
   state = { icon: "" };
@@ -92,11 +92,6 @@ export default class Wod extends Component {
                   })}
                 </div>
                 <MDBBtnGroup>
-                  <Link to={`/wods/${_id}`}>
-                    <MDBBtn className="m-2" size="sm">
-                      <i className="fas fa-info-circle fa-lg mr-1"></i> Details
-                    </MDBBtn>
-                  </Link>
                   <MDBBtn
                     className="m-2"
                     color="danger"
@@ -105,6 +100,11 @@ export default class Wod extends Component {
                   >
                     <i className="fas fa-trash fa-lg mr-1"></i> Delete
                   </MDBBtn>
+                  <NavLink to={`/wods/${_id}`}>
+                    <MDBBtn className="m-2" size="sm">
+                      <i className="fas fa-info-circle fa-lg mr-1"></i> Details
+                    </MDBBtn>
+                  </NavLink>
                 </MDBBtnGroup>
               </div>
             </Card.Body>

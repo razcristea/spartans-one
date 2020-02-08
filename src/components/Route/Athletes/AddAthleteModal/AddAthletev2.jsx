@@ -15,7 +15,7 @@ class AddAthleteV2 extends React.Component {
     name: "",
     phone: "",
     email: "",
-    age: "",
+    birthday: "",
     genre: "",
     personalBest: {
       benchpress: "" || 0,
@@ -33,7 +33,8 @@ class AddAthleteV2 extends React.Component {
   };
   onChangeFileHandler = event => {
     this.setState({
-      selectedFileName: this.state.phone + event.target.files[0].name,
+      selectedFileName:
+        this.state.name.replace(/\s+/g, "") + event.target.files[0].name,
       selectedFile: event.target.files[0]
     });
   };
@@ -46,7 +47,7 @@ class AddAthleteV2 extends React.Component {
       formData.append("name", this.state.name);
       formData.append("phoneNumber", this.state.phone);
       formData.append("email", this.state.email);
-      formData.append("age", this.state.age);
+      formData.append("birthday", this.state.birthday);
       formData.append("sex", this.state.genre);
       formData.append("personalBest", JSON.stringify(this.state.personalBest));
       this.state.selectedFile

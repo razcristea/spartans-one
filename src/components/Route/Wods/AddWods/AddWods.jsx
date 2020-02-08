@@ -99,6 +99,7 @@ export default function AddWods(props) {
       {showSpinner ? <Spinner /> : null}
       <Modal
         show
+        onHide={props.toggleModal}
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered

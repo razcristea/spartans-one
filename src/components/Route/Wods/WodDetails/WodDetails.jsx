@@ -63,7 +63,7 @@ export default function WodDetails({ wodInfo, athletes }) {
     <Fragment>
       <GoBack />
       <div className="text-center pb-5 mb-2">
-        <div className="w-75 mx-auto m-3 p-3 wod-card-style headingStyle text-white font-weight-bold">
+        <div className="mx-auto m-2 p-3 wod-card-style headingStyle text-white font-weight-bold mediaQuery">
           <h3 className="p-2">{name}</h3>
           <h5>{type}</h5>
           {description !== "N/A" ? <p>Details: {description}</p> : null}
@@ -88,7 +88,7 @@ export default function WodDetails({ wodInfo, athletes }) {
           - Hall Of Fame -
         </h4>
         {neededAthletes.length ? (
-          <div className="p-1 m-2 w-100  mx-auto font-weight-bold card">
+          <div className="p-1 m-2 mediaQuery  mx-auto font-weight-bold card">
             <MDBTable className="table-striped table-dark  table-hover table-wod-style my-auto">
               <MDBTableHead>
                 <tr className="table-head-style">
@@ -136,7 +136,8 @@ export default function WodDetails({ wodInfo, athletes }) {
           </div>
         ) : (
           <div className="text-center text-white mt-3 font-weight-bold">
-            Nobody has done this Wod yet
+            <i className="fas fa-flushed mr-1 fa-2x"></i> Nobody has done this
+            Wod yet! <i className="far fa-meh-rolling-eyes ml-1 fa-2x"></i>
           </div>
         )}
       </div>

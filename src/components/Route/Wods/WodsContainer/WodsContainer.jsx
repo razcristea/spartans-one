@@ -1,7 +1,11 @@
 import React, { Component, Fragment } from "react";
-import { MDBBtn } from "mdbreact";
-import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
+import {
+  MDBBtn,
+  MDBModalHeader,
+  MDBModalFooter,
+  MDBModalBody,
+  MDBModal
+} from "mdbreact";
 import Select from "react-select";
 import Wod from "../Wod/Wod";
 import Accordion from "react-bootstrap/Accordion";
@@ -101,24 +105,29 @@ export default class WodsContainer extends Component {
   render() {
     return (
       <Fragment>
-        <Modal
-          show={this.state.willDelete}
-          onHide={this.closeDeleteModal}
+        <MDBModal
+          isOpen={this.state.willDelete}
+          toggle={this.closeDeleteModal}
           centered
         >
-          <Modal.Header closeButton></Modal.Header>
-          <Modal.Body className="delete-message">
-            Are you sure you want to delete this wod?
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="danger" onClick={this.deleteWod}>
-              Yes
-            </Button>
-            <Button variant="success" onClick={this.closeDeleteModal}>
-              No
-            </Button>
-          </Modal.Footer>
-        </Modal>
+          <MDBModalHeader className="border bg-dark text-white justify-content-center">
+            <i className="far fa-sad-cry fa-2x"></i>
+          </MDBModalHeader>
+          <MDBModalBody
+            className="text-center border text-white"
+            style={{ backgroundColor: "#383838", overflow: "auto" }}
+          >
+            Are you sure you want to delete this Wod?
+          </MDBModalBody>
+          <MDBModalFooter className="bg-dark border d-flex justify-content-around modalFooter">
+            <MDBBtn color="danger" size="sm" onClick={this.deleteAthlete}>
+              <i className="fas fa-heart-broken fa-lg mr-1"></i> Yes
+            </MDBBtn>
+            <MDBBtn color="success" size="sm" onClick={this.closeDeleteModal}>
+              <i className="fas fa-running fa-lg mr-1"></i> No
+            </MDBBtn>
+          </MDBModalFooter>
+        </MDBModal>
         <AlertMessage
           show={this.state.alertDeleted}
           messageAlertDeleted={this.state.messageAlertDeleted}

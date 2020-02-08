@@ -77,11 +77,6 @@ export default class Athlete extends PureComponent {
                 </span>
               </Card.Text>
               <ButtonGroup aria-label="Action Buttons">
-                <NavLink to={`/athletes/${_id}`}>
-                  <MDBBtn color="default" className="m-1" size="sm">
-                    <i className="fas fa-info-circle fa-lg mr-1"></i> Details
-                  </MDBBtn>
-                </NavLink>
                 <MDBBtn
                   color="danger"
                   onClick={() => this.props.toggleWillDeleteModal(_id)}
@@ -90,6 +85,11 @@ export default class Athlete extends PureComponent {
                 >
                   <i className="fas fa-user-slash fa-lg mr-1"></i> Delete
                 </MDBBtn>
+                <NavLink to={`/athletes/${_id}`}>
+                  <MDBBtn color="default" className="m-1" size="sm">
+                    <i className="fas fa-info-circle fa-lg mr-1"></i> Details
+                  </MDBBtn>
+                </NavLink>
               </ButtonGroup>
             </Card.Body>
           </Accordion.Collapse>

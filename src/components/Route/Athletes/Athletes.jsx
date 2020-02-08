@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { Route } from "react-router-dom";
 import AthletesContainer from "./AthletesContainer/AthletesContainer";
 import AthleteDetails from "./AthleteDetails/AthleteDetails";
@@ -6,7 +6,7 @@ import Loader from "../../../helpers/Loader";
 
 const athletesAPI = "https://theboxathletes.herokuapp.com/athletes/";
 
-export default class Athletes extends Component {
+export default class Athletes extends PureComponent {
   state = {
     athletes: [],
     showLoader: false
@@ -34,6 +34,8 @@ export default class Athletes extends Component {
       .catch(err => console.log(err));
   };
   render() {
+    console.log(this.state.athletes);
+
     return (
       <div>
         <Route

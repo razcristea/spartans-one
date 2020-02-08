@@ -147,7 +147,7 @@ function CreateAppointment({
     <div>
       {showSpinner ? <Spinner /> : null}
       <MDBContainer>
-        <MDBModal isOpen={isShowing} toggle={() => toggle(false)}>
+        <MDBModal isOpen={isShowing} toggle={() => toggle(false)} centered>
           <MDBModalHeader className="border bg-dark text-white modalHeader">
             <i className="far fa-calendar-check mr-2"></i>{" "}
             <span style={{ fontWeight: "500" }}>Create Appointment</span>
