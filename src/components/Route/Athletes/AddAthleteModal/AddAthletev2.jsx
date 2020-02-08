@@ -17,6 +17,7 @@ class AddAthleteV2 extends React.Component {
     email: "",
     birthday: "",
     genre: "",
+    birthday: "",
     personalBest: {
       benchpress: "" || 0,
       strictpress: "" || 0,
@@ -31,6 +32,7 @@ class AddAthleteV2 extends React.Component {
     selectedFile: null,
     spinner: false
   };
+
   onChangeFileHandler = event => {
     this.setState({
       selectedFileName:
@@ -38,6 +40,7 @@ class AddAthleteV2 extends React.Component {
       selectedFile: event.target.files[0]
     });
   };
+
   submitHandler = event => {
     event.preventDefault();
     const form = event.currentTarget;
@@ -49,6 +52,7 @@ class AddAthleteV2 extends React.Component {
       formData.append("email", this.state.email);
       formData.append("birthday", this.state.birthday);
       formData.append("sex", this.state.genre);
+      formData.append("birthday", this.state.birthday);
       formData.append("personalBest", JSON.stringify(this.state.personalBest));
       this.state.selectedFile
         ? formData.append(
@@ -84,9 +88,13 @@ class AddAthleteV2 extends React.Component {
       firstInvalidElement.focus();
     }
   };
+
   changeHandler = event => {
-    this.setState({ [event.target.name]: event.target.value });
+    this.setState({
+      [event.target.name]: event.target.value
+    });
   };
+
   changePrHandler = event => {
     this.setState({
       personalBest: {
@@ -97,6 +105,8 @@ class AddAthleteV2 extends React.Component {
   };
 
   render() {
+    console.log(this.state.birthday);
+
     return (
       <React.Fragment>
         {this.state.spinner ? <Spinner /> : null}

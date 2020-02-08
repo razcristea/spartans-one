@@ -10,7 +10,19 @@ import "./AthleteDetails.css";
 
 export default function AthleteDetails({ id, info, getAthletes }) {
   const [isEditing, setisEditing] = useState(false);
-  const { name, age, sex, email, photo, _id, phoneNumber, wods } = info;
+  const { name, sex, email, photo, _id, phoneNumber, wods } = info;
+
+  const getAge = () => {
+    let today = new Date();
+    let birthDate = new Date(info.birthday);
+    let ageNow = today.getFullYear() - birthDate.getFullYear();
+    let month = today.getMonth() - birthDate.getMonth();
+    if (month < 0 || today.getDate() < birthDate.getDate()) {
+      ageNow--;
+    }
+    return ageNow;
+  };
+  const [age] = useState(getAge());
 
   return (
     <Fragment>

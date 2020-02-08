@@ -18,8 +18,9 @@ export default class EditInfoModal extends Component {
     this.state = {
       name: props.info.name,
       phoneNumber: props.info.phoneNumber,
-      email: props.info.email,
       age: props.info.age,
+      email: props.info.email,
+      birthday: props.info.birthday,
       show: false,
       message: ""
     };
@@ -36,8 +37,9 @@ export default class EditInfoModal extends Component {
     const updatedAthleteDetails = {
       name: this.state.name,
       phoneNumber: this.state.phoneNumber,
+      age: this.state.age,
       email: this.state.email,
-      age: this.state.age
+      birthday: this.state.birthday
     };
 
     this.editAthleteDetails(updatedAthleteDetails);
@@ -118,13 +120,15 @@ export default class EditInfoModal extends Component {
                   value={this.state.email}
                   onChange={this.handleChange}
                 />
+
                 <MDBInput
                   className="white-text"
-                  label="Age"
-                  icon="baby"
-                  name="age"
-                  value={this.state.age}
+                  icon="calendar-alt"
+                  name="birthday"
+                  type="date"
+                  label="Date of birth"
                   onChange={this.handleChange}
+                  value={this.state.birthday}
                 />
               </div>
             </MDBModalBody>

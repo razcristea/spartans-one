@@ -25,6 +25,7 @@ export default class Footer extends PureComponent {
     athleteCount: 0,
     female: 0,
     male: 0,
+    birthdays: 0,
     date: ""
   };
   componentDidMount() {
@@ -48,11 +49,22 @@ export default class Footer extends PureComponent {
       .then(data => {
         let female = 0,
           male = 0;
-        data.forEach(entry => (entry.sex === "M" ? male++ : female++));
+        let birthdays = 0;
+        data.forEach(entry => {
+          entry.sex === "M" ? male++ : female++;
+          let today = new Date();
+          let birthDate = new Date(entry.birthday);
+          let month = today.getMonth() - birthDate.getMonth();
+          if (month === 0 && today.getDate() === birthDate.getDate()) {
+            birthdays++;
+          }
+        });
+
         this.setState({
           athleteCount: data.length,
           female: female,
-          male: male
+          male: male,
+          birthdays: birthdays
         });
       })
       .catch(error => {
@@ -70,8 +82,9 @@ export default class Footer extends PureComponent {
         </div>
         <div className="text-center">
           <div className="mb-1">
-            {this.state.athleteCount} <i className="fas fa-users fa-lg"></i> | 0{" "}
-            <i className="fas fa-birthday-cake fa-lg"></i>
+            {this.state.athleteCount} <i className="fas fa-users fa-lg"></i> |{" "}
+            {this.state.birthdays}{" "}
+            <i className="fas fa-birthday-cake fa-md"></i>
           </div>
           <div>
             {this.state.male} <i className="fas fa-mars fa-lg"></i> |{" "}
