@@ -26,7 +26,8 @@ export default class Footer extends PureComponent {
     female: 0,
     male: 0,
     birthdays: 0,
-    date: ""
+    date: "",
+    dateFormat: ""
   };
   componentDidMount() {
     this.getAthletes();
@@ -40,7 +41,8 @@ export default class Footer extends PureComponent {
         ? "0" + this.today.getDate()
         : this.today.getDate();
     const date = day + "-" + month + "-" + year;
-    this.setState({ date: date });
+    const dateFormat = year + "-" + month + "-" + day;
+    this.setState({ date: date, dateFormat: dateFormat });
   }
   componentDidUpdate(prevProps) {
     if (prevProps.count !== this.props.count) {
@@ -56,7 +58,7 @@ export default class Footer extends PureComponent {
           birthdays = 0;
         data.forEach(entry => {
           entry.sex === "M" ? male++ : female++;
-          if (entry.birthday.slice(4) === this.state.date.slice(4)) {
+          if (entry.birthday.slice(4) === this.state.dateFormat.slice(4)) {
             birthdays++;
           }
         });
