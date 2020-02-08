@@ -26,8 +26,7 @@ export default class Footer extends PureComponent {
     female: 0,
     male: 0,
     birthdays: 0,
-    date: "",
-    dateFormat: ""
+    date: ""
   };
   componentDidMount() {
     this.getAthletes();
@@ -40,9 +39,8 @@ export default class Footer extends PureComponent {
       this.today.getDate() < 10
         ? "0" + this.today.getDate()
         : this.today.getDate();
-    const date = day + "-" + month + "-" + year;
-    const dateFormat = year + "-" + month + "-" + day;
-    this.setState({ date: date, dateFormat: dateFormat });
+    const date = year + "-" + month + "-" + day;
+    this.setState({ date: date });
   }
   componentDidUpdate(prevProps) {
     if (prevProps.count !== this.props.count) {
@@ -58,7 +56,7 @@ export default class Footer extends PureComponent {
           birthdays = 0;
         data.forEach(entry => {
           entry.sex === "M" ? male++ : female++;
-          if (entry.birthday.slice(4) === this.state.dateFormat.slice(4)) {
+          if (entry.birthday.slice(4) === this.state.date.slice(4)) {
             birthdays++;
           }
         });
@@ -80,7 +78,11 @@ export default class Footer extends PureComponent {
         <div>
           <div>Welcome, Coach Vali!</div>
           <div className="text-muted text-center text-small">
-            <i className="far fa-calendar-alt"></i> {this.state.date}
+            <i className="far fa-calendar-alt"></i>{" "}
+            {this.state.date
+              .split("-")
+              .reverse()
+              .join("-")}
           </div>
         </div>
         <div className="text-center">
