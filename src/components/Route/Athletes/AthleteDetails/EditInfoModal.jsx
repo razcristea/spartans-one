@@ -65,7 +65,7 @@ export default class EditInfoModal extends Component {
         return response.json();
       })
       .then(answer => {
-        this.displayAlert(answer);
+        this.displayAlert(answer.message);
       })
       .then(() => {
         setTimeout(() => {

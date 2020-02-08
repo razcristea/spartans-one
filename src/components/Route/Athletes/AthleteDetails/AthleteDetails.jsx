@@ -39,7 +39,7 @@ export default function AthleteDetails({ id, info, getAthletes }) {
         style={{ backgroundColor: "#353535" }}
       >
         <div eventkey={_id}>
-          <Card.Body className="text-center">
+          <Card.Body className="text-center bigScreen mx-auto">
             <div className="infoSection">
               <img
                 alt={name}
@@ -84,7 +84,11 @@ export default function AthleteDetails({ id, info, getAthletes }) {
                 </MDBBtn>
               </div>
             </div>
-            <PersonalBest id={id} />
+            <PersonalBest
+              id={id}
+              info={info.personalBest}
+              refresh={getAthletes}
+            />
             <div className="addwod mt-3">
               <Workouts
                 wods={wods}

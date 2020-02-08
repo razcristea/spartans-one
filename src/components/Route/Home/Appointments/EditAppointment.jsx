@@ -69,7 +69,6 @@ export default function EditAppointment({
       .then(data => {
         setShowSpinner(false);
         toggle(false);
-        console.log(data);
       })
       .then(() => refresh(date))
       .catch(err => console.log(err));

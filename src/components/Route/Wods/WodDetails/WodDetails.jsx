@@ -88,7 +88,7 @@ export default function WodDetails({ wodInfo, athletes }) {
           - Hall Of Fame -
         </h4>
         {neededAthletes.length ? (
-          <div className="p-1 m-2 mediaQuery  mx-auto font-weight-bold card">
+          <div className="p-1 m-2 bigScreen mx-auto font-weight-bold card">
             <MDBTable className="table-striped table-dark  table-hover table-wod-style my-auto">
               <MDBTableHead>
                 <tr className="table-head-style">

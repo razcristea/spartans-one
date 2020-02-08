@@ -74,12 +74,13 @@ export default function AddWorkoutForm({ count, id, updateWods }) {
 
   useEffect(() => {
     const today = new Date();
-    const date =
-      today.getDate() +
-      "." +
-      (today.getMonth() + 1) +
-      "." +
-      today.getFullYear();
+    const year = today.getFullYear();
+    const month =
+      today.getMonth() + 1 < 10
+        ? "0" + (today.getMonth() + 1)
+        : today.getMonth() + 1;
+    const day = today.getDate() < 10 ? "0" + today.getDate() : today.getDate();
+    const date = day + "-" + month + "-" + year;
     setCurrentDay(date);
     fetch(wodsApi)
       .then(response => response.json())

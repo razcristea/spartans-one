@@ -115,7 +115,13 @@ export default class Athlete extends PureComponent {
                   {" "}
                   Age: {this.state.age} | Sex: {sex}
                 </span>
-                <span className="p-1 d-block">Birthday: {birthday}</span>
+                <span className="p-1 d-block">
+                  Birthday:{" "}
+                  {birthday
+                    .split("-")
+                    .reverse()
+                    .join("-")}
+                </span>
               </Card.Text>
               <ButtonGroup aria-label="Action Buttons">
                 <MDBBtn

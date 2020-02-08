@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState } from "react";
 import Button from "react-bootstrap/Button";
 import ListGroup from "react-bootstrap/ListGroup";
 import Form from "react-bootstrap/Form";
@@ -8,19 +8,11 @@ import { MDBIcon } from "mdbreact";
 
 const athletesAPI = "https://theboxathletes.herokuapp.com/athletes/";
 
-export default function PersonalBest({ id }) {
+export default function PersonalBest({ id, info, refresh }) {
   const inputRef = useRef(null);
   const [percentage, setPercentage] = useState(50);
   const [editingPersonalBest, setEditingPersonalBest] = useState(false);
-  const [personalBest, setPersonalBest] = useState([]);
-
-  useEffect(() => {
-    fetch(athletesAPI + id)
-      .then(response => response.json())
-      .then(data => {
-        setPersonalBest(data.personalBest);
-      });
-  }, [id, editingPersonalBest]);
+  const [personalBest, setPersonalBest] = useState(info);
 
   const updateRecords = e => {
     // first, target the scores for current id, and select all scores
@@ -66,7 +58,6 @@ export default function PersonalBest({ id }) {
         body: JSON.stringify({ personalBest: newScore })
       })
         .then(response => response.json())
-        .then(data => console.log(data))
         .then(data => {
           Object.keys(elements).map(key => (elements[key].disabled = true));
           Array.from(elements).map(
@@ -74,6 +65,8 @@ export default function PersonalBest({ id }) {
           );
           Array.from(elements).map(element => (element.style.color = "black"));
           setEditingPersonalBest(false);
+          setPersonalBest(data.updatedField.personalBest);
+          refresh();
           editBtn.innerHTML = `<div> <i class="fas fa-cog fa-2x mr-1"> </i> Change</div>`;
         })
         .catch(err => console.log(err));

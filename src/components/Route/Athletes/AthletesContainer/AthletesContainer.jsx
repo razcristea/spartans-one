@@ -155,7 +155,7 @@ export default class AthletesContainer extends Component {
                 type="search"
                 autoFocus
                 placeholder="Athlete Name..."
-                className="p-1 pl-2 searchInput"
+                className="p-1 pl-2 searchInput m-2"
                 onChange={this.doTheSearch}
                 onBlur={this.showSearchInput}
               />

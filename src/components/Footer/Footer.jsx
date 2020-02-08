@@ -39,7 +39,7 @@ export default class Footer extends PureComponent {
       this.today.getDate() < 10
         ? "0" + this.today.getDate()
         : this.today.getDate();
-    const date = year + "-" + month + "-" + day;
+    const date = day + "-" + month + "-" + year;
     this.setState({ date: date });
   }
   componentDidUpdate(prevProps) {
@@ -78,11 +78,7 @@ export default class Footer extends PureComponent {
         <div>
           <div>Welcome, Coach Vali!</div>
           <div className="text-muted text-center text-small">
-            <i className="far fa-calendar-alt"></i>{" "}
-            {this.state.date
-              .split("-")
-              .reverse()
-              .join("-")}
+            <i className="far fa-calendar-alt"></i> {this.state.date}
           </div>
         </div>
         <div className="text-center">
