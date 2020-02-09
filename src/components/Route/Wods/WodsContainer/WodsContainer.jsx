@@ -120,7 +120,7 @@ export default class WodsContainer extends Component {
             Are you sure you want to delete this Wod?
           </MDBModalBody>
           <MDBModalFooter className="bg-dark border d-flex justify-content-around modalFooter">
-            <MDBBtn color="danger" size="sm" onClick={this.deleteAthlete}>
+            <MDBBtn color="danger" size="sm" onClick={this.deleteWod}>
               <i className="fas fa-eraser fa-lg mr-1"></i> Yes
             </MDBBtn>
             <MDBBtn color="success" size="sm" onClick={this.closeDeleteModal}>

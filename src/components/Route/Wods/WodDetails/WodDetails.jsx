@@ -62,11 +62,9 @@ export default function WodDetails({ wodInfo, athletes }) {
   return (
     <Fragment>
       <GoBack />
-      <MDBBtn color="white" size="sm" className="w-100 m-0">
-        <i className="far fa-edit mr-1 fa-2x"></i> Click to edit the {name} Wod
-      </MDBBtn>
+
       <div className="text-center pb-5 mb-2">
-        <div className="mx-auto mt-1 mb-1 p-3 wod-card-style headingStyle text-white font-weight-bold mediaQuery">
+        <div className="mx-auto mt-1 mb-1 p-3 wod-card-style headingStyle text-white font-weight-bold mediaQuery position-relative">
           <h3 className="p-2">{name}</h3>
           <h5>{type}</h5>
           {description !== "N/A" ? <p>Details: {description}</p> : null}
@@ -85,6 +83,21 @@ export default function WodDetails({ wodInfo, athletes }) {
                 </p>
               );
             })}
+            <MDBBtn
+              className="headingStyle text-white"
+              color="dark"
+              size="sm"
+              style={{
+                position: "absolute",
+                border: "2px double white",
+                top: "5px",
+                right: "5px",
+                borderRadius: "5%",
+                padding: "0.7rem"
+              }}
+            >
+              <i className="fas fa-cogs fa-2x"></i>
+            </MDBBtn>
           </div>
         </div>
 

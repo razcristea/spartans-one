@@ -158,11 +158,7 @@ export default function PersonalBest({ id, info, refresh }) {
             max="98"
             draggable
             step="1"
-            onTouchEnd={() => (document.body.style.overflow = "unset")}
-            onChange={() => {
-              document.body.style.overflow = "hidden";
-              setPercentage(inputRef.current.value);
-            }}
+            onChange={() => setPercentage(inputRef.current.value)}
           />
           <div className="m-1 font-weight-bold">10%</div>
         </div>

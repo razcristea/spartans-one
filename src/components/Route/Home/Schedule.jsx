@@ -8,17 +8,19 @@ const scheduleUrl = "https://theboxathletes.herokuapp.com/appointments/";
 
 function Schedule() {
   const [selectedDate, setSelectedDate] = useState("");
-  const [appointments, setAppointments] = useState("");
+  const [appointments, setAppointments] = useState(0);
   const [lookingAtSchedule, setLookingAtSchedule] = useState(false);
   const [showLoading, setShowLoading] = useState(true);
 
   const checkAppointments = async selectedDate => {
     try {
       // querry the selected date from DB and store it in appointments
+      setShowLoading(true);
       const response = await fetch(scheduleUrl + selectedDate);
       const data = await response.json();
       if (data.error) {
-        await setAppointments(0);
+        setAppointments(0);
+        setShowLoading(false);
       }
       if (data.length) {
         data[0].entries.sort((a, b) => {
@@ -27,19 +29,15 @@ function Schedule() {
             ? -1
             : 1;
         });
-
-        await setAppointments(data[0]);
+        setAppointments(data[0]);
+        setShowLoading(false);
       }
     } catch (error) {
       console.log(error);
     }
   };
   useEffect(() => {
-    setShowLoading(true);
     checkAppointments(selectedDate);
-    setTimeout(() => {
-      setShowLoading(false);
-    }, 300);
   }, [selectedDate]);
 
   return (
