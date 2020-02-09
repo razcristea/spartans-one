@@ -7,18 +7,20 @@ import { NavLink } from "react-router-dom";
 export default function AthleteCard({ athlete, toggleWillDeleteModal }) {
   return (
     <div className="card text-center card-item">
-      <div className="header-card-wraper">
-        <img src={athlete.photo} alt="" className="image-card" />
-        <h2 className="card-name">{athlete.name}</h2>
-        <h5 className="card-age">
-          {athlete.age}|<span> </span>
-          {athlete.sex === "M" ? (
-            <i className="fas fa-mars fa-lg"></i>
-          ) : (
-            <i className="fas fa-venus fa-lg"></i>
-          )}
-        </h5>
-      </div>
+      <NavLink to={`/athletes/${athlete._id}`} className="card-link">
+        <div className="header-card-wraper pb-1">
+          <img src={athlete.photo} alt="" className="image-card" />
+          <h2 className="card-name">{athlete.name}</h2>
+          <h5 className="card-age">
+            {athlete.age}|<span> </span>
+            {athlete.sex === "M" ? (
+              <i className="fas fa-mars fa-lg"></i>
+            ) : (
+              <i className="fas fa-venus fa-lg"></i>
+            )}
+          </h5>
+        </div>
+      </NavLink>
       <p className="card-phone mt-1">
         <i className="fas fa-phone-square fa-lg"></i>{" "}
         {athlete.phoneNumber.substring(0, 4)}-

@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import GoBack from "../../../../helpers/GoBack";
 import { NavLink } from "react-router-dom";
-import { MDBTable, MDBTableBody, MDBTableHead } from "mdbreact";
+import { MDBTable, MDBTableBody, MDBTableHead, MDBBtn } from "mdbreact";
 import "./WodDetails.css";
 
 import firstPlace from "./assets/first_place_icon.png";
@@ -62,8 +62,11 @@ export default function WodDetails({ wodInfo, athletes }) {
   return (
     <Fragment>
       <GoBack />
+      <MDBBtn color="white" size="sm" className="w-100 m-0">
+        <i className="far fa-edit mr-1 fa-2x"></i> Click to edit the {name} Wod
+      </MDBBtn>
       <div className="text-center pb-5 mb-2">
-        <div className="mx-auto m-2 p-3 wod-card-style headingStyle text-white font-weight-bold mediaQuery">
+        <div className="mx-auto mt-1 mb-1 p-3 wod-card-style headingStyle text-white font-weight-bold mediaQuery">
           <h3 className="p-2">{name}</h3>
           <h5>{type}</h5>
           {description !== "N/A" ? <p>Details: {description}</p> : null}
@@ -84,6 +87,7 @@ export default function WodDetails({ wodInfo, athletes }) {
             })}
           </div>
         </div>
+
         <h4 className="fame-style  mx-auto w-100 p-2 text-center">
           - Hall Of Fame -
         </h4>

@@ -18,7 +18,6 @@ export default class EditInfoModal extends Component {
     this.state = {
       name: props.info.name,
       phoneNumber: props.info.phoneNumber,
-      age: props.info.age,
       email: props.info.email,
       birthday: props.info.birthday,
       show: false,
@@ -27,6 +26,12 @@ export default class EditInfoModal extends Component {
   }
 
   handleChange = event => {
+    if (event.target.name === "phoneNumber") {
+      this.setState({
+        phoneNumber: event.target.value.replace(/[()]/g, "")
+      });
+      return;
+    }
     this.setState({
       [event.target.name]: event.target.value
     });
@@ -37,7 +42,6 @@ export default class EditInfoModal extends Component {
     const updatedAthleteDetails = {
       name: this.state.name,
       phoneNumber: this.state.phoneNumber,
-      age: this.state.age,
       email: this.state.email,
       birthday: this.state.birthday
     };

@@ -88,6 +88,12 @@ class AddAthleteV2 extends React.Component {
   };
 
   changeHandler = event => {
+    if (event.target.name === "phone") {
+      this.setState({
+        phone: event.target.value.replace(/[()]/g, "")
+      });
+      return;
+    }
     this.setState({
       [event.target.name]: event.target.value
     });
@@ -103,8 +109,6 @@ class AddAthleteV2 extends React.Component {
   };
 
   render() {
-    console.log(this.state.birthday);
-
     return (
       <React.Fragment>
         {this.state.spinner ? <Spinner /> : null}
@@ -127,10 +131,10 @@ class AddAthleteV2 extends React.Component {
             noValidate
           >
             <Modal.Body className="text-light" id="modalBody">
-              <h5 className="headingStyle p-2 m-3 bg-dark text-white text-center">
+              <h5 className="headingStyle p-2 mx-3 mt-3 mb-0 bg-dark text-white text-center">
                 <MDBIcon icon="info" className="mr-2" /> Athlete Info
               </h5>
-              <MDBRow className="ml-3 mr-3 mb-3 border">
+              <MDBRow className="ml-3 mr-3 mb-3 border border-top-0">
                 {addAthleteFields.map((field, index) => (
                   <MDBCol md="4" key={index}>
                     <MDBInput
@@ -202,10 +206,10 @@ class AddAthleteV2 extends React.Component {
                   </label>
                 </div>
               </MDBRow>
-              <h5 className="headingStyle p-2 m-3 bg-dark text-white text-center">
+              <h5 className="headingStyle p-2 mx-3 mt-3 mb-0 bg-dark text-white text-center">
                 <MDBIcon icon="dumbbell" /> Personal Best
               </h5>
-              <MDBRow className="m-3 pb-4 border">
+              <MDBRow className="mx-3 mt-0 mb-3 pb-4 border border-top-0">
                 {personalBestFields.map((field, index) => (
                   <MDBCol md="3" key={index}>
                     <MDBInput

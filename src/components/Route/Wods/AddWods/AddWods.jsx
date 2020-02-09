@@ -1,5 +1,12 @@
 import React, { useState, useRef } from "react";
-import { MDBRow, MDBCol, MDBInput, MDBBtn, MDBIcon } from "mdbreact";
+import {
+  MDBRow,
+  MDBCol,
+  MDBInput,
+  MDBBtn,
+  MDBIcon,
+  MDBBtnGroup
+} from "mdbreact";
 import Modal from "react-bootstrap/Modal";
 import "./AddWods.css";
 import Spinner from "../../Athletes/AddAthleteModal/Spinner";
@@ -119,10 +126,112 @@ export default function AddWods(props) {
           }}
         >
           <Modal.Body className="text-white">
-            <h5 className="headingStyle p-2 m-3 bg-dark text-white text-center">
+            <h5 className="headingStyle p-2 ml-3 mr-3 mt-3 mb-0 bg-dark text-white text-center">
+              <MDBIcon icon="dumbbell" className="mr-2" /> Exercises
+            </h5>
+            <MDBRow className="ml-3 mr-3 my-0 pb-3 border border-top-0">
+              <MDBCol md="6">
+                <MDBInput
+                  ref={exerciseRepsRef}
+                  className="text-white addWodInput"
+                  icon=""
+                  type="number"
+                  name="reps"
+                  label="Reps/Cal/m (Ex: 20)"
+                  labelClass="labelClass"
+                ></MDBInput>
+              </MDBCol>
+              <MDBCol md="6">
+                <MDBInput
+                  ref={exerciseNameRef}
+                  className="text-white addWodInput"
+                  type="text"
+                  name="exerciseName"
+                  label="Name (Ex: Squats)"
+                  labelClass="labelClass"
+                  onBlur={enableAddButton}
+                ></MDBInput>
+              </MDBCol>
+              <MDBCol md="6">
+                <MDBInput
+                  ref={exerciseWeightFemaleRef}
+                  icon="female"
+                  className="text-white addWodInput"
+                  type="number"
+                  name="weightFemale"
+                  label="Female/Kg (default:0)"
+                ></MDBInput>
+                <MDBInput
+                  ref={exerciseWeightMaleRef}
+                  className="text-white addWodInput"
+                  icon="male"
+                  type="number"
+                  name="weightMale"
+                  label="Male/Kg (default:0)"
+                ></MDBInput>
+              </MDBCol>
+              <MDBCol className="d-flex align-items-end flex-column bd-highlight example-parent">
+                <MDBBtn
+                  color="light"
+                  size="md"
+                  className="mt-auto p-2 bd-highlight col-example text-dark"
+                  onClick={addExercise}
+                  disabled={enabled}
+                >
+                  <MDBIcon icon="plus" size="lg" className="mr-1" /> Add
+                  Exercise
+                </MDBBtn>
+              </MDBCol>
+            </MDBRow>
+            <h5 className="headingStyle p-2 ml-3 mr-3 mt-1 bg-dark text-white text-center my-0">
+              <MDBIcon icon="eye" className="mr-2" /> Preview
+            </h5>
+            <div
+              className={
+                exercises.length ? "border border-top-0 mx-3 my-0" : ""
+              }
+            >
+              {exercises.map((exercise, i) => (
+                <div
+                  key={i}
+                  className="mb-1 d-flex justify-content-between align-items-center bg-light text-dark mx-1 font-weight-bold"
+                  style={{ fontSize: "13px" }}
+                  draggable
+                  onDrag={e => console.log(e.screenY)}
+                >
+                  <span className="ml-2" key={exercise.name}>
+                    {exercise.reps ? exercise.reps : null} {exercise.name}{" "}
+                    {exercise.weight === "/ kg" ? null : exercise.weight}
+                  </span>
+                  <MDBBtnGroup>
+                    <MDBBtn
+                      color="danger"
+                      className="btn-rounded py-1 px-2 mr-4"
+                      style={{ fontSize: "10px" }}
+                      onClick={() => {
+                        removeExercise(exercise.name);
+                      }}
+                    >
+                      Remove
+                    </MDBBtn>
+                    <MDBBtn
+                      color="warning"
+                      className="btn-rounded py-1 px-3"
+                      style={{ fontSize: "10px" }}
+                      onClick={() => {
+                        console.log(exercise);
+                      }}
+                    >
+                      Edit
+                    </MDBBtn>
+                  </MDBBtnGroup>
+                </div>
+              ))}
+            </div>
+            <h5 className="headingStyle p-2 mx-3 mt-3 mb-0 bg-dark text-white text-center">
               <MDBIcon icon="info" className="mr-2" /> Wod Info
             </h5>
-            <MDBRow className="m-3 rounded border">
+            <MDBRow className="mx-3 my-0 border border-top-0">
               <MDBCol md="6">
                 <Select
                   value={selectedType}
@@ -148,7 +257,6 @@ export default function AddWods(props) {
                   <div className="valid-feedback ml-4 pl-3">Looks good!</div>
                 </MDBInput>
               </MDBCol>
-
               <MDBCol md="6">
                 <MDBInput
                   className="text-white addWodInput"
@@ -172,89 +280,6 @@ export default function AddWods(props) {
                 ></MDBInput>
               </MDBCol>
             </MDBRow>
-            <h5 className="headingStyle p-2 m-3 bg-dark text-white text-center">
-              <MDBIcon icon="dumbbell" className="mr-2" /> Exercises
-            </h5>
-            <MDBRow className="m-3 pb-4 border">
-              <MDBCol md="6">
-                <MDBInput
-                  ref={exerciseRepsRef}
-                  className="text-white addWodInput"
-                  icon=""
-                  type="number"
-                  name="reps"
-                  label="Reps/Cal/m (Ex: 20)"
-                  labelClass="labelClass"
-                ></MDBInput>
-              </MDBCol>
-              <MDBCol md="6">
-                <MDBInput
-                  ref={exerciseNameRef}
-                  className="text-white addWodInput"
-                  type="text"
-                  name="exerciseName"
-                  label="Name (Ex: Squats)"
-                  labelClass="labelClass"
-                  onBlur={enableAddButton}
-                ></MDBInput>
-              </MDBCol>
-              <MDBCol md="6">
-                <div className="text-center mt-2">Weight</div>
-                <MDBInput
-                  ref={exerciseWeightFemaleRef}
-                  icon="female"
-                  className="text-white addWodInput"
-                  type="number"
-                  name="weightFemale"
-                  label="Female/Kg (default:0)"
-                ></MDBInput>
-                <MDBInput
-                  ref={exerciseWeightMaleRef}
-                  className="text-white addWodInput"
-                  icon="male"
-                  type="number"
-                  name="weightMale"
-                  label="Male/Kg (default:0)"
-                ></MDBInput>
-              </MDBCol>
-              <MDBCol className="d-flex align-items-end flex-column bd-highlight example-parent">
-                <MDBBtn
-                  color="warning"
-                  size="md"
-                  className="mt-auto p-2 bd-highlight col-example text-white"
-                  onClick={addExercise}
-                  disabled={enabled}
-                >
-                  <MDBIcon icon="plus" size="lg" className="mr-1" /> Add
-                  Exercise
-                </MDBBtn>
-              </MDBCol>
-            </MDBRow>
-            <h5 className="headingStyle p-2 m-3 bg-dark text-white text-center">
-              <MDBIcon icon="eye" className="mr-2" /> Preview
-            </h5>
-            {exercises.map((exercise, i) => (
-              <div
-                key={i}
-                className="mb-3 ml-5 mr-5 border-bottom d-flex justify-content-between align-items-center"
-                style={{ fontSize: "13px" }}
-              >
-                <span className="ml-2" key={exercise.name}>
-                  {exercise.reps ? exercise.reps : null} {exercise.name}{" "}
-                  {exercise.weight === "/ kg" ? null : exercise.weight}
-                </span>
-                <MDBBtn
-                  color="danger"
-                  className="btn-rounded py-1 px-2"
-                  style={{ fontSize: "10px" }}
-                  onClick={() => {
-                    removeExercise(exercise.name);
-                  }}
-                >
-                  Remove
-                </MDBBtn>
-              </div>
-            ))}
             <MDBCol md="12" className="mb-3 mt-5">
               <div className="custom-control custom-checkbox pl-3">
                 <input
