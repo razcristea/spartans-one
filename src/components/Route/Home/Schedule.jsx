@@ -13,6 +13,10 @@ function Schedule() {
   const [showLoading, setShowLoading] = useState(true);
 
   const checkAppointments = async selectedDate => {
+    if (!selectedDate) {
+      console.log("No Date selected");
+      return;
+    }
     try {
       // querry the selected date from DB and store it in appointments
       setShowLoading(true);

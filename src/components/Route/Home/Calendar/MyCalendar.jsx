@@ -4,29 +4,25 @@ import "./MyCalendar.css";
 
 export default class MyCalendar extends Component {
   state = {
-    date: new Date()
+    date: new Date(),
+    processedDate: ""
   };
   onChange = async date => {
-    this.setState({ date });
-  };
-  componentDidMount() {
-    this.props.getDate(
-      this.state.date
+    this.setState({
+      processedDate: date
         .toString()
         .split(" ")
         .slice(1, 4)
         .join("-")
-    );
+    });
+  };
+  async componentDidMount() {
+    await this.onChange(this.state.date);
+    this.props.getDate(this.state.processedDate);
   }
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.date !== this.state.date) {
-      this.props.getDate(
-        this.state.date
-          .toString()
-          .split(" ")
-          .slice(1, 4)
-          .join("-")
-      );
+    if (prevState.processedDate !== this.state.processedDate) {
+      this.props.getDate(this.state.processedDate);
     }
   }
   render() {

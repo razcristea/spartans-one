@@ -96,7 +96,7 @@ export default function AddWorkoutForm({ count, id, updateWods }) {
     <React.Fragment>
       <AlertMessage show={displayAlert} messageAlertDeleted={alertMesage} />
       {showSpinner ? <Spinner /> : null}
-      <Card>
+      <Card className="mediaQuery mx-auto">
         <div className="d-flex justify-content-around align-items-center mb-0 bg-dark p-3">
           <Accordion.Toggle
             as={Button}

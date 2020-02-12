@@ -96,7 +96,7 @@ export default class EditInfoModal extends Component {
               style={{ backgroundColor: "#383838", overflow: "auto" }}
             >
               <MDBInput
-                className="white-text"
+                className="white-text addAthleteInput"
                 label="Name"
                 icon="user"
                 name="name"
@@ -104,7 +104,7 @@ export default class EditInfoModal extends Component {
                 onChange={this.handleChange}
               />
               <MDBInput
-                className="white-text"
+                className="white-text addAthleteInput"
                 label="Phone"
                 icon="phone"
                 name="phoneNumber"
@@ -112,7 +112,7 @@ export default class EditInfoModal extends Component {
                 onChange={this.handleChange}
               />
               <MDBInput
-                className="white-text"
+                className="white-text addAthleteInput"
                 label="Email"
                 icon="envelope-open"
                 name="email"
@@ -120,7 +120,7 @@ export default class EditInfoModal extends Component {
                 onChange={this.handleChange}
               />
               <MDBInput
-                className="white-text"
+                className="white-text addAthleteInput"
                 icon="calendar-alt"
                 name="birthday"
                 type="date"
