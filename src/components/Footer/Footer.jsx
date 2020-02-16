@@ -5,6 +5,7 @@ const footerStyle = {
   left: 0,
   bottom: 0,
   width: "100%",
+  height: "60px",
   background: "#343a40",
   color: "#fff",
   fontSize: "0.9rem",
@@ -73,10 +74,11 @@ export default class Footer extends PureComponent {
       });
   };
   render() {
+    const isLoggedIn = this.props.isLoggedIn;
     return (
       <footer style={footerStyle}>
         <div>
-          <div>Welcome, Coach Vali!</div>
+          {isLoggedIn ? <div>Welcome, Coach Vali!</div> : null}
           <div className="text-muted text-center text-small">
             <i className="far fa-calendar-alt"></i>{" "}
             {this.state.date
@@ -85,17 +87,23 @@ export default class Footer extends PureComponent {
               .join("-")}
           </div>
         </div>
-        <div className="text-center">
-          <div className="mb-1">
-            {this.state.athleteCount} <i className="fas fa-users fa-lg"></i> |{" "}
-            {this.state.birthdays}{" "}
-            <i className="fas fa-birthday-cake fa-md"></i>
+        {isLoggedIn ? (
+          <div className="text-center">
+            <div className="mb-1">
+              {this.state.athleteCount} <i className="fas fa-users fa-lg"></i>{" "}
+              {this.state.birthdays ? (
+                <span>
+                  | {this.state.birthdays}{" "}
+                  <i className="fas fa-birthday-cake fa-lg text-warning"></i>
+                </span>
+              ) : null}{" "}
+            </div>
+            <div>
+              {this.state.male} <i className="fas fa-mars fa-lg"></i> |{" "}
+              {this.state.female} <i className="fas fa-venus fa-lg"></i>
+            </div>
           </div>
-          <div>
-            {this.state.male} <i className="fas fa-mars fa-lg"></i> |{" "}
-            {this.state.female} <i className="fas fa-venus fa-lg"></i>
-          </div>
-        </div>
+        ) : null}
       </footer>
     );
   }

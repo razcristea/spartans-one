@@ -35,7 +35,7 @@ export default class Athletes extends PureComponent {
   };
   render() {
     console.log(this.state.athletes);
-
+    console.log(this.props);
     return (
       <div>
         <Route

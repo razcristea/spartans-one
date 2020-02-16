@@ -88,6 +88,7 @@ class AddAthleteV2 extends React.Component {
   };
 
   changeHandler = event => {
+    console.log(event.target.value);
     if (event.target.name === "phone") {
       this.setState({
         phone: event.target.value.replace(/[()]/g, "")

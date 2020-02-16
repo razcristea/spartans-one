@@ -3,12 +3,12 @@ import { NavLink } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Logo from "./logoV2.png";
-import Vali from "./vali.jpeg";
 
 const links = [
-  { path: "Schedule", route: "/", icon: "fas fa-clipboard-list mr-1" },
+  { path: "Profile", route: "/", icon: "far fa-id-card mr-1" },
+  { path: "Schedule", route: "/schedule", icon: "fas fa-clipboard-list mr-1" },
   { path: "Athletes", route: "/athletes", icon: "fas fa-users mr-1" },
-  { path: "Wods", route: "/wods", icon: "fas fa-dumbbell mr-1" },
+  { path: "Workouts", route: "/wods", icon: "fas fa-dumbbell mr-1" },
   { path: "Notes", route: "/notes", icon: "far fa-comment-dots mr-1" }
 ];
 
@@ -16,7 +16,7 @@ const activeStyle = {
   fontWeight: "bold",
   color: "#f5ec47"
 };
-export default function Header() {
+export default function Header({ isLoggedIn }) {
   const [expanded, setExpanded] = useState(false);
   return (
     <Navbar
@@ -43,15 +43,33 @@ export default function Header() {
         onBlur={() => setTimeout(() => setExpanded(false), 300)}
       />
       <Navbar.Collapse id="basic-navbar-nav">
-        <img className="border m-2 coachPhoto" src={Vali} alt="Vali" />
-        <Nav className="ml-auto">
-          {links.map((link, i) => (
+        <Nav className="mx-auto">
+          {isLoggedIn ? (
+            links.map((link, i) => (
+              <NavLink
+                onClick={() => setExpanded(false)}
+                key={i}
+                exact
+                to={`${link.route}`}
+                className="m-1 mr-3 p-1 text-decoration-none text-center"
+                activeClassName="selected"
+                activeStyle={activeStyle}
+                style={{
+                  boxShadow: "0 2px 5px 0 #212529, 0 2px 10px 0 #212121",
+                  color: "white"
+                }}
+              >
+                <i className={link.icon}></i>
+                <span> </span>
+                {link.path}
+              </NavLink>
+            ))
+          ) : (
             <NavLink
               onClick={() => setExpanded(false)}
-              key={i}
+              to="/"
               exact
-              to={`${link.route}`}
-              className="m-1 mr-3 p-1 text-decoration-none text-right"
+              className="m-1 mr-3 p-1 text-decoration-none text-center"
               activeClassName="selected"
               activeStyle={activeStyle}
               style={{
@@ -59,11 +77,12 @@ export default function Header() {
                 color: "white"
               }}
             >
-              <i className={link.icon}></i>
+              <i className="far fa-id-card mr-1"></i>
               <span> </span>
-              {link.path}
+              {isLoggedIn ? "Profile/Logout" : "Login/Register"}
             </NavLink>
-          ))}
+          )}
+          {}
         </Nav>
       </Navbar.Collapse>
     </Navbar>

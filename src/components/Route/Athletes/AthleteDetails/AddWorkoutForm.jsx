@@ -189,7 +189,8 @@ export default function AddWorkoutForm({ count, id, updateWods }) {
                     type="number"
                     name="minutes"
                     label="Minutes"
-                    className="mx-auto"
+                    labelClass="labelClass"
+                    className="mx-auto appointmentInput"
                   ></MDBInput>
                   <div className="ml-2 mr-2">:</div>
                   <MDBInput
@@ -200,7 +201,8 @@ export default function AddWorkoutForm({ count, id, updateWods }) {
                     type="number"
                     name="seconds"
                     label="Seconds"
-                    className="mx-auto"
+                    labelClass="labelClass"
+                    className="mx-auto appointmentInput"
                   ></MDBInput>
                 </div>
               ) : null}
@@ -214,7 +216,8 @@ export default function AddWorkoutForm({ count, id, updateWods }) {
                 type="number"
                 name="nrOfReps"
                 label="Reps (default : 0)"
-                className="mx-auto"
+                labelClass="labelClass"
+                className="mx-auto appointmentInput"
               ></MDBInput>
             </div>
             <div>

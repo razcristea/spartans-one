@@ -68,7 +68,7 @@ export default function AthleteDetails({ id, info, getAthletes }) {
                     Age: {age} | Sex: {sex}
                   </span>
                   <span className="p-1 d-block">
-                    <i className="fas fa-birthday-cake mr-1 fa-lg"></i>{" "}
+                    Birthday:{" "}
                     {birthday
                       .split("-")
                       .reverse()
