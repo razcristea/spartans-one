@@ -6,7 +6,8 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { MDBIcon } from "mdbreact";
 
-const athletesAPI = "https://theboxathletes.herokuapp.com/athletes/";
+// const athletesAPI = "http://localhost:3000/athletes/";
+const athletesAPI = "https://mypthelperapi.herokuapp.com/athletes/";
 
 export default function PersonalBest({ id, info, refresh }) {
   const inputRef = useRef(null);
@@ -48,13 +49,13 @@ export default function PersonalBest({ id, info, refresh }) {
       );
 
       const URI = athletesAPI + id;
-      const headers = new Headers();
-      headers.append("Content-Type", "application/json");
-      // ABSOLUTELY necessary to specify Content-Type!
 
       fetch(URI, {
         method: "PUT",
-        headers: headers,
+        headers: {
+          "Content-Type": "application/json",
+          "access-token": localStorage.getItem("access-token")
+        },
         body: JSON.stringify({ personalBest: newScore })
       })
         .then(response => response.json())

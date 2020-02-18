@@ -8,7 +8,8 @@ import {
 import Spinner from "./Spinner";
 import "./AddAthlete.css";
 
-const athletesAPI = "https://theboxathletes.herokuapp.com/athletes/";
+// const athletesAPI = "http://localhost:3000/athletes";
+const athletesAPI = "https://mypthelperapi.herokuapp.com/athletes/";
 
 class AddAthleteV2 extends React.Component {
   state = {
@@ -61,6 +62,7 @@ class AddAthleteV2 extends React.Component {
         : formData.append("photo", this.state.selectedFile);
       this.setState({ spinner: true });
       fetch(athletesAPI, {
+        headers: { "access-token": localStorage.getItem("access-token") },
         method: "POST",
         body: formData
       })
@@ -88,7 +90,6 @@ class AddAthleteV2 extends React.Component {
   };
 
   changeHandler = event => {
-    console.log(event.target.value);
     if (event.target.name === "phone") {
       this.setState({
         phone: event.target.value.replace(/[()]/g, "")

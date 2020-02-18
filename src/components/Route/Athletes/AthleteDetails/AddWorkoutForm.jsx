@@ -8,10 +8,14 @@ import Stopwatch from "./Stopwatch";
 import AlertMessage from "../AlertMessage/AlertMessage";
 import Spinner from "../AddAthleteModal/Spinner";
 
-const athletesApi = "https://theboxathletes.herokuapp.com/athletes/";
-const wodsApi = "https://theboxathletes.herokuapp.com/wods/";
+// const athletesApi = "http://localhost:3000/athletes/";
+// const wodsApi = "http://localhost:3000/wods/";
+
+const athletesApi = "https://mypthelperapi.herokuapp.com/athletes/";
+const wodsApi = "https://mypthelperapi.herokuapp.com/wods/";
 
 let time = 0;
+
 export default function AddWorkoutForm({ count, id, updateWods }) {
   const [isAddingWorkout, setIsAddingWorkout] = useState(false);
   const [currentDay, setCurrentDay] = useState("");
@@ -31,7 +35,10 @@ export default function AddWorkoutForm({ count, id, updateWods }) {
   const saveWorkoutToAthlete = () => {
     setShowSpinner(true);
     fetch(athletesApi + id, {
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "access-token": localStorage.getItem("access-token")
+      },
       method: "POST",
       body: JSON.stringify({
         name: selectedWod,
@@ -82,7 +89,10 @@ export default function AddWorkoutForm({ count, id, updateWods }) {
     const day = today.getDate() < 10 ? "0" + today.getDate() : today.getDate();
     const date = day + "-" + month + "-" + year;
     setCurrentDay(date);
-    fetch(wodsApi)
+    fetch(wodsApi, {
+      method: "GET",
+      headers: { "access-token": localStorage.getItem("access-token") }
+    })
       .then(response => response.json())
       .then(wods => {
         wods.sort((a, b) =>

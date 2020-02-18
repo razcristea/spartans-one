@@ -9,28 +9,35 @@ import Wods from "./components/Route/Wods/Wods";
 import Notes from "./components/Route/Notes/Notes";
 
 export default class App extends Component {
-  state = { changeCount: 0, isLoggedIn: false, accessToken: "", userId: "" };
+  state = { changeCount: 0, isLoggedIn: false, accessToken: "", userName: "" };
 
   changeCount = () => {
     this.setState({ changeCount: this.state.changeCount + 1 });
   };
-  handleLogin = (accessToken, userId) => {
+
+  handleLogin = (accessToken, userName) => {
     this.setState({
       isLoggedIn: true,
       accessToken,
-      userId
+      userName
     });
   };
-  handleLogout = (accessToken, userId) => {
+
+  handleLogout = () => {
     this.setState({
       isLoggedIn: false,
-      accessToken,
-      userId
+      accessToken: "",
+      userName: ""
     });
   };
+
   componentDidMount() {
     if (localStorage.getItem("access-token")) {
-      this.setState({ isLoggedIn: true });
+      this.setState({
+        isLoggedIn: true,
+        accessToken: localStorage.getItem("access-token"),
+        userName: localStorage.getItem("userName")
+      });
     }
   }
   render() {
@@ -50,21 +57,30 @@ export default class App extends Component {
               )}
               exact
             ></Route>
-            <Route path="/schedule" component={Schedule} exact></Route>
+            <Route
+              path="/schedule"
+              component={() => (
+                <Schedule accessToken={this.state.accessToken} />
+              )}
+              exact
+            ></Route>
             <Route
               path="/athletes"
               component={() => (
                 <Athletes
                   changeCount={this.changeCount}
-                  user={{
-                    token: this.state.accessToken,
-                    id: this.state.userId
-                  }}
+                  accessToken={this.state.accessToken}
                 />
               )}
             ></Route>
-            <Route path="/wods" component={Wods}></Route>
-            <Route path="/notes" component={Notes}></Route>
+            <Route
+              path="/wods"
+              component={() => <Wods accessToken={this.state.accessToken} />}
+            ></Route>
+            <Route
+              path="/notes"
+              component={() => <Notes accessToken={this.state.accessToken} />}
+            ></Route>
           </Switch>
         ) : (
           <Switch>
@@ -75,14 +91,16 @@ export default class App extends Component {
                   handleLogin={this.handleLogin}
                   handleLogout={this.handleLogout}
                   isLoggedIn={this.state.isLoggedIn}
+                  changeCount={this.changeCount}
                 />
               )}
               exact
             ></Route>
           </Switch>
         )}
-
         <Footer
+          userName={this.state.userName}
+          accessToken={this.state.accessToken}
           count={this.state.changeCount}
           isLoggedIn={this.state.isLoggedIn}
         />

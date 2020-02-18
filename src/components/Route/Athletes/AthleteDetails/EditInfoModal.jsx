@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { MDBInput } from "mdbreact";
 import AlertMessage from "../AlertMessage/AlertMessage";
-
 import {
   MDBContainer,
   MDBBtn,
@@ -11,6 +10,9 @@ import {
   MDBModalFooter,
   MDBIcon
 } from "mdbreact";
+
+// const athletesAPI = "http://localhost:3000/athletes/";
+const athletesAPI = "https://mypthelperapi.herokuapp.com/athletes/";
 
 export default class EditInfoModal extends Component {
   constructor(props) {
@@ -57,14 +59,14 @@ export default class EditInfoModal extends Component {
   };
 
   editAthleteDetails(updatedAthleteDetails) {
-    fetch(
-      `https://theboxathletes.herokuapp.com/athletes/${this.props.info._id}`,
-      {
-        headers: { "Content-Type": "application/json" },
-        method: "PUT",
-        body: JSON.stringify(updatedAthleteDetails)
-      }
-    )
+    fetch(`${athletesAPI}${this.props.info._id}`, {
+      headers: {
+        "Content-Type": "application/json",
+        "access-token": localStorage.getItem("access-token")
+      },
+      method: "PUT",
+      body: JSON.stringify(updatedAthleteDetails)
+    })
       .then(response => {
         return response.json();
       })

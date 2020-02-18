@@ -4,8 +4,10 @@ import WodsContainer from "./WodsContainer/WodsContainer";
 import WodDetails from "./WodDetails/WodDetails";
 import Loader from "../../../helpers/Loader";
 
-const wodsApi = "https://theboxathletes.herokuapp.com/wods/";
-const athletesApi = "https://theboxathletes.herokuapp.com/athletes/";
+// const athletesApi = "http://localhost:3000/athletes/";
+// const wodsApi = "http://localhost:3000/wods/";
+const athletesApi = "https://mypthelperapi.herokuapp.com/athletes";
+const wodsApi = "https://mypthelperapi.herokuapp.com/wods/";
 
 export default class Wods extends Component {
   state = { wods: [], athletes: [], showLoader: false };
@@ -18,7 +20,10 @@ export default class Wods extends Component {
   getWods = () => {
     if (window.location.pathname === "/wods")
       this.setState({ showLoader: true });
-    fetch(wodsApi)
+    fetch(wodsApi, {
+      method: "GET",
+      headers: { "access-token": localStorage.getItem("access-token") }
+    })
       .then(response => response.json())
       .then(data => {
         data.sort((a, b) =>
@@ -36,7 +41,10 @@ export default class Wods extends Component {
   };
 
   getAthletes = () => {
-    fetch(athletesApi)
+    fetch(athletesApi, {
+      method: "GET",
+      headers: { "access-token": localStorage.getItem("access-token") }
+    })
       .then(response => response.json())
       .then(data => {
         data.sort((a, b) =>

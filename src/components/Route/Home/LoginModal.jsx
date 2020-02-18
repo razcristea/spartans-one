@@ -9,13 +9,14 @@ import {
   MDBInput
 } from "mdbreact";
 
-const loginURL = "http://localhost:3000/users/login";
-
+const loginURL = "https://mypthelperapi.herokuapp.com/users/login";
+// const loginURL = "http://localhost:3000/users/login";
 export default function Login({
   showLogin,
   toggle,
   handleLogin,
-  showRegister
+  showRegister,
+  changeCount
 }) {
   const history = useHistory();
   const [email, setEmail] = useState("");
@@ -24,6 +25,9 @@ export default function Login({
 
   const loginToAPI = async () => {
     try {
+      if (!email || !password) {
+        throw new Error("Email & Password are required!");
+      }
       const loginData = { email, password };
       const response = await fetch(loginURL, {
         headers: { "Content-Type": "application/json" },
@@ -34,10 +38,15 @@ export default function Login({
       if (data.error) {
         throw new Error(data.error);
       }
+
       localStorage.setItem("access-token", data.accessToken);
-      localStorage.setItem("userId", data.id);
+      localStorage.setItem("userName", data.name);
+
       const token = localStorage.getItem("access-token");
-      handleLogin(token);
+      const userName = localStorage.getItem("userName");
+
+      handleLogin(token, userName);
+      changeCount();
       history.push("/schedule");
     } catch (error) {
       setErrorMessage(error.message);
@@ -96,7 +105,14 @@ export default function Login({
         </MDBBtn>
       </MDBModalBody>
       <MDBModalFooter className="bg-dark border d-flex justify-content-around modalFooter">
-        <MDBBtn color="danger" size="sm" onClick={() => toggle(false)}>
+        <MDBBtn
+          color="danger"
+          size="sm"
+          onClick={() => {
+            toggle(false);
+            setErrorMessage("");
+          }}
+        >
           <i className="fas fa-ban mr-1"></i> Cancel
         </MDBBtn>
         <MDBBtn color="success" size="sm" onClick={loginToAPI}>

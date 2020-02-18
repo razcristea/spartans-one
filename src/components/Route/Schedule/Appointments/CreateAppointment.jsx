@@ -13,6 +13,11 @@ import Select from "react-select";
 import Spinner from "../../Athletes/AddAthleteModal/Spinner";
 import "./CreateAppointment.css";
 
+// const athletesUrl = "http://localhost:3000/athletes/";
+// const appointmentsUrl = "http://localhost:3000/appointments/";
+const athletesUrl = "https://mypthelperapi.herokuapp.com/athletes";
+const appointmentsUrl = "https://mypthelperapi.herokuapp.com/appointments/";
+
 function CreateAppointment({
   toggle,
   isShowing,
@@ -32,7 +37,10 @@ function CreateAppointment({
   const [showSpinner, setShowSpinner] = useState(false);
 
   useEffect(() => {
-    fetch("https://theboxathletes.herokuapp.com/athletes/")
+    fetch(athletesUrl, {
+      headers: { "access-token": localStorage.getItem("access-token") },
+      method: "GET"
+    })
       .then(response => response.json())
       .then(data => {
         data.sort((a, b) => (a.name > b.name ? 1 : -1));
@@ -68,7 +76,7 @@ function CreateAppointment({
     if (!start || !participants) {
       setInAlert(true);
       setAlertMessage(
-        "It's not really a good ideea to schedule an appointment with NOBODY! Please select at least 1 Athlete!"
+        "It's not really a good ideea to appointments an appointment with NOBODY! Please select at least 1 Athlete!"
       );
       return;
     }
@@ -88,8 +96,11 @@ function CreateAppointment({
         attendees: participants
       };
       setShowSpinner(true);
-      fetch(`https://theboxathletes.herokuapp.com/appointments/${data._id} `, {
-        headers: { "Content-Type": "application/json" },
+      fetch(`${appointmentsUrl}${data._id} `, {
+        headers: {
+          "Content-Type": "application/json",
+          "access-token": localStorage.getItem("access-token")
+        },
         method: "POST",
         body: JSON.stringify(myPayload)
       })
@@ -120,8 +131,11 @@ function CreateAppointment({
         entries: [{ startHour: start, endHour: end, attendees: participants }]
       };
       setShowSpinner(true);
-      fetch(`https://theboxathletes.herokuapp.com/appointments/`, {
-        headers: { "Content-Type": "application/json" },
+      fetch(appointmentsUrl, {
+        headers: {
+          "Content-Type": "application/json",
+          "access-token": localStorage.getItem("access-token")
+        },
         method: "POST",
         body: JSON.stringify(myPayload)
       })

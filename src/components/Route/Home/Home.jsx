@@ -4,15 +4,21 @@ import CoachProfile from "./CoachProfile/CoachProfile";
 import LoginModal from "./LoginModal";
 import RegisterModal from "./RegisterModal";
 
-export default function Home({ handleLogin, handleLogout, isLoggedIn }) {
+export default function Home({
+  handleLogin,
+  handleLogout,
+  isLoggedIn,
+  changeCount
+}) {
   const [showLogin, setShowLogin] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
 
   const logout = () => {
     localStorage.removeItem("access-token");
-    const token = localStorage.getItem("access-token");
-    handleLogout(token);
+    localStorage.removeItem("userName");
+    handleLogout();
   };
+
   return (
     <div>
       <div className="headingStyle">
@@ -45,12 +51,14 @@ export default function Home({ handleLogin, handleLogout, isLoggedIn }) {
         toggle={setShowLogin}
         handleLogin={handleLogin}
         showRegister={setShowRegister}
+        changeCount={changeCount}
       />
       <RegisterModal
         showRegister={showRegister}
         toggle={setShowRegister}
         handleLogin={handleLogin}
         showLogin={setShowLogin}
+        changeCount={changeCount}
       />
     </div>
   );

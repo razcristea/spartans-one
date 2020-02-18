@@ -31,7 +31,8 @@ const options = [
   { value: "special", label: changeWodIcon("SPECIAL", "fa-radiation") }
 ];
 
-const wodsApi = "https://theboxathletes.herokuapp.com/wods/";
+// const wodsApi = "http://localhost:3000/wods/";
+const wodsApi = "https://mypthelperapi.herokuapp.com/wods/";
 
 export default class WodsContainer extends Component {
   state = {
@@ -88,7 +89,8 @@ export default class WodsContainer extends Component {
   };
   deleteWod = () => {
     fetch(wodsApi + this.state.idToDelete, {
-      method: "DELETE"
+      method: "DELETE",
+      headers: { "access-token": localStorage.getItem("access-token") }
     })
       .then(res => res.json())
       .then(answer => {

@@ -13,7 +13,8 @@ import {
   MDBModalHeader
 } from "mdbreact";
 
-const athletesAPI = "https://theboxathletes.herokuapp.com/athletes/";
+// const athletesAPI = "http://localhost:3000/athletes/";
+const athletesAPI = "https://mypthelperapi.herokuapp.com/athletes/";
 
 export default class AthletesContainer extends Component {
   constructor(props) {
@@ -91,7 +92,8 @@ export default class AthletesContainer extends Component {
   deleteAthlete = () => {
     const athleteID = this.state.idToDelete;
     fetch(athletesAPI + athleteID, {
-      method: "DELETE"
+      method: "DELETE",
+      headers: { "access-token": localStorage.getItem("access-token") }
     })
       .then(res => res.json())
       .then(answer => {

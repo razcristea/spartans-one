@@ -4,18 +4,6 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Logo from "./logoV2.png";
 
-const links = [
-  { path: "Profile", route: "/", icon: "far fa-id-card mr-1" },
-  { path: "Schedule", route: "/schedule", icon: "fas fa-clipboard-list mr-1" },
-  { path: "Athletes", route: "/athletes", icon: "fas fa-users mr-1" },
-  { path: "Workouts", route: "/wods", icon: "fas fa-dumbbell mr-1" },
-  { path: "Notes", route: "/notes", icon: "far fa-comment-dots mr-1" }
-];
-
-const activeStyle = {
-  fontWeight: "bold",
-  color: "#f5ec47"
-};
 export default function Header({ isLoggedIn }) {
   const [expanded, setExpanded] = useState(false);
   return (
@@ -43,7 +31,7 @@ export default function Header({ isLoggedIn }) {
         onBlur={() => setTimeout(() => setExpanded(false), 300)}
       />
       <Navbar.Collapse id="basic-navbar-nav">
-        <Nav className="mx-auto">
+        <Nav className="ml-auto">
           {isLoggedIn ? (
             links.map((link, i) => (
               <NavLink
@@ -88,3 +76,16 @@ export default function Header({ isLoggedIn }) {
     </Navbar>
   );
 }
+
+const links = [
+  { path: "Profile", route: "/", icon: "far fa-id-card mr-1" },
+  { path: "Schedule", route: "/schedule", icon: "fas fa-clipboard-list mr-1" },
+  { path: "Athletes", route: "/athletes", icon: "fas fa-users mr-1" },
+  { path: "Workouts", route: "/wods", icon: "fas fa-dumbbell mr-1" },
+  { path: "Notes", route: "/notes", icon: "far fa-comment-dots mr-1" }
+];
+
+const activeStyle = {
+  fontWeight: "bold",
+  color: "#f5ec47"
+};

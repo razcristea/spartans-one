@@ -4,7 +4,8 @@ import AthletesContainer from "./AthletesContainer/AthletesContainer";
 import AthleteDetails from "./AthleteDetails/AthleteDetails";
 import Loader from "../../../helpers/Loader";
 
-const athletesAPI = "https://theboxathletes.herokuapp.com/athletes/";
+const athletesAPI = "https://mypthelperapi.herokuapp.com/athletes/";
+// const athletesAPI = "http://localhost:3000/athletes";
 
 export default class Athletes extends PureComponent {
   state = {
@@ -18,7 +19,10 @@ export default class Athletes extends PureComponent {
   getAthletes = () => {
     if (window.location.pathname === "/athletes")
       this.setState({ showLoader: true });
-    fetch(athletesAPI)
+    fetch(athletesAPI, {
+      method: "GET",
+      headers: { "access-token": localStorage.getItem("access-token") }
+    })
       .then(response => response.json())
       .then(data => {
         data.sort((a, b) =>
@@ -35,7 +39,6 @@ export default class Athletes extends PureComponent {
   };
   render() {
     console.log(this.state.athletes);
-    console.log(this.props);
     return (
       <div>
         <Route

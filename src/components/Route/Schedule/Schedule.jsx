@@ -4,7 +4,8 @@ import Appointments from "./Appointments/Appointments";
 import { MDBBtn, MDBIcon } from "mdbreact";
 import Loader from "../../../helpers/Loader";
 
-const scheduleUrl = "https://theboxathletes.herokuapp.com/appointments/";
+// const appointmentsURL = "http://localhost:3000/appointments/";
+const appointmentsURL = "https://mypthelperapi.herokuapp.com/appointments/";
 
 function Schedule() {
   const [selectedDate, setSelectedDate] = useState("");
@@ -14,13 +15,15 @@ function Schedule() {
 
   const checkAppointments = async selectedDate => {
     if (!selectedDate) {
-      console.log("No Date selected");
       return;
     }
     try {
       // querry the selected date from DB and store it in appointments
       setShowLoading(true);
-      const response = await fetch(scheduleUrl + selectedDate);
+      const response = await fetch(appointmentsURL + selectedDate, {
+        headers: { "access-token": localStorage.getItem("access-token") },
+        method: "GET"
+      });
       const data = await response.json();
       if (data.error) {
         setAppointments(0);

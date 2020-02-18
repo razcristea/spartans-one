@@ -10,6 +10,11 @@ import {
 import Select from "react-select";
 import Spinner from "../../Athletes/AddAthleteModal/Spinner";
 
+// const athletesUrl = "http://localhost:3000/athletes/";
+// const appointmentsUrl = "http://localhost:3000/appointments/";
+const athletesUrl = "https://mypthelperapi.herokuapp.com/athletes";
+const appointmentsUrl = "https://mypthelperapi.herokuapp.com/appointments/";
+
 export default function EditAppointment({
   data,
   date,
@@ -23,7 +28,10 @@ export default function EditAppointment({
   const [showSpinner, setShowSpinner] = useState(false);
 
   useEffect(() => {
-    fetch("https://theboxathletes.herokuapp.com/athletes/")
+    fetch(athletesUrl, {
+      method: "GET",
+      headers: { "access-token": localStorage.getItem("access-token") }
+    })
       .then(response => response.json())
       .then(data => {
         data.sort((a, b) => (a.name > b.name ? 1 : -1));
@@ -60,8 +68,11 @@ export default function EditAppointment({
       attendees: participants
     };
     setShowSpinner(true);
-    fetch("https://theboxathletes.herokuapp.com/appointments/" + dateId, {
-      headers: { "Content-Type": "application/json" },
+    fetch(appointmentsUrl + dateId, {
+      headers: {
+        "Content-Type": "application/json",
+        "access-token": localStorage.getItem("access-token")
+      },
       method: "PUT",
       body: JSON.stringify(newParticipants)
     })

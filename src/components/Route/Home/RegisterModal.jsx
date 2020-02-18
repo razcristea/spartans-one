@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import {
   MDBBtn,
@@ -9,7 +9,7 @@ import {
   MDBInput
 } from "mdbreact";
 
-const registerURL = "http://localhost:3000/users/register";
+const registerURL = "https://mypthelperapi.herokuapp.com/users/register";
 
 export default function Login({
   showRegister,
@@ -18,11 +18,43 @@ export default function Login({
   showLogin
 }) {
   const history = useHistory();
-  const registerNewUser = () => {
-    localStorage.setItem("access-token", "ceva");
-    const token = localStorage.getItem("access-token");
-    handleLogin(token);
-    history.push("/schedule");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const registerNewUser = async () => {
+    try {
+      if (!firstName || !lastName || !email || !password) {
+        throw new Error("All fields are required!");
+      }
+
+      const registerData = { firstName, lastName, email, password };
+
+      const response = await fetch(registerURL, {
+        headers: { "Content-Type": "application/json" },
+        method: "POST",
+        body: JSON.stringify(registerData)
+      });
+
+      const data = await response.json();
+      if (data.error) {
+        throw new Error(data.error);
+      }
+
+      localStorage.setItem("access-token", data.accessToken);
+      localStorage.setItem("userName", data.name);
+
+      const token = localStorage.getItem("access-token");
+      const userName = localStorage.getItem("userName");
+
+      handleLogin(token, userName);
+
+      history.push("/schedule");
+    } catch (error) {
+      setErrorMessage(error.message);
+    }
   };
   return (
     <MDBModal isOpen={showRegister} toggle={() => toggle(false)} centered>
@@ -41,6 +73,10 @@ export default function Login({
             label="First Name"
             labelClass="labelClass"
             className="mx-auto appointmentInput"
+            onChange={e => {
+              setFirstName(e.target.value);
+              setErrorMessage("");
+            }}
           ></MDBInput>
           <MDBInput
             type="text"
@@ -48,6 +84,10 @@ export default function Login({
             label="Last Name"
             labelClass="labelClass"
             className="mx-auto appointmentInput"
+            onChange={e => {
+              setLastName(e.target.value);
+              setErrorMessage("");
+            }}
           ></MDBInput>
           <MDBInput
             type="email"
@@ -55,6 +95,10 @@ export default function Login({
             label="Email"
             labelClass="labelClass"
             className="mx-auto appointmentInput"
+            onChange={e => {
+              setEmail(e.target.value);
+              setErrorMessage("");
+            }}
           ></MDBInput>
           <MDBInput
             type="password"
@@ -62,8 +106,15 @@ export default function Login({
             label="Password"
             labelClass="labelClass"
             className="mx-auto appointmentInput"
+            onChange={e => {
+              setPassword(e.target.value);
+              setErrorMessage("");
+            }}
           ></MDBInput>
         </div>
+        {errorMessage ? (
+          <p className="text-danger mt-0 mb-2 w-50 mx-auto">{errorMessage}</p>
+        ) : null}
         <p className="text-white">Already have an account?</p>
         <MDBBtn
           size="sm"
@@ -77,7 +128,14 @@ export default function Login({
         </MDBBtn>
       </MDBModalBody>
       <MDBModalFooter className="bg-dark border d-flex justify-content-around modalFooter">
-        <MDBBtn color="danger" size="sm" onClick={() => toggle(false)}>
+        <MDBBtn
+          color="danger"
+          size="sm"
+          onClick={() => {
+            toggle(false);
+            setErrorMessage("");
+          }}
+        >
           <i className="fas fa-ban mr-1"></i> Cancel
         </MDBBtn>
         <MDBBtn color="success" size="sm" onClick={registerNewUser}>

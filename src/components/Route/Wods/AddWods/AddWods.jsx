@@ -12,7 +12,8 @@ import "./AddWods.css";
 import Spinner from "../../Athletes/AddAthleteModal/Spinner";
 import Select from "react-select";
 
-const wodsApi = "https://theboxathletes.herokuapp.com/wods/";
+// const wodsApi = "http://localhost:3000/wods/";
+const wodsApi = "https://mypthelperapi.herokuapp.com/wods/";
 
 export default function AddWods(props) {
   if (!props.options[0].value) props.options.shift();
@@ -75,7 +76,10 @@ export default function AddWods(props) {
       };
       setShowSpinner(true);
       fetch(wodsApi, {
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "access-token": localStorage.getItem("access-token")
+        },
         method: "POST",
         body: JSON.stringify(newWod)
       })

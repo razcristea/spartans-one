@@ -1,24 +1,7 @@
 import React, { PureComponent } from "react";
 
-const footerStyle = {
-  position: "fixed",
-  left: 0,
-  bottom: 0,
-  width: "100%",
-  height: "60px",
-  background: "#343a40",
-  color: "#fff",
-  fontSize: "0.9rem",
-  fontWeight: "bold",
-  padding: ".40rem 1.175rem",
-  zIndex: "100",
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center",
-  borderTop: "1px solid white"
-};
-
-const athletesAPI = "https://theboxathletes.herokuapp.com/athletes/";
+const athletesAPI = "https://mypthelperapi.herokuapp.com/athletes/";
+// const athletesAPI = "http://localhost:3000/athletes/";
 
 export default class Footer extends PureComponent {
   today = new Date();
@@ -49,7 +32,10 @@ export default class Footer extends PureComponent {
     }
   }
   getAthletes = () => {
-    fetch(athletesAPI)
+    fetch(athletesAPI, {
+      method: "GET",
+      headers: { "access-token": localStorage.getItem("access-token") }
+    })
       .then(response => response.json())
       .then(data => {
         let female = 0,
@@ -78,7 +64,7 @@ export default class Footer extends PureComponent {
     return (
       <footer style={footerStyle}>
         <div>
-          {isLoggedIn ? <div>Welcome, Coach Vali!</div> : null}
+          {isLoggedIn ? <div>Welcome, Coach {this.props.userName}!</div> : null}
           <div className="text-muted text-center text-small">
             <i className="far fa-calendar-alt"></i>{" "}
             {this.state.date
@@ -108,3 +94,21 @@ export default class Footer extends PureComponent {
     );
   }
 }
+
+const footerStyle = {
+  position: "fixed",
+  left: 0,
+  bottom: 0,
+  width: "100%",
+  height: "60px",
+  background: "#343a40",
+  color: "#fff",
+  fontSize: "0.9rem",
+  fontWeight: "bold",
+  padding: ".40rem 1.175rem",
+  zIndex: "100",
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+  borderTop: "1px solid white"
+};
